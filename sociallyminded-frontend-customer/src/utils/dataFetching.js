@@ -9,16 +9,17 @@ export const DataFetchingTemplate = (url) => {
     useEffect(() => {
 
         const fetchData = async () => {
-        try {
             axios.get(url)
             .then(response => {
                 setData(response.data)
             })
-        } catch (error) {
-            setError(error);
-        } finally {
-            setLoading(false);
-        }}
+            .catch ((error) => {
+                setError(error)
+            })
+            .finally (
+                setLoading(false)
+            )
+        }
 
         fetchData();
 
@@ -26,3 +27,4 @@ export const DataFetchingTemplate = (url) => {
 
     return { data, error, loading };
 };
+
