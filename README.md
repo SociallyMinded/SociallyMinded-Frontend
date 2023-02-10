@@ -1,1 +1,1 @@
-# SociallyMinded-Frontend
+# SociallyMinded-Frontend-Customer
