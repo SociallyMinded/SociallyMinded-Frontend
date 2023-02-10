@@ -43,7 +43,7 @@ const Table = styled.table`
     border-collapse:collapse;
 `
 const TableRow = styled.tr`
-    padding:6%;
+    padding:7%;
 `
 
 const TableHeader = styled.th`
