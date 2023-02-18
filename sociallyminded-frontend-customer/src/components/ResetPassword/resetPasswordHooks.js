@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
+import { EMAIL_DOES_NOT_EXIST } from "./resetEmailConstants";
 
 
 const useResetPasswordHooks = () => {
@@ -12,6 +13,7 @@ const useResetPasswordHooks = () => {
     const [serverError, setServerError] = useState("")
 
     const[showErrorWarning, setShowErrorWarning] = useState(false)
+    const [showPageLoadSpinner, setShowPageLoadSpinner] = useState(false)
 
     const handleShowErrorWarning = (event) => {
         setShowErrorWarning(!showErrorWarning)
@@ -23,23 +25,28 @@ const useResetPasswordHooks = () => {
     }
 
     const sendPasswordResetEmail = async (event) => {
-        event.preventDefault();
-        await sendPasswordResetEmailToUser(email)
-        .then(() => {
-            console.log("password reset email sent")
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            console.log(errorMessage)
-            setServerError(errorMessage)
+        setShowErrorWarning(false)
+        event.preventDefault()
+
+        try {
+            setShowPageLoadSpinner(true)
+            await sendPasswordResetEmailToUser(email)
+        }
+        catch(error) {
             setShowErrorWarning(true)
-        })
+            setServerError(EMAIL_DOES_NOT_EXIST)
+        }
+        finally {
+            setShowPageLoadSpinner(false)
+        }
+
     }
 
     const state = { 
         email,
         serverError,
-        showErrorWarning
+        showErrorWarning,
+        showPageLoadSpinner
     }
 
     const setState = { 

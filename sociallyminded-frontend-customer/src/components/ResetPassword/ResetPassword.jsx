@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import useResetPasswordHooks from "./resetPasswordHooks";
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
-import { HOME_LINK, SIGNUP_PAGE_LINK } from "../../routes/routes";
+import { HOME_LINK, LOGIN_PAGE_LINK, SIGNUP_PAGE_LINK } from "../../routes/routes";
 
 const ResetPassword = () => {
     const {state, setState} = useResetPasswordHooks();
@@ -20,7 +20,7 @@ const ResetPassword = () => {
                 {
                     state.showErrorWarning && 
                     <Alert variant={"danger"} onClose={setState.handleShowErrorWarning} dismissible>
-                    This email does not exist in our records
+                    {state.serverError}
                     </Alert>
                 }
             </FormResultTemplate>
@@ -50,7 +50,7 @@ const ResetPassword = () => {
                     <FormButton type="submit" variant="primary">Reset Password</FormButton>
                 }
             </Form>
-            <SignupPageLink to={SIGNUP_PAGE_LINK}>Back to Signup Page</SignupPageLink>
+            <LoginPageLink to={LOGIN_PAGE_LINK}>Back to Log in Page</LoginPageLink>
         </ResetPasswordPageTemplate>
         </PageTemplate>
     )
@@ -106,10 +106,9 @@ const FormButton = styled(Button)`
     margin-top:5%;    
 `
 
-const SignupPageLink = styled(Link)`
+const LoginPageLink = styled(Link)`
     margin-top:1.5em;
     text-decoration:none;
 `
-
 
 export default ResetPassword

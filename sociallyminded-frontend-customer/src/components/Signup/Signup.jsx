@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { RESET_PASSWORD_LINK } from "../../routes/routes";
+import { LOGIN_PAGE_LINK, RESET_PASSWORD_LINK } from "../../routes/routes";
 import useSignupHooks from './signupHooks';
 import styled from 'styled-components';
 import { PageTemplate } from '../common/styles';
@@ -79,7 +79,7 @@ const Signup = () => {
                     Continue with google
                 </FormButton>
                 </Form>
-                <HomeLink to={RESET_PASSWORD_LINK}>Reset Password</HomeLink>
+                <LoginLink to={LOGIN_PAGE_LINK}>Log in</LoginLink>
         </SignupPageTemplate>
 
         </PageTemplate>
@@ -134,9 +134,8 @@ const LogoImage = styled.img`
     margin-right:0.5em;
 `
 
-const HomeLink = styled(Link)`
+const LoginLink = styled(Link)`
     margin-top:1.5em;
     text-decoration:none;
 `
 export default Signup;
-

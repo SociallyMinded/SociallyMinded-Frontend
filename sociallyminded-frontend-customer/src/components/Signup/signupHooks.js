@@ -31,17 +31,14 @@ const useSignupHooks = () => {
     }
   
     const handleUsernameChange = (event) => {
-        setServerError("")
         setUsername(event.target.value)
     }
 
     const handleEmailChange = (event) => {
-        setServerError("")
         setEmail(event.target.value)
     }
 
     const handlePasswordChange = (event) => {
-        setServerError("")
         setPassword(event.target.value)
 
         if (event.target.value.length < 6) {
@@ -49,10 +46,6 @@ const useSignupHooks = () => {
         } else {
             setPasswordError("")
         }
-    }
-
-    const sendPasswordResetEmail = async () => {
-        await sendPasswordResetEmailToUser(email)
     }
 
     const signInViaGoogle = async () => {
@@ -76,6 +69,7 @@ const useSignupHooks = () => {
     }
     
     const handleFormSignup = async (event) => {
+        setShowErrorWarning(false)
         event.preventDefault()
         try {
             setShowPageLoadSpinner(true)
@@ -91,6 +85,7 @@ const useSignupHooks = () => {
                 .catch(error => {
                     console.log(error)
                 })
+                
         } catch (error) {
             setShowErrorWarning(true)
             if (error.code == "auth/email-already-in-use") {
@@ -119,7 +114,6 @@ const useSignupHooks = () => {
         handlePasswordChange,  
         handleFormSignup,
         signInViaGoogle,
-        sendPasswordResetEmail,
         handleShowErrorWarning
     }
 
