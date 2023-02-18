@@ -52,6 +52,7 @@ const useLoginHooks = () => {
 
         finally {
             setShowPageLoadSpinner(false)
+            navigate("/home")
         }
     }
 

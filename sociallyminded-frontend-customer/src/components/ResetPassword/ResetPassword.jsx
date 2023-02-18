@@ -23,6 +23,12 @@ const ResetPassword = () => {
                     {state.serverError}
                     </Alert>
                 }
+                {
+                    state.showEmailSentNotification &&
+                    <Alert variant={"success"} onClose={setState.handleShowEmailSentNotification} dismissible>
+                    Email is sent! 
+                    </Alert>
+                }
             </FormResultTemplate>
              
             <h1>Reset Password</h1>

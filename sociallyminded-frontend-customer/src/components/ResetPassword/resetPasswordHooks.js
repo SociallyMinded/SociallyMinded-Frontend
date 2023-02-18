@@ -14,6 +14,12 @@ const useResetPasswordHooks = () => {
 
     const[showErrorWarning, setShowErrorWarning] = useState(false)
     const [showPageLoadSpinner, setShowPageLoadSpinner] = useState(false)
+    const [showEmailSentNotification, setShowEmailSentNotification] = useState(false)
+
+    const handleShowEmailSentNotification = (event) => {
+        setShowEmailSentNotification(!showEmailSentNotification)
+
+    }
 
     const handleShowErrorWarning = (event) => {
         setShowErrorWarning(!showErrorWarning)
@@ -38,6 +44,7 @@ const useResetPasswordHooks = () => {
         }
         finally {
             setShowPageLoadSpinner(false)
+            setShowEmailSentNotification(true)
         }
 
     }
@@ -46,13 +53,15 @@ const useResetPasswordHooks = () => {
         email,
         serverError,
         showErrorWarning,
-        showPageLoadSpinner
+        showPageLoadSpinner,
+        showEmailSentNotification
     }
 
     const setState = { 
         handleEmailChange,
         sendPasswordResetEmail,
-        handleShowErrorWarning
+        handleShowErrorWarning,
+        handleShowEmailSentNotification
     }
 
     return { state, setState }
