@@ -1,0 +1,134 @@
+import { Link } from 'react-router-dom'
+import axios from "axios";
+import { useState } from "react";
+import { getAuth, updateProfile } from "firebase/auth";
+import { UserAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom'
+import { getAllCustomersUrl, RESET_PASSWORD_LINK } from "../../routes/routes";
+import { HOME_LINK, INVALID_EMAIL_ERROR, PASSWORD_INSUFFICIENT_LEN_ERROR } from './signupConstants';
+import useSignupHooks from './signupHooks';
+import styled from 'styled-components';
+import { PageTemplate } from '../common/styles';
+import Button from 'react-bootstrap/Button';
+import SiteLogo from '../common/SiteLogo/SiteLogo';
+
+const auth = getAuth();
+
+const Signup = () => {
+
+    const {state, setState} = useSignupHooks();
+
+    return (
+        <PageTemplate>
+            <SiteLogo></SiteLogo>
+             <SignupPageTemplate>
+             <h1>Sign up</h1>
+            <p>{state.serverError}</p>
+            <Form onSubmit={setState.handleFormSignup}>
+
+                <FormInputContainer>
+                    <FormLabel>Username</FormLabel>
+                    <FormInput 
+                        required 
+                        type="text" 
+                        value={state.username} 
+                        onChange={setState.handleUsernameChange}
+                    />
+                </FormInputContainer> 
+                
+                <FormInputContainer>
+                    <FormLabel>Email</FormLabel>
+                    <FormInput 
+                        required 
+                        value={state.email} 
+                        onChange={setState.handleEmailChange}
+                    />
+                </FormInputContainer> 
+                
+                <FormInputContainer>
+                    <FormLabel>Password</FormLabel>
+                    <FormInput 
+                        required 
+                        type="password" 
+                        value={state.password} 
+                        onChange={setState.handlePasswordChange}
+                    />
+                    <p>{state.passwordError}</p>
+                </FormInputContainer> 
+                {
+                    state.email.length != 0 &&
+                    state.username.length != 0 &&
+                    state.password.length >= 6 &&
+                    <FormButton type="submit" variant="primary">Sign Up</FormButton>
+                } 
+                {
+                    (state.email.length == 0 ||
+                    state.password.length < 6  ||
+                    state.username.length == 0) &&
+                    <FormButton disabled type="submit" variant="primary">Sign Up</FormButton>
+                }
+                <FormButton variant="outline-secondary" onClick={setState.signInViaGoogle}>
+                    <LogoImage src={require('./google.png')}></LogoImage>
+                    Continue with google
+                </FormButton>
+                </Form>
+                <HomeLink to={RESET_PASSWORD_LINK}>Reset Password</HomeLink>
+        </SignupPageTemplate>
+
+        </PageTemplate>
+    )
+}
+
+
+const SignupPageTemplate = styled.div`
+    display: flex;
+    margin-top:5%;
+    margin-bottom:15%;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+`
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    width:30%;
+`
+const FormInputContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    border-radius:10px;
+    border-width:0px;
+    margin-top: 2%;
+`
+
+const FormLabel = styled.label`
+    font-size:0.9em;
+`
+
+const FormInput = styled.input`
+    border-radius:5px;
+    padding: 0.5em;
+    outline:none;
+    outline:none;
+    box-shadow:none;
+    border:1px solid #c9c9c9;
+`
+
+const FormButton = styled(Button)`
+    margin-top:5%;    
+`
+
+const LogoImage = styled.img`
+    width:1.2em;
+    height:1.2em;
+    margin-right:0.5em;
+`
+
+const HomeLink = styled(Link)`
+    margin-top:1.5em;
+    text-decoration:none;
+`
+
+export default Signup;
+
