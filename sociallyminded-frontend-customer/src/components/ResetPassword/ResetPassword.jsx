@@ -4,14 +4,30 @@ import { PageTemplate } from "../common/styles";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
+import useResetPasswordHooks from "./resetPasswordHooks";
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
+import { HOME_LINK, SIGNUP_PAGE_LINK } from "../../routes/routes";
 
 const ResetPassword = () => {
+    const {state, setState} = useResetPasswordHooks();
     return (
         <PageTemplate>
             <SiteLogo></SiteLogo>
             <ResetPasswordPageTemplate>
-             <h1>Reset Password</h1>
-            <Form>
+            <FormResultTemplate>
+                {state.showPageLoadSpinner && <Spinner animation="border" />}
+                {
+                    state.showErrorWarning && 
+                    <Alert variant={"danger"} onClose={setState.handleShowErrorWarning} dismissible>
+                    This email does not exist in our records
+                    </Alert>
+                }
+            </FormResultTemplate>
+             
+            <h1>Reset Password</h1>
+
+            <Form onSubmit={setState.sendPasswordResetEmail}>
                 <FormInputContainer>
                     <FormDescription>
                         An email will be sent to the email address you have provided.
@@ -21,12 +37,20 @@ const ResetPassword = () => {
                     <FormInput 
                         required 
                         type="text" 
-                        // value={state.username} 
-                        // onChange={setState.handleUsernameChange}
+                        value={state.email} 
+                        onChange={setState.handleEmailChange}
                     />
                 </FormInputContainer>
-                <FormButton type="submit" variant="primary">Sign Up</FormButton>
+                {
+                    state.email.length == 0 &&                 
+                    <FormButton disabled type="submit" variant="primary">Reset Password</FormButton>
+                }
+                {
+                    state.email.length != 0 &&                 
+                    <FormButton type="submit" variant="primary">Reset Password</FormButton>
+                }
             </Form>
+            <SignupPageLink to={SIGNUP_PAGE_LINK}>Back to Signup Page</SignupPageLink>
         </ResetPasswordPageTemplate>
         </PageTemplate>
     )
@@ -34,9 +58,12 @@ const ResetPassword = () => {
 }
 
 
+const FormResultTemplate = styled.div`
+    height:13vh;
+`
+
 const ResetPasswordPageTemplate = styled.div`
     display: flex;
-    margin-top:5%;
     margin-bottom:15%;
     flex-direction:column;
     justify-content:center;
@@ -79,13 +106,7 @@ const FormButton = styled(Button)`
     margin-top:5%;    
 `
 
-const LogoImage = styled.img`
-    width:1.2em;
-    height:1.2em;
-    margin-right:0.5em;
-`
-
-const HomeLink = styled(Link)`
+const SignupPageLink = styled(Link)`
     margin-top:1.5em;
     text-decoration:none;
 `

@@ -1,19 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
-import { getAuth, updateProfile, GoogleAuthProvider } from "firebase/auth";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
 import { getAllCustomersUrl } from "../../routes/routes";
 import { 
     PASSWORD_INSUFFICIENT_LEN_ERROR, 
     newCustomerRecord,
+    GENERIC_EMAIL_ERROR,
+    EMAIL_ALREADY_EXISTS
 } from "./signupConstants";
 
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
+import { GoogleAuthProvider } from "firebase/auth";
 
 const useSignupHooks = () => {
-    const { createUser, signInWithGmailPopup, sendPasswordResetEmailToUser } = UserAuth() 
+    const { createUser, setCurrentUserDetail, signInWithGmailPopup, sendPasswordResetEmailToUser } = UserAuth() 
     const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
@@ -22,62 +22,84 @@ const useSignupHooks = () => {
     
     const [passwordError, setPasswordError] = useState("")
     const [serverError, setServerError] = useState("")
+
+    const[showErrorWarning, setShowErrorWarning] = useState(false)
+    const [showPageLoadSpinner, setShowPageLoadSpinner] = useState(false)
+
+    const handleShowErrorWarning = (event) => {
+        setShowErrorWarning(!showErrorWarning)
+    }
   
     const handleUsernameChange = (event) => {
         setServerError("")
-        const { value } = event.target
-        setUsername(value)
+        setUsername(event.target.value)
     }
 
     const handleEmailChange = (event) => {
         setServerError("")
-        const { value } = event.target
-        setEmail(value)
+        setEmail(event.target.value)
     }
 
     const handlePasswordChange = (event) => {
         setServerError("")
-        const { value } = event.target
-        setPassword(value)
+        setPassword(event.target.value)
 
-        if (value.length < 6) {
+        if (event.target.value.length < 6) {
             setPasswordError(PASSWORD_INSUFFICIENT_LEN_ERROR)
         } else {
             setPasswordError("")
         }
     }
 
-    const sendPasswordResetEmail = async (event) => {
+    const sendPasswordResetEmail = async () => {
         await sendPasswordResetEmailToUser(email)
     }
 
-    const signInViaGoogle = async (event) => {
-        await signInWithGmailPopup(auth, provider)
+    const signInViaGoogle = async () => {
+        await signInWithGmailPopup()
+        .then((result) => {
+            console.log("Signed in via Google")
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user
+        
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            setServerError(error)
+            setShowErrorWarning(true)
+        })
+
         navigate("/home")
     }
     
     const handleFormSignup = async (event) => {
         event.preventDefault()
         try {
-            if (passwordError == "") {
-                await createUser(email, password)
-                await updateProfile(auth.currentUser, {
-                        displayName: username
+            setShowPageLoadSpinner(true)
+            await createUser(email, password)
+            await setCurrentUserDetail(username)
+
+            const newRecord = newCustomerRecord(username, email, password)
+
+            await axios.post(getAllCustomersUrl, newRecord)
+                .then(response => {
+                    navigate('/Home')
                 })
-    
-                const newRecord = newCustomerRecord(username, email, password)
-    
-                await axios.post(getAllCustomersUrl, newRecord)
-                    .then(response => {
-                        navigate('/Home')
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        setServerError(error)
-                    })
-                }
-        } catch (e) {
-            setServerError(e.message)
+                .catch(error => {
+                    console.log(error)
+                })
+        } catch (error) {
+            setShowErrorWarning(true)
+            if (error.code == "auth/email-already-in-use") {
+                setServerError(EMAIL_ALREADY_EXISTS)
+            } else {
+                setServerError(GENERIC_EMAIL_ERROR)
+            }
+        } finally {
+            setShowPageLoadSpinner(false)
         }   
     }
 
@@ -86,7 +108,9 @@ const useSignupHooks = () => {
         email,
         password, 
         passwordError, 
-        serverError
+        serverError,
+        showErrorWarning,
+        showPageLoadSpinner
     }
 
     const setState = { 
@@ -95,7 +119,8 @@ const useSignupHooks = () => {
         handlePasswordChange,  
         handleFormSignup,
         signInViaGoogle,
-        sendPasswordResetEmail
+        sendPasswordResetEmail,
+        handleShowErrorWarning
     }
 
     return { state, setState }

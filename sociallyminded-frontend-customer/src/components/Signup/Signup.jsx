@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom'
-import axios from "axios";
-import { useState } from "react";
-import { getAuth, updateProfile } from "firebase/auth";
-import { UserAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom'
-import { getAllCustomersUrl, RESET_PASSWORD_LINK } from "../../routes/routes";
-import { HOME_LINK, INVALID_EMAIL_ERROR, PASSWORD_INSUFFICIENT_LEN_ERROR } from './signupConstants';
+import { RESET_PASSWORD_LINK } from "../../routes/routes";
 import useSignupHooks from './signupHooks';
 import styled from 'styled-components';
 import { PageTemplate } from '../common/styles';
 import Button from 'react-bootstrap/Button';
 import SiteLogo from '../common/SiteLogo/SiteLogo';
-
-const auth = getAuth();
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Signup = () => {
 
@@ -22,8 +16,20 @@ const Signup = () => {
         <PageTemplate>
             <SiteLogo></SiteLogo>
              <SignupPageTemplate>
-             <h1>Sign up</h1>
-            <p>{state.serverError}</p>
+
+             <FormResultTemplate>
+                    {state.showPageLoadSpinner && <Spinner animation="border" />}
+
+                    {
+                    state.showErrorWarning && 
+                    <Alert variant={"danger"} onClose={setState.handleShowErrorWarning} dismissible>
+                        {state.serverError}
+                    </Alert>
+                    }
+            </FormResultTemplate>
+
+            <h1>Sign up</h1>
+
             <Form onSubmit={setState.handleFormSignup}>
 
                 <FormInputContainer>
@@ -40,6 +46,7 @@ const Signup = () => {
                     <FormLabel>Email</FormLabel>
                     <FormInput 
                         required 
+                        type="text"
                         value={state.email} 
                         onChange={setState.handleEmailChange}
                     />
@@ -79,10 +86,12 @@ const Signup = () => {
     )
 }
 
+const FormResultTemplate = styled.div`
+    height:13vh;
+`
 
 const SignupPageTemplate = styled.div`
     display: flex;
-    margin-top:5%;
     margin-bottom:15%;
     flex-direction:column;
     justify-content:center;
@@ -129,6 +138,5 @@ const HomeLink = styled(Link)`
     margin-top:1.5em;
     text-decoration:none;
 `
-
 export default Signup;
 
