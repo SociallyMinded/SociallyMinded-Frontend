@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { GoogleAuthProvider } from "firebase/auth";
 import { GENERIC_EMAIL_ERROR, USER_NOT_FOUND, WRONG_PASSWORD, GENERIC_LOGIN_ERROR } from "./loginConstants";
+import { newCustomerRecord } from "./loginConstants";
+import axios from "axios";
+import { handleLoginViaGmail } from "../../routes/routes";
 
 const useLoginHooks = () => {
     const { signIn, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
@@ -57,23 +60,25 @@ const useLoginHooks = () => {
     }
 
     const signInViaGoogle = async () => {
-        await signInWithGmailPopup()
-        .then((result) => {
-            console.log("Signed in via Google")
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user
-        
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            const email = error.customData.email;
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            setServerError(error)
+        try {
+            await signInWithGmailPopup()
+            .then((result) => {
+                const user = result.user
+                const newRecord = newCustomerRecord(user.displayName, user.email, user.uid)
+                return axios.put(handleLoginViaGmail, newRecord)
+            })
+            .then((result) => {
+                console.log(result)
+                navigate("/Home")             
+            })
+        }
+        catch (error) {
+            setServerError(error.response.data.message)
             setShowErrorWarning(true)
-        })
-
-        navigate("/home")
+        } 
+        finally {
+            console.log("Done")
+        }
     }
 
     const state = { 

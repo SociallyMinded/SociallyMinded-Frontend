@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
-import { getAllCustomersUrl } from "../../routes/routes";
+import { getAllCustomersUrl, getCustomerByFirebaseUid, handleLoginViaGmail } from "../../routes/routes";
 import { 
     PASSWORD_INSUFFICIENT_LEN_ERROR, 
     newCustomerRecord,
@@ -13,12 +13,14 @@ import {
 import { GoogleAuthProvider } from "firebase/auth";
 
 const useSignupHooks = () => {
-    const { createUser, setCurrentUserDetail, signInWithGmailPopup, sendPasswordResetEmailToUser } = UserAuth() 
+    const { createUser, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
     const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [firebaseUid, setFirebaseUid] = useState("")
+
     
     const [passwordError, setPasswordError] = useState("")
     const [serverError, setServerError] = useState("")
@@ -49,24 +51,27 @@ const useSignupHooks = () => {
     }
 
     const signInViaGoogle = async () => {
-        await signInWithGmailPopup()
-        .then((result) => {
-            console.log("Signed in via Google")
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user
-        
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            const email = error.customData.email;
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            setServerError(error)
+        try {
+            await signInWithGmailPopup()
+            .then((result) => {
+                const user = result.user
+                const newRecord = newCustomerRecord(user.displayName, user.email, user.uid)
+                return axios.put(handleLoginViaGmail, newRecord)
+            })
+            .then((result) => {
+                console.log(result)
+                navigate("/Home")             
+            })
+        }
+        catch (error) {
+            setServerError(error.response.data.message)
             setShowErrorWarning(true)
-        })
-
-        navigate("/home")
+        } 
+        finally {
+            console.log("Done")
+        }
     }
+
     
     const handleFormSignup = async (event) => {
         setShowErrorWarning(false)
@@ -74,18 +79,16 @@ const useSignupHooks = () => {
         try {
             setShowPageLoadSpinner(true)
             await createUser(email, password)
-            await setCurrentUserDetail(username)
-
-            const newRecord = newCustomerRecord(username, email, password)
-
-            await axios.post(getAllCustomersUrl, newRecord)
-                .then(response => {
-                    navigate('/Home')
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-                
+            .then((result) => {
+                const user = result.user
+                const newRecord = newCustomerRecord(username, email, user.uid)
+                return axios.post(getAllCustomersUrl, newRecord)
+            })
+            .then((result) => {
+                console.log(result)
+                navigate("/Home")
+            })
+           
         } catch (error) {
             setShowErrorWarning(true)
             if (error.code == "auth/email-already-in-use") {
@@ -95,6 +98,7 @@ const useSignupHooks = () => {
             }
         } finally {
             setShowPageLoadSpinner(false)
+            console.log("Done")
         }   
     }
 

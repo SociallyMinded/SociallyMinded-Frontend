@@ -2,17 +2,17 @@ import React from "react";
 import SiteLogo from "../SiteLogo/SiteLogo";
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
-import { LOGIN_PAGE_LINK, SIGNUP_PAGE_LINK } from "../../../routes/routes";
+import { HOME_LINK } from "../../../routes/routes";
 
-const Header = () => {
+const LoggedInHeader = () => {
     return (
         <HeaderLinkContainer>
             <SiteLogo></SiteLogo>
             <HeaderSiteLinks>
                 <HeaderLink>Shop</HeaderLink>
                 <HeaderLink>Volunteering</HeaderLink>
-                <HeaderLink to={LOGIN_PAGE_LINK}>Log in</HeaderLink>
-                <HeaderLink to={SIGNUP_PAGE_LINK}>Sign up</HeaderLink>
+                <HeaderLink>Profile</HeaderLink>
+                <HeaderLink to={HOME_LINK}>Log Out</HeaderLink>
             </HeaderSiteLinks>
         </HeaderLinkContainer>
     )
@@ -60,7 +60,6 @@ const HeaderLink = styled(Link)`
         transform-origin: left;
         transform: scaleX(1);
     }
-
 `
 
-export default Header
+export default LoggedInHeader

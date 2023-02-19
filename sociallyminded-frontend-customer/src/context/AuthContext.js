@@ -8,8 +8,9 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   sendPasswordResetEmail,
-  signInWithPopup
-} from 'firebase/auth';
+  signInWithPopup,
+  getAuth
+} from 'firebase/auth'
 
 import { auth } from '../firebase.js';
 const UserContext = createContext();
@@ -56,7 +57,7 @@ export const AuthContextProvider = ({ children }) => {
         user, createUser, 
         setCurrentUserDetail, logout, 
         signIn, signInWithGmailPopup, 
-        sendPasswordResetEmailToUser 
+        sendPasswordResetEmailToUser
       }}>
       {children}
     </UserContext.Provider>

@@ -2,10 +2,10 @@ export const PASSWORD_INSUFFICIENT_LEN_ERROR = "Password should be at least 6 ch
 export const EMAIL_ALREADY_EXISTS = "There is already an account with this email"
 export const GENERIC_EMAIL_ERROR = "Invalid Email"
 
-export const newCustomerRecord = (email, password, username) => {
+export const newCustomerRecord = (username, email, firebaseUid) => {
     return {
-        "email": email,
-        "username" : username,
-        "password": password
+        "username": username,
+        "email" : email,
+        "firebaseUid": firebaseUid
     }
 }

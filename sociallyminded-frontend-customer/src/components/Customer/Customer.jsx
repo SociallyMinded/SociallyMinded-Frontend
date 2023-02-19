@@ -5,6 +5,7 @@ import { DeleteButton } from "../common/Button/DeleteButton";
 import { EditButton } from "../common/Button/EditButton";
 import { PageTemplate } from "../common/styles";
 import { UserAuth } from '../../context/AuthContext'
+import LoggedInHeader from "../common/Header/LoggedInHeader"
 
 export const Customer = () => {
     const { data, error, loading, 
@@ -15,46 +16,15 @@ export const Customer = () => {
 
     const {user} = UserAuth()
 
-    console.log(user.uid)
-    return (
-        <div>       
-            <h1>Customers</h1>     
-            <label>Create customer</label>
-            <form>
-                <br></br><input onChange={handleInput}></input>
-            
-            </form>
+    // console.log(user.uid)
+    // console.log(user.displayName)
+    // console.log(user.email)
 
-            {/* <p>You typed : {input}</p>
-            <button onClick={() => toggleShowCustomers}>Show usernames</button>
-            <Table>
-                <TableRow>
-                    <TableHeader>Nos</TableHeader>
-                    <TableHeader>Customer username</TableHeader>
-                </TableRow>
-                {showCustomers && data != null && data.map(d => 
-                        <TableRow>
-                            <TableDataCell>{d.customerId}</TableDataCell>
-                            <TableDataCell>{d.username}</TableDataCell>
-                        </TableRow>
-                )} */}
-            {/* </Table> */}
-            {/* <SubmitButton onClick={(e) => handlers.createCustomer(e)}/>
-            <DeleteButton onClick={(e) => handlers.createCustomer(e)}/>
-            <EditButton onClick={(e) => handlers.createCustomer(e)}/> */}
-            {/* <Table>
-                <TableRow>
-                    <TableHeader>Nos</TableHeader>
-                    <TableHeader>Customer username</TableHeader>
-                </TableRow>
-                {showCustomers && data != null && data.map(d => 
-                        <TableRow>
-                            <TableDataCell>{d.customerId}</TableDataCell>
-                            <TableDataCell>{d.username}</TableDataCell>
-                        </TableRow>
-                )}
-            </Table> */}
-        </div>
+    return (
+        <PageTemplate>   
+            <LoggedInHeader></LoggedInHeader>    
+          
+        </PageTemplate>
     )
 
 }
