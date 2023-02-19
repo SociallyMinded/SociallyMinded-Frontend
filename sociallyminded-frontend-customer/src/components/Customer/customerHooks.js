@@ -6,8 +6,6 @@ import axios from 'axios'
 const useCustomerHooks = () => {
     const { data, error, loading } = DataFetchingTemplate(getAllCustomersUrl);
 
-    // const { result, error1, loading1 } = DataCreationTemplate(getAllCustomersUrl, input);
-
     const [showCustomers, setShowCustomers] = useState(false);
     const toggleShowCustomers = () => {
         setShowCustomers(!showCustomers)

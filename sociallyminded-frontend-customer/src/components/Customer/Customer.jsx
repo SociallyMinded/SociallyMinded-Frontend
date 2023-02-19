@@ -1,5 +1,11 @@
 import useCustomerHooks from "./customerHooks";
 import styled from 'styled-components'
+import { SubmitButton } from "../common/Button/SubmitButton";
+import { DeleteButton } from "../common/Button/DeleteButton";
+import { EditButton } from "../common/Button/EditButton";
+import { PageTemplate } from "../common/styles";
+import { UserAuth } from '../../context/AuthContext'
+import LoggedInHeader from "../common/Header/LoggedInHeader"
 
 export const Customer = () => {
     const { data, error, loading, 
@@ -8,30 +14,17 @@ export const Customer = () => {
         response, handlers 
     } = useCustomerHooks();
 
-    console.log(data)
+    const {user} = UserAuth()
+
+    // console.log(user.uid)
+    // console.log(user.displayName)
+    // console.log(user.email)
+
     return (
-        <div>       
-            <h1>Customers</h1>     
-            <label>Create customer</label>
-            <form>
-                <br></br><input onChange={handleInput} value={input}></input>
-                <button onClick={(e) => handlers.createCustomer(e)}>Submit</button>
-            </form>
-            <p>You typed : {input}</p>
-            <button onClick={toggleShowCustomers}>Show usernames</button>
-            <Table>
-                <TableRow>
-                    <TableHeader>Nos</TableHeader>
-                    <TableHeader>Customer username</TableHeader>
-                </TableRow>
-                {showCustomers && data != null && data.map(d => 
-                        <TableRow>
-                            <TableDataCell>{d.customerId}</TableDataCell>
-                            <TableDataCell>{d.username}</TableDataCell>
-                        </TableRow>
-                )}
-            </Table>
-        </div>
+        <PageTemplate>   
+            <LoggedInHeader></LoggedInHeader>    
+          
+        </PageTemplate>
     )
 
 }
