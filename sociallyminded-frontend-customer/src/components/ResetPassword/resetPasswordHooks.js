@@ -26,25 +26,28 @@ const useResetPasswordHooks = () => {
     }
 
     const handleEmailChange = (event) => {
-        setServerError("")
         setEmail(event.target.value)
     }
 
     const sendPasswordResetEmail = async (event) => {
+        setServerError("")
         setShowErrorWarning(false)
+        setShowEmailSentNotification(false)
         event.preventDefault()
 
         try {
             setShowPageLoadSpinner(true)
             await sendPasswordResetEmailToUser(email)
+            .then((result) => {
+                setShowEmailSentNotification(true)
+            })
         }
         catch(error) {
             setShowErrorWarning(true)
             setServerError(EMAIL_DOES_NOT_EXIST)
         }
         finally {
-            setShowPageLoadSpinner(false)
-            setShowEmailSentNotification(true)
+            setShowPageLoadSpinner(false)            
         }
 
     }
