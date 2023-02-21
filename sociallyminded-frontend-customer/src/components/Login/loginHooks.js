@@ -38,6 +38,10 @@ const useLoginHooks = () => {
         try {
             setShowPageLoadSpinner(true)
             await signIn(email, password)
+            .then((result) => {
+                console.log(result)
+                navigate("/home")
+            })
         } 
         
         catch (error) {
@@ -55,7 +59,6 @@ const useLoginHooks = () => {
 
         finally {
             setShowPageLoadSpinner(false)
-            navigate("/home")
         }
     }
 

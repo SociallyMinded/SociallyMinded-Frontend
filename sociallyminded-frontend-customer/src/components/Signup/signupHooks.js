@@ -54,9 +54,13 @@ const useSignupHooks = () => {
         try {
             await signInWithGmailPopup()
             .then((result) => {
+                console.log(result)
                 const user = result.user
                 const newRecord = newCustomerRecord(user.displayName, user.email, user.uid)
                 return axios.put(handleLoginViaGmail, newRecord)
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
             })
             .then((result) => {
                 console.log(result)
