@@ -59,9 +59,6 @@ const useSignupHooks = () => {
                 const newRecord = newCustomerRecord(user.displayName, user.email, user.uid)
                 return axios.put(handleLoginViaGmail, newRecord)
             })
-            .catch((error) => {
-                console.log(error.response.data.message)
-            })
             .then((result) => {
                 console.log(result)
                 navigate("/Home")             

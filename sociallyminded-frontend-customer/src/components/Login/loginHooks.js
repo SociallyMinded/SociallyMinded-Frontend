@@ -59,6 +59,7 @@ const useLoginHooks = () => {
 
         finally {
             setShowPageLoadSpinner(false)
+            console.log("Done")
         }
     }
 
