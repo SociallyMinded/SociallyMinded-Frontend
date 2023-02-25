@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import ResetPassword from './components/ResetPassword/ResetPassword';
+import ProductListing from './components/ProductListing/ProductListing';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/reset_pw' element={<ResetPassword/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/home' element={<Customer/>}/>
+            <Route path='/product_listing' element={<ProductListing/>}/>
         </Routes>
         </BrowserRouter>
       </AuthContextProvider>
