@@ -24,14 +24,14 @@ const HeaderLinkContainer = styled.div`
 `
 
 const HeaderSiteLinks = styled.div`
+    justify-content:end;
     display:flex;
     flex-direction:row;
-    margin-left:50%;
     margin-top:0.5em;
     width:100%;
 `
 const HeaderLink = styled(Link)`
-    margin-right:10%;
+    margin-left:10%;
     font-size:1.1em;
     text-decoration:none;
     color: black;
