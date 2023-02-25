@@ -30,7 +30,7 @@ export const Customer = () => {
             <LoggedInHeader></LoggedInHeader> 
             <ProductsContainer>
 
-                <StyledRow lg={"4"} md={"4"} margin-bottom="500px">
+                <StyledRow lg={5} md={4} margin-bottom="500px">
                     <InputGroup className="mb-3">
                         <StyledFormControl
                         placeholder="Search Product"
@@ -41,8 +41,8 @@ export const Customer = () => {
                         </Button>
                     </InputGroup> 
 
-                    {Array.from({ length: 16 }).map((_, idx) => (
-                        <StyledCol>
+                    {Array.from({ length: 20 }).map((_, idx) => (
+                        <StyledCol md={3} >
                         <StyledCard>
                             <Card.Img variant="top" src={require('./donut.png')} />
                             <Card.Body>
@@ -78,13 +78,13 @@ const StyledPagination = styled(Pagination)`
     margin-bottom:5%;
 `
 const StyledCol = styled(Col)`
-    margin-top:2.5%;
+    margin-top:2%;
 `
 
 const ProductsContainer = styled.div`
 `
 const StyledRow = styled(Row)`
-    margin-top:5%;
+    margin-top:2.5%;
 `
 
 const StyledFormControl = styled(Form.Control)`
