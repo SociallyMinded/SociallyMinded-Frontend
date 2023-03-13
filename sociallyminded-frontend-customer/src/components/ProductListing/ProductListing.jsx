@@ -14,12 +14,17 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 import Toast from 'react-bootstrap/Toast';
+import { useLocation } from 'react-router-dom';
+
 
 const ProductListing = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const { state } = useLocation();
+    
 
     return (
         <PageTemplate>
@@ -51,14 +56,11 @@ const ProductListing = () => {
                 <ProductListingDescriptionSection>
                     
                     <ProductListingDescriptionContainer>
-                        <h1>Product Name</h1>
-                        <h1>Price</h1>
-                        <h3>About this item</h3>
-                        <p>Placeholder Text</p>
-                        <p>Placeholder Text</p>
-                        <h3>About the social enterprise</h3>
-                        <p>Placeholder Text</p>
-                        <p>Placeholder Text</p>                                    
+                        <h1>{state.d.name}</h1>
+                        <h1>${state.d.price}</h1>
+                        <h4>Category : {state.d.category}</h4>
+                        <h4>About this item</h4>
+                        <p>{state.d.description}</p>                                
                     </ProductListingDescriptionContainer>
                     
                     <ProductListingPurchaseContainer>

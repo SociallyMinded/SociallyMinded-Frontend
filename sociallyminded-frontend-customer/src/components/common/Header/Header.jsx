@@ -2,14 +2,14 @@ import React from "react";
 import SiteLogo from "../SiteLogo/SiteLogo";
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
-import { LOGIN_PAGE_LINK, SIGNUP_PAGE_LINK } from "../../../routes/routes";
+import { LOGIN_PAGE_LINK, SIGNUP_PAGE_LINK, SHOP_LINK } from "../../../routes/routes";
 
 const Header = () => {
     return (
         <HeaderLinkContainer>
             <SiteLogo></SiteLogo>
             <HeaderSiteLinks>
-                <HeaderLink>Shop</HeaderLink>
+                <HeaderLink to={SHOP_LINK}>Shop</HeaderLink>
                 <HeaderLink>Volunteering</HeaderLink>
                 <HeaderLink to={LOGIN_PAGE_LINK}>Log in</HeaderLink>
                 <HeaderLink to={SIGNUP_PAGE_LINK}>Sign up</HeaderLink>

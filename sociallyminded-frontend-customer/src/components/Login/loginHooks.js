@@ -7,6 +7,7 @@ import { GENERIC_EMAIL_ERROR, USER_NOT_FOUND, WRONG_PASSWORD, GENERIC_LOGIN_ERRO
 import { newCustomerRecord } from "./loginConstants";
 import axios from "axios";
 import { handleLoginViaGmail } from "../../routes/routes";
+import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 
 const useLoginHooks = () => {
     const { signIn, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
@@ -40,7 +41,7 @@ const useLoginHooks = () => {
             await signIn(email, password)
             .then((result) => {
                 console.log(result)
-                navigate("/home")
+                navigate(LOGIN_SIGNUP_REDIRECT_LINK)
             })
         } 
         
@@ -73,7 +74,7 @@ const useLoginHooks = () => {
             })
             .then((result) => {
                 console.log(result)
-                navigate("/Home")             
+                navigate(LOGIN_SIGNUP_REDIRECT_LINK)             
             })
         }
         catch (error) {
