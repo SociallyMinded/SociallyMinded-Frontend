@@ -1,4 +1,4 @@
-import { Customer } from './components/Customer/Customer';
+import { ShopPage } from './components/Shop/ShopPage';
 import Home from './components/Home/Home';
 import { AuthContextProvider } from './context/AuthContext';
 import Signup from './components/Signup/Signup.jsx';
@@ -18,7 +18,7 @@ function App() {
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/reset_pw' element={<ResetPassword/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/home' element={<Customer/>}/>
+            <Route path='/shop' element={<ShopPage/>}/>
             <Route path='/product_listing' element={<ProductListing/>}/>
         </Routes>
         </BrowserRouter>

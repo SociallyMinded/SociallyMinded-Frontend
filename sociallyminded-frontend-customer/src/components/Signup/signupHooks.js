@@ -9,7 +9,7 @@ import {
     GENERIC_EMAIL_ERROR,
     EMAIL_ALREADY_EXISTS
 } from "./signupConstants";
-
+import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const useSignupHooks = () => {
@@ -61,7 +61,7 @@ const useSignupHooks = () => {
             })
             .then((result) => {
                 console.log(result)
-                navigate("/Home")             
+                navigate(LOGIN_SIGNUP_REDIRECT_LINK)             
             })
         }
         catch (error) {
@@ -87,7 +87,7 @@ const useSignupHooks = () => {
             })
             .then((result) => {
                 console.log(result)
-                navigate("/Home")
+                navigate(LOGIN_SIGNUP_REDIRECT_LINK)
             })
            
         } catch (error) {
