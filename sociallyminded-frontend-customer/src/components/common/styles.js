@@ -7,3 +7,9 @@ export const PageTemplate = styled.div`
     margin-top: 3%;
     margin-bottom: 3%;
 `
+
+export const ReviewPageTemplate = styled.div`
+    font-family: 'Josefin Sans', sans-serif;
+    margin-top: 3%;
+    margin-bottom: 3%;
+`

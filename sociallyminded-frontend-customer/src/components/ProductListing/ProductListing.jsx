@@ -16,6 +16,7 @@ import Form from 'react-bootstrap/Form';
 import Toast from 'react-bootstrap/Toast';
 import { useLocation } from 'react-router-dom';
 
+import { Badge } from "react-bootstrap";
 
 const ProductListing = () => {
     const [show, setShow] = useState(false);
@@ -56,11 +57,15 @@ const ProductListing = () => {
                 <ProductListingDescriptionSection>
                     
                     <ProductListingDescriptionContainer>
-                        <h1>{state.d.name}</h1>
-                        <h1>${state.d.price}</h1>
-                        <h4>Category : {state.d.category}</h4>
-                        <h4>About this item</h4>
-                        <p>{state.d.description}</p>                                
+                        <ProductListingDescriptionTitleContainer>
+                            <h1>{state.d.name} </h1>
+                            <h5><Badge bg="secondary"> {state.d.category} </Badge></h5>
+                        </ProductListingDescriptionTitleContainer>
+                        <h2>Price : ${state.d.price}</h2>
+                        <ProductListingDescriptionDetailContainer>
+                            <h4>About this item</h4>
+                            <p>{state.d.description}</p>    
+                        </ProductListingDescriptionDetailContainer>                            
                     </ProductListingDescriptionContainer>
                     
                     <ProductListingPurchaseContainer>
@@ -78,7 +83,7 @@ const ProductListing = () => {
                                 <Modal.Header closeButton>
                                     <Modal.Title>Reviews</Modal.Title>
                                 </Modal.Header>
-                                <StyledReviewBody>
+                                {/* <StyledReviewBody>
 
                                     <ReviewContainer>
                                         <AvatarImg src={require('./peep-11.png')}></AvatarImg>
@@ -152,7 +157,7 @@ const ProductListing = () => {
                                             Review 1 description
                                         </p>
                                     </ReviewContainer>
-                                </StyledReviewBody>
+                                </StyledReviewBody> */}
                             </PageTemplate>
                         </StyledModal>
                     </ProductListingPurchaseContainer>
@@ -196,6 +201,12 @@ const ProductListingDescriptionContainer = styled.div`
     margin-right:5%;
     overflow:scroll;
     background-:red;
+`
+const ProductListingDescriptionTitleContainer = styled.div`
+    margin-bottom:3vh;
+`
+const ProductListingDescriptionDetailContainer = styled.div`
+    margin-top:3vh;
 `
 
 const ProductListingPurchaseContainer = styled.div`
