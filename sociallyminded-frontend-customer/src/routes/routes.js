@@ -5,6 +5,9 @@ export const getAllCustomersUrl = `${ABSOLUTE_PATH}/entity.customer`
 export const handleLoginViaGmail = `${ABSOLUTE_PATH}/entity.customer/loginViaGmail/`
 export const getAllProductsUrl = `${ABSOLUTE_PATH}/entity.product/`
 
+// Add product Id after the last "/" 
+export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
+
 export const HOME_LINK = "/"
 export const SIGNUP_PAGE_LINK = "/signup"
 export const LOGIN_PAGE_LINK = "/login"

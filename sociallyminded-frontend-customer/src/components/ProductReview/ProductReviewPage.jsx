@@ -1,12 +1,32 @@
 import React from 'react';
-import { PageTemplate } from '../common/styles';
+import { PageTemplate, ReviewPageTemplate } from '../common/styles';
 import Header from '../common/Header/Header';
 import styled from 'styled-components';
 import { Modal } from 'react-bootstrap';
+import { useLocation } from 'react-router';
+import useProductReviewHooks from './productReviewHooks';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getAllReviewsByProductIdUrl } from '../../routes/routes';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export const ProductReviewPage = () => {
+
+    const { state } = useLocation();
+    const navigate = useNavigate();
+    
+    const {         
+        data, displayData, loading, error, generateRandomNum
+    } = useProductReviewHooks(state)
+
+    console.log(data)
+
+    // const MAX_NUM = 18
+    // const MIN_NUM =  1
+    // const RANDOM_NUM = Math.floor(Math.random() * (MAX_NUM - MIN_NUM + 1) + MIN_NUM)
     return (
-        <PageTemplate>
+        <ReviewPageTemplate>
             <Header/>
             <ReviewHeaderContainer>
                 <Title>Reviews</Title>
@@ -16,81 +36,21 @@ export const ProductReviewPage = () => {
                 />
             </ReviewHeaderContainer>
             <ReviewDetailsContainer>
-                <p>Back</p>
-                <h1>Product A</h1>
+                <StyledLink onClick={() => navigate(-1)}>Back</StyledLink>
+                <h1>{state.d.name}</h1>
                 <StyledReviewBody>
+                {data != null && data.map((d) => (
                     <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                  
-                            Review 1 description<br></br>
-                        </ReviewDescription>
+                    <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
+                    <ReviewDescription>
+                       {d.reviewDescription}
+                    </ReviewDescription>
                     </ReviewContainer>
-                    <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                        </ReviewDescription>
-                    </ReviewContainer>
-                    <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                        </ReviewDescription>
-                    </ReviewContainer>
-                    <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                        </ReviewDescription>
-                    </ReviewContainer>
-                    <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                        </ReviewDescription>
-                    </ReviewContainer>
-                    <ReviewContainer>
-                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                        <ReviewDescription>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                            Review 1 description<br></br>
-                        </ReviewDescription>
-                    </ReviewContainer>
-            </StyledReviewBody>
-            </ReviewDetailsContainer>
-    
 
-        </PageTemplate>
+                ))}
+            </StyledReviewBody>
+            </ReviewDetailsContainer>    
+        </ReviewPageTemplate>
     )
 
 }
@@ -124,11 +84,24 @@ const ReviewDetailsContainer = styled.div`
     position: relative;
     margin-left:7vw;
     margin-right:7vw;
-    margin-top:5vh;
+    margin-top:4vh;
 `
 
 
-
+const StyledLink = styled.button`
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    font-size: 1.1em;
+    margin-bottom:2vh;
+    &:hover {
+        color:blue;
+    }
+`
 
 
 
@@ -152,10 +125,11 @@ const StyledReviewBody = styled(Modal.Body)`
 
 const ReviewDescription = styled.div`
     position: relative;
-    background: #f4f9fb;
+    background: #FBFBFB;
     border-radius: .4em;
     padding:1em;
     width:100%;
+    border:1px solid #dbdbdb;
 
     &:after {
         content: '';
@@ -165,12 +139,33 @@ const ReviewDescription = styled.div`
         width: 0;
         height: 0;
         border: 9px solid transparent;
-        border-right-color: #f4f9fb;
+        border-right-color: #dbdbdb;
         border-left: 0;
         border-bottom: 0;
         margin-top: -4.5px;
         margin-left: -9px;
     }
+      
+    &:hover {
+        transition: all 0.2s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        top: -4px;
+    }
+  
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        border-radius: 32px;
+        transform: scale(2);
+        transform-origin: 50% 50%;
+        transition: transform 0.15s ease-out;
+    }
+  
+    &:hover:before {
+        transform: scale(2.15);
+    }
+
 `
 
 

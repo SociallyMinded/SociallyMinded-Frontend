@@ -5,6 +5,7 @@ import Header from "../common/Header/Header";
 import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import { SIGNUP_PAGE_LINK } from "../../routes/routes";
+import './styles.css'
 
 const Home = () => {
     return (
@@ -12,12 +13,22 @@ const Home = () => {
             <Header></Header>
             <HomePage>
                 <HomePageDescription>
+                <div id="container">
+            <div id="flip">
+                <div><div>Cultivating Changemakers</div></div>
+                <div><div>Empowering Entrepreneurs</div></div>
+                <div><div>Supporting Social Causes</div></div>
+            </div>
+            </div>
                     <HomePageTitle>SociallyMinded</HomePageTitle>
                     <HomePageSubtitle>Support your favourite social enterprises today!</HomePageSubtitle>
+       
                     <HomePageLink to={SIGNUP_PAGE_LINK}>Get Started</HomePageLink>
                 </HomePageDescription>
             <HomeImage src={require('./home-logo.png')}></HomeImage>
             </HomePage>
+      
+
         </PageTemplate>
 
     )
@@ -41,15 +52,27 @@ const HomePageSubtitle = styled.h1`
 const HomePageDescription = styled.div`
     display:flex;
     flex-direction:column;
-    margin-top:15%;
+    margin-top:10%;
     margin-left:10%;
 `
 
 const HomeImage = styled.img`
     width:45em;
     height:35em;
-    margin-top:5%;
+    margin-top:7%;
     margin-left:3%;
+
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-top: 5px;
+
+    @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }   
+    }
 `
 
 const HomePageLink = styled(Link)`
@@ -77,5 +100,7 @@ const HomePageLink = styled(Link)`
         transition-duration: .1s;
     }
 `
+
+
 
 export default Home
