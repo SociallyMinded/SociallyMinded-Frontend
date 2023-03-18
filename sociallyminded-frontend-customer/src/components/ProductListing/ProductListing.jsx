@@ -18,6 +18,8 @@ import { useLocation } from 'react-router-dom';
 
 import { Badge } from "react-bootstrap";
 
+import { Link } from "react-router-dom";
+
 const ProductListing = () => {
     const [show, setShow] = useState(false);
 
@@ -71,95 +73,9 @@ const ProductListing = () => {
                     <ProductListingPurchaseContainer>
                         <StyledButton>Buy this product</StyledButton>
                         <StyledButton variant="primary" onClick={handleShow}>
-                            View all reviews
+                            <StyledLink to="/product_review" state={ state }>View All Reviews</StyledLink>
                         </StyledButton>
-                        <StyledModal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            <PageTemplate>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Reviews</Modal.Title>
-                                </Modal.Header>
-                                {/* <StyledReviewBody>
-
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                    <ReviewContainer>
-                                        <AvatarImg src={require('./peep-11.png')}></AvatarImg>
-                                        <p>
-                                            Username : pppp
-                                            <br></br>
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                            Review 1 description
-                                        </p>
-                                    </ReviewContainer>
-                                </StyledReviewBody> */}
-                            </PageTemplate>
-                        </StyledModal>
+                 
                     </ProductListingPurchaseContainer>
         
                 </ProductListingDescriptionSection>
@@ -217,6 +133,14 @@ const ProductListingPurchaseContainer = styled.div`
 const StyledButton = styled(Button)`
     margin-bottom:10%;
     margin-right:5%;
+`
+
+const StyledLink = styled(Link)`
+    text-decoration:none;
+    color:white;
+    &:hover {
+        color:white;
+    }
 `
 
 const AvatarImg = styled.img`
