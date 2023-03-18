@@ -3,6 +3,7 @@ import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetc
 import { getAllProductsUrl } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
+import { ProductCategories } from "../../enum"
 
 const useShopHooks = () => {
     const [data, setData] = useState(null)
@@ -30,26 +31,26 @@ const useShopHooks = () => {
 
     // Filter categories
     const categoriesMap = new Map()
-    categoriesMap.set("CRAFTS",0)
-    categoriesMap.set("CLOTHING",0)
-    categoriesMap.set("FOOD",0)
-    categoriesMap.set("OTHERS",0)
+    categoriesMap.set(ProductCategories.CRAFTS,0)
+    categoriesMap.set(ProductCategories.CLOTHING,0)
+    categoriesMap.set(ProductCategories.FOOD,0)
+    categoriesMap.set(ProductCategories.OTHERS,0)
 
     const [categories, setCategories] = useState(categoriesMap)
     const filterProductByCategory = (e) => {
         var category = e.target.value
 
         switch(category) {
-            case category == "CRAFTS":
+            case category == ProductCategories.CRAFTS:
                 setCraftFilterClicked(!craftFilterClicked)
                 break
-            case category == "CLOTHING":
+            case category == ProductCategories.CLOTHING:
                 setClothingFilterClicked(!clothingFilterClicked)
                 break
-            case category == "FOOD":
+            case category == ProductCategories.FOOD:
                 setFoodFilterClicked(!foodFilterClicked)
                 break
-            case category == "OTHERS":
+            case category == ProductCategories.OTHERS:
                 setOthersFilterClicked(!othersFilterClicked)
                 break
             default:

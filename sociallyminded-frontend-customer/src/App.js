@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ProductListing from './components/ProductListing/ProductListing';
+import { ProductReviewPage } from './components/ProductReview/ProductReviewPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/shop' element={<ShopPage/>}/>
             <Route path='/product_listing' element={<ProductListing/>}/>
+            <Route path='/product_review' element={<ProductReviewPage/>}/>
         </Routes>
         </BrowserRouter>
       </AuthContextProvider>

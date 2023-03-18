@@ -3,6 +3,44 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { DropdownButton } from "react-bootstrap";
+import { ProductCategories, ProductCategoryLabels } from '../../enum';
+
+const SearchInputCategory = ({data}) => {
+    return (
+        <Form>
+            <StyledFormCheck 
+                type={'checkbox'}
+                label={ProductCategoryLabels.CRAFTS}
+                value={ProductCategories.CRAFTS}
+                onClick={data.filterProductByCategory}
+                defaultChecked={data.craftFilterClicked}
+            />
+            <StyledFormCheck
+                type={'checkbox'}
+                label={ProductCategoryLabels.CLOTHING}
+                value={ProductCategories.CLOTHING}
+                onClick={data.filterProductByCategory}
+                defaultChecked={data.clothingFilterClicked}
+            
+            />
+            <StyledFormCheck
+                type={'checkbox'}
+                label={ProductCategoryLabels.FOOD}
+                value={ProductCategories.FOOD}
+                onClick={data.filterProductByCategory}
+                defaultChecked={data.foodFilterClicked}
+        
+            />
+            <StyledFormCheck
+                type={'checkbox'}
+                label={ProductCategoryLabels.OTHERS}
+                value={ProductCategories.OTHERS}
+                onClick={data.filterProductByCategory}
+                defaultChecked={data.othersFilterClicked}
+            />
+        </Form>
+    )
+}
 
 export const SearchInput = ({data}) => {
     return (
@@ -14,40 +52,7 @@ export const SearchInput = ({data}) => {
                 value={data.searchQuery}
             />
             <DropdownButton id="dropdown-basic-button" title="Search By Category">
-                <Form>
-                    <StyledFormCheck 
-                        type={'checkbox'}
-                        label={`Crafts`}
-                        value={'CRAFTS'}
-                        onClick={data.filterProductByCategory}
-                        defaultChecked={data.craftFilterClicked}
-
-                    />
-                    <StyledFormCheck
-                        type={'checkbox'}
-                        label={`Clothing`}
-                        value={'CLOTHING'}
-                        onClick={data.filterProductByCategory}
-                        defaultChecked={data.clothingFilterClicked}
-                    
-                    />
-                    <StyledFormCheck
-                        type={'checkbox'}
-                        label={`Food`}
-                        value={'FOOD'}
-                        onClick={data.filterProductByCategory}
-                        defaultChecked={data.foodFilterClicked}
-                
-                    />
-                    <StyledFormCheck
-                        type={'checkbox'}
-                        label={`Others`}
-                        value={'OTHERS'}
-                        onClick={data.filterProductByCategory}
-                        defaultChecked={data.othersFilterClicked}
-                
-                    />
-                </Form>
+                <SearchInputCategory data = {data}/>
             </DropdownButton>
             <Button variant="outline-secondary" id="button-addon2" onClick={data.performSearch}>
                 Search
