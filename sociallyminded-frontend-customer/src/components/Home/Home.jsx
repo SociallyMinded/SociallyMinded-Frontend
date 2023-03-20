@@ -6,31 +6,52 @@ import Button from "react-bootstrap/esm/Button";
 import { Link } from "react-router-dom";
 import { SIGNUP_PAGE_LINK } from "../../routes/routes";
 import './styles.css'
+import useLoginHooks from "../Login/loginHooks";
+import { UserAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import LoggedInHeader from "../common/Header/LoggedInHeader";
+import { Toast } from "react-bootstrap";
+
+import { useContext } from "react";
+import { LogoutToastContext } from "../../App";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+    const { user } = UserAuth()
+
+    const { state, setState } = useLoginHooks()
+
+    const { showLogoutToast, setShowLogoutToast } = useContext(LogoutToastContext);
+    const closeLogoutToast = () => setShowLogoutToast(false)
+
+    const location = useLocation();
+
     return (
         <PageTemplate>
-            <Header></Header>
+            {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <HomePage>
                 <HomePageDescription>
-                <div id="container">
-            <div id="flip">
-                <div><div>Cultivating Changemakers</div></div>
-                <div><div>Empowering Entrepreneurs</div></div>
-                <div><div>Supporting Social Causes</div></div>
-            </div>
-            </div>
+                    <div id="container">
+                        <div id="flip">
+                            <div><div>Cultivating Changemakers</div></div>
+                            <div><div>Empowering Entrepreneurs</div></div>
+                            <div><div>Supporting Social Causes</div></div>
+                        </div>
+                    </div>
                     <HomePageTitle>SociallyMinded</HomePageTitle>
                     <HomePageSubtitle>Support your favourite social enterprises today!</HomePageSubtitle>
-       
                     <HomePageLink to={SIGNUP_PAGE_LINK}>Get Started</HomePageLink>
                 </HomePageDescription>
-            <HomeImage src={require('./home-logo.png')}></HomeImage>
+
+                <HomeImage src={require('./home-logo.png')}></HomeImage>
+                {user == null && showLogoutToast && location.state != null && <StyledToast onClose={closeLogoutToast}>
+                    <Toast.Header>
+                        <strong className="me-auto">Log Out</strong>
+                    </Toast.Header>
+                    <Toast.Body>You have been logged out!</Toast.Body>
+                </StyledToast>}
             </HomePage>
-      
-
         </PageTemplate>
-
     )
 }
 
@@ -57,6 +78,8 @@ const HomePageDescription = styled.div`
 `
 
 const HomeImage = styled.img`
+    position:relative;
+    z-index:1;
     width:45em;
     height:35em;
     margin-top:7%;
@@ -73,6 +96,13 @@ const HomeImage = styled.img`
         50%  { transform: translate(0, 15px); }
         100%   { transform: translate(0, -0px); }   
     }
+`
+const StyledToast = styled(Toast)`
+    position:absolute;
+    z-index:2;
+    margin-left:73%;
+    width:15%;
+    margin-top:3%;
 `
 
 const HomePageLink = styled(Link)`

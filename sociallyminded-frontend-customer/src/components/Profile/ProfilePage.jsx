@@ -2,11 +2,14 @@ import React from "react";
 import { PageTemplate } from "../common/styles";
 import styled from "styled-components";
 import Header from "../common/Header/Header";
+import LoggedInHeader from "../common/Header/LoggedInHeader";
 import Table from 'react-bootstrap/Table';
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import useLoginHooks from "../Login/loginHooks";
+import { UserAuth } from "../../context/AuthContext";
 
 export const ProfilePage = () => {
     const [show, setShow] = useState(false);
@@ -14,10 +17,11 @@ export const ProfilePage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
+    const { user } = UserAuth()
   
     return (
         <PageTemplate>
-            <Header></Header>
+            {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <h3>Order Records</h3>
             <Table hover responsive>
                 <thead>

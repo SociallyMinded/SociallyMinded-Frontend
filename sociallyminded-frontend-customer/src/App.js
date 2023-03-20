@@ -9,23 +9,31 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import ProductListing from './components/ProductListing/ProductListing';
 import { ProductReviewPage } from './components/ProductReview/ProductReviewPage';
 import { ProfilePage } from './components/Profile/ProfilePage';
+import { createContext } from 'react';
+import { useState } from 'react';
+
+export const LogoutToastContext = createContext(-1);
 
 function App() {
+  const [showLogoutToast, setShowLogoutToast] = useState(true);
+
   return (
     <div>
       <AuthContextProvider>
-        <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/signup' element={<Signup/>}/>
-            <Route path='/reset_pw' element={<ResetPassword/>}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/shop' element={<ShopPage/>}/>
-            <Route path='/product_listing' element={<ProductListing/>}/>
-            <Route path='/product_review' element={<ProductReviewPage/>}/>
-            <Route path='/profile' element={<ProfilePage/>}/>
-        </Routes>
-        </BrowserRouter>
+        <LogoutToastContext.Provider value={{ showLogoutToast, setShowLogoutToast }}>
+          <BrowserRouter>
+          <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/signup' element={<Signup/>}/>
+              <Route path='/reset_pw' element={<ResetPassword/>}/>
+              <Route path='/login' element={<Login/>}/>
+              <Route path='/shop' element={<ShopPage/>}/>
+              <Route path='/product_listing' element={<ProductListing/>}/>
+              <Route path='/product_review' element={<ProductReviewPage/>}/>
+              <Route path='/profile' element={<ProfilePage/>}/>
+          </Routes>
+          </BrowserRouter>
+        </LogoutToastContext.Provider>
       </AuthContextProvider>
     </div>
   );
