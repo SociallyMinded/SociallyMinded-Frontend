@@ -19,21 +19,27 @@ import { useLocation } from 'react-router-dom';
 import { Badge } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
+import useProductListingHooks from "./productListingHooks";
+import { UserAuth } from "../../context/AuthContext";
 
 const ProductListing = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     const { state } = useLocation();
-    
+
+
+    const {         
+        data, displayData, loading, error, generateRandomNum, createNewOrder,
+        handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
+        showToast, handleShowToast, handleCloseToast, orderQty, handleOrderQty
+    } = useProductListingHooks(state)
+
 
     return (
         <PageTemplate>
             <LoggedInHeader></LoggedInHeader>
             <ProductListingPage>
+
                 <ProductListingImgSection>
+
                     <Carousel>
                         <Carousel.Item>
                             <ProductListingImg
@@ -57,7 +63,6 @@ const ProductListing = () => {
                 </ProductListingImgSection>
                         
                 <ProductListingDescriptionSection>
-                    
                     <ProductListingDescriptionContainer>
                         <ProductListingDescriptionTitleContainer>
                             <h1>{state.d.name} </h1>
@@ -71,16 +76,68 @@ const ProductListing = () => {
                     </ProductListingDescriptionContainer>
                     
                     <ProductListingPurchaseContainer>
-                        <StyledButton>Buy this product</StyledButton>
-                        <StyledButton variant="primary" onClick={handleShow}>
+                        <StyledButton onClick={handleShowPurchaseModal}>Buy this product</StyledButton>
+                        <StyledButton variant="primary" onClick={handleShowReviewsPage}>
                             <StyledLink to="/product_review" state={ state }>View All Reviews</StyledLink>
                         </StyledButton>
-                 
                     </ProductListingPurchaseContainer>
-        
                 </ProductListingDescriptionSection>
 
+                <ProductListingToastSection>
+                    <div>
+                    {showToast && 
+                        <StyledToast onClose={handleCloseToast}>
+                            <Toast.Header>
+                                <strong className="me-auto">Order Placed</strong>
+                            </Toast.Header>
+                            <Toast.Body>Your order for {state.d.name} is placed!</Toast.Body>
+                        </StyledToast>
+                    }
+                    {/* {showToast && 
+                        <StyledToast onClose={handleCloseToast}>
+                            <Toast.Header>
+                                <strong className="me-auto">Notice</strong>
+                            </Toast.Header>
+                            <Toast.Body>Please log in to your account to place an order</Toast.Body>
+                        </StyledToast>
+                    } */}
+
+
+                    </div>
+           
+               
+                </ProductListingToastSection>
+
+       
+        
+         
+                <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{state.d.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Qty</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="1"
+                            autoFocus
+                            value={orderQty}
+                            onChange={handleOrderQty}
+                        />
+                        </Form.Group>
+                    </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={createNewOrder}>
+                        Place Order
+                    </Button>
+                    </Modal.Footer>
+                </Modal> 
+                
             </ProductListingPage>
+        
         </PageTemplate>
     )
 }
@@ -111,12 +168,23 @@ const ProductListingDescriptionSection = styled.div`
     max-width:60vw;
     overflow:scroll;
 `
+
+const ProductListingToastSection = styled.div`
+    display:flex;
+    flex-direction:column;
+    margin-top:5%;
+    margin-left:5%;
+    width:60vw;
+    max-width:60vw;
+    overflow:scroll;
+`
+
 const ProductListingDescriptionContainer = styled.div`
-    max-height:60vh;
-    height:60vh;
+    max-height:65vh;
+    height:65vh;
     margin-right:5%;
     overflow:scroll;
-    background-:red;
+    width:100%;
 `
 const ProductListingDescriptionTitleContainer = styled.div`
     margin-bottom:3vh;
@@ -126,9 +194,15 @@ const ProductListingDescriptionDetailContainer = styled.div`
 `
 
 const ProductListingPurchaseContainer = styled.div`
-    margin-top:5%;
-    margin-bottom:0%;
+    width:100%;
 `
+
+const StyledToast = styled(Toast)`
+    height:100%;
+    width:80%;
+    margin-right:5%;
+`
+
 
 const StyledButton = styled(Button)`
     margin-bottom:10%;
@@ -166,42 +240,5 @@ const StyledModal = styled(Modal)`
     margin-top:5%;
 `
 
+
 export default ProductListing
-
-/*
-<FloatingLabel
-    controlId="floatingInput"
-    label="Quantity"
-    className="mb-3">
-    <Form.Control type="number" placeholder="quantity" min="0"/>
-</FloatingLabel>
-
-<Spinner animation="border" role="status"></Spinner>
-
-
-<Modal.Header closeButton>
-    <Modal.Title>Write your review</Modal.Title>
-</Modal.Header>
-
-<Modal.Body>
-    <FloatingLabel
-        controlId="floatingTextarea"
-        label="Review"
-        className="mb-3"
-    >
-    <Form.Control as="textarea" placeholder="Leave a comment here" />
-    </FloatingLabel>
-    <FloatingLabel
-        controlId="floatingInput"
-        label="Rating"
-        className="mb-3">
-    <Form.Control type="number" placeholder="quantity" min="0" max="5"/>
-    </FloatingLabel>
-    
-</Modal.Body>
-
-<Modal.Footer>
-    <Button variant="primary">Submit review</Button>
-</Modal.Footer>
-
-*/

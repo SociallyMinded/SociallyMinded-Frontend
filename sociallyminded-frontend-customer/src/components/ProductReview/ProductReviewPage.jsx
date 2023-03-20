@@ -10,21 +10,17 @@ import axios from 'axios';
 import { getAllReviewsByProductIdUrl } from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { UserAuth } from '../../context/AuthContext';
 
 export const ProductReviewPage = () => {
 
-    const { state } = useLocation();
-    const navigate = useNavigate();
+    const { state } = useLocation()
+    const navigate = useNavigate()
     
     const {         
         data, displayData, loading, error, generateRandomNum
     } = useProductReviewHooks(state)
 
-    console.log(data)
-
-    // const MAX_NUM = 18
-    // const MIN_NUM =  1
-    // const RANDOM_NUM = Math.floor(Math.random() * (MAX_NUM - MIN_NUM + 1) + MIN_NUM)
     return (
         <ReviewPageTemplate>
             <Header/>
@@ -39,6 +35,7 @@ export const ProductReviewPage = () => {
                 <StyledLink onClick={() => navigate(-1)}>Back</StyledLink>
                 <h1>{state.d.name}</h1>
                 <StyledReviewBody>
+                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
                 {data != null && data.map((d) => (
                     <ReviewContainer>
                     <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
@@ -49,7 +46,7 @@ export const ProductReviewPage = () => {
 
                 ))}
             </StyledReviewBody>
-            </ReviewDetailsContainer>    
+            </ReviewDetailsContainer>  
         </ReviewPageTemplate>
     )
 
