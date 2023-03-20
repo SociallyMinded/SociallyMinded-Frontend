@@ -4,6 +4,7 @@ const ABSOLUTE_PATH = "http://localhost:8080/SociallyMinded-war/webresources"
 export const getAllCustomersUrl = `${ABSOLUTE_PATH}/entity.customer`
 export const handleLoginViaGmail = `${ABSOLUTE_PATH}/entity.customer/loginViaGmail/`
 export const getAllProductsUrl = `${ABSOLUTE_PATH}/entity.product/`
+export const createNewOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`

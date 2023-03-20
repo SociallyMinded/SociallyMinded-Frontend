@@ -7,7 +7,6 @@ import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
 
 const useProductReviewHooks = (state) => {
-    // const { state } = useLocation();
 
     const [data, setData] = useState(null)
     const [displayData, setDisplayData] = useState(null)
