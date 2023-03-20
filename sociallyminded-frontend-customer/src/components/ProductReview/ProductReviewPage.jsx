@@ -10,17 +10,16 @@ import axios from 'axios';
 import { getAllReviewsByProductIdUrl } from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
+import { UserAuth } from '../../context/AuthContext';
 
 export const ProductReviewPage = () => {
 
-    const { state } = useLocation();
-    const navigate = useNavigate();
+    const { state } = useLocation()
+    const navigate = useNavigate()
     
     const {         
         data, displayData, loading, error, generateRandomNum
     } = useProductReviewHooks(state)
-
-    console.log(data)
 
     return (
         <ReviewPageTemplate>

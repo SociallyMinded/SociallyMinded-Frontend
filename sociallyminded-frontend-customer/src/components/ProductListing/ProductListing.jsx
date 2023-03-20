@@ -20,19 +20,18 @@ import { Badge } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import useProductListingHooks from "./productListingHooks";
+import { UserAuth } from "../../context/AuthContext";
 
 const ProductListing = () => {
-
-
     const { state } = useLocation();
+
 
     const {         
         data, displayData, loading, error, generateRandomNum, createNewOrder,
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
-        showToast, handleShowToast, handleCloseToast
+        showToast, handleShowToast, handleCloseToast, orderQty, handleOrderQty
     } = useProductListingHooks(state)
 
-    
 
     return (
         <PageTemplate>
@@ -94,6 +93,15 @@ const ProductListing = () => {
                             <Toast.Body>Your order for {state.d.name} is placed!</Toast.Body>
                         </StyledToast>
                     }
+                    {/* {showToast && 
+                        <StyledToast onClose={handleCloseToast}>
+                            <Toast.Header>
+                                <strong className="me-auto">Notice</strong>
+                            </Toast.Header>
+                            <Toast.Body>Please log in to your account to place an order</Toast.Body>
+                        </StyledToast>
+                    } */}
+
 
                     </div>
            
@@ -115,6 +123,8 @@ const ProductListing = () => {
                             type="number"
                             placeholder="1"
                             autoFocus
+                            value={orderQty}
+                            onChange={handleOrderQty}
                         />
                         </Form.Group>
                     </Form>

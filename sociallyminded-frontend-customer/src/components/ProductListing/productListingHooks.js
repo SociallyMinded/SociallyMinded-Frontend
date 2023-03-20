@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
 import { createNewOrderUrl } from "../../routes/routes"
+import { UserAuth } from "../../context/AuthContext"
 
 const useProductListingHooks = (state) => {
 
@@ -27,6 +28,13 @@ const useProductListingHooks = (state) => {
     const handleShowToast= () => setShowToast(true);
     const handleCloseToast = () => setShowToast(false);
 
+    const [orderQty, setOrderQty] = useState(false);
+
+    const handleOrderQty = (e) => setOrderQty(e.target.value);
+
+    const { user } = UserAuth()
+    console.log(user.uid)
+
     useEffect(() => {
         axios.get(getAllReviewsByProductIdUrl + state.d.productId)
         .then(response => {
@@ -43,30 +51,41 @@ const useProductListingHooks = (state) => {
 
     const createNewOrder = async () => {
         setLoading(true)
-        const newOrder = {
-            "productId" : "1",
-            "customerId":1,
-            "record": {
-                "quantity": 3
+        if (user != null) {
+            const customerFirebaseUid = user.uid
+            const productId = state.d.productId
+            const totalPrice = Math.round(state.d.price * orderQty,2)
+            console.log(user.uid)
+            const newOrder = {
+                "productId" : productId,
+                "customerFirebaseUid": customerFirebaseUid,
+                "record": {
+                    "quantity": orderQty,
+                    "totalPrice":totalPrice
+                }
             }
+           
+            await axios.post(createNewOrderUrl, newOrder)
+                .then(response => {
+                    console.log(response.data)
+                    setData(response.data)
+                })
+                .catch(error => setError(error.response.data))
+                .finally(res => {
+                    setShowPurchaseModal(false)
+                    setShowToast(true)
+                })
+        } else {
+            
         }
-        await axios.post(createNewOrderUrl, newOrder)
-            .then(response => {
-                console.log(response.data)
-                setData(response.data)
-            })
-            .catch(error => setError(error.response.data))
-            .finally(res => {
-                setShowPurchaseModal(false)
-                setShowToast(true)
-            })
+      
     }
     
 
     return { 
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
-        showToast, handleShowToast, handleCloseToast
+        showToast, handleShowToast, handleCloseToast, orderQty, handleOrderQty
     } 
 }
 
