@@ -8,7 +8,9 @@ import Login from './components/Login/Login';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ProductListing from './components/ProductListing/ProductListing';
 import { ProductReviewPage } from './components/ProductReview/ProductReviewPage';
+import { AddProductReviewPage } from './components/AddProductReview/AddProductReviewPage';
 import { ProfilePage } from './components/Profile/ProfilePage';
+import React from 'react';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
             <Route path='/shop' element={<ShopPage/>}/>
             <Route path='/product_listing' element={<ProductListing/>}/>
             <Route path='/product_review' element={<ProductReviewPage/>}/>
+            <Route path='/addReview' element={<AddProductReviewPage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
         </Routes>
         </BrowserRouter>

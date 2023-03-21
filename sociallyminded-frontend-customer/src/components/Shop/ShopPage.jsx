@@ -4,6 +4,7 @@ import useShopHooks from "./shopHooks";
 import { SearchInput } from "./SearchInput";
 import { DataDisplay } from "./DataDisplay";
 import { PromptResults } from "./PromptResults";
+import React from 'react';
 
 export const ShopPage = () => {
     const {         

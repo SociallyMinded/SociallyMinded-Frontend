@@ -1,0 +1,302 @@
+import React from 'react';
+import { PageTemplate, ReviewPageTemplate } from '../common/styles';
+import Header from '../common/Header/Header';
+import styled from 'styled-components';
+import { Modal } from 'react-bootstrap';
+import { useLocation } from 'react-router';
+// import useProductReviewHooks from './addProductReviewHooks';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getAllReviewsByProductIdUrl } from '../../routes/routes';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { UserAuth } from '../../context/AuthContext';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
+import { AiFillCamera } from 'react-icons/ai';
+import { ImEnlarge2 } from 'react-icons/im';
+import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
+import { createNewReviewUrl } from "../../routes/routes"
+ import { version } from 'react';
+export const AddProductReviewPage = (state) => {
+    const [rating, setRating] = React.useState(5);
+    const [hover, setHover] = React.useState(-1);
+    const [reviewDescription, setReviewDescription] = useState('');
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [previewUrls, setPreviewUrls] = useState([]);
+    const [isAnonymous, setIsAnonymous] = useState(false);
+    const [enlargedImg, setEnlargedImg] = useState(-1);
+    const characterCount = reviewDescription.length;
+    const maxCharacters = 999;
+   
+
+console.log("react version" +version);
+    // const { state } = useLocation()
+    const navigate = useNavigate()
+    const { user } = UserAuth()
+    console.log(user.uid)
+    // const productId = state.d.productId;
+    // const {         
+    //     data
+    // } = useProductReviewHooks(state)
+
+    // const { user } = UserAuth()
+    // const { data, loading, error } = useProfileHooks(user)
+
+    //console.log(user.uid)
+    const ratingLabels = {
+        1: 'Terrible',
+        2: 'Poor',
+        3: 'Ok',
+        4: 'Good',
+        5: 'Excellent',
+      };
+
+    function getRatingLabelText(rating) {
+    return `${rating} Star${rating !== 1 ? 's' : ''}, ${ratingLabels[rating]}`;
+    };
+
+    const handleReviewDescriptionChange = (e) => {
+        setReviewDescription(e.target.value);
+        //onChange={(e) => setReviewDescription(e.target.value)}
+      };
+
+      const handleFileChange = (event) => {
+        const files = event.target.files;
+        let urls = [];
+    
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, file]);
+          urls.push(URL.createObjectURL(file));
+        }
+    
+        setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+      };
+
+      const handleRemove = (index) => {
+        const newSelectedFiles = [...selectedFiles];
+        newSelectedFiles.splice(index, 1);
+        setSelectedFiles(newSelectedFiles);
+    
+        const newPreviewUrls = [...previewUrls];
+        newPreviewUrls.splice(index, 1);
+        setPreviewUrls(newPreviewUrls);
+
+      };
+
+      const handleEnlarged = (img) => {
+        setEnlargedImg(img);
+      };
+    
+      const handleShrink = () => {
+        setEnlargedImg(-1);
+      };
+
+      function handleCheckboxChange(e) {
+        setIsAnonymous(e.target.checked);
+      }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(`Rating: ${rating}`);
+        console.log(`ReviewDescription: ${reviewDescription}`);
+        console.log(selectedFiles);
+        // const newReview = {
+        //   "reviewDescription" : reviewDescription,
+        //   "productId" : productId,
+        //   "customerId": user.uid
+        //   }
+      
+        //   //setShowPageLoadSpinner(true)
+        //   axios.post(createNewReviewUrl, newReview)
+        //   // .then((result) => {
+        //     .then(response => {
+        //       console.log(response.data)
+        //       // setData(response.data)
+        //       // const user = result.user
+        //       // const newRecord = createNewReview(reviewDescription, "1l","1l")
+        //       // return axios.post(getAllReviewsByProductIdUrl, newRecord)
+        //   })
+        //   .then((result) => {
+        //       console.log(result)
+        //       navigate(LOGIN_SIGNUP_REDIRECT_LINK)
+        //   })
+         
+      
+     
+
+    };
+
+    // css
+    const formStyle = {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh"
+    }
+
+    const reviewUploadImage = {
+        background: "#fff",
+        border: "1px solid #8351cf",
+        boxSizing: "border-box",
+        padding: "0 12px",
+        height: "30px",
+        color: "#8351cf",
+        display: "inline-flex",
+        marginRight: "8px",
+        cursor: "pointer"
+    };
+
+    const reviewUploadImageButton = {
+        display: "none"
+    }
+
+    const removeButton = {
+        background: "#fff",
+        border: "1px solid #8351cf",
+        boxSizing: "border-box",
+        padding: "0 12px",
+        height: "30px",
+        color: "#8351cf",
+        display: "inline-flex",
+        cursor: "pointer",
+        position: "absolute",
+        right: "0"
+    }
+
+    const enlargeButton = {
+        background: "#fff",
+        border: "1px solid #8351cf",
+        boxSizing: "border-box",
+        padding: "4 8px",
+        height: "30px",
+        color: "#8351cf",
+        display: "inline-flex",
+        cursor: "pointer",
+        position: "absolute",
+        left: "0"
+    }
+    
+    return (
+      <PageTemplate>
+       <Header/>
+       <div>
+        <form style={formStyle} onSubmit={handleSubmit}>
+        <Box
+      sx={{
+        width: 200,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <Rating
+        name="hover-feedback"
+        value={rating}
+        precision={1}
+        getLabelText={getRatingLabelText}
+        onChange={(event, newValue) => {
+          setRating(newValue);
+        }}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+      />
+      {rating !== null && (
+        <Box sx={{ ml: 2 }}>{ratingLabels[hover !== -1 ? hover : rating]}</Box>
+      )}
+    </Box>
+
+        <br />
+        <label>
+          Review Description: <br />
+          <textarea placeholder="Share more thoughts on the product to help other buyers" 
+          onChange={handleReviewDescriptionChange}
+          style={{ maxWidth:"800px", minWidth:"500px", maxHeight:"500px",minHeight:"150px" }}
+          value={reviewDescription} maxLength="999" />
+        </label>
+        <div>
+        characters: {characterCount}/{maxCharacters}
+      </div>
+
+        {/* preview of the image*/}
+        <div style={{display:"flex"}}>
+        
+       {previewUrls.map((url, index) => (
+        // <div key={index} onClick={() => handleEnlarged(index)}>
+            <div style={{backgroundImage: `url(${url})`, border: "none", 
+            maxWidth:"80px", minWidth:"80px", maxHeight:"80px",minHeight:"80px",
+            backgroundSize:"cover", position:"relative",overflow:"hidden",
+            marginRight:"6px",
+            backgroundPosition: "50%",
+            backgroundRepeat: "no-repeat"}} >
+                <button style={removeButton} type="button" onClick={() => handleRemove(index)}>
+                    X
+                </button>
+                <button style={enlargeButton} type="button" onClick={() => handleEnlarged(index)}>
+                <ImEnlarge2/>
+                </button>
+            </div>
+     
+         
+          
+        // </div>
+      ))}
+      {enlargedImg !== -1 && (
+        <div onClick={handleShrink}>
+          <img src={previewUrls[enlargedImg]} style={{ maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
+        </div>
+      )}
+      </div>
+      <br />
+      <br />
+      {selectedFiles.length < 5 && (
+        <>
+         {/* upload image button */}
+        <label class= "imageButton" style={reviewUploadImage} >
+        <p><AiFillCamera/></p>
+            <span>add photo</span>
+          <input style={reviewUploadImageButton} type="file" onChange={handleFileChange} /> 
+         </label>
+        </>
+      )}
+        <br />
+        <br />
+        {/* checkbox to check if the user want to show review as anonymous */}
+        <label>
+        <input
+          type="checkbox"
+          checked={isAnonymous}
+          onChange={handleCheckboxChange}
+        />
+        Do not show my username in the review.
+      </label>
+      <br/>
+      <br/>
+        <button class="sc-ckEbSK dVcYVY btn btn-primary" type="submit">Submit</button>
+      </form> 
+      </div>
+      </PageTemplate>
+    );
+
+}
+
+
+
+const Title = styled.h1`
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:1;
+    font-size:4.5em;
+    font-weight:semi-bold;
+`
+
+
+
+
+

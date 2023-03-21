@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import SiteLogo from '../common/SiteLogo/SiteLogo';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
+import React from 'react';
 
 const Signup = () => {
 
