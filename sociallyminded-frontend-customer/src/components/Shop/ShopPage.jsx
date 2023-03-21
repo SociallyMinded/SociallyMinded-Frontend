@@ -5,6 +5,9 @@ import { SearchInput } from "./SearchInput";
 import { DataDisplay } from "./DataDisplay";
 import { PromptResults } from "./PromptResults";
 import React from 'react';
+import useLoginHooks from "../Login/loginHooks";
+import Header from "../common/Header/Header"; 
+import { UserAuth } from "../../context/AuthContext";
 
 export const ShopPage = () => {
     const {         
@@ -15,9 +18,11 @@ export const ShopPage = () => {
         foodFilterClicked, othersFilterClicked
     } = useShopHooks();
 
+    const { user } = UserAuth()
+
     return (
         <PageTemplate>   
-            <LoggedInHeader></LoggedInHeader> 
+            {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <div>
                 <SearchInput 
                     data={{

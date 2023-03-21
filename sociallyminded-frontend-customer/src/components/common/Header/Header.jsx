@@ -10,7 +10,6 @@ const Header = () => {
             <SiteLogo></SiteLogo>
             <HeaderSiteLinks>
                 <HeaderLink to={SHOP_LINK}>Shop</HeaderLink>
-                <HeaderLink>Volunteering</HeaderLink>
                 <HeaderLink to={LOGIN_PAGE_LINK}>Log in</HeaderLink>
                 <HeaderLink to={SIGNUP_PAGE_LINK}>Sign up</HeaderLink>
             </HeaderSiteLinks>
@@ -26,7 +25,7 @@ const HeaderLinkContainer = styled.div`
 const HeaderSiteLinks = styled.div`
     display:flex;
     flex-direction:row;
-    margin-left:50%;
+    margin-left:69%;
     margin-top:0.5em;
     width:100%;
 `

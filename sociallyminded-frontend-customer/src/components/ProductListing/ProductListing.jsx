@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import LoggedInHeader from "../common/Header/Header";
 import { PageTemplate } from "../common/styles";
 
 import Modal from 'react-bootstrap/Modal';
@@ -15,27 +14,28 @@ import Form from 'react-bootstrap/Form';
 
 import Toast from 'react-bootstrap/Toast';
 import { useLocation } from 'react-router-dom';
-
 import { Badge } from "react-bootstrap";
-
 import { Link } from "react-router-dom";
 import useProductListingHooks from "./productListingHooks";
 import { UserAuth } from "../../context/AuthContext";
+import useLoginHooks from "../Login/loginHooks";
+import Header from "../common/Header/Header";
+import LoggedInHeader from "../common/Header/LoggedInHeader";
 
 const ProductListing = () => {
     const { state } = useLocation();
-
+    const { user } = UserAuth()
 
     const {         
         data, displayData, loading, error, generateRandomNum, createNewOrder,
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
-        showToast, handleShowToast, handleCloseToast, orderQty, handleOrderQty
+        showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast
     } = useProductListingHooks(state)
-
 
     return (
         <PageTemplate>
-            <LoggedInHeader></LoggedInHeader>
+            {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ProductListingPage>
 
                 <ProductListingImgSection>
@@ -85,31 +85,27 @@ const ProductListing = () => {
 
                 <ProductListingToastSection>
                     <div>
-                    {showToast && 
-                        <StyledToast onClose={handleCloseToast}>
+                    {showSuccessToast && 
+                        <StyledToast onClose={handleCloseSuccessToast}>
                             <Toast.Header>
                                 <strong className="me-auto">Order Placed</strong>
                             </Toast.Header>
                             <Toast.Body>Your order for {state.d.name} is placed!</Toast.Body>
                         </StyledToast>
                     }
-                    {/* {showToast && 
-                        <StyledToast onClose={handleCloseToast}>
+                    {showLoginPromptToast && 
+                        <StyledLoginPromptToast onClose={handleCloseLoginPromptToast}>
                             <Toast.Header>
                                 <strong className="me-auto">Notice</strong>
                             </Toast.Header>
                             <Toast.Body>Please log in to your account to place an order</Toast.Body>
-                        </StyledToast>
-                    } */}
-
-
-                    </div>
-           
-               
+                        </StyledLoginPromptToast>
+                    }
+                    </div>    
                 </ProductListingToastSection>
 
        
-        
+
          
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
@@ -201,8 +197,17 @@ const StyledToast = styled(Toast)`
     height:100%;
     width:80%;
     margin-right:5%;
+    box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
+    background-color:#DBE8D7;
 `
 
+const StyledLoginPromptToast = styled(Toast)`
+    height:100%;
+    width:80%;
+    margin-right:5%;
+    box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
+    background-color:#EDD2D2;
+`
 
 const StyledButton = styled(Button)`
     margin-bottom:10%;

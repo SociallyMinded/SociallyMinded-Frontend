@@ -2,17 +2,21 @@ import React from "react";
 import SiteLogo from "../SiteLogo/SiteLogo";
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
-import { HOME_LINK } from "../../../routes/routes";
+import { HOME_LINK, SHOP_LINK, PROFILE_PAGE_LINK } from "../../../routes/routes";
+import useLoginHooks from "../../Login/loginHooks";
 
 const LoggedInHeader = () => {
+
+    const { state, setState } = useLoginHooks()
+    const d = { "userLoggedOut" : true}
+
     return (
         <HeaderLinkContainer>
             <SiteLogo></SiteLogo>
             <HeaderSiteLinks>
-                <HeaderLink>Shop</HeaderLink>
-                <HeaderLink>Volunteering</HeaderLink>
-                <HeaderLink>Profile</HeaderLink>
-                <HeaderLink to={HOME_LINK}>Log Out</HeaderLink>
+                <HeaderLink to={SHOP_LINK}>Shop</HeaderLink>
+                <HeaderLink to={PROFILE_PAGE_LINK}>Profile</HeaderLink>
+                <HeaderLink to={HOME_LINK} onClick={setState.signOutFromAccount}  state={{ d }}>Log Out</HeaderLink>
             </HeaderSiteLinks>
         </HeaderLinkContainer>
     )
@@ -29,6 +33,7 @@ const HeaderSiteLinks = styled.div`
     flex-direction:row;
     margin-top:0.5em;
     width:100%;
+    margin-left:65%;
 `
 const HeaderLink = styled(Link)`
     margin-left:10%;
