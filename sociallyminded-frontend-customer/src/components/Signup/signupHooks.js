@@ -11,8 +11,9 @@ import {
 } from "./signupConstants";
 import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 import { GoogleAuthProvider } from "firebase/auth";
-
+import { getAuth, updateProfile } from "firebase/auth";
 const useSignupHooks = () => {
+
     const { createUser, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
     const navigate = useNavigate()
 
@@ -75,26 +76,36 @@ const useSignupHooks = () => {
 
     
     const handleFormSignup = async (event) => {
+
+        const auth = getAuth();
+
         setShowErrorWarning(false)
         event.preventDefault()
         try {
             setShowPageLoadSpinner(true)
             await createUser(email, password)
+
             .then((result) => {
-                const user = result.user
-                const newRecord = newCustomerRecord(username, email, user.uid)
+                const newRecord = newCustomerRecord(username, email, result.user.uid)
                 return axios.post(getAllCustomersUrl, newRecord)
             })
+
             .then((result) => {
-                console.log(result)
-                navigate(LOGIN_SIGNUP_REDIRECT_LINK)
+                updateProfile(auth.currentUser, {
+                    displayName: username
+                })
+            
+                .then((result) => {
+                    console.log(result)
+                    navigate(LOGIN_SIGNUP_REDIRECT_LINK)
+                })
             })
-           
         } catch (error) {
             setShowErrorWarning(true)
             if (error.code == "auth/email-already-in-use") {
                 setServerError(EMAIL_ALREADY_EXISTS)
             } else {
+                console.log(error)
                 setServerError(GENERIC_EMAIL_ERROR)
             }
         } finally {

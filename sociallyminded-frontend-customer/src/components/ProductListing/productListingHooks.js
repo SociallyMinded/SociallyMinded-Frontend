@@ -60,13 +60,13 @@ const useProductListingHooks = (state) => {
             const customerFirebaseUid = user.uid
             const productId = state.d.productId
             const totalPrice = Math.round(state.d.price * orderQty,2)
-            console.log(user.uid)
             const newOrder = {
                 "productId" : productId,
-                "customerFirebaseUid": customerFirebaseUid,
+                "custFirebaseUid": customerFirebaseUid,
                 "record": {
                     "quantity": orderQty,
-                    "totalPrice":totalPrice
+                    "totalPrice":totalPrice,
+                    "orderTitle": `${state.d.name} Order`
                 }
             }
            

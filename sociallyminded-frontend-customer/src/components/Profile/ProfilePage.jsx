@@ -8,8 +8,13 @@ import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import useLoginHooks from "../Login/loginHooks";
 import { UserAuth } from "../../context/AuthContext";
+import useProfileHooks from "./profileHooks.js"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 export const ProfilePage = () => {
     const [show, setShow] = useState(false);
@@ -18,94 +23,97 @@ export const ProfilePage = () => {
     const handleShow = () => setShow(true);
   
     const { user } = UserAuth()
+    const { data, loading, error } = useProfileHooks(user)
+
+    console.log(user.uid)
   
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
-            <h3>Order Records</h3>
-            <Table hover responsive>
+            <TableContainer>
+            <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
+            {data != null && data.length == 0 && <h5>You have no orders currently</h5>}
+            {data != null && data.length != 0 && <Table hover>
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>Product Name</th>
+                    <th>Order Title</th>
                     <th>Qty</th>
+                    <th>Price</th>
                     <th>Order Date</th>
                     <th>Status</th>
-                    <th>Confirm Order Received</th>
-                    <th>Cancel Order</th>
+                    <th></th>
                     </tr>
                 </thead>
+       
                 <tbody>
+                {data != null && data.map((d) => (
                     <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td><Button>Confirm</Button></td>
-                    <td><Button>Cancel</Button></td>
+                        <StyledTd>{d.orderRecordId}</StyledTd>
+                        <StyledTd>{d.orderTitle}</StyledTd>
+                        <StyledTd>{d.quantity}</StyledTd>
+                        <StyledTd>{d.totalPrice}</StyledTd>
+                        <StyledTd>{d.dateOfOrder != null && d.dateOfOrder.split("T")[0]}</StyledTd>
+                        <StyledTd>{d.orderStatus}</StyledTd>
+                        <StyledTd>
+                            <StyledNavbar>
+                            <Container>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                    <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav >
+                                        <NavDropdown title="More" id="basic-nav-dropdown" class="navbar-toggler-icon">
+                                        <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.2">
+                                            Edit Order
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">
+                                            Cancel Order
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.4">
+                                            Submit a Review
+                                        </NavDropdown.Item>
+                                        </NavDropdown>
+                                    </Nav>
+                                    </Navbar.Collapse>
+                            </Container>
+                        </StyledNavbar>
+                        </StyledTd>
                     </tr>
-                    <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Thornton</td>
-                    <td>Thornton</td>
-                    
-                    <td>
-                    <>
-                    <Button variant="primary" onClick={handleClose}>
-                        Confirm
-                    </Button>
-                    </>
-                    </td>
-                    <td>
-                    
-                <Button variant="primary" onClick={handleShow}>
-                   Cancel
-                </Button>
-
-                <Modal show={show} onHide={handleClose} centered>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="name@example.com"
-                            autoFocus
-                        />
-                        </Form.Group>
-                        <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
-                        >
-                        <Form.Label>Example textarea</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-                    </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Confirm
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
-
-  
-                        
-                        </td>
-                        
-                    </tr>
+                ))}
+                                                           
                 </tbody>
-                </Table>
+                </Table>}
+
+            </TableContainer>
         </PageTemplate>
     )
 }
 
+const StyledNavbar = styled(Navbar)`
+    width:50%;
+    height:5vh;
+`
+
+const TableContainer = styled(Table)`
+    margin-top:5vh;
+    width:95%;
+    margin-left:5%;
+    height:100vh;
+    max-height:100vh;
+    overflow: scroll;
+`
+
+const StyledTable = styled(Table)`
+    height:50vh;
+    padding-top:0px!important;
+`
+
+const StyledHeader = styled.h3`
+    margin-bottom:5vh;
+`
+
+const StyledThead = styled.thead`
+`
+const StyledTd = styled.td`
+    vertical-align: middle;
+`
