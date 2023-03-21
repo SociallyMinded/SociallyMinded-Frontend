@@ -11,11 +11,14 @@ import { getAllReviewsByProductIdUrl } from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { UserAuth } from '../../context/AuthContext';
+import LoggedInHeader from '../common/Header/LoggedInHeader';
 
 export const ProductReviewPage = () => {
 
     const { state } = useLocation()
     const navigate = useNavigate()
+    
+    const { user } = UserAuth()
     
     const {         
         data, displayData, loading, error, generateRandomNum
@@ -23,7 +26,7 @@ export const ProductReviewPage = () => {
 
     return (
         <ReviewPageTemplate>
-            <Header/>
+            {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ReviewHeaderContainer>
                 <Title>Reviews</Title>
                 <ReviewImg

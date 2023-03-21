@@ -2,15 +2,24 @@ import React from "react";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signOut } from "firebase/auth";
 import { GENERIC_EMAIL_ERROR, USER_NOT_FOUND, WRONG_PASSWORD, GENERIC_LOGIN_ERROR } from "./loginConstants";
 import { newCustomerRecord } from "./loginConstants";
 import axios from "axios";
-import { handleLoginViaGmail } from "../../routes/routes";
+import { handleLoginViaGmail, ABSOLUTE_HOME_LINK } from "../../routes/routes";
 import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 
 const useLoginHooks = () => {
-    const { signIn, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
+
+    const { 
+        user, createUser, 
+        setCurrentUserDetail, logout, 
+        signIn, signInWithGmailPopup, 
+        sendPasswordResetEmailToUser
+    } = UserAuth() 
+
+    console.log(user)
+
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
@@ -20,6 +29,12 @@ const useLoginHooks = () => {
 
     const[showErrorWarning, setShowErrorWarning] = useState(false)
     const [showPageLoadSpinner, setShowPageLoadSpinner] = useState(false)
+
+    const [showLogoutToast, setShowLogoutToast] = useState(true)
+    const handleShowLogoutToast = () => setShowLogoutToast(true);
+    const handleCloseLogoutToast = () => setShowLogoutToast(false);
+
+    const [userSignedIn, setUserSignedIn] = useState(false)
 
     const handleShowErrorWarning = (event) => {
         setShowErrorWarning(!showErrorWarning)
@@ -74,7 +89,7 @@ const useLoginHooks = () => {
             })
             .then((result) => {
                 console.log(result)
-                navigate(LOGIN_SIGNUP_REDIRECT_LINK)             
+                navigate(LOGIN_SIGNUP_REDIRECT_LINK)    
             })
         }
         catch (error) {
@@ -86,12 +101,25 @@ const useLoginHooks = () => {
         }
     }
 
+    const signOutFromAccount = async () => {
+        try {
+            await logout()
+            setShowLogoutToast(true)
+            console.log('You are logged out')
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
     const state = { 
+        user,
         email,
         password, 
         serverError,
         showErrorWarning,
-        showPageLoadSpinner
+        showPageLoadSpinner,
+        showLogoutToast,
+        userSignedIn
     }
 
     const setState = { 
@@ -99,7 +127,10 @@ const useLoginHooks = () => {
         handlePasswordChange, 
         handleShowErrorWarning, 
         loginToAccount,
-        signInViaGoogle
+        signInViaGoogle,
+        signOutFromAccount,
+        handleCloseLogoutToast,
+        handleShowLogoutToast
     }
 
     return { state, setState }

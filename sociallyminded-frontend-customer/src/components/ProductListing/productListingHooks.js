@@ -17,7 +17,9 @@ const useProductListingHooks = (state) => {
 
     const [showReviewsPage, setShowReviewsPage] = useState(false);
     const [showPurchaseModal, setShowPurchaseModal] = useState(false);
-    const [showToast, setShowToast] = useState(false);
+    const [showSuccessToast, setShowSuccessToast] = useState(false);
+    const [showLoginPromptToast, setShowLoginPromptToast] = useState(false);
+
 
     const handleShowPurchaseModal = () => setShowPurchaseModal(true);
     const handleClosePurchaseModal = () => setShowPurchaseModal(false);
@@ -25,15 +27,18 @@ const useProductListingHooks = (state) => {
     const handleShowReviewsPage = () => setShowReviewsPage(true);
     const handleCloseReviewsPage = () => setShowReviewsPage(false);
 
-    const handleShowToast= () => setShowToast(true);
-    const handleCloseToast = () => setShowToast(false);
+    const handleShowSuccessToast = () => setShowSuccessToast(true);
+    const handleCloseSuccessToast = () => setShowSuccessToast(false);
 
+    const handleShowLoginPromptToast = () => setShowLoginPromptToast(true);
+    const handleCloseLoginPromptToast = () => setShowLoginPromptToast(false);
+
+    
     const [orderQty, setOrderQty] = useState(false);
 
     const handleOrderQty = (e) => setOrderQty(e.target.value);
 
     const { user } = UserAuth()
-    console.log(user.uid)
 
     useEffect(() => {
         axios.get(getAllReviewsByProductIdUrl + state.d.productId)
@@ -55,13 +60,13 @@ const useProductListingHooks = (state) => {
             const customerFirebaseUid = user.uid
             const productId = state.d.productId
             const totalPrice = Math.round(state.d.price * orderQty,2)
-            console.log(user.uid)
             const newOrder = {
                 "productId" : productId,
-                "customerFirebaseUid": customerFirebaseUid,
+                "custFirebaseUid": customerFirebaseUid,
                 "record": {
                     "quantity": orderQty,
-                    "totalPrice":totalPrice
+                    "totalPrice":totalPrice,
+                    "orderTitle": `${state.d.name} Order`
                 }
             }
            
@@ -73,19 +78,20 @@ const useProductListingHooks = (state) => {
                 .catch(error => setError(error.response.data))
                 .finally(res => {
                     setShowPurchaseModal(false)
-                    setShowToast(true)
+                    setShowSuccessToast(true)
                 })
         } else {
-            
+            setShowPurchaseModal(false)
+            setShowLoginPromptToast(true)
         }
-      
     }
     
 
     return { 
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
-        showToast, handleShowToast, handleCloseToast, orderQty, handleOrderQty
+        showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast
     } 
 }
 
