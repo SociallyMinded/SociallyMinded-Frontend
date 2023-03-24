@@ -43,9 +43,9 @@ const useProfileHooks = (user) => {
 
     const [addressData, setAddressData] = useState("")
 
-    const [showConfirmEditModal, setShowConfirmEditOrderModal] = useState(false)
-    const showConfirmEditOrderPage = (e) => setShowConfirmEditOrderModal(true)
-    const closeConfirmEditOrderPage = (e) => setShowConfirmEditOrderModal(false)
+    const [showConfirmEditModalPage, setShowConfirmEditOrderModal] = useState(false)
+    const showConfirmEditOrderPage = () => setShowConfirmEditOrderModal(true)
+    const closeConfirmEditOrderPage = () => setShowConfirmEditOrderModal(false)
 
 
     const returnToPurchaseModalAfterConfirmModal = () => {
@@ -262,7 +262,8 @@ const useProfileHooks = (user) => {
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
         showPaymentOrderModal, showPaymentSuccessToast,
-        showConfirmEditOrderPage
+        showConfirmEditModalPage
+        
     ]);
 
     return { 
@@ -282,7 +283,7 @@ const useProfileHooks = (user) => {
         showEditSuccessToast,
         handleShowEditSuccessToast,
         handleCloseEditSuccessToast,
-        showConfirmEditModal,
+        showConfirmEditModalPage,
         showConfirmEditOrderPage,
         closeConfirmEditOrderPage,
        

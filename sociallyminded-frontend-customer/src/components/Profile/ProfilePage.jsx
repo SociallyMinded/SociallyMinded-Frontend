@@ -48,7 +48,7 @@ export const ProfilePage = () => {
         showEditSuccessToast,
         handleShowEditSuccessToast,
         handleCloseEditSuccessToast,
-        showConfirmEditModal,
+        showConfirmEditModalPage,
         closeConfirmEditOrderPage,
        
         cancelOrder,
@@ -125,7 +125,21 @@ export const ProfilePage = () => {
             <TableContainer>
         
             <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
+            <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Qty</Form.Label>
+                        <Form.Control
+                            type="number"
+                            autoFocus
+                            value={editOrderQty}
+                            disabled
+                        />
+                        </Form.Group>
+                       
+                    </Form>
+
             {data != null && data.length == 0 && <h5>You have no orders currently</h5>}
+ 
             {data != null && data.length != 0 && <Table hover>
                 <thead>
                     <tr>
@@ -218,7 +232,7 @@ export const ProfilePage = () => {
                     </Modal.Footer>
                 </Modal> 
 
-                {addressData != null  && <Modal show={showConfirmEditModal} onHide={closeConfirmEditOrderPage} centered>
+                {addressData != null  && <Modal show={showConfirmEditModalPage} onHide={closeConfirmEditOrderPage} centered>
                     <Modal.Header closeButton onClick={closeConfirmEditOrderPage}>
                     <Modal.Title>Confirm Edits : {orderSelected != null && orderSelected.orderTitle}</Modal.Title>
                     </Modal.Header>
@@ -239,7 +253,7 @@ export const ProfilePage = () => {
                                 type="number"
                                 placeholder="1"
                                 autoFocus
-                                value={orderSelected != null && orderSelected.totalPrice * editOrderQty}
+                                value={orderSelected != null && (orderSelected.totalPrice/orderSelected.quantity) * editOrderQty}
                                 disabled
                             />                    
                         </Form.Group>
@@ -350,17 +364,17 @@ export const ProfilePage = () => {
                     </Button> 
                     </Modal.Footer>
                 </Modal> 
-    
+{/*     
                 {data != null && data.length != 0 && <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Item>{2}</Pagination.Item>
-      <Pagination.Item>{3}</Pagination.Item>
-      <Pagination.Ellipsis />
-      <Pagination.Next />
-      <Pagination.Last />
-    </Pagination>}
+                <Pagination.First />
+                <Pagination.Prev />
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Item>{2}</Pagination.Item>
+                <Pagination.Item>{3}</Pagination.Item>
+                <Pagination.Ellipsis />
+                <Pagination.Next />
+                <Pagination.Last />
+                </Pagination>} */}
                 
             </TableContainer>
         </PageTemplate>
