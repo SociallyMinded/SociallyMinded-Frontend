@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react"
 import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
-import { deleteOrderUrl, getOrdersByCustomer, updateOrderUrl } from "../../routes/routes"
+import { deleteOrderUrl, getOrdersByCustomer, updateOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
@@ -33,10 +33,26 @@ const useProfileHooks = (user) => {
     const handleShowEditOrderModal = () => setShowEditOrderModal(true);
     const handleCloseEditOrderModal = () => setShowEditOrderModal(false);
     
-    const [editOrderQty, setEditOrderQty] = useState(false);
+    const [editOrderQty, setEditOrderQty] = useState("");
     const handleEditOrderQty = (qty) => setEditOrderQty(qty);
-    
     const [editOrderError, setEditOrderError] = useState(null)
+
+    const [editOrderAddress, setEditOrderAddress] = useState("");
+    const handleEditOrderAddress = (address) => setEditOrderAddress(address);
+    const [editOrderAddressError, setEditOrderAddressError] = useState(null)
+
+    const [addressData, setAddressData] = useState("")
+
+    const [showConfirmEditModal, setShowConfirmEditOrderModal] = useState(false)
+    const showConfirmEditOrderPage = (e) => setShowConfirmEditOrderModal(true)
+    const closeConfirmEditOrderPage = (e) => setShowConfirmEditOrderModal(false)
+
+
+    const returnToPurchaseModalAfterConfirmModal = () => {
+        setShowConfirmEditOrderModal(false)
+        setShowEditOrderModal(true)
+    }
+
     
     const [showEditSuccessToast, setShowEditSuccessToast] = useState(false)
     const handleShowEditSuccessToast = () => setShowEditSuccessToast(true)
@@ -57,6 +73,7 @@ const useProfileHooks = (user) => {
     const handleOrderSelected = (order, action) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
+        setEditOrderAddress(order.address)
         if (action == Actions.UPDATE) {
             setShowEditOrderModal(true)
         } else if (action == Actions.CANCEL) {
@@ -64,6 +81,25 @@ const useProfileHooks = (user) => {
         } else if (action == Actions.PAYMENT) {
             setShowPaymentOrderModal(true)
         }
+    }
+
+
+    const geocodeAddress =  async () => {
+        const url = obtainGeocodeUrl(editOrderAddress)
+        await axios.get(url)
+        .then(response => {
+            const addressData = response.data.results[0]
+            console.log(addressData)
+            setAddressData(addressData)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .finally (() => {
+            setLoading(false)
+            setShowEditOrderModal(false)
+            setShowConfirmEditOrderModal(true)
+        })
     }
 
 
@@ -82,7 +118,8 @@ const useProfileHooks = (user) => {
                     "orderTitle": `${orderSelected.orderTitle}`,
                     "orderRecordId": orderSelected.orderRecordId,
                     "dateOfOrder": orderSelected.dateOfOrder,
-                    "orderStatus": orderSelected.orderStatus
+                    "orderStatus": orderSelected.orderStatus,
+                    "address": addressData.ADDRESS
                 }
             }
            
@@ -94,7 +131,7 @@ const useProfileHooks = (user) => {
                 .finally(res => {
                     setRefreshTable(true)
 
-                    setShowEditOrderModal(false)
+                    setShowConfirmEditOrderModal(false)
                     setShowEditSuccessToast(true)
                 })
         } else {
@@ -118,7 +155,8 @@ const useProfileHooks = (user) => {
                     "orderTitle": `${orderSelected.orderTitle}`,
                     "orderRecordId": orderSelected.orderRecordId,
                     "dateOfOrder": orderSelected.dateOfOrder,
-                    "orderStatus": orderSelected.orderStatus
+                    "orderStatus": orderSelected.orderStatus,
+                    "address": addressData.ADDRESS
                 }
             }
           
@@ -164,6 +202,10 @@ const useProfileHooks = (user) => {
 
     const makePayment = async () => {
         setLoading(true)
+        setCreditCardNos("")
+        setCreditCardCVV("")
+        setCreditCardExpiryDate("")
+        setPayment("")
         if (user != null) {
             const customerFirebaseUid = user.uid
             if (payment == orderSelected.totalPrice) {
@@ -176,7 +218,8 @@ const useProfileHooks = (user) => {
                         "orderTitle": `${orderSelected.orderTitle}`,
                         "orderRecordId": orderSelected.orderRecordId,
                         "dateOfOrder": orderSelected.dateOfOrder,
-                        "orderStatus": ORDERSTATUS.IN_DELIVERY
+                        "orderStatus": ORDERSTATUS.IN_DELIVERY,
+                        "address": orderSelected.address
                     }
                 }
 
@@ -218,14 +261,18 @@ const useProfileHooks = (user) => {
         user, refreshTable, 
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
-        showPaymentOrderModal, showPaymentSuccessToast
+        showPaymentOrderModal, showPaymentSuccessToast,
+        showConfirmEditOrderPage
     ]);
 
     return { 
         data, loading, error,
         editOrderQty,
+        editOrderAddress,
         handleOrderSelected,
+        handleEditOrderAddress,
         orderSelected,
+        geocodeAddress,
 
         updateEditedOrder,
         showEditOrderModal,
@@ -235,6 +282,9 @@ const useProfileHooks = (user) => {
         showEditSuccessToast,
         handleShowEditSuccessToast,
         handleCloseEditSuccessToast,
+        showConfirmEditModal,
+        showConfirmEditOrderPage,
+        closeConfirmEditOrderPage,
        
         cancelOrder,
         showCancelOrderModal,
@@ -259,6 +309,15 @@ const useProfileHooks = (user) => {
         showPaymentSuccessToast,
         handleShowPaymentSuccessToast,
         handleClosePaymentSuccessToast,
+
+
+        addressData,
+        showConfirmEditOrderPage,
+        closeConfirmEditOrderPage,
+        setShowConfirmEditOrderModal,
+        returnToPurchaseModalAfterConfirmModal
+
+    
 
     } 
 }

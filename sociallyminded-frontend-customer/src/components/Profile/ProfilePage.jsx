@@ -21,7 +21,8 @@ import { Actions } from "./profileHooks.js";
 
 import { Pagination } from 'react-bootstrap';
 
-
+import { Map, Marker } from "react-map-gl";
+import PointMarker from "../PointMarker";
 
 export const ProfilePage = () => {
     const [show, setShow] = useState(false);
@@ -33,8 +34,11 @@ export const ProfilePage = () => {
     const { 
         data, loading, error,
         editOrderQty,
+        editOrderAddress,
         handleOrderSelected,
+        handleEditOrderAddress,
         orderSelected,
+        geocodeAddress,
 
         updateEditedOrder,
         showEditOrderModal,
@@ -44,6 +48,8 @@ export const ProfilePage = () => {
         showEditSuccessToast,
         handleShowEditSuccessToast,
         handleCloseEditSuccessToast,
+        showConfirmEditModal,
+        closeConfirmEditOrderPage,
        
         cancelOrder,
         showCancelOrderModal,
@@ -69,10 +75,22 @@ export const ProfilePage = () => {
         handleShowPaymentSuccessToast,
         handleClosePaymentSuccessToast,
 
+
+        addressData,
+        setShowConfirmEditOrderModal,
+        returnToPurchaseModalAfterConfirmModal
+
     } = useProfileHooks(user)
 
     const [page, setPage] = useState(1)
 
+    const [viewState, setViewState] = useState({
+        longitude: addressData == null ? 103.77655039734071 : addressData.LONGITUDE,
+        latitude: addressData == null ? 1.3555175316779877 : addressData.LATITUDE,
+        zoom: 16
+      });
+
+    console.log(data)
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
@@ -81,7 +99,7 @@ export const ProfilePage = () => {
                     <Toast.Header>
                         <strong className="me-auto">Order Updated</strong>
                     </Toast.Header>
-                    <Toast.Body>Your order is updated!</Toast.Body>
+                    <Toast.Body> {orderSelected.orderTitle} is updated!</Toast.Body>
                 </StyledToast>
                 }
             {showCancelSuccessToast &&  
@@ -89,7 +107,7 @@ export const ProfilePage = () => {
                     <Toast.Header>
                         <strong className="me-auto">Order Cancelled</strong>
                     </Toast.Header>
-                    <Toast.Body>Your order is cancelled!</Toast.Body>
+                    <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
                 </StyledToast>
                 }
 
@@ -98,7 +116,7 @@ export const ProfilePage = () => {
                     <Toast.Header>
                         <strong className="me-auto">Order Paid</strong>
                     </Toast.Header>
-                    <Toast.Body>Your payment is credited!</Toast.Body>
+                    <Toast.Body>Payment is credited to {orderSelected.orderTitle}!</Toast.Body>
                 </StyledToast>
                 }
 
@@ -116,6 +134,7 @@ export const ProfilePage = () => {
                     <th>Qty</th>
                     <th>Price</th>
                     <th>Order Date</th>
+                    <th>Order Address</th>
                     <th>Status</th>
                     <th></th>
                     </tr>
@@ -123,13 +142,14 @@ export const ProfilePage = () => {
                 
        
                 <tbody>
-                {data != null && data.slice(0,5).map((d) => (
+                {data != null && data.slice(0,10).map((d) => (
                     <tr>
                         <StyledTd>{d.orderRecordId}</StyledTd>
                         <StyledTd>{d.orderTitle}</StyledTd>
                         <StyledTd>{d.quantity}</StyledTd>
                         <StyledTd>{d.totalPrice}</StyledTd>
                         <StyledTd>{d.dateOfOrder != null && d.dateOfOrder.split("T")[0]}</StyledTd>
+                        <StyledTd>{d.address}</StyledTd>
                         <StyledTd>{d.orderStatus}</StyledTd>
                         <StyledTd>
                             <StyledNavbar>
@@ -179,14 +199,90 @@ export const ProfilePage = () => {
                             onChange={(e) => handleEditOrderQty(e.target.value)}
                         />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder={orderSelected != null && orderSelected.address}
+                            autoFocus
+                            value={editOrderAddress}
+                            onChange={(e) => handleEditOrderAddress(e.target.value)}
+                        />
+                        </Form.Group>
                     </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="primary" onClick={updateEditedOrder}>  
-                        Update Order
+                    <Button variant="primary" onClick={geocodeAddress}>  
+                        Confirm Update
                     </Button>
                     </Modal.Footer>
                 </Modal> 
+
+                {addressData != null  && <Modal show={showConfirmEditModal} onHide={closeConfirmEditOrderPage} centered>
+                    <Modal.Header closeButton onClick={closeConfirmEditOrderPage}>
+                    <Modal.Title>Confirm Edits : {orderSelected != null && orderSelected.orderTitle}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Qty</Form.Label>
+                        <Form.Control
+                            type="number"
+                            autoFocus
+                            value={editOrderQty}
+                            disabled
+                        />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control
+                                type="number"
+                                placeholder="1"
+                                autoFocus
+                                value={orderSelected != null && orderSelected.totalPrice * editOrderQty}
+                                disabled
+                            />                    
+                        </Form.Group>
+                    </Form>
+                    <Form>
+  
+                    </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Address : {addressData.ADDRESS}</Form.Label>
+                        </Form.Group>
+                    </Form>
+                    <Form>
+                             
+                    <Map
+                        mapboxAccessToken={'pk.eyJ1Ijoib25neW9uZ2VuMjAwMCIsImEiOiJjbDZseXN2ejQwZ25pM2JxcTNwbGY2Mm01In0.6_e_3aUVc5M9RUMI9S2sfw'}
+                        {...viewState}
+                        onMove={evt => setViewState(evt.viewState)}
+                        mapStyle="mapbox://styles/mapbox/streets-v9"
+                        style={{width:"100%", height:"40vh"}}
+                        latitude={addressData.LATITUDE}
+                        longitude={addressData.LONGITUDE}
+                    >
+                        <PointMarker
+                            longitude={addressData.LONGITUDE}
+                            latitude={addressData.LATITUDE}
+                        />
+                    </Map>
+
+                    </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
+                        Back
+                    </Button>
+                    <Button variant="primary" onClick={updateEditedOrder}>
+                        Apply Updates
+                    </Button>
+                    </Modal.Footer>
+                </Modal> 
+                }
+
+
           
                 <Modal show={showCancelOrderModal} centered>
                     <Modal.Header closeButton onClick={handleCloseCancelOrderModal}>
@@ -299,6 +395,7 @@ const StyledThead = styled.thead`
 `
 const StyledTd = styled.td`
     vertical-align: middle;
+    max-width:10vw;
 `
 
 const StyledToast = styled(Toast)`

@@ -21,13 +21,16 @@ import { UserAuth } from "../../context/AuthContext";
 import useLoginHooks from "../Login/loginHooks";
 import Header from "../common/Header/Header";
 import LoggedInHeader from "../common/Header/LoggedInHeader";
+import { Marker } from "react-map-gl";
+import Map from 'react-map-gl';
 
-    
+import PointMarker from "../PointMarker";
+
 const ProductListing = () => {
     const { state } = useLocation();
     const { user } = UserAuth()
 
-
+    const [showPopup, setShowPopup] = useState(true);
 
     const {         
         data, displayData, loading, error, createNewOrder, 
@@ -43,7 +46,13 @@ const ProductListing = () => {
 
     console.log(addressData)
 
-
+    const [viewState, setViewState] = useState({
+        longitude: addressData == null ? 103.77655039734071 : addressData.LONGITUDE,
+        latitude: addressData == null ? 1.3555175316779877 : addressData.LATITUDE,
+        zoom: 16
+      });
+    
+      
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
@@ -72,7 +81,7 @@ const ProductListing = () => {
                         </Carousel.Item>
                     </Carousel>
                 </ProductListingImgSection>
-                        
+        
                 <ProductListingDescriptionSection>
                     <ProductListingDescriptionContainer>
                         <ProductListingDescriptionTitleContainer>
@@ -119,8 +128,7 @@ const ProductListing = () => {
                     </div>    
                 </ProductListingToastSection>
 
-       
-
+           
          
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
@@ -132,7 +140,6 @@ const ProductListing = () => {
                         <Form.Label>Qty</Form.Label>
                         <Form.Control
                             type="number"
-                            placeholder="1"
                             autoFocus
                             value={orderQty}
                             onChange={handleOrderQty}
@@ -141,10 +148,10 @@ const ProductListing = () => {
                     </Form>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Address Postal Code</Form.Label>
+                        <Form.Label>Address</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Address"
+                            placeholder="Address / Postal Code"
                             autoFocus
                             value={postalCode}
                             onChange={handlePostalCode}
@@ -169,35 +176,55 @@ const ProductListing = () => {
                         <Form.Label>Qty</Form.Label>
                         <Form.Control
                             type="number"
-                            placeholder="1"
                             autoFocus
                             value={orderQty}
                             disabled
                         />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Price</Form.Label>
-                    <Form.Control
-                            type="number"
-                            placeholder="1"
-                            autoFocus
-                            value={state.d.price * orderQty}
-                            disabled
-                        />                    
-                    </Form.Group>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control
+                                type="number"
+                                placeholder="1"
+                                autoFocus
+                                value={state.d.price * orderQty}
+                                disabled
+                            />                    
+                        </Form.Group>
+                    </Form>
+                    <Form>
+  
                     </Form>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Address : {addressData.ADDRESS}</Form.Label>
                         </Form.Group>
                     </Form>
+                    <Form>
+                             
+                    <Map
+                        mapboxAccessToken={'pk.eyJ1Ijoib25neW9uZ2VuMjAwMCIsImEiOiJjbDZseXN2ejQwZ25pM2JxcTNwbGY2Mm01In0.6_e_3aUVc5M9RUMI9S2sfw'}
+                        {...viewState}
+                        onMove={evt => setViewState(evt.viewState)}
+                        mapStyle="mapbox://styles/mapbox/streets-v9"
+                        style={{width:"100%", height:"40vh"}}
+                        latitude={addressData.LATITUDE}
+                        longitude={addressData.LONGITUDE}
+                    >
+                        <PointMarker
+                            longitude={addressData.LONGITUDE}
+                            latitude={addressData.LATITUDE}
+                        />
+                    </Map>
+
+                    </Form>
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
                         Back
                     </Button>
-                    <Button variant="primary" onClick={geocodeAddress}>
-                        Confirm Order
+                    <Button variant="primary" onClick={createNewOrder}>
+                        Place Order
                     </Button>
                     </Modal.Footer>
                 </Modal> 

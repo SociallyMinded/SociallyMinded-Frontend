@@ -48,7 +48,7 @@ const useProductListingHooks = (state) => {
     const handlePostalCode = (e) => setPostalCode(e.target.value);
 
 
-    const [addressData, setAddressData] = useState()
+    const [addressData, setAddressData] = useState("")
 
     const [confirmOrder, setConfirmOrder] = useState(false)
     const showConfirmOrderPage = (e) => setConfirmOrder(true)
@@ -97,6 +97,7 @@ const useProductListingHooks = (state) => {
 
     const createNewOrder = async () => {
         setLoading(true)
+        console.log(addressData.ADDRESS)
         if (user != null) {
             const customerFirebaseUid = user.uid
             const productId = state.d.productId
@@ -107,18 +108,18 @@ const useProductListingHooks = (state) => {
                 "record": {
                     "quantity": orderQty,
                     "totalPrice":totalPrice,
-                    "orderTitle": `${state.d.name} Order`
+                    "orderTitle": `${state.d.name} Order`,
+                    "address": addressData != null ? addressData.ADDRESS : ""
                 }
             }
            
             await axios.post(createNewOrderUrl, newOrder)
                 .then(response => {
-                    console.log(response.data)
-                    setData(response.data)
+                    console.log(response)
                 })
-                .catch(error => setError(error.response.data))
+                .catch(error => setError(error))
                 .finally(res => {
-                    setShowPurchaseModal(false)
+                    setConfirmOrder(false)
                     setShowSuccessToast(true)
                 })
         } else {

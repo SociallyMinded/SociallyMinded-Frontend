@@ -1,0 +1,3946 @@
+[
+   {
+      "Unnamed: 0":0,
+      "name":"Office of Admissions (OAM)",
+      "address":"Office of Admissions (OAM), 2 College Avenue West, University Town #01-03  (S) 138607",
+      "lat":1.304895,
+      "lon":103.772481,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":1,
+      "name":"Alice Lee Centre for Nursing Studies",
+      "address":"Alice Lee Centre for Nursing Studies, 10 Medical Drive, Clinical Research Centre, MD11 Level 2 (S) 117597",
+      "lat":1.29614814,
+      "lon":103.78177,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":2,
+      "name":"Office of Alumni Relations",
+      "address":"Office of Alumni Relations, 11 Kent Ridge Drive, Shaw Foundation Alumni House (S) 119244",
+      "lat":1.293533229,
+      "lon":103.7736902,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":3,
+      "name":"Bioinformatics Center",
+      "address":"Bioinformatics Center, 8 Medical Drive, MD 7 #04-06 (S) 117597",
+      "lat":1.2961086133,
+      "lon":103.7810363488,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":4,
+      "name":"Board of Trustees Secretariat",
+      "address":"Board of Trustees Secretariat, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #06-01 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":5,
+      "name":"Office of Campus Amenities",
+      "address":"Office of Campus Amenities, 8 Kent Ridge Drive, #02-01 (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":6,
+      "name":"Office of Campus Security",
+      "address":"Office of Campus Security, 17 and 18 Prince George's Park (S) 118417",
+      "lat":1.2924491554,
+      "lon":103.7795823437,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":7,
+      "name":"Central Procurement Office",
+      "address":"Central Procurement Office, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #03-07 (S) 119077",
+      "lat":1.2970875822,
+      "lon":103.7776880156,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":8,
+      "name":"Centre for Future-Ready Graduates",
+      "address":"Centre for Future-Ready Graduates, 31 Lower Kent Ridge Road, Yusof Ishak House Level 2 (S) 119078",
+      "lat":1.2985660206,
+      "lon":103.7747580658,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":9,
+      "name":"Office of Corporate Relations",
+      "address":"Office of Corporate Relations, 21 Lower Kent Ridge Road, University Hall, Tan Chin Tuan Wing #02-02 \/ #05-03 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":10,
+      "name":"Alice Lee Centre for Nursing Studies",
+      "address":"Alice Lee Centre for Nursing Studies, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.29614814,
+      "lon":103.78177,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":11,
+      "name":"Animal Holding Unit",
+      "address":"Animal Holding Unit, 10 Medical Drive (S) 117597",
+      "lat":1.295995532,
+      "lon":103.7816992,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":12,
+      "name":"Antenatal Diagnostic Centre",
+      "address":"Antenatal Diagnostic Centre, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":13,
+      "name":"Clinical Research Centre",
+      "address":"Clinical Research Centre, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296616429,
+      "lon":103.7816596,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":14,
+      "name":"Dental Centre",
+      "address":"Dental Centre, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.294368175,
+      "lon":103.7838447,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":15,
+      "name":"Department of Anaesthesia",
+      "address":"Department of Anaesthesia, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":16,
+      "name":"Department of Anatomy (ANATOMY)",
+      "address":"Department of Anatomy (ANATOMY), 4 Medical Driv, MD10 (S) 117594",
+      "lat":1.296374605,
+      "lon":103.7817449,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":17,
+      "name":"Department of Biochemistry",
+      "address":"Department of Biochemistry, 8 Medical Drive, Block MD 7, #02-08 (S) 119260",
+      "lat":1.295718057,
+      "lon":103.7806762,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":18,
+      "name":"Department of Community, Occupational and Family Medicine",
+      "address":"Department of Community, Occupational and Family Medicine, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295474916,
+      "lon":103.7811183,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":19,
+      "name":"Department of Diagnostic Radiology",
+      "address":"Department of Diagnostic Radiology, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":20,
+      "name":"Department of Medicine",
+      "address":"Department of Medicine, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":21,
+      "name":"Department of Microbiology (MICROBIOLOGY)",
+      "address":"Department of Microbiology (MICROBIOLOGY), 5 Science Drive 2 (S) 117597",
+      "lat":1.295827338,
+      "lon":103.7809489,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":22,
+      "name":"Department of Obstetrics and Gynaecology",
+      "address":"Department of Obstetrics and Gynaecology, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":23,
+      "name":"Department of Ophthalmology",
+      "address":"Department of Ophthalmology, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":24,
+      "name":"Department of Orthopaedic Surgery",
+      "address":"Department of Orthopaedic Surgery, 1E Kent Ridge Road, UHS Tower Block, Level 11 (S) 119228",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":25,
+      "name":"Department of Otolaryngology",
+      "address":"Department of Otolaryngology, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":26,
+      "name":"Department of Paediatrics (PAEDIATRICS)",
+      "address":"Department of Paediatrics (PAEDIATRICS), 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":27,
+      "name":"Department of Pathology",
+      "address":"Department of Pathology, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":28,
+      "name":"Department of Pharmacology (PHARMACOLOGY)",
+      "address":"Department of Pharmacology (PHARMACOLOGY), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.29501494,
+      "lon":103.781262,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":29,
+      "name":"Department of Physiology",
+      "address":"Department of Physiology, Block MD9, 2 Medical Drive (S) 117597",
+      "lat":1.295585763,
+      "lon":103.7816703,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":30,
+      "name":"Department of Psychological Medicine",
+      "address":"Department of Psychological Medicine, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":31,
+      "name":"Department of Surgery",
+      "address":"Department of Surgery, 1E Kent Ridge Road, NUHS Tower Block, Level 8 (S) 119228",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":32,
+      "name":"Maternal and Child Health\/Family Planning Services, Research and Training",
+      "address":"Maternal and Child Health\/Family Planning Services, Research and Training, 5 Lower Kent Ridge Road (S) 119074",
+      "lat":1.29497624,
+      "lon":103.7831274,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":33,
+      "name":"Medicine (Dean's Office)",
+      "address":"Medicine (Dean's Office), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296616429,
+      "lon":103.7816596,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":34,
+      "name":"Design Incubation Centre",
+      "address":"Design Incubation Centre, 4 Architecture Drive, SDE2 #03-01 (S) 117566",
+      "lat":1.29734,
+      "lon":103.77119,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":35,
+      "name":"Development Office",
+      "address":"Development Office, 11 Kent Ridge Drive, Shaw Foundation Alumni House #03-01 (S) 119244",
+      "lat":1.293369562,
+      "lon":103.7736736,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":36,
+      "name":"Engineering Design and Innovation Centre",
+      "address":"Engineering Design and Innovation Centre, 5 Engineering Drive 2, E2A #04-05 (S) 117579",
+      "lat":1.2987933487,
+      "lon":103.7714743614,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":37,
+      "name":"Office of Environmental Sustainability",
+      "address":"Office of Environmental Sustainability , 8 Kent Ridge Drive, #03-04 (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":38,
+      "name":"Office of Estate Development",
+      "address":"Office of Estate Development, 8 Kent Ridge Drive, #02-03 (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":39,
+      "name":"European Union Centre",
+      "address":"European Union Centre, 11 Slim Barracks Rise (off North Buona Vista Road), Executive Centre (NTU@one-north campus) #06-01 (S) 138664",
+      "lat":1.304026,
+      "lon":103.789742,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":40,
+      "name":"Office of Facilities Management",
+      "address":"Office of Facilities Management, 8 Kent Ridge Drive, #02-03 (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":41,
+      "name":"Office of Financial Services",
+      "address":"Office of Financial Services, 21 Lower Kent Ridge Road, University Hall, Tan Chin Tuan Wing #03-02 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":42,
+      "name":"Former Visitor's Lodge",
+      "address":"Former Visitor's Lodge, 15 Kent Ridge Crescent (S) 119277",
+      "lat":1.29614,
+      "lon":103.77245,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":43,
+      "name":"Office of Housing Services",
+      "address":"Office of Housing Services, 10 Kent Ridge Crescent, Block ADM Level 3 (S) 119260",
+      "lat":1.29614,
+      "lon":103.77245,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":44,
+      "name":"Office of Human Resources",
+      "address":"Office of Human Resources, University Hall Tan Chin Tuan Wing, #04-01, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":45,
+      "name":"Building and Estate Society",
+      "address":"Building and Estate Society, 3 Architecture Drive, #04-06 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":46,
+      "name":"Centre for Advanced Studies in Architecture (CASA)",
+      "address":"Centre for Advanced Studies in Architecture (CASA), 4 Architecture Drive, #03-01 (S) 117566",
+      "lat":1.298471915,
+      "lon":103.7704265,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":47,
+      "name":"Centre for Project Management and Construction Law",
+      "address":"Centre for Project Management and Construction Law, 4 Architecture Drive, #02-02a (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":48,
+      "name":"Centre for Sustainable Asian Cities",
+      "address":"Centre for Sustainable Asian Cities, 4 Architecture Drive, SDE1 #04-24 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":49,
+      "name":"Centre for Total Building Performance (CTBP)",
+      "address":"Centre for Total Building Performance (CTBP), 4 Architecture Drive, #02-02 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":50,
+      "name":"DE Club Room",
+      "address":"DE Club Room, 4 Architecture Drive, SDE3 #04-24 (S) 117566",
+      "lat":1.29839,
+      "lon":103.77047,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":51,
+      "name":"Dean's Office (Design and Engineering)",
+      "address":"Dean's Office (Design and Engineering), 4 Architecture Drive, SDE1 #03-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":52,
+      "name":"Department of Architecture (ARCH)",
+      "address":"Department of Architecture (ARCH), 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":53,
+      "name":"Department of Real Estate",
+      "address":"Department of Real Estate, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":54,
+      "name":"Energy and Sustainability Unit",
+      "address":"Energy and Sustainability Unit, 4 Architecture Drive, SDE1 #03-05 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":55,
+      "name":"Information Resource Centre School of Design and Engineering",
+      "address":"Information Resource Centre School of Design and Engineering, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":56,
+      "name":"Institute of Real Estate Studies (IRES)",
+      "address":"Institute of Real Estate Studies (IRES), 21 Heng Mui Keng Terrace, I3 Building #04-02 (S) 119613",
+      "lat":1.292509295,
+      "lon":103.7756529,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":57,
+      "name":"Master of Landscape Architecture Studio",
+      "address":"Master of Landscape Architecture Studio, 4 Architecture Drive, #02-03 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":58,
+      "name":"NUS-JTC Industrial Infrastructure Innovation Centre",
+      "address":"NUS-JTC Industrial Infrastructure Innovation Centre, 1 Architecture Drive, #03-03K (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":59,
+      "name":"School of Design and Engineering - Conference Room",
+      "address":"School of Design and Engineering - Conference Room, 1 Architecture Drive, #03-07 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":60,
+      "name":"School of Design and Engineering - Department of Architecture",
+      "address":"School of Design and Engineering - Department of Architecture, 4 Architecture Drive, #03-06  (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":61,
+      "name":"School of Design and Engineering - Department of Building",
+      "address":"School of Design and Engineering - Department of Building, 4 Architecture Drive, SDE1 #03-02 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":62,
+      "name":"School of Design and Engineering - Department of Real Estate",
+      "address":"School of Design and Engineering - Department of Real Estate, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":63,
+      "name":"School of Design and Engineering - Division of Industrial Design",
+      "address":"School of Design and Engineering - Division of Industrial Design, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":64,
+      "name":"School of Design and Engineering - Exhibition Hall",
+      "address":"School of Design and Engineering - Exhibition Hall, 4 Architecture Drive, #01-01 #01-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":65,
+      "name":"School of Design and Engineering - Exhibition Hall (Mezzanine)",
+      "address":"School of Design and Engineering - Exhibition Hall (Mezzanine), 4 Architecture Drive, #02-01 #02-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":66,
+      "name":"School of Design and Engineering - Information Resource Centre",
+      "address":"School of Design and Engineering - Information Resource Centre, 4 Architecture Drive, SD1 #04-23 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":67,
+      "name":"School of Design and Engineering - Information Technology Unit",
+      "address":"School of Design and Engineering - Information Technology Unit, 4 Architecture Drive, SDE3 #04-01 (S) 117566",
+      "lat":1.29839,
+      "lon":103.77044,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":68,
+      "name":"Information Technology",
+      "address":"Information Technology, 2 Engineering Drive 4 (S) 117584",
+      "lat":1.29758,
+      "lon":103.77251,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":69,
+      "name":"Association of Pacific Rim Universities (APRU) Secretariat",
+      "address":"Association of Pacific Rim Universities (APRU) Secretariat, 11 Kent Ridge Drive, Shaw Foundation Alumni House Level 2 (S) 119244",
+      "lat":1.29334,
+      "lon":103.77366,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":70,
+      "name":"Coffee Club Xpress (Faculty of Arts and Social Sciences)",
+      "address":"Coffee Club Xpress (Faculty of Arts and Social Sciences), 21 Kent Ridge Crescent (S) 119260",
+      "lat":1.294797617,
+      "lon":103.7712067,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":71,
+      "name":"Department of Social Work",
+      "address":"Department of Social Work, 3 Arts Link, Blk AS3 (S) 119260",
+      "lat":1.294763398,
+      "lon":103.7713495,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":72,
+      "name":"Department of Sociology",
+      "address":"Department of Sociology, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295328032,
+      "lon":103.772364,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":73,
+      "name":"Division of Research and Graduate Studies, Faculty of Arts and Social Sciences",
+      "address":"Division of Research and Graduate Studies, Faculty of Arts and Social Sciences, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294620653,
+      "lon":103.7711662,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":74,
+      "name":"NUS Multi-Purpose Co-operative Society Ltd",
+      "address":"NUS Multi-Purpose Co-operative Society Ltd, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296519046,
+      "lon":103.7810392,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":75,
+      "name":"Office of Programmes, Faculty of Arts and Social Sciences",
+      "address":"Office of Programmes, Faculty of Arts and Social Sciences, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294620653,
+      "lon":103.7711662,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":76,
+      "name":"SoC Incubation Centre",
+      "address":"SoC Incubation Centre, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.297692127,
+      "lon":103.7804485,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":77,
+      "name":"SOC1",
+      "address":"SOC1, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.297692127,
+      "lon":103.7804485,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":78,
+      "name":"Centre for Instructional Technology (CIT)",
+      "address":"Centre for Instructional Technology (CIT), 2 Engineering Drive 4, Information Technology #03-01 (S) 117584",
+      "lat":1.29756,
+      "lon":103.77255,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":79,
+      "name":"Office of Internal Audit",
+      "address":"Office of Internal Audit, University Hall Tan Chin Tuan Wing, #03-01, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":80,
+      "name":"International Relations Office (IRO)",
+      "address":"International Relations Office (IRO), 11 Kent Ridge Drive, Shaw Foundation Alumni House #03-03 (S) 119244",
+      "lat":1.293533229,
+      "lon":103.7736902,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":81,
+      "name":"Investment Office",
+      "address":"Investment Office, 21 Lower Kent Ridge Road, University Hall, Tan Chin Tuan Wing #03-04 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":82,
+      "name":"Lee Kong Chian Natural History Museum",
+      "address":"Lee Kong Chian Natural History Museum, 2 Conservatory Drive (S) 117377",
+      "lat":1.301605,
+      "lon":103.773503,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":83,
+      "name":"Office of Legal Affairs",
+      "address":"Office of Legal Affairs, University Hall Lee Kong Chian Wing, #03-00, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":84,
+      "name":"National University Medical Institutes",
+      "address":"National University Medical Institutes, MD11 Medical Drive (S) 117597",
+      "lat":1.296008131,
+      "lon":103.7817242,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":85,
+      "name":"NUS Centre For the Arts (NUS CFA)",
+      "address":"NUS Centre For the Arts (NUS CFA), National University of Singapore, University Cultural Centre 3rd Level, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301728637,
+      "lon":103.7721489,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":86,
+      "name":"NUS Enterprise",
+      "address":"NUS Enterprise, 21 Heng Mui Keng Terrace, I3 Building Level 5 (S) 119613",
+      "lat":1.292429487,
+      "lon":103.7755195,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":87,
+      "name":"NUS Entrepreneurship Centre",
+      "address":"NUS Entrepreneurship Centre, 21 Heng Mui Keng Terrace, I3 Building Level 5 (S) 119613",
+      "lat":1.292553259,
+      "lon":103.7754782,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":88,
+      "name":"NUS Industry Liaison Office",
+      "address":"NUS Industry Liaison Office, 21 Heng Mui Keng Terrace, I3 Building, Level 5 (S) 119613",
+      "lat":1.2973435369,
+      "lon":103.7778546219,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":89,
+      "name":"NUS (Suzhou) Research Institute Liaison Office",
+      "address":"NUS (Suzhou) Research Institute Liaison Office , 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.2973435369,
+      "lon":103.7778546219,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":90,
+      "name":"C J Koh Law Library",
+      "address":"C J Koh Law Library, 469D Bukit Timah Road (S) 259773",
+      "lat":1.318942072,
+      "lon":103.8182129,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":91,
+      "name":"Central Library",
+      "address":"Central Library, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.296261755,
+      "lon":103.7730289,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":92,
+      "name":"Central Library Annexe",
+      "address":"Central Library Annexe, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.296732529,
+      "lon":103.7737979,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":93,
+      "name":"Chinese Library",
+      "address":"Chinese Library, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.29701,
+      "lon":103.77336,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":94,
+      "name":"Hon Sui Sen Memorial Library",
+      "address":"Hon Sui Sen Memorial Library, 1 Hon Sui Sen Drive (S) 117588",
+      "lat":1.293081017,
+      "lon":103.7746998,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":95,
+      "name":"Medical Library",
+      "address":"Medical Library, Centre for Translational Medicine, Block MD6, 14 Medical Drive, #05-01 (S) 117599",
+      "lat":1.295340884,
+      "lon":103.7814786,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":96,
+      "name":"Music Library",
+      "address":"Music Library, 3 Conservatory Drive (S) 117376",
+      "lat":1.302178441,
+      "lon":103.7729161,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":97,
+      "name":"Resource Library",
+      "address":"Resource Library, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301786824,
+      "lon":103.7716656,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":98,
+      "name":"Science Library",
+      "address":"Science Library, 10 Science Drive 2, Block S6 Level 4 (S) 117548",
+      "lat":1.295306079,
+      "lon":103.7801893,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":99,
+      "name":"NUS Museum",
+      "address":"NUS Museum, National University of Singapore, University Cultural Centre, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301464181,
+      "lon":103.7724412,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":100,
+      "name":"NUS Technology Holdings",
+      "address":"NUS Technology Holdings, 21 Heng Mui Keng Ter, #05-00 (S) 119613",
+      "lat":1.2924296577,
+      "lon":103.7756320706,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":101,
+      "name":"NUS Overseas Colleges",
+      "address":"NUS Overseas Colleges, 21 Heng Mui Keng Terrace, I3 Building Level 5 (S) 119613",
+      "lat":1.292553259,
+      "lon":103.7754782,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":102,
+      "name":"NUS Press",
+      "address":"NUS Press, 3 Arts Link, AS3 #01-02 (S) 117569",
+      "lat":1.2947891961,
+      "lon":103.7712593662,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":103,
+      "name":"Office of Financial Aid",
+      "address":"Office of Financial Aid, 2 College Avenue West, #01-03 (S) 138607",
+      "lat":1.3047820152,
+      "lon":103.7724186303,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":104,
+      "name":"Office of Professional Engineering & Executive Education",
+      "address":"Office of Professional Engineering & Executive Education, Faculty of Engineering, Faculty of Engineering (S) 117578",
+      "lat":1.2986505257,
+      "lon":103.7711325923,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":105,
+      "name":"Office of the Deputy President (Administration)",
+      "address":"Office of the Deputy President (Administration), 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #06-02 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":106,
+      "name":"Office of the Deputy President (Research and Technology)",
+      "address":"Office of the Deputy President (Research and Technology), 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #05-02 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":107,
+      "name":"Office of the President",
+      "address":"Office of the President, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing, Level 6 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":108,
+      "name":"Office of the Provost",
+      "address":"Office of the Provost, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing, Level 5 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":109,
+      "name":"Office of the Vice President (Campus Infrastructure)",
+      "address":"Office of the Vice President (Campus Infrastructure), 8 Kent Ridge Drive, #02-03 (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":110,
+      "name":"Office of the Vice President (University and Global Relations)",
+      "address":"Office of the Vice President (University and Global Relations), 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #03-07 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":111,
+      "name":"Office of Privacy and Compliance",
+      "address":"Office of Privacy and Compliance, University Hall, Lee Kong Chian Wing, UHL #06-03A, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":null,
+      "lon":null,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":112,
+      "name":"Registrar's Office",
+      "address":"Registrar's Office, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #04-01 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":113,
+      "name":"Office of Resource Planning",
+      "address":"Office of Resource Planning, 21 Lower Kent Ridge Road, University Hall, Tan Chin Tuan Wing #03-02 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":114,
+      "name":"Office of Risk Management",
+      "address":"Office of Risk Management, 21 Lower Kent Ridge Road, University Hall, Lee Kong Chian Wing #03-07 (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":115,
+      "name":"Office of Safety, Health and Environment",
+      "address":"Office of Safety, Health and Environment, 8 Kent Ridge Drive, #03-02 (S) 119246",
+      "lat":1.3047871329,
+      "lon":103.8305097205,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":116,
+      "name":"Office of Student Affairs",
+      "address":"Office of Student Affairs, 31 Lower Kent Ridge Road, Yusof Ishak House #03-00 (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":117,
+      "name":"Student Service Centre",
+      "address":"Student Service Centre, 31 Lower Kent Ridge Road, Yusof Ishak House Level 1 (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":118,
+      "name":"Temasek Defence Systems Institute",
+      "address":"Temasek Defence Systems Institute, 9 Engineering Drive 1 (S) 117575",
+      "lat":1.298847,
+      "lon":103.771135,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":119,
+      "name":"University Health Centre",
+      "address":"University Health Centre, 20 Lower Kent Ridge Road, University Health Centre  (S) 119080",
+      "lat":1.298943865,
+      "lon":103.7764982,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":120,
+      "name":"University Town Management Office",
+      "address":"University Town Management Office, 1 Create Way, CREATE Tower Level 1 (S) 138602",
+      "lat":1.304160992,
+      "lon":103.774294,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":121,
+      "name":"Visitors Centre",
+      "address":"Visitors Centre, 2 College Avenue West, #01-03 (S) 138607",
+      "lat":1.3047820152,
+      "lon":103.7724186303,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":122,
+      "name":"Temasek Defence Systems Institute",
+      "address":"Temasek Defence Systems Institute, E1 1 Engineering Drive 2, #05-05 (S) 117575",
+      "lat":1.298847,
+      "lon":103.771135,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":123,
+      "name":"Centre for Department of Teaching and Learning (CDTL)",
+      "address":"Centre for Department of Teaching and Learning (CDTL), 10 Kent Ridge Crescent, Central Library Annexe (S) 119260",
+      "lat":1.296732529,
+      "lon":103.7737979,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":124,
+      "name":"Centre for English Language Communication (CELC)",
+      "address":"Centre for English Language Communication (CELC), 10 Architecture Drive (S) 117511",
+      "lat":1.297026892,
+      "lon":103.7715753,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":125,
+      "name":"Duke-NUS Medical School",
+      "address":"Duke-NUS Medical School, 8 College Road, Duke-NUS Graduate Medical School  (S) 169857",
+      "lat":1.281067402,
+      "lon":103.8341288,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":126,
+      "name":"Centre for Language Studies",
+      "address":"Centre for Language Studies, 10 Arts Link, AS4\/02-05 (S) 117570",
+      "lat":1.294723667,
+      "lon":103.7720058,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":127,
+      "name":"Communications and New Media Programme",
+      "address":"Communications and New Media Programme, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295462739,
+      "lon":103.7732727,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":128,
+      "name":"Dean's Office (Arts and Social Sciences)",
+      "address":"Dean's Office (Arts and Social Sciences), 5 Arts Link Level 5 Shaw Foundation Building (AS7) (S) 117570",
+      "lat":1.294620653,
+      "lon":103.7711662,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":129,
+      "name":"Department of Chinese Studies",
+      "address":"Department of Chinese Studies, Blk AS8 Level 5 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962172454,
+      "lon":103.7724369649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":130,
+      "name":"Department of Communications and New Media (CNM)",
+      "address":"Department of Communications and New Media (CNM), 11 Computing Drive, AS6 #03-41 (S) 117416",
+      "lat":1.29562,
+      "lon":103.77321,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":131,
+      "name":"Department of Economics",
+      "address":"Department of Economics, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295333899,
+      "lon":103.7710991,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":132,
+      "name":"Department of English Language and Literature (ENG LANG\/LIT)",
+      "address":"Department of English Language and Literature (ENG LANG\/LIT), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294396443,
+      "lon":103.7720976,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":133,
+      "name":"Department of Geography (GEOGRAPHY)",
+      "address":"Department of Geography (GEOGRAPHY), 1 Arts Link, AS2, #03-01 (S) 117570",
+      "lat":1.295333899,
+      "lon":103.7710991,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":134,
+      "name":"Department of History",
+      "address":"Department of History, 11 Arts Link, AS1, #05-27 (S) 117570",
+      "lat":1.295328032,
+      "lon":103.772364,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":135,
+      "name":"Department of Japanese Studies",
+      "address":"Department of Japanese Studies, Blk AS8 Level 5 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962172454,
+      "lon":103.7724369649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":136,
+      "name":"Department of Malay Studies",
+      "address":"Department of Malay Studies, Blk AS8 Level 6 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962172454,
+      "lon":103.7724369649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":137,
+      "name":"Department of Philosophy (PHILOSOPHY)",
+      "address":"Department of Philosophy (PHILOSOPHY), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294763398,
+      "lon":103.7713495,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":138,
+      "name":"Department of Political Science",
+      "address":"Department of Political Science, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295328032,
+      "lon":103.772364,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":139,
+      "name":"Department of Psychology",
+      "address":"Department of Psychology, Block AS4, #02-07, 9 Arts Link (S) 117570",
+      "lat":1.294723667,
+      "lon":103.7720058,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":140,
+      "name":"Department of Social Work",
+      "address":"Department of Social Work, 3 Arts Link, Blk AS3 (S) 117570",
+      "lat":1.294763398,
+      "lon":103.7713495,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":141,
+      "name":"Department of Sociology",
+      "address":"Department of Sociology, Blk AS1, #03-06, 11 Arts Link (S) 117570",
+      "lat":1.2951513141,
+      "lon":103.7720623012,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":142,
+      "name":"Department of Southeast Asian Studies (SEA STUD (SEAD))",
+      "address":"Department of Southeast Asian Studies (SEA STUD (SEAD)) , Blk AS8 Level 6 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962172454,
+      "lon":103.7724369649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":143,
+      "name":"Division of Research and Graduate Studies- Faculty of Arts and Social Sciences",
+      "address":"Division of Research and Graduate Studies- Faculty of Arts and Social Sciences, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294620653,
+      "lon":103.7800203,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":144,
+      "name":"Faculty of Arts and Social Sciences",
+      "address":"Faculty of Arts and Social Sciences, 5 Arts Link, Shaw Foundation Building AS7 Level 5 (S) 117570",
+      "lat":1.294458488,
+      "lon":103.7711744,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":145,
+      "name":"FASS Faculty Lounge",
+      "address":"FASS Faculty Lounge, Arts Canteen #02-00 (S) 117570",
+      "lat":1.294458488,
+      "lon":103.7711744,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":146,
+      "name":"Office of Programmes",
+      "address":"Office of Programmes, 5 Arts Link, AS7 Level 2 (S) 117570",
+      "lat":1.294458488,
+      "lon":103.7711744,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":147,
+      "name":"Office of Programmes - Faculty of Arts and Social Sciences",
+      "address":"Office of Programmes - Faculty of Arts and Social Sciences, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294620653,
+      "lon":103.7711662,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":148,
+      "name":"Singapore Centre for Applied and Policy Economics (SCAPE)",
+      "address":"Singapore Centre for Applied and Policy Economics (SCAPE), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295333899,
+      "lon":103.7710991,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":149,
+      "name":"South Asian Studies Programme",
+      "address":"South Asian Studies Programme, 5 Arts Link, AS7 #04-12 (S) 117570",
+      "lat":1.294458488,
+      "lon":103.7711744,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":150,
+      "name":"Faculty of Dentistry",
+      "address":"Faculty of Dentistry, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296829958,
+      "lon":103.7819145,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":151,
+      "name":"Advanced Control Technology",
+      "address":"Advanced Control Technology, 4 Engineering Drive 3, Blk E4, Level 8, Room 23\/24 (S) 117583",
+      "lat":1.29836,
+      "lon":103.77252,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":152,
+      "name":"Advanced Manufacturing Laboratory",
+      "address":"Advanced Manufacturing Laboratory, 9 Engineering Drive 1, EA #01-05 (S) 117576",
+      "lat":1.30035,
+      "lon":103.77054,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":153,
+      "name":"Centre for Advanced Chemical Engineering (CAChE)",
+      "address":"Centre for Advanced Chemical Engineering (CAChE), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.297969561,
+      "lon":103.7725819,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":154,
+      "name":"Centre for Advanced Computations in Engineering Science (ACES)",
+      "address":"Centre for Advanced Computations in Engineering Science (ACES), 9 Engineering Drive 2 (S) 117575",
+      "lat":1.300016076,
+      "lon":103.7704674,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":155,
+      "name":"Centre for Construction Materials and Technology (CCMT)",
+      "address":"Centre for Construction Materials and Technology (CCMT), 4 Architecture Drive (S) 117566",
+      "lat":1.2995798,
+      "lon":103.7708428,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":156,
+      "name":"Centre for Design Technology (CDT)",
+      "address":"Centre for Design Technology (CDT), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.298298707,
+      "lon":103.7726502,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":157,
+      "name":"Centre for Integrated Circuit Failure Analysis and Reliability (CICFAR)",
+      "address":"Centre for Integrated Circuit Failure Analysis and Reliability (CICFAR), 2 Engineering Drive 3, Blk E3-04-04 (S) 117581",
+      "lat":1.299266085,
+      "lon":103.7719004,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":158,
+      "name":"Centre for Intelligent Control (CIC)",
+      "address":"Centre for Intelligent Control (CIC), 4 Engineering Drive 3 (S) 117576",
+      "lat":1.30016,
+      "lon":103.77079,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":159,
+      "name":"Centre for Intelligent Products and Manufacturing Systems (CIPMAS)",
+      "address":"Centre for Intelligent Products and Manufacturing Systems (CIPMAS), 9 Engineering Drive 2 (S) 117575",
+      "lat":1.30016,
+      "lon":103.77079,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":160,
+      "name":"Centre for Microwave and Radio Frequency (CMRF)",
+      "address":"Centre for Microwave and Radio Frequency (CMRF), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.298298707,
+      "lon":103.7726502,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":161,
+      "name":"Centre for Offshore Research and Engineering (CORE)",
+      "address":"Centre for Offshore Research and Engineering (CORE), 1 Engineering Drive 2, E1A #07-03 (S) 117576",
+      "lat":1.298488661,
+      "lon":103.7714177,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":162,
+      "name":"Centre for Optoelectronics (COE)",
+      "address":"Centre for Optoelectronics (COE), 2 Engineering Drive 3, E3 #02-07 (S) 117581",
+      "lat":1.299266085,
+      "lon":103.7719004,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":163,
+      "name":"Centre for Power Electronics (CPE)",
+      "address":"Centre for Power Electronics (CPE), 2 Engineering Drive 3, E3 (S) 117581",
+      "lat":1.299266085,
+      "lon":103.7719004,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":164,
+      "name":"Centre for Protective Technology (CPT)",
+      "address":"Centre for Protective Technology (CPT), 12 Kent Ridge Road (S) 119222",
+      "lat":1.297218012,
+      "lon":103.775346,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":165,
+      "name":"Centre for Soft Ground Engineering (CSGE)",
+      "address":"Centre for Soft Ground Engineering (CSGE), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.300301927,
+      "lon":103.7715678,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":166,
+      "name":"Centre for Transportation Research (CTR)",
+      "address":"Centre for Transportation Research (CTR), 4 Architecture Drive (S) 117566",
+      "lat":1.2995798,
+      "lon":103.7708428,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":167,
+      "name":"Centre for Water Research (CWR)",
+      "address":"Centre for Water Research (CWR), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.299739266,
+      "lon":103.7706926,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":168,
+      "name":"DCP Assembly Workshop 1",
+      "address":"DCP Assembly Workshop 1, 1 Engineering Drive 2, E1A #07-03 (S) 117576",
+      "lat":1.299396026,
+      "lon":103.7709127,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":169,
+      "name":"DCP Assembly Workshop 2",
+      "address":"DCP Assembly Workshop 2, 1 Engineering Drive 2, E1A #01-04 (S) 117579",
+      "lat":1.299396026,
+      "lon":103.7709127,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":170,
+      "name":"DCP Electronics Workshop",
+      "address":"DCP Electronics Workshop, 5 Engineering Drive 2, E2A #02-02 (S) 117576",
+      "lat":1.299396026,
+      "lon":103.7709127,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":171,
+      "name":"Dean's Office (Engineering)",
+      "address":"Dean's Office (Engineering), 9 Engineering Drive 1, EA #07-26 (S) 117576",
+      "lat":1.30020924,
+      "lon":103.7707924,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":172,
+      "name":"Department of Biomedical Engineering",
+      "address":"Department of Biomedical Engineering, 4 Engineering Drive 3, Block E4, #04-08 (S) 117583",
+      "lat":1.298319677,
+      "lon":103.7725792999,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":173,
+      "name":"Department of Chemical and Biomolecular Engineering",
+      "address":"Department of Chemical and Biomolecular Engineering, 4 Engineering Drive 4, E5 #02-09 (S) 117585",
+      "lat":1.298111443,
+      "lon":103.7722305,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":174,
+      "name":"Department of Civil and Environmental Engineering",
+      "address":"Department of Civil and Environmental Engineering, 1 Engineering Drive 2, E1A #07-03 (S) 117576",
+      "lat":1.299411426,
+      "lon":103.7708504,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":175,
+      "name":"Asia-Pacific Centre for Environmental Law (APCEL)",
+      "address":"Asia-Pacific Centre for Environmental Law (APCEL), 469G Bukit Timah Road, Eu Tong Sen Building (S) 259776",
+      "lat":1.318194812,
+      "lon":103.8169349,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":176,
+      "name":"C J Koh Law Library",
+      "address":"C J Koh Law Library, 469D Bukit Timah Road (S) 259773",
+      "lat":1.318942072,
+      "lon":103.8182129,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":177,
+      "name":"Centre for International Law (CIL)",
+      "address":"Centre for International Law (CIL), 469A Bukit Timah Road, Tower Block, #09-01 (S) 259770",
+      "lat":1.3194872314,
+      "lon":103.8171510759,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":178,
+      "name":"Centre for Law & Business",
+      "address":"Centre for Law & Business, 469G Bukit Timah Road, Eu Tong Sen Building (S) 259776",
+      "lat":1.318194812,
+      "lon":103.8169349,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":179,
+      "name":"Faculty of Law",
+      "address":"Faculty of Law, 469G Bukit Timah Road, Block B (S) 259776",
+      "lat":1.318194812,
+      "lon":103.8169349,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":180,
+      "name":"Moot Court",
+      "address":"Moot Court, 469G Bukit Timah Road (S) 259776",
+      "lat":1.318194812,
+      "lon":103.8169349,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":181,
+      "name":"Bio-Sciences Complex",
+      "address":"Bio-Sciences Complex, 3 Science Drive 2 (S) 117543",
+      "lat":1.296798124,
+      "lon":103.7801705,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":182,
+      "name":"Center for Bioimaging Sciences (CBIS)",
+      "address":"Center for Bioimaging Sciences (CBIS), 14 Science Drive 4, S1A Level 2 (S) 117546",
+      "lat":1.296729166,
+      "lon":103.7803005,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":183,
+      "name":"Centre for Computational Science and Engineering",
+      "address":"Centre for Computational Science and Engineering, 6 Science Drive 2, S16 Level 8 (S) 117546",
+      "lat":1.296729166,
+      "lon":103.7803005,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":184,
+      "name":"Centre for Ion Beam Applications (CIBA)",
+      "address":"Centre for Ion Beam Applications (CIBA), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296407648,
+      "lon":103.7789932,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":185,
+      "name":"Centre for Life Sciences (CeLS)",
+      "address":"Centre for Life Sciences (CeLS), 28 Medical Drive (S) 117456",
+      "lat":1.294624596,
+      "lon":103.7807369,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":186,
+      "name":"Centre for Quantum Technologies",
+      "address":"Centre for Quantum Technologies, 3 Science Drive 2, S15 #03-18 (S) 117543",
+      "lat":1.297175966,
+      "lon":103.780232,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":187,
+      "name":"Centre for Superconducting and Magnetic Materials (CSMM)",
+      "address":"Centre for Superconducting and Magnetic Materials (CSMM), 2 Science Drive 3, S12 Level 2 (S) 117542",
+      "lat":1.29706,
+      "lon":103.77871,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":188,
+      "name":"Centre for Wavelets Approximation and Information Processing (CWAIP)",
+      "address":"Centre for Wavelets Approximation and Information Processing (CWAIP), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296869365,
+      "lon":103.7793682,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":189,
+      "name":"Chemical Molecular and Materials Analysis Centre (CMMAC)",
+      "address":"Chemical Molecular and Materials Analysis Centre (CMMAC), 3 Science\u00a0Drive\u00a03 (S) 117543 ",
+      "lat":1.2962232,
+      "lon":103.7793351,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":190,
+      "name":"Dean's Office (Science)",
+      "address":"Dean's Office (Science), 6 Science Drive 2, S16 Level 9 (S) 117546",
+      "lat":1.296729166,
+      "lon":103.7803005,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":191,
+      "name":"Department of Biological Sciences",
+      "address":"Department of Biological Sciences, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.295945965,
+      "lon":103.7783711,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":192,
+      "name":"Department of Chemistry",
+      "address":"Department of Chemistry, 3 Science\u00a0Drive\u00a03 (S) 117543 ",
+      "lat":1.296214821,
+      "lon":103.7793601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":193,
+      "name":"Department of Mathematics",
+      "address":"Department of Mathematics, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.297692127,
+      "lon":103.7804485,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":194,
+      "name":"Department of Pharmacy",
+      "address":"Department of Pharmacy, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295694505,
+      "lon":103.779277,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":195,
+      "name":"Department of Physics",
+      "address":"Department of Physics, 2 Science Drive 3 (S) 117551",
+      "lat":1.297094014,
+      "lon":103.77863,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":196,
+      "name":"Department of Statistics and Applied Probability",
+      "address":"Department of Statistics and Applied Probability, 3 Science Drive 2 (S) 117543",
+      "lat":1.296798124,
+      "lon":103.7801705,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":197,
+      "name":"Division of Research and Graduate Studies Faculty of Science",
+      "address":"Division of Research and Graduate Studies Faculty of Science, S16 Science Drive 1 (S) 117546",
+      "lat":1.296729166,
+      "lon":103.7803005,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":198,
+      "name":"Food Science and Technology Programme",
+      "address":"Food Science and Technology Programme, S14 Science Drive 2 (S) 117546",
+      "lat":1.296729166,
+      "lon":103.7803005,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":199,
+      "name":"GEA-NUS Pharmaceutical Processing Research Laboratory",
+      "address":"GEA-NUS Pharmaceutical Processing Research Laboratory, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295770008,
+      "lon":103.7792353,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":200,
+      "name":"Pharmacy - Annexe",
+      "address":"Pharmacy - Annexe, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295770008,
+      "lon":103.7792353,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":201,
+      "name":"Protein and Proteomics Centre",
+      "address":"Protein and Proteomics Centre, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.29566756,
+      "lon":103.7788343,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":202,
+      "name":"Raffles Museum of Biodiversity Research",
+      "address":"Raffles Museum of Biodiversity Research, 6 Science Drive 2, S6 #03-01 (S) 117546",
+      "lat":1.295120334,
+      "lon":103.78043,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":203,
+      "name":"Science Demo Lab",
+      "address":"Science Demo Lab, S16 #02-01b",
+      "lat":1.296929,
+      "lon":103.78024,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":204,
+      "name":"Surface Science Laboratory",
+      "address":"Surface Science Laboratory, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296850958,
+      "lon":103.7792256,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":205,
+      "name":"Institute of Systems Science",
+      "address":"Institute of Systems Science, 25 Heng Mui Keng Terrace (S) 119615",
+      "lat":1.2920930425,
+      "lon":103.7765681398,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":206,
+      "name":"Dean's Office (Lee Kuan Yew School of Public Policy)",
+      "address":"Dean's Office (Lee Kuan Yew School of Public Policy), 469 Bukit Timah Road (S) 259756",
+      "lat":1.318970732,
+      "lon":103.8167621,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":207,
+      "name":"Lee Kuan Yew School of Public Policy",
+      "address":"Lee Kuan Yew School of Public Policy, 469C Bukit Timah Road, Lee Kuan Yew School of Public Policy  (S) 259772",
+      "lat":1.319558515,
+      "lon":103.8178308,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":208,
+      "name":"NUS Graduate School for Integrative Sciences and Engineering",
+      "address":"NUS Graduate School for Integrative Sciences and Engineering, 21 Lower Kent Ridge, University Hall, Tan Chin Tuan Wing, Level 04, #04-02 (S) 119077",
+      "lat":1.2972972885,
+      "lon":103.7777587839,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":209,
+      "name":"Saw Swee Hock School of Public Health (SSHSPH)",
+      "address":"Saw Swee Hock School of Public Health (SSHSPH), Tahir Foundation Building, 12 Science Drive 2, #10-01 (S) 117549",
+      "lat":1.295336,
+      "lon":103.780635,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":210,
+      "name":"School of Business",
+      "address":"School of Business, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.293635134,
+      "lon":103.7743163,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":211,
+      "name":"Adaptive Computing Research Lab",
+      "address":"Adaptive Computing Research Lab, 13 Computing Drive (S) 117417",
+      "lat":1.294896602,
+      "lon":103.7739567,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":212,
+      "name":"Computing (Dean's Office)",
+      "address":"Computing (Dean's Office), 13 Computing Drive (S) 117417",
+      "lat":1.294896602,
+      "lon":103.7739567,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":213,
+      "name":"Dean's Office (Computing)",
+      "address":"Dean's Office (Computing), 13 Computing Drive, COM1 #03-27 (S) 117417",
+      "lat":1.294896602,
+      "lon":103.7739567,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":214,
+      "name":"Division of Research and Graduate Studies, School of Computing (Interim Cluster)",
+      "address":"Division of Research and Graduate Studies, School of Computing (Interim Cluster), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296991057,
+      "lon":103.7800203,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":215,
+      "name":"Incubation Centre, School of Computing (Interim Cluster)",
+      "address":"Incubation Centre, School of Computing (Interim Cluster), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296991057,
+      "lon":103.7800203,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":216,
+      "name":"Information Technology Unit, School of Computing",
+      "address":"Information Technology Unit, School of Computing, 13 Computing Drive, #03-68 (S) 117417",
+      "lat":1.293491326,
+      "lon":103.7743616608,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":217,
+      "name":"Institute of High Performance Computing (IHPC)",
+      "address":"Institute of High Performance Computing (IHPC), 1 Science Park Road (S) 117582",
+      "lat":1.289261152,
+      "lon":103.7787588,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":218,
+      "name":"Medical Computing Research Lab",
+      "address":"Medical Computing Research Lab, 13 Computing Drive (S) 117417",
+      "lat":1.294896602,
+      "lon":103.7739567,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":219,
+      "name":"School of Computing",
+      "address":"School of Computing, 13 Computing Drive, COM1 (S) 117417",
+      "lat":1.294896602,
+      "lon":103.7739567,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":220,
+      "name":"School of Continuing and Lifelong Education (SCALE)",
+      "address":"School of Continuing and Lifelong Education (SCALE), Block AS8 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2961592866,
+      "lon":103.7722421345,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":221,
+      "name":"School of Continuing and Lifelong Education (SCALE)",
+      "address":"School of Continuing and Lifelong Education (SCALE), 8 College Avenue West (S) 138608",
+      "lat":1.3059629262,
+      "lon":103.7726851352,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":222,
+      "name":"Building and Estate Society",
+      "address":"Building and Estate Society, 3 Architecture Drive, #04-06 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":223,
+      "name":"Centre for Advanced Studies in Architecture (CASA)",
+      "address":"Centre for Advanced Studies in Architecture (CASA), 4 Architecture Drive, #03-01 (S) 117566",
+      "lat":1.298471915,
+      "lon":103.7704265,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":224,
+      "name":"Centre for Project Management and Construction Law",
+      "address":"Centre for Project Management and Construction Law, 4 Architecture Drive, #02-02a (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":225,
+      "name":"Centre for Sustainable Asian Cities",
+      "address":"Centre for Sustainable Asian Cities, 4 Architecture Drive, SDE1 #04-24 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":226,
+      "name":"Centre for Total Building Performance (CTBP)",
+      "address":"Centre for Total Building Performance (CTBP), 4 Architecture Drive, #02-02 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":227,
+      "name":"DE Club Room",
+      "address":"DE Club Room, 4 Architecture Drive, SDE3 #04-24 (S) 117566",
+      "lat":1.29839,
+      "lon":103.77047,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":228,
+      "name":"Dean's Office (Design and Engineering)",
+      "address":"Dean's Office (Design and Engineering), 4 Architecture Drive, SDE1 #03-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":229,
+      "name":"Department of Architecture (ARCH)",
+      "address":"Department of Architecture (ARCH), 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":230,
+      "name":"Department of Real Estate",
+      "address":"Department of Real Estate, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":231,
+      "name":"Energy and Sustainability Unit",
+      "address":"Energy and Sustainability Unit, 4 Architecture Drive, SDE1 #03-05 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":232,
+      "name":"Information Resource Centre School of Design and Engineering",
+      "address":"Information Resource Centre School of Design and Engineering, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":233,
+      "name":"Institute of Real Estate Studies (IRES)",
+      "address":"Institute of Real Estate Studies (IRES), 21 Heng Mui Keng Terrace, I3 Building #04-02 (S) 119613",
+      "lat":1.292509295,
+      "lon":103.7756529,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":234,
+      "name":"Master of Landscape Architecture Studio",
+      "address":"Master of Landscape Architecture Studio, 4 Architecture Drive, #02-03 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":235,
+      "name":"NUS-JTC Industrial Infrastructure Innovation Centre",
+      "address":"NUS-JTC Industrial Infrastructure Innovation Centre, 1 Architecture Drive, #03-03K (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":236,
+      "name":"School of Design and Engineering - Conference Room",
+      "address":"School of Design and Engineering - Conference Room, 1 Architecture Drive, #03-07 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":237,
+      "name":"School of Design and Engineering - Department of Architecture",
+      "address":"School of Design and Engineering - Department of Architecture, 4 Architecture Drive, #03-06  (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":238,
+      "name":"School of Design and Engineering - Department of Building",
+      "address":"School of Design and Engineering - Department of Building, 4 Architecture Drive, SDE1 #03-02 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":239,
+      "name":"School of Design and Engineering - Department of Real Estate",
+      "address":"School of Design and Engineering - Department of Real Estate, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":240,
+      "name":"School of Design and Engineering - Division of Industrial Design",
+      "address":"School of Design and Engineering - Division of Industrial Design, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":241,
+      "name":"School of Design and Engineering - Exhibition Hall",
+      "address":"School of Design and Engineering - Exhibition Hall, 4 Architecture Drive, #01-01 #01-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":242,
+      "name":"School of Design and Engineering - Exhibition Hall (Mezzanine)",
+      "address":"School of Design and Engineering - Exhibition Hall (Mezzanine), 4 Architecture Drive, #02-01 #02-01 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":243,
+      "name":"School of Design and Engineering - Information Resource Centre",
+      "address":"School of Design and Engineering - Information Resource Centre, 4 Architecture Drive, SD1 #04-23 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":244,
+      "name":"School of Design and Engineering - Information Technology Unit",
+      "address":"School of Design and Engineering - Information Technology Unit, 4 Architecture Drive, SDE3 #04-01 (S) 117566",
+      "lat":1.29839,
+      "lon":103.77044,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":245,
+      "name":"Cinnamon College (USP) Visitors' Apartments",
+      "address":"Cinnamon College (USP) Visitors' Apartments, 22 College Avenue East, Cinnamon College (USP) #03-102\/103\/104 (S) 138595",
+      "lat":1.306709987,
+      "lon":103.773381,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":246,
+      "name":"Dining Hall",
+      "address":"Dining Hall, 22 College Avenue East, Cinnamon College (USP) Level 1 (S) 138595",
+      "lat":1.306709987,
+      "lon":103.773381,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":247,
+      "name":"Master's Commons Lounge",
+      "address":"Master's Commons Lounge, 22 College Avenue East, Cinnamon College (USP) #03-L (S) 138595",
+      "lat":1.306709987,
+      "lon":103.773381,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":248,
+      "name":"The QR Centre",
+      "address":"The QR Centre, 18 College Avenue East, Cinnamon College (USP) #01-03 (S) 138593",
+      "lat":1.306571776,
+      "lon":103.7735269,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":249,
+      "name":"The USP Writing Centre",
+      "address":"The USP Writing Centre, 18 College Avenue East, Cinnamon College (USP) #01-02",
+      "lat":null,
+      "lon":null,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":250,
+      "name":"University Scholars Programme",
+      "address":"University Scholars Programme, 18 College Avenue East, University Scholars Programme  (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":251,
+      "name":"University Scholars Programme Chatter Box",
+      "address":"University Scholars Programme Chatter Box, 22 College Avenue East, Cinnamon College (USP) (S) 138595",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":252,
+      "name":"University Scholars Programme General Office",
+      "address":"University Scholars Programme General Office, 18 College Avenue East, Cinnamon College (USP) #01-02 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":253,
+      "name":"University Scholars Programme Multi-Media Lab",
+      "address":"University Scholars Programme Multi-Media Lab, 18 College Avenue East, Cinnamon College (USP) #01-03 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":254,
+      "name":"University Scholars Programme Reading Room",
+      "address":"University Scholars Programme Reading Room, 18 College Avenue East, Cinnamon College (USP) #01-01 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":255,
+      "name":"University Scholars Programme Seminar Room 1",
+      "address":"University Scholars Programme Seminar Room 1, 18 College Avenue East, Cinnamon College (USP) #01-04 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":256,
+      "name":"University Scholars Programme Seminar Room 2",
+      "address":"University Scholars Programme Seminar Room 2, 18 College Avenue East, Cinnamon College (USP) #02-01\/02 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":257,
+      "name":"University Scholars Programme Tutorial Room 1",
+      "address":"University Scholars Programme Tutorial Room 1, 18 College Avenue East, Cinnamon College (USP) #02-05 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":258,
+      "name":"University Scholars Programme Tutorial Room 2",
+      "address":"University Scholars Programme Tutorial Room 2, 18 College Avenue East, Cinnamon College (USP) #02-03 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":259,
+      "name":"University Scholars Programme Writing Center",
+      "address":"University Scholars Programme Writing Center, 18 College Avenue East, Cinnamon College (USP) #01-02 (S) 138593",
+      "lat":1.306710229,
+      "lon":103.7734601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":260,
+      "name":"Yale-NUS College",
+      "address":"Yale-NUS College, 16 College Avenue West, #01-220, Yale-NUS College (S) 138527",
+      "lat":1.307267498,
+      "lon":103.7722093,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":261,
+      "name":"Yong Loo Lin School of Medicine",
+      "address":"Yong Loo Lin School of Medicine, NUHS Tower Block, Level 11, 1E Kent Ridge Road (S) 119228",
+      "lat":1.2967673415,
+      "lon":103.781320577,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":262,
+      "name":"Yong Siew Toh Conservatory of Music",
+      "address":"Yong Siew Toh Conservatory of Music, 3 Conservatory Drive, Yong Siew Toh Conservatory of Music (S) 117376",
+      "lat":1.30256017,
+      "lon":103.7726908,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":263,
+      "name":"Cancer Science Institute of Singapore (CSIS)",
+      "address":"Cancer Science Institute of Singapore (CSIS), 14 Medical Drive, #12-01 (S) 117599",
+      "lat":1.29572,
+      "lon":103.7808,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":264,
+      "name":"Centre for Quantum Technologies",
+      "address":"Centre for Quantum Technologies, 3 Science Drive 2, S15 #03-18 (S) 117543",
+      "lat":1.297175966,
+      "lon":103.780232,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":265,
+      "name":"Mechanobiology Institute, Singapore (MI)",
+      "address":"Mechanobiology Institute, Singapore (MI), 5A Engineering Drive 1, T-Lab Building #05-01 (S) 117411",
+      "lat":1.299937963,
+      "lon":103.7721526,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":266,
+      "name":"Asia Research Institute (ARI)",
+      "address":"Asia Research Institute (ARI), AS8, Level 7, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962172454,
+      "lon":103.7724369649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":267,
+      "name":"Biomedical Institute for Global Health Research and Technology",
+      "address":"Biomedical Institute for Global Health Research and Technology, 14 Medical Drive, MD6, #14-01 (S) 117599",
+      "lat":1.295381,
+      "lon":103.781774,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":268,
+      "name":"Cancer Science Institute of Singapore (CSIS)",
+      "address":"Cancer Science Institute of Singapore (CSIS), 14 Medical Drive, #12-01 (S) 117599",
+      "lat":1.29572,
+      "lon":103.7808,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":269,
+      "name":"Centre for Advanced 2D Materials",
+      "address":"Centre for Advanced 2D Materials, 6 Science Drive 2, Block S14 #06-00 (S) 117546",
+      "lat":1.2968926287,
+      "lon":103.7797543167,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":270,
+      "name":"Centre for Healthcare Innovation and Medical Engineering",
+      "address":"Centre for Healthcare Innovation and Medical Engineering, ",
+      "lat":1.3003497058,
+      "lon":103.7707189531,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":271,
+      "name":"Centre for International Law (CIL)",
+      "address":"Centre for International Law (CIL), 469A Bukit Timah Road, Tower Block, #09-01 (S) 259770",
+      "lat":1.3194872314,
+      "lon":103.8171510759,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":272,
+      "name":"Centre for Maritime Studies (CMS)",
+      "address":"Centre for Maritime Studies (CMS), 15 Prince George's Park (S) 118414",
+      "lat":1.2929687329,
+      "lon":103.7781397047,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":273,
+      "name":"Centre for Quantum Technologies",
+      "address":"Centre for Quantum Technologies, 3 Science Drive 2, S15 #03-18 (S) 117543",
+      "lat":1.297175966,
+      "lon":103.780232,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":274,
+      "name":"Centre for Remote Imaging, Sensing and Processing (CRISP)",
+      "address":"Centre for Remote Imaging, Sensing and Processing (CRISP), 10 Lower Kent Ridge Road, #02-00 (S) 119076",
+      "lat":1.29768,
+      "lon":103.78043,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":275,
+      "name":"East Asian Institute (EAI)",
+      "address":"East Asian Institute (EAI), 469A Bukit Timah Road, #06-01 (S) 259770",
+      "lat":1.319487231,
+      "lon":103.8171511,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":276,
+      "name":"Energy Studies Institute (ESI)",
+      "address":"Energy Studies Institute (ESI), 29 Heng Mui Keng Terrace, Block A #10-01 (S) 119260",
+      "lat":1.29061,
+      "lon":103.7777,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":277,
+      "name":"Energy Sustainability Unit",
+      "address":"Energy Sustainability Unit, 4 Architecture Drive (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":278,
+      "name":"Institute for Mathematical Sciences",
+      "address":"Institute for Mathematical Sciences, 3 Prince George's Park & 4 Prince George's Park (S) 118402",
+      "lat":1.292851966,
+      "lon":103.7796155,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":279,
+      "name":"Institute for the Application of Learning Science and Educational Technology",
+      "address":"Institute for the Application of Learning Science and Educational Technology, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.29726,
+      "lon":103.777742,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":280,
+      "name":"Institute of Data Science",
+      "address":"Institute of Data Science, 13 Computing Drive, AS6, #05-09 (S) 117417",
+      "lat":1.295702,
+      "lon":103.773248,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":281,
+      "name":"Institute of Operations Research and Analytics",
+      "address":"Institute of Operations Research and Analytics, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.29726,
+      "lon":103.777742,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":282,
+      "name":"Institute of Policy Studies (IPS)",
+      "address":"Institute of Policy Studies (IPS), 1C Cluny Road, House 5 (S) 259599",
+      "lat":1.317656799,
+      "lon":103.8168663,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":283,
+      "name":"Institute of Real Estate Studies (IRES)",
+      "address":"Institute of Real Estate Studies (IRES), 21 Heng Mui Keng Terrace, I3 Building #04-02 (S) 119613",
+      "lat":1.292509295,
+      "lon":103.7756529,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":284,
+      "name":"Institute of South Asian Studies (ISAS)",
+      "address":"Institute of South Asian Studies (ISAS), Block B 29 Heng Mui Keng Terrace, #08-06 (S) 119620",
+      "lat":1.29061656,
+      "lon":103.7777096898,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":285,
+      "name":"Interactive and Digital Media Institute (IDMI)",
+      "address":"Interactive and Digital Media Institute (IDMI), 21 Heng Mui Keng Terrace, I3 #03-02 (S) 119613",
+      "lat":1.292509295,
+      "lon":103.7756529,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":286,
+      "name":"Life Sciences Institute (LSI)",
+      "address":"Life Sciences Institute (LSI), 28 Medical Drive, #05-02 (S) 117456",
+      "lat":1.294590927,
+      "lon":103.7806202,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":287,
+      "name":"Lloyd's Register Foundation Institute for the Public Understanding of Risk",
+      "address":"Lloyd's Register Foundation Institute for the Public Understanding of Risk, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.29726,
+      "lon":103.777742,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":288,
+      "name":"Middle East Institute (MEI)",
+      "address":"Middle East Institute (MEI), A 29 Heng Mui Keng Terrace (S) 119620",
+      "lat":1.29061656,
+      "lon":103.7777096898,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":289,
+      "name":"NUS Environmental Research Institute (NERI)",
+      "address":"NUS Environmental Research Institute (NERI), 5A Engineering Drive 1, T-Lab #02-01 (S) 117411",
+      "lat":1.299937963,
+      "lon":103.7721526,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":290,
+      "name":"Association of Pacific Rim Universities (APRU) Secretariat",
+      "address":"Association of Pacific Rim Universities (APRU) Secretariat, 11 Kent Ridge Drive, Shaw Foundation Alumni House Level 2 (S) 119244",
+      "lat":1.29334,
+      "lon":103.77366,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":291,
+      "name":"NUS Global Asia Institute (GAI)",
+      "address":"NUS Global Asia Institute (GAI), 10 Lower Kent Ridge Road, S17 #03-01 (S) 119076",
+      "lat":1.29769,
+      "lon":103.78047,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":292,
+      "name":"NUS Nanoscience and Nanotechnology Institute (NanoCore)",
+      "address":"NUS Nanoscience and Nanotechnology Institute (NanoCore), 5A Engineering Drive 1, T-Lab #11-00 (S) 117411",
+      "lat":1.299937963,
+      "lon":103.7721526,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":293,
+      "name":"NUS Nanoscience and Nanotechnology Institute (NUSNNI)",
+      "address":"NUS Nanoscience and Nanotechnology Institute (NUSNNI), 2 Engineering Drive 3, #05-29 (S) 117581",
+      "lat":1.299284384,
+      "lon":103.7719285,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":294,
+      "name":"Risk Management Institute (RMI)",
+      "address":"Risk Management Institute (RMI), 21 Heng Mui Keng Terrace, I\u00b3 Building #04-03 (S) 119613",
+      "lat":1.292509295,
+      "lon":103.7756529,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":295,
+      "name":"SINAPSE Institute",
+      "address":"SINAPSE Institute, 28 Medical Drive, Centre for Life Sciences #05-COR (S) 117456",
+      "lat":1.294569924,
+      "lon":103.7806202,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":296,
+      "name":"Singapore Synchrotron Light Source (SSLS)",
+      "address":"Singapore Synchrotron Light Source (SSLS), 5 Research Link (S) 117603",
+      "lat":1.295589525,
+      "lon":103.7751543,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":297,
+      "name":"Solar Energy Research Institute of Singapore (SERIS)",
+      "address":"Solar Energy Research Institute of Singapore (SERIS), 7 Engineering Drive 1, E3A #06-01 (S) 117574",
+      "lat":1.300156943,
+      "lon":103.7714779,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":298,
+      "name":"Temasek Laboratories (TL@NUS)",
+      "address":"Temasek Laboratories (TL@NUS), 5A Engineering Drive 1, T-Lab Building #09-02 (S) 117411",
+      "lat":1.299937963,
+      "lon":103.7721526,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":299,
+      "name":"The Logistics Institute - Asia Pacific",
+      "address":"The Logistics Institute - Asia Pacific, 21 Heng Mui Keng Terrace, I3 Building #04-01 (S) 119613",
+      "lat":1.29251,
+      "lon":103.77565,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":300,
+      "name":"Tropical Marine Science Institute (TMSI)",
+      "address":"Tropical Marine Science Institute (TMSI), 18 Kent Ridge Road, S2S (S) 119227",
+      "lat":1.29763,
+      "lon":103.77483,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":301,
+      "name":"Engineering Auditorium",
+      "address":"Engineering Auditorium, 9 Engineering Drive 1 (S) 117576",
+      "lat":1.30064,
+      "lon":103.77064,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":302,
+      "name":"Hon Sui Sen Auditorium",
+      "address":"Hon Sui Sen Auditorium, 1 Hon Sui Sen Drive (S) 117588",
+      "lat":1.29342,
+      "lon":103.77469,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":303,
+      "name":"Lecture Theatre 1",
+      "address":"Lecture Theatre 1, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.299594566,
+      "lon":103.7713447,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":304,
+      "name":"Lecture Theatre 2",
+      "address":"Lecture Theatre 2, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.299233839,
+      "lon":103.7715116,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":305,
+      "name":"Lecture Theatre 3",
+      "address":"Lecture Theatre 3, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.297665586,
+      "lon":103.7733634,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":306,
+      "name":"Lecture Theatre 4",
+      "address":"Lecture Theatre 4, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.297514593,
+      "lon":103.7734884,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":307,
+      "name":"Lecture Theatre 5",
+      "address":"Lecture Theatre 5, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.298444948,
+      "lon":103.7713869,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":308,
+      "name":"Lecture Theatre 6",
+      "address":"Lecture Theatre 6, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.298663473,
+      "lon":103.7719288,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":309,
+      "name":"Lecture Theatre 7",
+      "address":"Lecture Theatre 7, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.30004309,
+      "lon":103.7710779,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":310,
+      "name":"Lecture Theatre 7A",
+      "address":"Lecture Theatre 7A, 9 Engineering Drive 1, EA (S) 117576",
+      "lat":1.30051,
+      "lon":103.77094,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":311,
+      "name":"Lecture Theatre 8",
+      "address":"Lecture Theatre 8, 7 Arts Link, AS5 (S) 117570",
+      "lat":1.294224058,
+      "lon":103.7720252,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":312,
+      "name":"Lecture Theatre 9",
+      "address":"Lecture Theatre 9, 11 Arts Link, AS1 (S) 117570",
+      "lat":1.29502,
+      "lon":103.77229,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":313,
+      "name":"Lecture Theatre 10",
+      "address":"Lecture Theatre 10, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294954486,
+      "lon":103.772089,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":314,
+      "name":"Lecture Theatre 11",
+      "address":"Lecture Theatre 11, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295575165,
+      "lon":103.7715301,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":315,
+      "name":"Lecture Theatre 12",
+      "address":"Lecture Theatre 12, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295050553,
+      "lon":103.7712468,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":316,
+      "name":"Lecture Theatre 13",
+      "address":"Lecture Theatre 13, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295142762,
+      "lon":103.7710467,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":317,
+      "name":"Lecture Theatre 14",
+      "address":"Lecture Theatre 14, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295735527,
+      "lon":103.7733935,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":318,
+      "name":"Lecture Theatre 15",
+      "address":"Lecture Theatre 15, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295500528,
+      "lon":103.773356,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":319,
+      "name":"Lecture Theatre 16",
+      "address":"Lecture Theatre 16, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.294099495,
+      "lon":103.7740487,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":320,
+      "name":"Lecture Theatre 17",
+      "address":"Lecture Theatre 17, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.293797418,
+      "lon":103.7741155,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":321,
+      "name":"Lecture Theatre 18",
+      "address":"Lecture Theatre 18, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.293655039,
+      "lon":103.7746576,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":322,
+      "name":"Lecture Theatre 19",
+      "address":"Lecture Theatre 19, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.293982258,
+      "lon":103.7745824,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":323,
+      "name":"Lecture Theatre 20",
+      "address":"Lecture Theatre 20, Science Drive 3 (S) 117542",
+      "lat":1.295847339,
+      "lon":103.7789753,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":324,
+      "name":"Lecture Theatre 21",
+      "address":"Lecture Theatre 21, Science Drive 2 (S) 117546",
+      "lat":1.295528688,
+      "lon":103.7795591,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":325,
+      "name":"Lecture Theatre 24",
+      "address":"Lecture Theatre 24, Science Drive 2 (S) 117546",
+      "lat":1.295797685,
+      "lon":103.7804761,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":326,
+      "name":"Lecture Theatre 25",
+      "address":"Lecture Theatre 25, Science Drive 2 (S) 117546",
+      "lat":1.296213133,
+      "lon":103.780601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":327,
+      "name":"Lecture Theatre 26",
+      "address":"Lecture Theatre 26, Science Drive 2 (S) 117546",
+      "lat":1.29649,
+      "lon":103.78105,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":328,
+      "name":"Lecture Theatre 27",
+      "address":"Lecture Theatre 27, 10 Lower Kent Ridge Road (S) 119076",
+      "lat":1.296750354,
+      "lon":103.7809342,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":329,
+      "name":"Lecture Theatre 28",
+      "address":"Lecture Theatre 28, 2 Medical Drive (S) 117593",
+      "lat":1.296989566,
+      "lon":103.7809841,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":330,
+      "name":"Lecture Theatre 29",
+      "address":"Lecture Theatre 29, 2 Medical Drive (S) 117593",
+      "lat":1.29721625,
+      "lon":103.7812342,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":331,
+      "name":"Lecture Theatre 31",
+      "address":"Lecture Theatre 31, Science Drive 2 (S) 117543",
+      "lat":1.296787843,
+      "lon":103.780434,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":332,
+      "name":"Lecture Theatre 32",
+      "address":"Lecture Theatre 32, Science Drive 3 (S) 117542",
+      "lat":1.296220139,
+      "lon":103.7784334,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":333,
+      "name":"Lecture Theatre 33",
+      "address":"Lecture Theatre 33, 10 Lower Kent Ridge Road (S) 119076",
+      "lat":1.297731826,
+      "lon":103.7809256,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":334,
+      "name":"Lecture Theatre 34",
+      "address":"Lecture Theatre 34, 10 Lower Kent Ridge Road (S) 119076",
+      "lat":1.297694011,
+      "lon":103.7808778,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":335,
+      "name":"Lecture Theatre 35",
+      "address":"Lecture Theatre 35, Centre for Translational Medicine, Block MD6, 14 Medical Drive (S) 117599",
+      "lat":1.295509412,
+      "lon":103.7818431,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":336,
+      "name":"Lecture Theatre 36",
+      "address":"Lecture Theatre 36, Centre for Translational Medicine, Block MD6, 14 Medical Drive (S) 117599",
+      "lat":1.2955094117,
+      "lon":103.7818431039,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":337,
+      "name":"Lecture Theatre 37",
+      "address":"Lecture Theatre 37, Science Drive 2 (S) 117546",
+      "lat":1.2954929515,
+      "lon":103.7802829302,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":338,
+      "name":"Lecture Theatre 50",
+      "address":"Lecture Theatre 50, 2 College Avenue West (S) 138607",
+      "lat":1.3043292304,
+      "lon":103.7731984205,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":339,
+      "name":"Lecture Theatre 51",
+      "address":"Lecture Theatre 51, 2 College Avenue West (S) 138607",
+      "lat":1.3041697587,
+      "lon":103.7731317974,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":340,
+      "name":"Lecture Theatre 52",
+      "address":"Lecture Theatre 52, 2 College Avenue West (S) 138607",
+      "lat":1.3040438531,
+      "lon":103.7730651581,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":341,
+      "name":"Lecture Theatre 53",
+      "address":"Lecture Theatre 53, 2 College Avenue West (S) 138607",
+      "lat":1.3039347265,
+      "lon":103.7729901731,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":342,
+      "name":"Ngee Ann Kongsi Auditorium",
+      "address":"Ngee Ann Kongsi Auditorium, 8 College Ave W, Level 2, Education Resource Centre (S) 138608",
+      "lat":1.305566971,
+      "lon":103.7731269,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":343,
+      "name":"UTown Auditorium 1",
+      "address":"UTown Auditorium 1, 1 Create Way (S) 138602",
+      "lat":1.3041018479,
+      "lon":103.7735228088,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":344,
+      "name":"UTown Auditorium 2",
+      "address":"UTown Auditorium 2 , 2 College Avenue West (S) 138607",
+      "lat":1.3042534694,
+      "lon":103.77271488,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":345,
+      "name":"UTown Auditorium 3",
+      "address":"UTown Auditorium 3, 10 College Avenue East (S) 138616",
+      "lat":1.3072997423,
+      "lon":103.773121964,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":346,
+      "name":"Eusoff Hall",
+      "address":"Eusoff Hall, 10 Kent Ridge Drive (S) 119242",
+      "lat":1.293282767,
+      "lon":103.7702482,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":347,
+      "name":"Kent Ridge Hall",
+      "address":"Kent Ridge Hall, 10 Heng Mui Keng Terrace (S) 119617",
+      "lat":1.291926111,
+      "lon":103.774542,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":348,
+      "name":"King Edward VII Hall",
+      "address":"King Edward VII Hall, 1A Kent Ridge Road (S) 119224",
+      "lat":1.292520114,
+      "lon":103.7808893,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":349,
+      "name":"PGP House",
+      "address":"PGP House, Blk 20, #01-23, 35 Prince George's Park Road (S) 118429",
+      "lat":1.2906198,
+      "lon":103.78042475,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":350,
+      "name":"Prince George's Park Residences",
+      "address":"Prince George's Park Residences, 27 Prince George's Park Road (S) 118425",
+      "lat":1.290992919,
+      "lon":103.7812283,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":351,
+      "name":"Raffles Hall",
+      "address":"Raffles Hall, 19 Kent Ridge Crescent (S) 119278",
+      "lat":1.299872783,
+      "lon":103.7738292,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":352,
+      "name":"Sheares Hall",
+      "address":"Sheares Hall, 20 Heng Mui Keng Terrace (S) 119618",
+      "lat":1.291074195,
+      "lon":103.7756714,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":353,
+      "name":"Temasek Hall",
+      "address":"Temasek Hall, 12 Kent Ridge Drive (S) 119243",
+      "lat":1.292903596,
+      "lon":103.7713867,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":354,
+      "name":"Cinnamon College",
+      "address":"Cinnamon College, 16 College Avenue West (S) 138592",
+      "lat":1.306769048,
+      "lon":103.7735685,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":355,
+      "name":"College of Alice and Peter Tan",
+      "address":"College of Alice and Peter Tan, 8 College Avenue East, #B1-50 (S) 138615",
+      "lat":1.3076437749,
+      "lon":103.773030073,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":356,
+      "name":"Residential College 4",
+      "address":"Residential College 4, University Town, 6 College Avenue East, #B1-01 (S) 138614",
+      "lat":1.30821,
+      "lon":103.77341,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":357,
+      "name":"Extension A",
+      "address":"Extension A, 25 Lower Kent Ridge Road (S) 119081",
+      "lat":1.298029314,
+      "lon":103.7767474,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":358,
+      "name":"Ridge View Residential College",
+      "address":"Ridge View Residential College, 25 Lower Kent Ridge Road (S) 119081",
+      "lat":1.298209629,
+      "lon":103.7760838,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":359,
+      "name":"Tembusu College Office",
+      "address":"Tembusu College Office, 28 College Avenue East, #B1-01 (S) 138598",
+      "lat":1.30625,
+      "lon":103.77368,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":360,
+      "name":"UTown Residence",
+      "address":"UTown Residence, 36 College Avenue East (S) 138600",
+      "lat":1.30550204,
+      "lon":103.7737984,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":361,
+      "name":"Kent Vale",
+      "address":"Kent Vale , 105 Clementi Road (S) 129789",
+      "lat":1.301384622,
+      "lon":103.7681933,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":362,
+      "name":"Alice Lee Plaza",
+      "address":"Alice Lee Plaza, 3 Conservatory Drive (S) 117376",
+      "lat":1.3024762055,
+      "lon":103.7726408421,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":363,
+      "name":"Education Resource Centre",
+      "address":"Education Resource Centre, 8 College Avenue West (S) 138608",
+      "lat":1.306017569,
+      "lon":103.7728852,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":364,
+      "name":"Little Skool-House International",
+      "address":"Little Skool-House International , 101B Clementi Road , Kent Vale Staff Housing  (S) 129798",
+      "lat":1.301402,
+      "lon":103.768946,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":365,
+      "name":"NUS Society",
+      "address":"NUS Society, 9 Kent Ridge Drive (S) 119241",
+      "lat":1.2940582,
+      "lon":103.7730585,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":366,
+      "name":"NUS Staff Club",
+      "address":"NUS Staff Club, Lower Kent Ridge Road (S) 119260",
+      "lat":1.299269997,
+      "lon":103.7758203,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":367,
+      "name":"NUSS Guild House",
+      "address":"NUSS Guild House, 9 Kent Ridge Dr (S) 119241",
+      "lat":1.294003,
+      "lon":103.7726876,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":368,
+      "name":"Runme Shaw CFA Studios",
+      "address":"Runme Shaw CFA Studios , 17 Kent Ridge Crescent, Runme Shaw CFA Studios (S) 119277",
+      "lat":1.299185,
+      "lon":103.773638,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":369,
+      "name":"Stephen Riady Centre",
+      "address":"Stephen Riady Centre, 2 College Avenue West (S) 138607",
+      "lat":1.304895,
+      "lon":103.772481,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":370,
+      "name":"University Cultural Centre",
+      "address":"University Cultural Centre, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301728637,
+      "lon":103.7721489,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":371,
+      "name":"Value Machine \/ TransitLink",
+      "address":"Value Machine \/ TransitLink, 10 Kent Ridge Crescent, Block ADM (S) 119260",
+      "lat":1.296236378,
+      "lon":103.7723875,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":372,
+      "name":"AXS Station",
+      "address":"AXS Station, 10 Kent Ridge Crescent, Block ADM (S) 119260",
+      "lat":1.296236378,
+      "lon":103.7723875,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":373,
+      "name":"AXS Station",
+      "address":"AXS Station, 10 Kent Ridge Crescent, Yong Loo Lin School of Medicine (S) 119260",
+      "lat":1.2968,
+      "lon":103.78096,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":374,
+      "name":"DBS\/POSB ATM",
+      "address":"DBS\/POSB ATM, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2968,
+      "lon":103.78096,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":375,
+      "name":"DBS\/POSB ATM",
+      "address":"DBS\/POSB ATM, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.297293242,
+      "lon":103.7779172,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":376,
+      "name":"DBS\/POSB Cash Deposit Machine",
+      "address":"DBS\/POSB Cash Deposit Machine, 31 Lower Kent Ridge Road, Yusof Ishak House (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":377,
+      "name":"OCBC ATM",
+      "address":"OCBC ATM, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.295055313,
+      "lon":103.7724058,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":378,
+      "name":"POSB ATM",
+      "address":"POSB ATM, 31 Lower Kent Ridge Road, Yusof Ishak House (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":379,
+      "name":"POSB ATM",
+      "address":"POSB ATM, 10 Kent Ridge Crescent, Block ADM (S) 119260",
+      "lat":1.296236378,
+      "lon":103.7723875,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":380,
+      "name":"POSB ATM",
+      "address":"POSB ATM, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.29646,
+      "lon":103.77301,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":381,
+      "name":"UOB ATM",
+      "address":"UOB ATM, 10 Kent Ridge Crescent, S16 (S) 119260",
+      "lat":1.29682,
+      "lon":103.78026,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":382,
+      "name":"UOB ATM",
+      "address":"UOB ATM, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296552447,
+      "lon":103.7806973,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":383,
+      "name":"UOB ATM",
+      "address":"UOB ATM, 10 Kent Ridge Crescent, Block ADM (S) 119260",
+      "lat":1.296236378,
+      "lon":103.7723875,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":384,
+      "name":"UOB ATM",
+      "address":"UOB ATM, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.29646,
+      "lon":103.77301,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":385,
+      "name":"Aft Science Park Drive Bus Stop (B15131)",
+      "address":"Aft Science Park Drive Bus Stop (B15131), South Buona Vista Road",
+      "lat":1.292803637,
+      "lon":103.784617,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":386,
+      "name":"AS 5 Bus Stop (A1,D1,BTC)",
+      "address":"AS 5 Bus Stop (A1,D1,BTC), Kent Ridge Crescent",
+      "lat":1.293529,
+      "lon":103.771998,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":387,
+      "name":"Bef Kent Ridge Terminal Bus Stop (B16139)",
+      "address":"Bef Kent Ridge Terminal Bus Stop (B16139), Clementi Road",
+      "lat":1.295548851,
+      "lon":103.769757,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":388,
+      "name":"Bef Science Park Drive Bus Stop (B15139)",
+      "address":"Bef Science Park Drive Bus Stop (B15139), South Buona Vista Road",
+      "lat":1.292551975,
+      "lon":103.7847922,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":389,
+      "name":"BIZ 2 Bus Stop (A1,D1,BTC)",
+      "address":"BIZ 2 Bus Stop (A1,D1,BTC), Kent Ridge Crescent",
+      "lat":1.293248,
+      "lon":103.77511,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":390,
+      "name":"Botanic Gardens MRT Station Bus Stop (B41021)",
+      "address":"Botanic Gardens MRT Station Bus Stop (B41021), Bukit Timah Road",
+      "lat":1.322653647,
+      "lon":103.8151558,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":391,
+      "name":"Central Library Bus Stop (B16181)",
+      "address":"Central Library Bus Stop (B16181), Kent Ridge Crescent",
+      "lat":1.296590605,
+      "lon":103.7724927,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":392,
+      "name":"COM 2 Bus Stop (A1,A2,D1)",
+      "address":"COM 2 Bus Stop (A1,A2,D1), Kent Ridge Drive",
+      "lat":1.294279,
+      "lon":103.773773,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":393,
+      "name":"Computing SOC1 Bus Stop (B18309)",
+      "address":"Computing SOC1 Bus Stop (B18309), Lower Kent Ridge Road",
+      "lat":1.297537735,
+      "lon":103.7807146,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":394,
+      "name":"Faculty Of Architecture Bus Stop (B16149)",
+      "address":"Faculty Of Architecture Bus Stop (B16149), Clementi Road",
+      "lat":1.297764411,
+      "lon":103.7698976,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":395,
+      "name":"Faculty Of Design and Engineering Bus Stop (B16199)",
+      "address":"Faculty Of Design and Engineering Bus Stop (B16199), Kent Ridge Crescent",
+      "lat":1.296539543,
+      "lon":103.7710337,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":396,
+      "name":"Faculty Of Engineering Bus Stop (B16159)",
+      "address":"Faculty Of Engineering Bus Stop (B16159), Clementi Road",
+      "lat":1.30058407,
+      "lon":103.7701211,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":397,
+      "name":"Information Technology Bus Stop (B16189)",
+      "address":"Information Technology Bus Stop (B16189), Kent Ridge Crescent",
+      "lat":1.297295602,
+      "lon":103.7727175,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":398,
+      "name":"ITE Dover Bus Stop (B16099)",
+      "address":"ITE Dover Bus Stop (B16099), AYE",
+      "lat":1.300537479,
+      "lon":103.778077,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":399,
+      "name":"Kent Ridge Bus Station (B18331)",
+      "address":"Kent Ridge Bus Station (B18331), Lower Kent Ridge Road",
+      "lat":1.294811981,
+      "lon":103.7843594,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":400,
+      "name":"Kent Ridge Terminal Bus Stop (B16009)",
+      "address":"Kent Ridge Terminal Bus Stop (B16009), Clementi Road",
+      "lat":1.294462,
+      "lon":103.769756,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":401,
+      "name":"Lim Seng Tjoe Bus Stop (B18301)",
+      "address":"Lim Seng Tjoe Bus Stop (B18301), Lower Kent Ridge Road",
+      "lat":1.297353174,
+      "lon":103.7808231,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":402,
+      "name":"LT 13 Bus Stop (A1,D1,BTC)",
+      "address":"LT 13 Bus Stop (A1,D1,BTC), Kent Ridge Crescent",
+      "lat":1.294723,
+      "lon":103.770616,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":403,
+      "name":"National University Hospital Bus Stop (B18221)",
+      "address":"National University Hospital Bus Stop (B18221), Lower Kent Ridge Road",
+      "lat":1.29602814,
+      "lon":103.7836251,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":404,
+      "name":"NUH Bus Stop (B18071)",
+      "address":"NUH Bus Stop (B18071), Buona Vista Flyover",
+      "lat":1.295572747,
+      "lon":103.7843989,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":405,
+      "name":"NUS Museums Bus Stop (B16161)",
+      "address":"NUS Museums Bus Stop (B16161), Kent Ridge Crescent",
+      "lat":1.301072678,
+      "lon":103.773731,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":406,
+      "name":"Opp Botanic Gardens MRT Station Bus Stop (B41029)",
+      "address":"Opp Botanic Gardens MRT Station Bus Stop (B41029), Dunearn Road",
+      "lat":1.323359091,
+      "lon":103.8162894,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":407,
+      "name":"Opp Faculty Of Architect Bus Stop (B16191)",
+      "address":"Opp Faculty Of Architect Bus Stop (B16191), Kent Ridge Crescent",
+      "lat":1.296169974,
+      "lon":103.7703335,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":408,
+      "name":"Opp HSSML Bus Stop (A2,D1)",
+      "address":"Opp HSSML Bus Stop (A2,D1), Kent Ridge Crescent",
+      "lat":1.29301,
+      "lon":103.77516,
+      "bus_stop":true
+   },
+   {
+      "Unnamed: 0":409,
+      "name":"7-11 Convenience Store",
+      "address":"7-11 Convenience Store, 31 Lower Kent Ridge Road (S) 119078",
+      "lat":1.298660133,
+      "lon":103.7748909,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":410,
+      "name":"A.R.T Food House",
+      "address":"A.R.T Food House, Faculty of Engineering, Blk E2, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2993858974,
+      "lon":103.7712174578,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":411,
+      "name":"Alcove - Asian Restaurant Bar",
+      "address":"Alcove - Asian Restaurant Bar, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301728637,
+      "lon":103.7721489,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":412,
+      "name":"Bookhaven",
+      "address":"Bookhaven, 2 College Avenue West, Level 1 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":413,
+      "name":"Butter My Buns",
+      "address":"Butter My Buns, Inside Bookhaven, 2 College Avenue West, #01-07 (S) 138607",
+      "lat":1.3048152792,
+      "lon":103.7725229865,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":414,
+      "name":"Cheers Convenience Store",
+      "address":"Cheers Convenience Store, 23 Folkestone Road (S) 139599",
+      "lat":1.303998295,
+      "lon":103.7742283,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":415,
+      "name":"Des The Place",
+      "address":"Des The Place, E2A Kiosk 1, Level 1, 6 Engineering Drive 4 (S) 117361",
+      "lat":1.2989338492,
+      "lon":103.7714784649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":416,
+      "name":"Dilys Creation",
+      "address":"Dilys Creation, 9 Engineering Drive 1 (S) 117575",
+      "lat":1.298474249,
+      "lon":103.7722897,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":417,
+      "name":"Dilys Creation",
+      "address":"Dilys Creation, 10 Science Drive 2 (S) 117543",
+      "lat":1.296741111,
+      "lon":103.7803196,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":418,
+      "name":"Dilys Creation (MD6)",
+      "address":"Dilys Creation (MD6), Yong Loo Lin School of Medicine, Blk MD6, 14 Medical Drive, #01-03 (S) 117599",
+      "lat":1.2953641683,
+      "lon":103.7817068935,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":419,
+      "name":"Dome Caf\u00e9",
+      "address":"Dome Caf\u00e9, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301728637,
+      "lon":103.7721489,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":420,
+      "name":"E-Canteen",
+      "address":"E-Canteen, 23 Prince George's Park (S) 118422",
+      "lat":1.2909063142,
+      "lon":103.7820759979,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":421,
+      "name":"FairpriceXpress",
+      "address":"FairpriceXpress, 2 College Avenue West, Level 1 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":422,
+      "name":"Flavours@UTown",
+      "address":"Flavours@UTown, 2 College Avenue West, Level 2 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":423,
+      "name":"Food Junction @ Central Square",
+      "address":"Food Junction @ Central Square, 31 Lower Kent Ridge Road (S) 119078",
+      "lat":1.298660133,
+      "lon":103.7748909,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":424,
+      "name":"Foodgle Hub",
+      "address":"Foodgle Hub, 5 Engineering Drive 2, E2 (S) 117576",
+      "lat":1.298488661,
+      "lon":103.77117,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":425,
+      "name":"Fortune Village",
+      "address":"Fortune Village, 2 College Avenue West, Level 1 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":426,
+      "name":"Frontier",
+      "address":"Frontier, 10 Science Drive 2 (S) 117543",
+      "lat":1.296741111,
+      "lon":103.7803196,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":427,
+      "name":"Good News Caf\u00e9",
+      "address":"Good News Caf\u00e9, 9 Engineering Drive 1 (S) 117576",
+      "lat":1.29807,
+      "lon":103.77115,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":428,
+      "name":"Guardian",
+      "address":"Guardian, 2 College Avenue West, Level 1 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":429,
+      "name":"Hair Infinity",
+      "address":"Hair Infinity, 2 College Avenue West, Level 1 (S) 138607",
+      "lat":1.3047820472,
+      "lon":103.7725353668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":430,
+      "name":"Humble Origins Caf\u00e9",
+      "address":"Humble Origins Caf\u00e9, 5 Arts Link (S) 119260",
+      "lat":1.294797617,
+      "lon":103.7712067,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":431,
+      "name":"Humble Origins Caf\u00e9",
+      "address":"Humble Origins Caf\u00e9, 8 Kent Ridge Drive (S) 119246",
+      "lat":1.2954969573,
+      "lon":103.7703000211,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":432,
+      "name":"Hwang's Korean Restaurant",
+      "address":"Hwang's Korean Restaurant, 23 Folkestone Road (S) 139599",
+      "lat":1.303998295,
+      "lon":103.7742283,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":433,
+      "name":"Carpark 2A (In front of E3A)",
+      "address":"Carpark 2A (In front of E3A), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.300834782,
+      "lon":103.7715550286,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":434,
+      "name":"Car Park 4 (Raffles Hall\/Runme Shaw CFA Studios)",
+      "address":"Car Park 4 (Raffles Hall\/Runme Shaw CFA Studios), 19 Kent Ridge Crescent (S) 119278",
+      "lat":1.300328043,
+      "lon":103.7740697,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":435,
+      "name":"Car Park 5 (University Sports Centre)",
+      "address":"Car Park 5 (University Sports Centre), 2 Sports Drive 1 (S) 117288",
+      "lat":1.300060903,
+      "lon":103.7749924,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":436,
+      "name":"Carpark 6B (University Hall)",
+      "address":"Carpark 6B (University Hall), 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.2972932422,
+      "lon":103.7779171668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":437,
+      "name":"Car Park 10 (Block S17\/LT33\/LT34)",
+      "address":"Car Park 10 (Block S17\/LT33\/LT34), 10 Lower Kent Ridge Road (S) 119076",
+      "lat":1.298159954,
+      "lon":103.7804341,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":438,
+      "name":"Car Park 10A (King Edward VII Hall\/Squash Court)",
+      "address":"Car Park 10A (King Edward VII Hall\/Squash Court), 1A Kent Ridge Road (S) 119224",
+      "lat":1.292394542,
+      "lon":103.7821717,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":439,
+      "name":"Car Park 11 (COM3\/Singapore Synchrotron Light Source)",
+      "address":"Car Park 11 (COM3\/Singapore Synchrotron Light Source), 5 Research Link (S) 117603",
+      "lat":1.294416584,
+      "lon":103.7752695,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":440,
+      "name":"Carpark 15 (In front of Temasek and Eusoff Halls)",
+      "address":"Carpark 15 (In front of Temasek and Eusoff Halls), 10 Kent Ridge Drive (S) 119242",
+      "lat":1.2941052956,
+      "lon":103.7706272045,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":441,
+      "name":"Car Park 16 (LT11\/AS2)",
+      "address":"Car Park 16 (LT11\/AS2), 1 Arts Link (S) 117568",
+      "lat":1.29576171,
+      "lon":103.771148,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":442,
+      "name":"Carpark 3 (University Cultural Centre \/ Yong Siew Toh Conservatory of Music)",
+      "address":"Carpark 3 (University Cultural Centre \/ Yong Siew Toh Conservatory of Music), 3 Conservatory Drive  (S) 117376",
+      "lat":1.302460657,
+      "lon":103.773127825,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":443,
+      "name":"Carpark 10B (Prince George's Park Residences)",
+      "address":"Carpark 10B (Prince George's Park Residences), Prince George's Park (S) 118429",
+      "lat":1.291160763,
+      "lon":103.7817137,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":444,
+      "name":"Carpark 12A (Institute of Systems Science)",
+      "address":"Carpark 12A (Institute of Systems Science), 25 Heng Mui Keng Terrace (S) 119615",
+      "lat":1.2924874833,
+      "lon":103.7767208518,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":445,
+      "name":"Carpark 1 (School of Design and Engineering)",
+      "address":"Carpark 1 (School of Design and Engineering), 4 Architecture Drive Singapore (S) 117566",
+      "lat":1.297370261,
+      "lon":103.7701702,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":446,
+      "name":"Carpark 10C (Centre for Life Sciences)",
+      "address":"Carpark 10C (Centre for Life Sciences), 28 Medical Drive (S) 117456",
+      "lat":1.29453,
+      "lon":103.78134,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":447,
+      "name":"Carpark 11A (Block BIZ2)",
+      "address":"Carpark 11A (Block BIZ2), 1 Business Link (S) 117592",
+      "lat":1.293537699,
+      "lon":103.7755202,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":448,
+      "name":"Carpark 12 (Hon Sui Sen Memorial Library)",
+      "address":"Carpark 12 (Hon Sui Sen Memorial Library), 1 Business Link (S) 117592",
+      "lat":1.2928292911,
+      "lon":103.7747464845,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":449,
+      "name":"12B (I3 Building)",
+      "address":"12B (I3 Building), 21 Heng Mui Keng Terrace (S) 119613",
+      "lat":1.29217,
+      "lon":103.77582,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":450,
+      "name":"Carpark 13 (Block COM1)",
+      "address":"Carpark 13 (Block COM1), 13 Computing Drive (S) 117417",
+      "lat":1.294778852,
+      "lon":103.7735065124,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":451,
+      "name":"Carpark 14 (Shaw Foundation Building, AS7)",
+      "address":"Carpark 14 (Shaw Foundation Building, AS7), 5 Arts Link (S) 117570",
+      "lat":1.294192455,
+      "lon":103.7710654,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":452,
+      "name":"Carpark 17 (Information Technology)",
+      "address":"Carpark 17 (Information Technology), 2 Engineering Drive 4 (S) 117584",
+      "lat":1.2973416497,
+      "lon":103.7722462907,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":453,
+      "name":"Car Park 2 (T-Lab)",
+      "address":"Car Park 2 (T-Lab), 5A Engineering Drive 1 (S) 117411",
+      "lat":1.299619368,
+      "lon":103.7727323,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":454,
+      "name":"Carpark 2B (Beside Block EA)",
+      "address":"Carpark 2B (Beside Block EA), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.300188028,
+      "lon":103.7704215,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":455,
+      "name":"Car Park 4A (Raffles Hall\/Runme Shaw CFA Studios)",
+      "address":"Car Park 4A (Raffles Hall\/Runme Shaw CFA Studios), 19 Kent Ridge Crescent (S) 119278",
+      "lat":1.299505635,
+      "lon":103.7739408,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":456,
+      "name":"Carpark 5B (NUS Staff Club)",
+      "address":"Carpark 5B (NUS Staff Club), 30 Lower Kent Ridge Road (S) 119075",
+      "lat":1.299002154,
+      "lon":103.7756727,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":457,
+      "name":"Emergency Call Point (Along Prince George's Park)",
+      "address":"Emergency Call Point (Along Prince George's Park), 1A Kent Ridge Road (S) 119224",
+      "lat":1.2920601312,
+      "lon":103.7830870882,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":458,
+      "name":"Emergency Call Point (Near Engineering Auditorium)",
+      "address":"Emergency Call Point (Near Engineering Auditorium), 9 Engineering Drive 1 (S) 117575",
+      "lat":1.3005447455,
+      "lon":103.7704754601,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":459,
+      "name":"Emergency Call Point (Near football field)",
+      "address":"Emergency Call Point (Near football field), 20 Lower Kent Ridge Road (S) 119080",
+      "lat":1.2997143273,
+      "lon":103.7782245036,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":460,
+      "name":"Emergency Call Point (Near Kent Ridge Hall)",
+      "address":"Emergency Call Point (Near Kent Ridge Hall), 10 Heng Mui Keng Terrace (S) 119617",
+      "lat":1.2918512406,
+      "lon":103.773891649,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":461,
+      "name":"Emergency Call Point (Near School of Design and Engineering)",
+      "address":"Emergency Call Point (Near School of Design and Engineering), 4 Architecture Drive (S) 117566",
+      "lat":1.2978089897,
+      "lon":103.7704351393,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":462,
+      "name":"NUS Coop Bookstore",
+      "address":"NUS Coop Bookstore, 12 Kent Ridge Crescent, Central Lbrary (S) 119275",
+      "lat":1.29646,
+      "lon":103.77301,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":463,
+      "name":"Optical",
+      "address":"Optical, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296833897,
+      "lon":103.7809587,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":464,
+      "name":"NUS Computer Coop",
+      "address":"NUS Computer Coop, 2 Engineering Drive 4 (S) 117584",
+      "lat":1.29759,
+      "lon":103.77234,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":465,
+      "name":"NUS Coop Bookstore",
+      "address":"NUS Coop Bookstore, 4 Architecture Drive, SDE1 Level 2 (S) 117566",
+      "lat":1.297432799,
+      "lon":103.770836,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":466,
+      "name":"NUS Coop Notebook Service Centre",
+      "address":"NUS Coop Notebook Service Centre, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296348174,
+      "lon":103.7810204,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":467,
+      "name":"PC Centre",
+      "address":"PC Centre, 31 Lower Kent Ridge Road, Yusof Ishak House  (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":468,
+      "name":"Postal and Telecommunication",
+      "address":"Postal and Telecommunication, 31 Lower Kent Ridge Road, Yusof Ishak House (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":469,
+      "name":"Yusof Ishak House Sundry Shop",
+      "address":"Yusof Ishak House Sundry Shop, 31 Lower Kent Ridge Road, Yusof Ishak House  (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":470,
+      "name":"IT Coop @ LT26",
+      "address":"IT Coop @ LT26, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296519046,
+      "lon":103.7810392,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":471,
+      "name":"NUS Coop Bookstore (LT27)",
+      "address":"NUS Coop Bookstore (LT27), 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.296833897,
+      "lon":103.7809587,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":472,
+      "name":"C J Koh Law Library",
+      "address":"C J Koh Law Library, 469D Bukit Timah Road (S) 259773",
+      "lat":1.318942072,
+      "lon":103.8182129,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":473,
+      "name":"Central Library",
+      "address":"Central Library, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.296261755,
+      "lon":103.7730289,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":474,
+      "name":"Central Library Annexe",
+      "address":"Central Library Annexe, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.296732529,
+      "lon":103.7737979,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":475,
+      "name":"Chinese Library",
+      "address":"Chinese Library, 12 Kent Ridge Crescent (S) 119275",
+      "lat":1.29701,
+      "lon":103.77336,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":476,
+      "name":"Hon Sui Sen Memorial Library",
+      "address":"Hon Sui Sen Memorial Library, 1 Hon Sui Sen Drive (S) 117588",
+      "lat":1.293081017,
+      "lon":103.7746998,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":477,
+      "name":"Medical Library",
+      "address":"Medical Library, Centre for Translational Medicine, Block MD6, 14 Medical Drive, #05-01 (S) 117599",
+      "lat":1.295340884,
+      "lon":103.7814786,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":478,
+      "name":"Music Library",
+      "address":"Music Library, 3 Conservatory Drive (S) 117376",
+      "lat":1.302178441,
+      "lon":103.7729161,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":479,
+      "name":"Resource Library",
+      "address":"Resource Library, 50 Kent Ridge Crescent (S) 119279",
+      "lat":1.301786824,
+      "lon":103.7716656,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":480,
+      "name":"Science Library",
+      "address":"Science Library, 10 Science Drive 2, Block S6 Level 4 (S) 117548",
+      "lat":1.295306079,
+      "lon":103.7801893,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":481,
+      "name":"NUS Student Union (NUSSU) Secretariat",
+      "address":"NUS Student Union (NUSSU) Secretariat, 31 Lower Kent Ridge Road, Yusof Ishak House (S) 119078",
+      "lat":1.298410586,
+      "lon":103.7745539,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":482,
+      "name":"Bio-Sciences Complex",
+      "address":"Bio-Sciences Complex, 3 Science Drive 2 (S) 117543",
+      "lat":1.2967941548,
+      "lon":103.7802905341,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":483,
+      "name":"Block ADM",
+      "address":"Block ADM, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2962363776,
+      "lon":103.7723874564,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":484,
+      "name":"E3A",
+      "address":"E3A, 9 Engineering Drive 1 (S) 117575",
+      "lat":1.3003019267,
+      "lon":103.7715677926,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":485,
+      "name":"Engineering Block",
+      "address":"Engineering Block, 9 Engineering Drive 1 (S) 117575",
+      "lat":1.2979695611,
+      "lon":103.7725819189,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":486,
+      "name":"Kent Vale",
+      "address":"Kent Vale, 105 Clementi Road (S) 129789",
+      "lat":1.3013846221,
+      "lon":103.7681932754,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":487,
+      "name":"Office of Campus Security",
+      "address":"Office of Campus Security, 17 and 18 Prince George's Park (S) 118417",
+      "lat":1.2924491554,
+      "lon":103.7795823437,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":488,
+      "name":"Office of Estate Development",
+      "address":"Office of Estate Development, 2 Estate Office Drive (S) 117587",
+      "lat":1.3014904214,
+      "lon":103.7737891497,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":489,
+      "name":"Prince George's Park",
+      "address":"Prince George's Park, 35 Prince George's Park (S) 118429",
+      "lat":1.2907708233,
+      "lon":103.7800994928,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":490,
+      "name":"School of Business",
+      "address":"School of Business, 10 Kent Ridge Crescent (S) 119260",
+      "lat":1.2944105409,
+      "lon":103.7745568942,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":491,
+      "name":"University Hall",
+      "address":"University Hall, 21 Lower Kent Ridge Road (S) 119077",
+      "lat":1.2972932422,
+      "lon":103.7779171668,
+      "bus_stop":false
+   },
+   {
+      "Unnamed: 0":492,
+      "name":"University Health Centre",
+      "address":"University Health Centre, 20 Lower Kent Ridge Road, University Health Centre  (S) 119080",
+      "lat":1.298943865,
+      "lon":103.7764982,
+      "bus_stop":false
+   }
+]
