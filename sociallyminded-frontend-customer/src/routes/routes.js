@@ -6,6 +6,8 @@ export const getAllCustomersUrl = `${ABSOLUTE_PATH}/entity.customer`
 export const handleLoginViaGmail = `${ABSOLUTE_PATH}/entity.customer/loginViaGmail/`
 export const getAllProductsUrl = `${ABSOLUTE_PATH}/entity.product/`
 export const createNewOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord`
+export const updateOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
+export const deleteOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
@@ -22,4 +24,6 @@ export const SHOP_LINK = "/shop"
 export const PROFILE_PAGE_LINK = "/profile"
 export const LOGIN_SIGNUP_REDIRECT_LINK = "/shop"
 
-
+export const obtainGeocodeUrl = (postal) => {
+    return `https://developers.onemap.sg/commonapi/search?searchVal=${postal}&returnGeom=Y&getAddrDetails=Y&pageNum=1`
+}

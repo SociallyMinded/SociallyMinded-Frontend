@@ -22,16 +22,27 @@ import useLoginHooks from "../Login/loginHooks";
 import Header from "../common/Header/Header";
 import LoggedInHeader from "../common/Header/LoggedInHeader";
 
+    
 const ProductListing = () => {
     const { state } = useLocation();
     const { user } = UserAuth()
 
+
+
     const {         
-        data, displayData, loading, error, generateRandomNum, createNewOrder,
+        data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast
+        postalCode, handlePostalCode,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, 
+        geocodeAddress,
+        confirmOrder, showConfirmOrderPage,
+        addressData,
+        returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
     } = useProductListingHooks(state)
+
+    console.log(addressData)
+
 
     return (
         <PageTemplate>
@@ -69,6 +80,10 @@ const ProductListing = () => {
                             <h5><Badge bg="secondary"> {state.d.category} </Badge></h5>
                         </ProductListingDescriptionTitleContainer>
                         <h2>Price : ${state.d.price}</h2>
+                        <ProductListingDescriptionDetailContainer>
+                            <h4>Social Enterprise</h4>
+                            <p>{state.d.socialenterprise.enterpriseName}</p>
+                        </ProductListingDescriptionDetailContainer>   
                         <ProductListingDescriptionDetailContainer>
                             <h4>About this item</h4>
                             <p>{state.d.description}</p>    
@@ -124,14 +139,71 @@ const ProductListing = () => {
                         />
                         </Form.Group>
                     </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Address Postal Code</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Address"
+                            autoFocus
+                            value={postalCode}
+                            onChange={handlePostalCode}
+                        />
+                        </Form.Group>
+                    </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="primary" onClick={createNewOrder}>
-                        Place Order
+                    <Button variant="primary" onClick={geocodeAddress}>
+                        Confirm Order
                     </Button>
                     </Modal.Footer>
                 </Modal> 
-                
+
+                {addressData != null  && <Modal show={confirmOrder} onHide={closeConfirmOrderPage} centered>
+                    <Modal.Header closeButton onClick={closeConfirmOrderPage}>
+                    <Modal.Title>Confirm Order for {state.d.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Qty</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="1"
+                            autoFocus
+                            value={orderQty}
+                            disabled
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                            type="number"
+                            placeholder="1"
+                            autoFocus
+                            value={state.d.price * orderQty}
+                            disabled
+                        />                    
+                    </Form.Group>
+                    </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Address : {addressData.ADDRESS}</Form.Label>
+                        </Form.Group>
+                    </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
+                        Back
+                    </Button>
+                    <Button variant="primary" onClick={geocodeAddress}>
+                        Confirm Order
+                    </Button>
+                    </Modal.Footer>
+                </Modal> 
+                }
+
+
             </ProductListingPage>
         
         </PageTemplate>
