@@ -5,13 +5,20 @@ import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 
 export const DataDisplay = ({data}) => {
+    console.log(data)
     return (
         <StyledRow lg={5} md={4}>
             {data.displayData != null && data.displayData.map((d) => (
                 <StyledCol md={3}>
+                    
                 <StyledLink id="styled-card-link" to="/product_listing" state={{ d }}>
+                    
                     <StyledCard>
-                        <Card.Img variant="top" src={require('./donut.png')} />
+                    <StyledCardHeader>
+                        {d.socialenterprise.enterpriseName}
+                    </StyledCardHeader>
+                        <StyledImg variant="top" src={require('./donut.png')} />
+                        
                         <StyledCardBody>
                             <Card.Title>{d.name}</Card.Title>
                             <Card.Title>${d.price}</Card.Title>
@@ -24,6 +31,12 @@ export const DataDisplay = ({data}) => {
         </StyledRow>
     )
 }
+
+const StyledCardHeader = styled(Card.Header)`
+    background-color:white;
+    border-width:0px;
+
+`
 
 const StyledRow = styled(Row)`
     max-height:70vh;
@@ -54,6 +67,7 @@ const StyledCard = styled(Card)`
     text-decoration: none;
     z-index: 0;
     overflow: hidden;
+    border: 1px solid #efefef;
   
     &:hover {
         transition: all 0.2s ease-out;
@@ -88,4 +102,8 @@ const StyledText = styled.p`
     width:100%;
     font-size:1.5em;
     margin-top:2%;
+`
+
+const StyledImg = styled(Card.Img)`
+  border-width:0px;
 `

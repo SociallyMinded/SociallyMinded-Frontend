@@ -5,8 +5,15 @@ import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
-import { createNewOrderUrl } from "../../routes/routes"
+import { createNewOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import { UserAuth } from "../../context/AuthContext"
+
+export const ORDERSTATUS = {
+    PENDING_APPROVAL: 'Pending Approval',
+    AWAITING_PAYMENT: 'Payment Required',
+    IN_DELIVERY: 'In Delivery'
+}
+
 
 const useProductListingHooks = (state) => {
 
@@ -34,9 +41,24 @@ const useProductListingHooks = (state) => {
     const handleCloseLoginPromptToast = () => setShowLoginPromptToast(false);
 
     
-    const [orderQty, setOrderQty] = useState(false);
-
+    const [orderQty, setOrderQty] = useState("");
     const handleOrderQty = (e) => setOrderQty(e.target.value);
+
+    const [postalCode, setPostalCode] = useState("")
+    const handlePostalCode = (e) => setPostalCode(e.target.value);
+
+
+    const [addressData, setAddressData] = useState()
+
+    const [confirmOrder, setConfirmOrder] = useState(false)
+    const showConfirmOrderPage = (e) => setConfirmOrder(true)
+    const closeConfirmOrderPage = (e) => setConfirmOrder(false)
+
+
+    const returnToPurchaseModalAfterConfirmModal = () => {
+        setConfirmOrder(false)
+        setShowPurchaseModal(true)
+    }
 
     const { user } = UserAuth()
 
@@ -53,6 +75,25 @@ const useProductListingHooks = (state) => {
             setLoading(false)
         )
     }, []);
+
+    const geocodeAddress =  async () => {
+        const url = obtainGeocodeUrl(postalCode)
+        await axios.get(url)
+        .then(response => {
+            const addressData = response.data.results[0]
+            console.log(addressData)
+            setAddressData(addressData)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .finally (() => {
+            setLoading(false)
+            setShowPurchaseModal(false)
+            setConfirmOrder(true)
+
+        })
+    }
 
     const createNewOrder = async () => {
         setLoading(true)
@@ -86,12 +127,14 @@ const useProductListingHooks = (state) => {
         }
     }
     
-
     return { 
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast
+        postalCode, handlePostalCode,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
+        confirmOrder, showConfirmOrderPage,
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
     } 
 }
 
