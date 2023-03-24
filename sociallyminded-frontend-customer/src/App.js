@@ -11,7 +11,7 @@ import { ProductReviewPage } from './components/ProductReview/ProductReviewPage'
 import { ProfilePage } from './components/Profile/ProfilePage';
 import { createContext } from 'react';
 import { useState } from 'react';
-
+import { Basemap } from './components/Map';
 export const LogoutToastContext = createContext(-1);
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
               <Route path='/product_listing' element={<ProductListing/>}/>
               <Route path='/product_review' element={<ProductReviewPage/>}/>
               <Route path='/profile' element={<ProfilePage/>}/>
+              <Route path="/map" element={<Basemap/>}/>
           </Routes>
           </BrowserRouter>
         </LogoutToastContext.Provider>
