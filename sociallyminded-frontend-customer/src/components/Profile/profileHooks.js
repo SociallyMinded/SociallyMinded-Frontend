@@ -5,6 +5,14 @@ import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
+import { 
+    orderTitleComparator, 
+    qtyComparator, 
+    priceComparator,
+    orderAddressComparator, 
+    orderDateComparator,
+    orderStatusComparator 
+} from "./comparator"
 
 export const Actions = {
     UPDATE: 'Update',
@@ -245,6 +253,120 @@ const useProfileHooks = (user) => {
     }
     
 
+    
+    const [sortAscendingOrderTitle, setSortAscendingOrderTitle] = useState(true)
+    const sortByOrderTitle = (e) => {
+        setSortAscendingOrderTitle(!sortAscendingOrderTitle)
+
+        if (sortAscendingOrderTitle == true) {
+            const sortedData = data.sort(orderTitleComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(orderTitleComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+    const [sortAscendingOrderQty, setSortAscendingOrderQty] = useState(true)
+    const sortByOrderQty = (e) => {
+        setSortAscendingOrderQty(!sortAscendingOrderQty)
+
+        if (sortAscendingOrderQty == true) {
+            const sortedData = data.sort(qtyComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(qtyComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+    const [sortAscendingOrderTotalPrice, setSortAscendingOrderTotalPrice] = useState(true)
+    const sortByOrderTotalPrice = (e) => {
+        setSortAscendingOrderTotalPrice(!sortAscendingOrderTotalPrice)
+
+        if (sortAscendingOrderTotalPrice == true) {
+            const sortedData = data.sort(priceComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(priceComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+    const [sortAscendingOrderAddress, setSortAscendingOrderAddress] = useState(true)
+    const sortByOrderAddress = (e) => {
+        setSortAscendingOrderAddress(!sortAscendingOrderAddress)
+
+        if (sortAscendingOrderAddress == true) {
+            const sortedData = data.sort(orderAddressComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(orderAddressComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+    const [sortAscendingOrderDate, setSortAscendingOrderDate] = useState(true)
+    const sortByOrderDate = (e) => {
+        setSortAscendingOrderDate(!sortAscendingOrderDate)
+
+        if (sortAscendingOrderDate == true) {
+            const sortedData = data.sort(orderDateComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(orderDateComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+    const [sortAscendingOrderStatus, setSortAscendingOrderStatus] = useState(true)
+    const sortByOrderStatus = (e) => {
+        setSortAscendingOrderStatus(!sortAscendingOrderStatus)
+
+        if (sortAscendingOrderStatus == true) {
+            const sortedData = data.sort(orderStatusComparator)
+            setData(sortedData)
+        } else {
+            const sortedData = data.sort(orderStatusComparator).reverse()
+            setData(sortedData)
+        }
+    }
+
+ 
+
+ 
+
+    const [dataExport, setDataExport] = useState([])
+    const [showExportData, setShowExportData] = useState(true)
+    const handleShowExportData = () => setShowExportData(true)
+    const handleCloseExportDate = () => setShowExportData(false)
+
+    const [showDownloadData, setShowDownloadData] = useState(false)
+
+    const prepareDataForExport = () => {
+        var dataPrep = []
+        if (data != null) {
+            for (let i = 0; i < data.length; i++) {
+                const dataModel = {
+                    "orderTitle": data[i].orderTitle,
+                    "address": data[i].address,
+                    "quantity": data[i].quantity,
+                    "totalPrice": data[i].totalPrice,
+                    "dateOfOrder": data[i].dateOfOrder,
+                    "orderStatus": data[i].orderStatus
+                }
+                dataPrep.push(dataModel)
+            }
+        } 
+        setDataExport(dataPrep)
+        setShowDownloadData(true)
+        setShowExportData(false)
+    }
+    
+    const handleDownloadData = () => {
+        setShowDownloadData(false)
+        setShowExportData(true)
+    }
 
     useEffect(() => {
         axios.get(getOrdersByCustomer + user.uid)
@@ -254,20 +376,19 @@ const useProfileHooks = (user) => {
         .catch ((error) => {
             setError(error)
         })
-        .finally (
+        .finally (() => {
             setLoading(false)
-        )
+        })
     }, [
         user, refreshTable, 
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
         showPaymentOrderModal, showPaymentSuccessToast,
-        showConfirmEditModalPage
-        
+        showConfirmEditModalPage        
     ]);
 
     return { 
-        data, loading, error,
+        data, setData, loading, error,
         editOrderQty,
         editOrderAddress,
         handleOrderSelected,
@@ -316,9 +437,20 @@ const useProfileHooks = (user) => {
         showConfirmEditOrderPage,
         closeConfirmEditOrderPage,
         setShowConfirmEditOrderModal,
-        returnToPurchaseModalAfterConfirmModal
+        returnToPurchaseModalAfterConfirmModal,
 
-    
+        sortByOrderTitle,
+        sortByOrderAddress,
+        sortByOrderDate,
+        sortByOrderQty,
+        sortByOrderTotalPrice,
+        sortByOrderStatus,
+
+        dataExport,
+        prepareDataForExport,
+        showDownloadData,
+        showExportData,
+        handleDownloadData
 
     } 
 }
