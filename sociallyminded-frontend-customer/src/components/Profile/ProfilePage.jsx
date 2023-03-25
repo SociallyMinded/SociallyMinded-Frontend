@@ -23,6 +23,21 @@ import { Pagination } from 'react-bootstrap';
 
 import { Map, Marker } from "react-map-gl";
 import PointMarker from "../PointMarker";
+import InputGroup from 'react-bootstrap/InputGroup';
+import { faHome,  faArrowDownWideShort } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { CSVLink, CSVDownload } from "react-csv";
+
+const exportHeaders = [
+    { label: "Order Title", key: "orderTitle" },
+    { label: "Address", key: "address" },
+    { label: "Quantity", key: "quantity" },
+    { label: "Total Price", key: "totalPrice" },
+    { label: "Date of Order", key: "dateOfOrder" },
+    { label: "Order Status", key: "orderStatus" }
+];
+
 
 export const ProfilePage = () => {
     const [show, setShow] = useState(false);
@@ -32,7 +47,7 @@ export const ProfilePage = () => {
   
     const { user } = UserAuth()
     const { 
-        data, loading, error,
+        data, setData, loading, error,
         editOrderQty,
         editOrderAddress,
         handleOrderSelected,
@@ -78,11 +93,26 @@ export const ProfilePage = () => {
 
         addressData,
         setShowConfirmEditOrderModal,
-        returnToPurchaseModalAfterConfirmModal
+        returnToPurchaseModalAfterConfirmModal,
+
+        sortByOrderTitle,
+        sortByOrderAddress,
+        sortByOrderDate,
+        sortByOrderQty,
+        sortByOrderTotalPrice,
+        sortByOrderStatus,
+
+        dataExport,
+        prepareDataForExport,
+        showDownloadData,
+        showExportData,
+        handleDownloadData
+
 
     } = useProfileHooks(user)
 
     const [page, setPage] = useState(1)
+    console.log(data != null ? data : 1)
 
     const [viewState, setViewState] = useState({
         longitude: addressData == null ? 103.77655039734071 : addressData.LONGITUDE,
@@ -90,10 +120,53 @@ export const ProfilePage = () => {
         zoom: 16
       });
 
-    console.log(data)
+
+    const determineTotalNosOfPages = () => {
+        const numDataEntry = data != null ? data.length : 0
+        const numEntriesPerPage = 5
+        if (numDataEntry % numEntriesPerPage == 0) {
+            return numDataEntry / numEntriesPerPage
+        } else {
+            const numPages = Math.floor(numDataEntry/numEntriesPerPage) + 1
+            return numPages
+        }
+    }
+
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const goToNextPage = () => {
+        const numPages = determineTotalNosOfPages()
+        if (currentPage < numPages) {
+            setCurrentPage(currentPage + 1)
+        } else {
+            setCurrentPage(numPages)
+        }
+    }
+
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+        } else {
+            setCurrentPage(1)
+        }
+    }
+
+    const goToFirstPage = () => {
+        setCurrentPage(1)
+    }
+
+    const goToLastPage = () => {
+        const numPages = determineTotalNosOfPages()
+        setCurrentPage(numPages)
+    }
+
+
+  
     return (
         <PageTemplate>
+            
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
+     
             {showEditSuccessToast &&  
                 <StyledToast onClose={handleCloseEditSuccessToast}>
                     <Toast.Header>
@@ -104,7 +177,7 @@ export const ProfilePage = () => {
                 }
             {showCancelSuccessToast &&  
                 <StyledToast onClose={handleCloseCancelSuccessToast}>
-                    <Toast.Header>
+                <Toast.Header>
                         <strong className="me-auto">Order Cancelled</strong>
                     </Toast.Header>
                     <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
@@ -123,40 +196,52 @@ export const ProfilePage = () => {
 
        
             <TableContainer>
-        
-            <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
-            <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Qty</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={editOrderQty}
-                            disabled
-                        />
-                        </Form.Group>
-                       
-                    </Form>
 
+            <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
+        <TableInputContainer>
+            <StyledInputGroup className="mb-3">
+                <Form.Control
+                    placeholder="Search Order"
+                    aria-describedby="basic-addon2"
+                
+                />
+                <Button variant="outline-secondary" id="button-addon2" >
+                    Filter
+                </Button>
+                <Button variant="outline-secondary" id="button-addon2" >
+                    Search
+                </Button>
+            </StyledInputGroup>
+            <div>
+                {showExportData && <StyledButton onClick={prepareDataForExport}>Export Data</StyledButton>}
+                {showDownloadData && <StyledButton onClick={handleDownloadData}>
+                    <StyledCSVLink data={dataExport != null && dataExport} headers={exportHeaders}>                
+                        Download Records
+                    </StyledCSVLink>
+                </StyledButton>}
+
+            </div>
+        </TableInputContainer>
+          
             {data != null && data.length == 0 && <h5>You have no orders currently</h5>}
- 
-            {data != null && data.length != 0 && <Table hover>
+            {data != null && data.length != 0 && 
+            <StyledTableContainer>
+            <StyledTable hover>
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>Order Title</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Order Date</th>
-                    <th>Order Address</th>
-                    <th>Status</th>
+                    <th>Order Title <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderTitle}/></th>
+                    <th>Qty <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderQty}/></th>
+                    <th>Price <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderTotalPrice}/></th>
+                    <th>Order Date <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderDate}/></th>
+                    <th>Order Address <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderAddress}/></th>
+                    <th>Status <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderStatus}/></th>
                     <th></th>
-                    </tr>
-                </thead>
+                    </tr>  
+                </thead>             
                 
-       
                 <tbody>
-                {data != null && data.slice(0,10).map((d) => (
+                {data != null && data.slice((currentPage-1)*5,(((currentPage-1)*5)+5)).map((d) => (
                     <tr>
                         <StyledTd>{d.orderRecordId}</StyledTd>
                         <StyledTd>{d.orderTitle}</StyledTd>
@@ -195,7 +280,9 @@ export const ProfilePage = () => {
                 ))}
                                                            
                 </tbody>
-                </Table>}
+                </StyledTable>
+               </StyledTableContainer>
+                }
                 
                 <Modal show={showEditOrderModal} centered>
                     <Modal.Header closeButton onClick={handleCloseEditOrderModal}>
@@ -364,18 +451,25 @@ export const ProfilePage = () => {
                     </Button> 
                     </Modal.Footer>
                 </Modal> 
-{/*     
-                {data != null && data.length != 0 && <Pagination>
-                <Pagination.First />
-                <Pagination.Prev />
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Item>{3}</Pagination.Item>
-                <Pagination.Ellipsis />
-                <Pagination.Next />
-                <Pagination.Last />
-                </Pagination>} */}
+                {data != null && data.length != 0 && <PaginationContainer>
+                <Pagination.First onClick={goToFirstPage}/>
+
+                {currentPage > 1 && <Pagination.Prev onClick={goToPreviousPage}/>}
+                {currentPage <= 1 && <Pagination.Prev disabled/>}
+
+                <Pagination.Item>{currentPage}</Pagination.Item>
+                {currentPage != determineTotalNosOfPages() && <Pagination.Next onClick={goToNextPage}/>}
+                {currentPage == determineTotalNosOfPages() && <Pagination.Next disabled/>}
+
+                <Pagination.Last onClick={goToLastPage}/>
+
+                </PaginationContainer>} 
+                <p>Total {determineTotalNosOfPages()} Pages</p>
+
+   
                 
+
+             
             </TableContainer>
         </PageTemplate>
     )
@@ -387,21 +481,22 @@ const StyledNavbar = styled(Navbar)`
 `
 
 const TableContainer = styled(Table)`
-    margin-top:10vh;
+    margin-top:6vh;
     width:95%;
     margin-left:5%;
-    height:100vh;
-    max-height:100vh;
-    overflow: scroll;
 `
 
 
 const StyledTable = styled(Table)`
-    height:50vh;
     padding-top:0px!important;
+    width:97%;
+
 `
 
-const StyledHeader = styled.h3`
+const StyledTableContainer = styled.div`
+`
+
+const StyledHeader = styled.h4`
     margin-bottom:5vh;
 `
 
@@ -413,10 +508,68 @@ const StyledTd = styled.td`
 `
 
 const StyledToast = styled(Toast)`
-    margin-left:75%;
-    margin-top:2%;
+    margin-left:70%;
+    margin-top:3%;
     position:absolute;
     z-index:1;
-    width:15vw;
+    width:20vw;
     background-color:#DBE8D7;    
+`
+
+const PaginationContainer = styled(Pagination)`
+    margin-top:3vh;
+`
+
+const StyledFontAwesomeIconSort = styled(FontAwesomeIcon)`
+    color:#a3a3a3;
+    margin-left:1%;
+`
+
+const StyledButton = styled(Button)`
+    text-decoration: none !important;
+    background-color:#0275d8!important;
+    &:hover {
+        text-decoration: none !important;
+        color:white;
+    }
+    &:after {
+        text-decoration: none !important;
+        color:white;
+
+    }
+    &:before {
+        text-decoration: none !important;
+        color:white;
+
+    }
+
+`
+
+const StyledCSVLink = styled(CSVLink)`
+    text-decoration: none !important;
+    color:white;
+    &:hover {
+        text-decoration: none !important;
+        color:white;
+    }
+    &:after {
+        text-decoration: none !important;
+        color:white;
+
+    }
+    &:before {
+        text-decoration: none !important;
+        color:white;
+
+    }
+`
+
+const StyledInputGroup = styled(InputGroup)`
+    width:80%;
+    margin-right: 2%;
+`
+
+const TableInputContainer = styled.div`
+    display:flex;
+    flex-direction:row;
 `
