@@ -24,7 +24,7 @@ import { Pagination } from 'react-bootstrap';
 import { Map, Marker } from "react-map-gl";
 import PointMarker from "../PointMarker";
 import InputGroup from 'react-bootstrap/InputGroup';
-import { faHome,  faArrowDownWideShort } from "@fortawesome/free-solid-svg-icons";
+import { faHome,  faArrowDownWideShort, faArrowUpShortWide } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CSVLink, CSVDownload } from "react-csv";
@@ -96,11 +96,17 @@ export const ProfilePage = () => {
         returnToPurchaseModalAfterConfirmModal,
 
         sortByOrderTitle,
+        sortAscendingOrderTitle,
         sortByOrderAddress,
+        sortAscendingOrderAddress,
         sortByOrderDate,
+        sortAscendingOrderDate,
         sortByOrderQty,
+        sortAscendingOrderQty,
         sortByOrderTotalPrice,
+        sortAscendingOrderTotalPrice,
         sortByOrderStatus,
+        sortAscendingOrderStatus,
 
         dataExport,
         prepareDataForExport,
@@ -215,7 +221,12 @@ export const ProfilePage = () => {
             <div>
                 {showExportData && <StyledButton onClick={prepareDataForExport}>Export Data</StyledButton>}
                 {showDownloadData && <StyledButton onClick={handleDownloadData}>
-                    <StyledCSVLink data={dataExport != null && dataExport} headers={exportHeaders}>                
+                    <StyledCSVLink 
+                        data={dataExport != null && dataExport} 
+                        headers={exportHeaders}
+                        filename={`${user.displayName}_${new Date()}`}
+                        extension=".csv"
+                    >                
                         Download Records
                     </StyledCSVLink>
                 </StyledButton>}
@@ -230,12 +241,48 @@ export const ProfilePage = () => {
                 <thead>
                     <tr>
                     <th>#</th>
-                    <th>Order Title <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderTitle}/></th>
-                    <th>Qty <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderQty}/></th>
-                    <th>Price <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderTotalPrice}/></th>
-                    <th>Order Date <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderDate}/></th>
-                    <th>Order Address <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderAddress}/></th>
-                    <th>Status <StyledFontAwesomeIconSort icon={faArrowDownWideShort} onClick={sortByOrderStatus}/></th>
+                    <th>
+                        Order Title 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderTitle == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderTitle}
+                        />
+                    </th>
+                    <th>
+                        Qty 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderQty == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderQty}
+                        />
+                    </th>
+                    <th>
+                        Price 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderTotalPrice == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderTotalPrice}
+                        />
+                    </th>
+                    <th>
+                        Order Date 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderDate == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderDate}
+                        />
+                    </th>
+                    <th>
+                        Order Address 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderAddress == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderAddress}
+                        />
+                    </th>
+                    <th>
+                        Status 
+                        <StyledFontAwesomeIconSort 
+                            icon={sortAscendingOrderStatus == true ? faArrowDownWideShort : faArrowUpShortWide} 
+                            onClick={sortByOrderStatus}
+                        />
+                    </th>
                     <th></th>
                     </tr>  
                 </thead>             
@@ -464,7 +511,7 @@ export const ProfilePage = () => {
                 <Pagination.Last onClick={goToLastPage}/>
 
                 </PaginationContainer>} 
-                <p>Total {determineTotalNosOfPages()} Pages</p>
+                <p>Number of Pages : {determineTotalNosOfPages()} </p>
 
    
                 

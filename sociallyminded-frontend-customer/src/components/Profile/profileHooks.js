@@ -440,11 +440,17 @@ const useProfileHooks = (user) => {
         returnToPurchaseModalAfterConfirmModal,
 
         sortByOrderTitle,
+        sortAscendingOrderTitle,
         sortByOrderAddress,
+        sortAscendingOrderAddress,
         sortByOrderDate,
+        sortAscendingOrderDate,
         sortByOrderQty,
+        sortAscendingOrderQty,
         sortByOrderTotalPrice,
+        sortAscendingOrderTotalPrice,
         sortByOrderStatus,
+        sortAscendingOrderStatus,
 
         dataExport,
         prepareDataForExport,
