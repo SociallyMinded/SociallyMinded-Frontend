@@ -1,5 +1,4 @@
 import { ShopPage } from './components/Shop/ShopPage';
-import Home from './components/Home/Home';
 import { AuthContextProvider } from './context/AuthContext';
 import Signup from './components/Signup/Signup.jsx';
 import { BrowserRouter } from "react-router-dom";
@@ -12,6 +11,7 @@ import { ProfilePage } from './components/Profile/ProfilePage';
 import { createContext } from 'react';
 import { useState } from 'react';
 import { Basemap } from './components/Map';
+import Home from "./components/Home/Home.jsx"
 export const LogoutToastContext = createContext(-1);
 
 function App() {
