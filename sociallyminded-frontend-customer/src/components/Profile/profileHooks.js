@@ -11,8 +11,9 @@ const useProfileHooks = (user) => {
     const [customer, setCustomer] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    console.log("here")
     console.log(data)
+ 
     useEffect(() => {
         axios.get(getOrdersByCustomer + user.uid)
         .then(response => {

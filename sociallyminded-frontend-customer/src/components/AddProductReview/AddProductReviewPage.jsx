@@ -18,8 +18,13 @@ import { AiFillCamera } from 'react-icons/ai';
 import { ImEnlarge2 } from 'react-icons/im';
 import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 import { createNewReviewUrl } from "../../routes/routes"
- import { version } from 'react';
+import { getProductByIdUrl } from "../../routes/routes"
+//import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
+import LoggedInHeader from "../common/Header/LoggedInHeader";
+
+
 export const AddProductReviewPage = (state) => {
+    const [product, setProduct] = useState(null);
     const [rating, setRating] = React.useState(5);
     const [hover, setHover] = React.useState(-1);
     const [reviewDescription, setReviewDescription] = useState('');
@@ -27,24 +32,21 @@ export const AddProductReviewPage = (state) => {
     const [previewUrls, setPreviewUrls] = useState([]);
     const [isAnonymous, setIsAnonymous] = useState(false);
     const [enlargedImg, setEnlargedImg] = useState(-1);
+    const [isEnlarged, setIsEnlarged] = useState(false);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     const characterCount = reviewDescription.length;
     const maxCharacters = 999;
-   
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const productId = searchParams.get('productId');
 
-console.log("react version" +version);
-    // const { state } = useLocation()
-    const navigate = useNavigate()
-    const { user } = UserAuth()
-    console.log(user.uid)
-    // const productId = state.d.productId;
-    // const {         
-    //     data
-    // } = useProductReviewHooks(state)
+    //const { state } = useLocation()
+    const navigate = useNavigate();
+    const { user } = UserAuth();
+    console.log(user.uid);
+    console.log("state"+productId);
 
-    // const { user } = UserAuth()
-    // const { data, loading, error } = useProfileHooks(user)
-
-    //console.log(user.uid)
     const ratingLabels = {
         1: 'Terrible',
         2: 'Poor',
@@ -65,14 +67,16 @@ console.log("react version" +version);
       const handleFileChange = (event) => {
         const files = event.target.files;
         let urls = [];
-    
+        let images = [];
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, file]);
           urls.push(URL.createObjectURL(file));
         }
     
+     
         setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
+        // console.log("url of the preview images : " + urls);
       };
 
       const handleRemove = (index) => {
@@ -88,43 +92,89 @@ console.log("react version" +version);
 
       const handleEnlarged = (img) => {
         setEnlargedImg(img);
+        setIsEnlarged(true);
       };
     
       const handleShrink = () => {
         setEnlargedImg(-1);
+        setIsEnlarged(false);
       };
 
       function handleCheckboxChange(e) {
         setIsAnonymous(e.target.checked);
       }
 
-    const handleSubmit = (e) => {
+    
+    useEffect(() => {
+      axios.get(getProductByIdUrl + productId)
+      .then(response => {
+        
+          setProduct(response.data)
+          console.log("product : "+response.data)
+          //console.log("product : "+response.data.productId)
+          //setDisplayData(response.data)
+      })
+      .catch ((error) => {
+          setError(error)
+      })
+      .finally (
+          setLoading(false)
+      )
+  }, []);
+
+    const handleSubmit = async (e) => {
+      if (user != null) {
+        setLoading(true);
+        const base64Promises = [];
+        const productId = product.productId
+        const customerFirebaseUid = user.uid
         e.preventDefault();
         console.log(`Rating: ${rating}`);
         console.log(`ReviewDescription: ${reviewDescription}`);
-        console.log(selectedFiles);
-        // const newReview = {
-        //   "reviewDescription" : reviewDescription,
-        //   "productId" : productId,
-        //   "customerId": user.uid
-        //   }
-      
-        //   //setShowPageLoadSpinner(true)
-        //   axios.post(createNewReviewUrl, newReview)
-        //   // .then((result) => {
-        //     .then(response => {
-        //       console.log(response.data)
-        //       // setData(response.data)
-        //       // const user = result.user
-        //       // const newRecord = createNewReview(reviewDescription, "1l","1l")
-        //       // return axios.post(getAllReviewsByProductIdUrl, newRecord)
-        //   })
-        //   .then((result) => {
-        //       console.log(result)
-        //       navigate(LOGIN_SIGNUP_REDIRECT_LINK)
-        //   })
+        console.log("product : " + productId)
+        const currentDate = new Date().toISOString().slice(0, 10);
+        const imagePromises = selectedFiles.map((file) => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+          });
+        });
+        Promise.all(imagePromises).then((imageBase64s) => {
+        const newReview = {
+          "productId" :productId,
+          "custFirebaseUid": customerFirebaseUid,
+          "review": {
+          // "dateOfReview":currentDate,
+          "reviewDescription" : reviewDescription,
+          "rating" : rating,
+          "isAnonymous" : isAnonymous,
+          "reviewImages" : imageBase64s
+        }
+          };
+          
+          console.log(newReview);
+  
+          axios.post(createNewReviewUrl, newReview)
+            .then(response => {
+              console.log("enter")
+              console.log(response.data)
+            })
+            .then((response) => {
+              console.log(response)
+              setLoading(false)
+              navigate(LOGIN_SIGNUP_REDIRECT_LINK)
+            })
+            .catch((error) => {
+              console.log(error); // handle any errors that occur during the axios call
+            });
+
+        });
+
          
-      
+        setSelectedFiles([]);
+         
+      };
      
 
     };
@@ -182,9 +232,19 @@ console.log("react version" +version);
     
     return (
       <PageTemplate>
-       <Header/>
+         {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
+       {/* show the product that going to review*/}
        <div>
+       {/* <img
+          src={}
+         alt= "pic"
+                            /> */}
+        {/* <p> Product name : {product.name} </p>
+         */}
+       </div>
+        <div>
         <form style={formStyle} onSubmit={handleSubmit}>
+        
         <Box
       sx={{
         width: 200,
@@ -226,16 +286,18 @@ console.log("react version" +version);
         <div style={{display:"flex"}}>
         
        {previewUrls.map((url, index) => (
-        // <div key={index} onClick={() => handleEnlarged(index)}>
             <div style={{backgroundImage: `url(${url})`, border: "none", 
             maxWidth:"80px", minWidth:"80px", maxHeight:"80px",minHeight:"80px",
             backgroundSize:"cover", position:"relative",overflow:"hidden",
             marginRight:"6px",
             backgroundPosition: "50%",
             backgroundRepeat: "no-repeat"}} >
+
+              {/* button to remove the picture uploaded */}
                 <button style={removeButton} type="button" onClick={() => handleRemove(index)}>
                     X
                 </button>
+                {/* button to enlarge the picture uploaded */}
                 <button style={enlargeButton} type="button" onClick={() => handleEnlarged(index)}>
                 <ImEnlarge2/>
                 </button>
@@ -245,11 +307,19 @@ console.log("react version" +version);
           
         // </div>
       ))}
+      {/* show the enlarged picture */}
       {enlargedImg !== -1 && (
         <div onClick={handleShrink}>
-          <img src={previewUrls[enlargedImg]} style={{ maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
+          <img src={previewUrls[enlargedImg]} style={{ cursor: "zoom-out", maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
         </div>
       )}
+      {/* the background when the picture is being enlarged */}
+       {isEnlarged && (
+          <div
+            style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0, backgroundColor: 'rgba(172, 127, 172, 0.5)',zIndex: 99}}
+            onClick={handleShrink}>
+          </div>
+        )}
       </div>
       <br />
       <br />
@@ -259,21 +329,21 @@ console.log("react version" +version);
         <label class= "imageButton" style={reviewUploadImage} >
         <p><AiFillCamera/></p>
             <span>add photo</span>
-          <input style={reviewUploadImageButton} type="file" onChange={handleFileChange} /> 
+          <input id="uploadReviewImage" style={reviewUploadImageButton} type="file" onChange={handleFileChange} /> 
          </label>
         </>
       )}
         <br />
         <br />
         {/* checkbox to check if the user want to show review as anonymous */}
-        <label>
+        {/* <label>
         <input
           type="checkbox"
           checked={isAnonymous}
           onChange={handleCheckboxChange}
         />
         Do not show my username in the review.
-      </label>
+      </label> */}
       <br/>
       <br/>
         <button class="sc-ckEbSK dVcYVY btn btn-primary" type="submit">Submit</button>

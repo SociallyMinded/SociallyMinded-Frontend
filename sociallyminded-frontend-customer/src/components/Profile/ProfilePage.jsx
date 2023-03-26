@@ -14,6 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from "react-router-dom";
 
 
 export const ProfilePage = () => {
@@ -26,7 +27,7 @@ export const ProfilePage = () => {
     const { data, loading, error } = useProfileHooks(user)
 
     console.log(user.uid)
-  
+    
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
@@ -54,7 +55,7 @@ export const ProfilePage = () => {
                         <StyledTd>{d.quantity}</StyledTd>
                         <StyledTd>{d.totalPrice}</StyledTd>
                         <StyledTd>{d.dateOfOrder != null && d.dateOfOrder.split("T")[0]}</StyledTd>
-                        <StyledTd>{d.orderStatus}</StyledTd>
+                        <StyledTd>{d.orderStatus}</StyledTd> 
                         <StyledTd>
                             <StyledNavbar>
                             <Container>
@@ -69,8 +70,12 @@ export const ProfilePage = () => {
                                         <NavDropdown.Item href="#action/3.3">
                                             Cancel Order
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.4">
+                                       {/* <StyledLink id="styled-card-link" to="/product_listing" state={{ d }}> */}
+                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}`}>
+                                        {/* <NavDropdown.Item> */}
+                                            {/* <Link to="/addReview" state={{d.product.productId}}> */}
                                             Submit a Review
+                                            {/* </Link> */}
                                         </NavDropdown.Item>
                                         </NavDropdown>
                                     </Nav>

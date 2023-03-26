@@ -12,6 +12,9 @@ const useProductReviewHooks = (state) => {
     const [displayData, setDisplayData] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [enlargedImg, setEnlargedImg] = useState(-1);
+    const [isEnlarged, setIsEnlarged] = useState(false);
+    const [rating, setRating] = useState(null);
 
     useEffect(() => {
         axios.get(getAllReviewsByProductIdUrl + state.d.productId)
@@ -20,7 +23,16 @@ const useProductReviewHooks = (state) => {
             setDisplayData(response.data)
             response.data.forEach((d) => {
                 d["avatar"] = generateRandomNum()
+
             })
+            const totalRating = response.data.reduce((sum, review) => sum + review.rating, 0);
+            const averageRating = totalRating / response.data.length;
+            setRating(averageRating.toFixed(2));
+           // const ratings = response.data.rating;
+            // const totalRating = ratings.reduce((sum, rating) => sum + rating.value, 0);
+            // console.log("totalRating : " +totalRating)
+            // const averageRating = totalRating / ratings.length;
+            // setRating(averageRating);
         })
         .catch ((error) => {
             setError(error)
@@ -37,8 +49,21 @@ const useProductReviewHooks = (state) => {
         return RANDOM_NUM;
     }
 
+    
+    const handleEnlarged = (img) => {
+        setEnlargedImg(img);
+        setIsEnlarged(true);
+      };
+    
+      const handleShrink = () => {
+        setEnlargedImg(-1);
+        setIsEnlarged(false);
+      };
+
+
     return { 
-        data, displayData, loading, error, generateRandomNum
+        data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
+        handleShrink, isEnlarged, setIsEnlarged, rating
     } 
 }
 

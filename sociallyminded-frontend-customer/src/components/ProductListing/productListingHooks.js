@@ -57,6 +57,7 @@ const useProductListingHooks = (state) => {
     const createNewOrder = async () => {
         setLoading(true)
         if (user != null) {
+            console.log("user id:"+user.uid)
             const customerFirebaseUid = user.uid
             const productId = state.d.productId
             const totalPrice = Math.round(state.d.price * orderQty,2)
@@ -69,7 +70,7 @@ const useProductListingHooks = (state) => {
                     "orderTitle": `${state.d.name} Order`
                 }
             }
-           
+           console.log(newOrder)
             await axios.post(createNewOrderUrl, newOrder)
                 .then(response => {
                     console.log(response.data)

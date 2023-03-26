@@ -10,11 +10,12 @@ export const createNewReviewUrl = `${ABSOLUTE_PATH}/entity.review`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
+export const getProductByIdUrl = `${ABSOLUTE_PATH}/entity.product/`
 // Add customer firebase uid after the last "/" 
 export const getOrdersByCustomer = `${ABSOLUTE_PATH}/entity.orderrecord/findOrderRecordsByCustomerId/`
 
-//testing the add review page
-export const addReviewByProductIdUrl = "/addReview"
+// //testing the add review page
+// export const addReviewByProductIdUrl = "/addReview"
 
 
 export const ABSOLUTE_HOME_LINK = ABSOLUTE_FRONTEND_PATH
