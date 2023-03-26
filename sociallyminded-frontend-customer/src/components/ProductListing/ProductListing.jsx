@@ -56,80 +56,83 @@ const ProductListing = () => {
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
-            <ProductListingPage>
+            <ProductListingPage>        
 
-                <ProductListingImgSection>
+            <ProductListingImgSection>
+                <Carousel>
+                    <Carousel.Item>
+                        <ProductListingImg
+                        src={require('./donut.png')}
+                        alt="First slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <ProductListingImg
+                        src={require('./donut.png')}
+                        alt="Second slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <ProductListingImg
+                        src={require('./donut.png')}
+                        alt="Third slide"
+                        />
+                    </Carousel.Item>
+                </Carousel>
+            </ProductListingImgSection>
 
-                    <Carousel>
-                        <Carousel.Item>
-                            <ProductListingImg
-                            src={require('./donut.png')}
-                            alt="First slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <ProductListingImg
-                            src={require('./donut.png')}
-                            alt="Second slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <ProductListingImg
-                            src={require('./donut.png')}
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
-                    </Carousel>
-                </ProductListingImgSection>
-        
-                <ProductListingDescriptionSection>
-                    <ProductListingDescriptionContainer>
-                        <ProductListingDescriptionTitleContainer>
-                            <h1>{state.d.name} </h1>
-                            <h5><Badge bg="secondary"> {state.d.category} </Badge></h5>
-                        </ProductListingDescriptionTitleContainer>
-                        <h2>Price : ${state.d.price}</h2>
-                        <ProductListingDescriptionDetailContainer>
-                            <h4>Social Enterprise</h4>
-                            <p>{state.d.socialenterprise.enterpriseName}</p>
-                        </ProductListingDescriptionDetailContainer>   
-                        <ProductListingDescriptionDetailContainer>
-                            <h4>About this item</h4>
-                            <p>{state.d.description}</p>    
-                        </ProductListingDescriptionDetailContainer>                            
-                    </ProductListingDescriptionContainer>
-                    
-                    <ProductListingPurchaseContainer>
+            
+            <ProductListingDescriptionSection>
+     
+            <ProductListingToastSection>
+                {showSuccessToast && 
+                    <StyledToast onClose={handleCloseSuccessToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Order Placed</strong>
+                        </Toast.Header>
+                        <Toast.Body>Your order for {state.d.name} is placed!</Toast.Body>
+                    </StyledToast>
+                }
+                {showLoginPromptToast && 
+                    <StyledLoginPromptToast onClose={handleCloseLoginPromptToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Notice</strong>
+                        </Toast.Header>
+                        <Toast.Body>Please log in to your account to place an order</Toast.Body>
+                    </StyledLoginPromptToast>
+                }
+            </ProductListingToastSection>
+
+                <ProductListingDescriptionContainer>
+                    <ProductListingDescriptionTitleContainer>
+                        <h1>{state.d.name} </h1>
+                        <h5><Badge bg="secondary"> {state.d.category} </Badge></h5>
+                    </ProductListingDescriptionTitleContainer>
+                    <h2>Price : ${state.d.price}</h2>
+                    <ProductListingDescriptionDetailContainer>
+                        <h4>Social Enterprise</h4>
+                        <p>{state.d.socialenterprise.enterpriseName}</p>
+                    </ProductListingDescriptionDetailContainer>   
+                    <ProductListingDescriptionDetailContainer>
+                        <h4>About this item</h4>
+                        <p>{state.d.description}</p>    
+                    </ProductListingDescriptionDetailContainer>   
+                        <ProductListingPurchaseContainer>
                         <StyledButton onClick={handleShowPurchaseModal}>Buy this product</StyledButton>
                         <StyledButton variant="primary" onClick={handleShowReviewsPage}>
                             <StyledLink to="/product_review" state={ state }>View All Reviews</StyledLink>
                         </StyledButton>
                     </ProductListingPurchaseContainer>
-                </ProductListingDescriptionSection>
+                </ProductListingDescriptionContainer>
 
-                <ProductListingToastSection>
-                    <div>
-                    {showSuccessToast && 
-                        <StyledToast onClose={handleCloseSuccessToast}>
-                            <Toast.Header>
-                                <strong className="me-auto">Order Placed</strong>
-                            </Toast.Header>
-                            <Toast.Body>Your order for {state.d.name} is placed!</Toast.Body>
-                        </StyledToast>
-                    }
-                    {showLoginPromptToast && 
-                        <StyledLoginPromptToast onClose={handleCloseLoginPromptToast}>
-                            <Toast.Header>
-                                <strong className="me-auto">Notice</strong>
-                            </Toast.Header>
-                            <Toast.Body>Please log in to your account to place an order</Toast.Body>
-                        </StyledLoginPromptToast>
-                    }
-                    </div>    
-                </ProductListingToastSection>
+                
+                
+            </ProductListingDescriptionSection>
 
-           
-         
+      
+
+
+
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
                     <Modal.Title>{state.d.name}</Modal.Title>
@@ -240,47 +243,38 @@ const ProductListing = () => {
 const ProductListingPage = styled.div`
     display:flex;
     flex-direction:row;
+    flex-wrap:wrap;
+    width:90vw;
+    height:70vh;
+    margin-top:5vh;
+    padding-top:8vh;
+    padding-left:5vw;
 `
 
 const ProductListingImgSection = styled.div`
-    width:30vw;
-    height:70vh;
-    margin-top:5%;
+    width:25vw;
+    height:50vh;
+    margin-right:5vw;
 `
 
 const ProductListingImg = styled.img`
-    width:30vw;
-    height:70vh;
+    width:25vw;
+    height:50vh;
     border-radius:10px;
 `
 
 const ProductListingDescriptionSection = styled.div`
     display:flex;
     flex-direction:column;
-    margin-top:5%;
-    margin-left:5%;
-    width:60vw;
-    max-width:60vw;
-    overflow:scroll;
-`
-
-const ProductListingToastSection = styled.div`
-    display:flex;
-    flex-direction:column;
-    margin-top:5%;
-    margin-left:5%;
-    width:60vw;
-    max-width:60vw;
-    overflow:scroll;
+    width:50vw;
+    height:50vh;
 `
 
 const ProductListingDescriptionContainer = styled.div`
-    max-height:65vh;
-    height:65vh;
-    margin-right:5%;
-    overflow:scroll;
-    width:100%;
+    height:70vh;
+    max-height:70vh;
 `
+
 const ProductListingDescriptionTitleContainer = styled.div`
     margin-bottom:3vh;
 `
@@ -292,15 +286,24 @@ const ProductListingPurchaseContainer = styled.div`
     width:100%;
 `
 
+
+const ProductListingToastSection = styled.div`
+    position:absolute;
+    z-index:1;
+    width:50%;
+    padding-left:30%;
+    top:17%;
+`
+
+
 const StyledToast = styled(Toast)`
     height:100%;
-    width:80%;
-    margin-right:5%;
     box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
-    background-color:#DBE8D7;
+    background-color: rgba(219, 242, 206, 0.95);
 `
 
 const StyledLoginPromptToast = styled(Toast)`
+    position:relative;
     height:100%;
     width:80%;
     margin-right:5%;
@@ -319,29 +322,6 @@ const StyledLink = styled(Link)`
     &:hover {
         color:white;
     }
-`
-
-const AvatarImg = styled.img`
-    width:3em;
-    height:4em;
-    margin-right:5%;
-`
-
-const StyledReviewBody = styled(Modal.Body)`
-    max-height:70vh;
-    overflow: scroll;
-`
-
-const ReviewContainer = styled.div`
-    display:flex;
-    flex-direction:row;
-    max-height:6em;
-    overflow:scroll;
-    margin-bottom:10%;
-`
-
-const StyledModal = styled(Modal)`
-    margin-top:5%;
 `
 
 
