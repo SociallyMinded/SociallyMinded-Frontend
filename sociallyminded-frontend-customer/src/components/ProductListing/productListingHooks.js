@@ -5,8 +5,15 @@ import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
-import { createNewOrderUrl } from "../../routes/routes"
+import { createNewOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import { UserAuth } from "../../context/AuthContext"
+
+export const ORDERSTATUS = {
+    PENDING_APPROVAL: 'Pending Approval',
+    AWAITING_PAYMENT: 'Payment Required',
+    IN_DELIVERY: 'In Delivery'
+}
+
 
 const useProductListingHooks = (state) => {
 
@@ -34,9 +41,24 @@ const useProductListingHooks = (state) => {
     const handleCloseLoginPromptToast = () => setShowLoginPromptToast(false);
 
     
-    const [orderQty, setOrderQty] = useState(false);
-
+    const [orderQty, setOrderQty] = useState("");
     const handleOrderQty = (e) => setOrderQty(e.target.value);
+
+    const [postalCode, setPostalCode] = useState("")
+    const handlePostalCode = (e) => setPostalCode(e.target.value);
+
+
+    const [addressData, setAddressData] = useState("")
+
+    const [confirmOrder, setConfirmOrder] = useState(false)
+    const showConfirmOrderPage = (e) => setConfirmOrder(true)
+    const closeConfirmOrderPage = (e) => setConfirmOrder(false)
+
+
+    const returnToPurchaseModalAfterConfirmModal = () => {
+        setConfirmOrder(false)
+        setShowPurchaseModal(true)
+    }
 
     const { user } = UserAuth()
 
@@ -54,8 +76,28 @@ const useProductListingHooks = (state) => {
         )
     }, []);
 
+    const geocodeAddress =  async () => {
+        const url = obtainGeocodeUrl(postalCode)
+        await axios.get(url)
+        .then(response => {
+            const addressData = response.data.results[0]
+            console.log(addressData)
+            setAddressData(addressData)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .finally (() => {
+            setLoading(false)
+            setShowPurchaseModal(false)
+            setConfirmOrder(true)
+
+        })
+    }
+
     const createNewOrder = async () => {
         setLoading(true)
+        console.log(addressData.ADDRESS)
         if (user != null) {
             console.log("user id:"+user.uid)
             const customerFirebaseUid = user.uid
@@ -67,18 +109,18 @@ const useProductListingHooks = (state) => {
                 "record": {
                     "quantity": orderQty,
                     "totalPrice":totalPrice,
-                    "orderTitle": `${state.d.name} Order`
+                    "orderTitle": `${state.d.name} Order`,
+                    "address": addressData != null ? addressData.ADDRESS : ""
                 }
             }
            console.log(newOrder)
             await axios.post(createNewOrderUrl, newOrder)
                 .then(response => {
-                    console.log(response.data)
-                    setData(response.data)
+                    console.log(response)
                 })
-                .catch(error => setError(error.response.data))
+                .catch(error => setError(error))
                 .finally(res => {
-                    setShowPurchaseModal(false)
+                    setConfirmOrder(false)
                     setShowSuccessToast(true)
                 })
         } else {
@@ -87,12 +129,14 @@ const useProductListingHooks = (state) => {
         }
     }
     
-
     return { 
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast
+        postalCode, handlePostalCode,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
+        confirmOrder, showConfirmOrderPage,
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
     } 
 }
 

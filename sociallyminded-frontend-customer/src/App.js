@@ -1,5 +1,4 @@
 import { ShopPage } from './components/Shop/ShopPage';
-import Home from './components/Home/Home';
 import { AuthContextProvider } from './context/AuthContext';
 import Signup from './components/Signup/Signup.jsx';
 import { BrowserRouter } from "react-router-dom";
@@ -13,7 +12,8 @@ import { ProfilePage } from './components/Profile/ProfilePage';
 import React from 'react';
 import { createContext } from 'react';
 import { useState } from 'react';
-
+import { Basemap } from './components/Map';
+import Home from "./components/Home/Home.jsx"
 export const LogoutToastContext = createContext(-1);
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
               <Route path='/product_review' element={<ProductReviewPage/>}/>
               <Route path='/addReview' element={<AddProductReviewPage/>}/>
               <Route path='/profile' element={<ProfilePage/>}/>
+              <Route path="/map" element={<Basemap/>}/>
           </Routes>
           </BrowserRouter>
         </LogoutToastContext.Provider>

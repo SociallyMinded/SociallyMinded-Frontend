@@ -10,6 +10,7 @@ const useShopHooks = () => {
     const [displayData, setDisplayData] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
+    
     useEffect(() => {
         axios.get(getAllProductsUrl)
         .then(response => {
