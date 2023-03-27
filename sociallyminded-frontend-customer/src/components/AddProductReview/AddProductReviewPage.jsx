@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { AiFillCamera } from 'react-icons/ai';
 import { ImEnlarge2 } from 'react-icons/im';
-import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
+import { PROFILE_PAGE_LINK } from "../../routes/routes";
 import { createNewReviewUrl } from "../../routes/routes"
 import { getProductByIdUrl } from "../../routes/routes"
 //import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
@@ -35,6 +35,7 @@ export const AddProductReviewPage = (state) => {
     const [isEnlarged, setIsEnlarged] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showReviewCompleteToast, setShowReviewCompleteToast] = useState(true);
     const characterCount = reviewDescription.length;
     const maxCharacters = 999;
     const location = useLocation();
@@ -73,8 +74,7 @@ export const AddProductReviewPage = (state) => {
           setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, file]);
           urls.push(URL.createObjectURL(file));
         }
-    
-     
+        
         setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
         // console.log("url of the preview images : " + urls);
       };
@@ -163,7 +163,9 @@ export const AddProductReviewPage = (state) => {
             .then((response) => {
               console.log(response)
               setLoading(false)
-              navigate(LOGIN_SIGNUP_REDIRECT_LINK)
+              setShowReviewCompleteToast(true)
+              const url = `${PROFILE_PAGE_LINK}?showReviewCompleteToast=${showReviewCompleteToast}`;
+              navigate(url)
             })
             .catch((error) => {
               console.log(error); // handle any errors that occur during the axios call
@@ -336,14 +338,14 @@ export const AddProductReviewPage = (state) => {
         <br />
         <br />
         {/* checkbox to check if the user want to show review as anonymous */}
-        {/* <label>
+        <label>
         <input
           type="checkbox"
           checked={isAnonymous}
           onChange={handleCheckboxChange}
         />
         Do not show my username in the review.
-      </label> */}
+      </label>
       <br/>
       <br/>
         <button class="sc-ckEbSK dVcYVY btn btn-primary" type="submit">Submit</button>

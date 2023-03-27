@@ -113,7 +113,11 @@ export const ProfilePage = () => {
         prepareDataForExport,
         showDownloadData,
         showExportData,
-        handleDownloadData
+        handleDownloadData,
+
+        showReviewCompleteToast,
+        handleShowReviewCompleteToast,
+        handleCloseReviewCompleteToast
 
 
     } = useProfileHooks(user)
@@ -198,6 +202,14 @@ export const ProfilePage = () => {
                     </Toast.Header>
                     <Toast.Body>Payment is credited to {orderSelected.orderTitle}!</Toast.Body>
                 </StyledToast>
+                }
+                {showReviewCompleteToast && 
+                    <StyledToast onClose={handleCloseReviewCompleteToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Reviewed Sucess</strong>
+                        </Toast.Header>
+                        <Toast.Body>Your review is submitted!</Toast.Body>
+                    </StyledToast>
                 }
 
 
@@ -514,7 +526,7 @@ export const ProfilePage = () => {
 
                 </PaginationContainer>} 
                 <p>Number of Pages : {determineTotalNosOfPages()} </p>
-
+                
    
                 
 

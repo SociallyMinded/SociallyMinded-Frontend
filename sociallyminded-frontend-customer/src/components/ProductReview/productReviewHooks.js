@@ -15,6 +15,7 @@ const useProductReviewHooks = (state) => {
     const [enlargedImg, setEnlargedImg] = useState(-1);
     const [isEnlarged, setIsEnlarged] = useState(false);
     const [rating, setRating] = useState(null);
+    const [selectedRating, setSelectedRating] = useState(null);
 
     useEffect(() => {
         axios.get(getAllReviewsByProductIdUrl + state.d.productId)
@@ -28,11 +29,7 @@ const useProductReviewHooks = (state) => {
             const totalRating = response.data.reduce((sum, review) => sum + review.rating, 0);
             const averageRating = totalRating / response.data.length;
             setRating(averageRating.toFixed(2));
-           // const ratings = response.data.rating;
-            // const totalRating = ratings.reduce((sum, rating) => sum + rating.value, 0);
-            // console.log("totalRating : " +totalRating)
-            // const averageRating = totalRating / ratings.length;
-            // setRating(averageRating);
+            
         })
         .catch ((error) => {
             setError(error)
@@ -55,15 +52,18 @@ const useProductReviewHooks = (state) => {
         setIsEnlarged(true);
       };
     
-      const handleShrink = () => {
+    const handleShrink = () => {
         setEnlargedImg(-1);
         setIsEnlarged(false);
-      };
+    };
 
+    const handleFilterButtonClick = (rating) => {
+        setSelectedRating(rating);
+    };
 
     return { 
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
-        handleShrink, isEnlarged, setIsEnlarged, rating
+        handleShrink, isEnlarged, setIsEnlarged, rating, handleFilterButtonClick
     } 
 }
 

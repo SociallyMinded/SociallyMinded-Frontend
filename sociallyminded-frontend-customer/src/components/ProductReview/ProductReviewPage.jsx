@@ -85,7 +85,15 @@ export const ProductReviewPage = () => {
                     <ReviewContainer>
                     <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
                     <ReviewDescription>
-                        {/* <UserName>{d.customer.customerId}</UserName> */}
+                        {d.isAnonymous == false && (
+                   
+                        <UserName>{d.customer.username}</UserName>
+                        )}
+                         {d.isAnonymous == true && (
+                   
+                            <UserName>Anonymous</UserName>
+                        )}
+
                     <Rating name="read-only" value={d.rating} readOnly />
                     <br/>
                         {d.dateOfReview!= null && d.dateOfReview.split("T")[0]}
