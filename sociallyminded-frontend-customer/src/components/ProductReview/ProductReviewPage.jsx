@@ -101,7 +101,9 @@ export const ProductReviewPage = () => {
                         <br/>
                         {d.reviewDescription}
                         <br/>
+                        {d.reviewImages != null &&  (
                         <ReviewImageListContainer> 
+                            
                             {d.reviewImages.map((base64, index) => (
                                 <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
                             ))}
@@ -118,6 +120,7 @@ export const ProductReviewPage = () => {
                                 </div>
                             )}
                         </ReviewImageListContainer>
+                        )}
         
 
                     
