@@ -76,7 +76,8 @@ export const AddProductReviewPage = (state) => {
         }
         
         setPreviewUrls((prevPreviewUrls) => [...prevPreviewUrls, ...urls]);
-        // console.log("url of the preview images : " + urls);
+      
+         console.log("url of the preview images : " + urls);
       };
 
       const handleRemove = (index) => {
@@ -111,8 +112,6 @@ export const AddProductReviewPage = (state) => {
         
           setProduct(response.data)
           console.log("product : "+response.data)
-          //console.log("product : "+response.data.productId)
-          //setDisplayData(response.data)
       })
       .catch ((error) => {
           setError(error)
@@ -129,9 +128,6 @@ export const AddProductReviewPage = (state) => {
         const productId = product.productId
         const customerFirebaseUid = user.uid
         e.preventDefault();
-        console.log(`Rating: ${rating}`);
-        console.log(`ReviewDescription: ${reviewDescription}`);
-        console.log("product : " + productId)
         const currentDate = new Date().toISOString().slice(0, 10);
         const imagePromises = selectedFiles.map((file) => {
           return new Promise((resolve) => {
@@ -152,7 +148,18 @@ export const AddProductReviewPage = (state) => {
           "reviewImages" : imageBase64s
         }
           };
-          
+
+          // const newProduct = {
+          //   "productId" :productId,
+          //   "custFirebaseUid": customerFirebaseUid,
+          //   "review": {
+          //   // "dateOfReview":currentDate,
+          //   "reviewDescription" : reviewDescription,
+          //   "rating" : rating,
+          //   "isAnonymous" : isAnonymous,
+          //   "reviewImages" : imageBase64s
+          // }
+          //   };
           console.log(newReview);
   
           axios.post(createNewReviewUrl, newReview)
