@@ -1,4 +1,5 @@
 import React from 'react';
+import Big from 'big.js';
 import { PageTemplate, ReviewPageTemplate } from '../common/styles';
 import Header from '../common/Header/Header';
 import styled from 'styled-components';
@@ -17,10 +18,12 @@ import StarIcon from '@mui/icons-material/Star';
 import { AiFillCamera } from 'react-icons/ai';
 import { ImEnlarge2 } from 'react-icons/im';
 import { PROFILE_PAGE_LINK } from "../../routes/routes";
-import { createNewReviewUrl } from "../../routes/routes"
-import { getProductByIdUrl } from "../../routes/routes"
+import { createNewReviewUrl } from "../../routes/routes";
+import { getProductByIdUrl } from "../../routes/routes";
+import { updateProductUrl } from "../../routes/routes";
 //import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
 import LoggedInHeader from "../common/Header/LoggedInHeader";
+
 
 
 export const AddProductReviewPage = (state) => {
@@ -111,7 +114,7 @@ export const AddProductReviewPage = (state) => {
       .then(response => {
         
           setProduct(response.data)
-          console.log("product : "+response.data)
+          console.log("product : " + response.data)
       })
       .catch ((error) => {
           setError(error)
@@ -141,27 +144,37 @@ export const AddProductReviewPage = (state) => {
           "productId" :productId,
           "custFirebaseUid": customerFirebaseUid,
           "review": {
-          // "dateOfReview":currentDate,
           "reviewDescription" : reviewDescription,
           "rating" : rating,
           "isAnonymous" : isAnonymous,
           "reviewImages" : imageBase64s
         }
           };
+          console.log("number rating" + Big(product.numRatings).plus(1) );
+          console.log("rating score :" + Big(product.ratingScore).plus(rating) );
+          const updateProduct = {
+            "socialEnterpriseId" : product.socialenterprise.socialEnterpriseId,
+            "product": {
+            "category" : product.category,
+            "description" : product.description,
+            "imageLink": product.imageLink,
+            "name" : product.name,
+            "price" : product.price,
+            "numRatings" : Big(product.numRatings).plus(1),
+            "ratingScore" : Big(product.ratingScore).plus(rating),
+            "productId" : productId
+          }
+            };
 
-          // const newProduct = {
-          //   "productId" :productId,
-          //   "custFirebaseUid": customerFirebaseUid,
-          //   "review": {
-          //   // "dateOfReview":currentDate,
-          //   "reviewDescription" : reviewDescription,
-          //   "rating" : rating,
-          //   "isAnonymous" : isAnonymous,
-          //   "reviewImages" : imageBase64s
-          // }
-          //   };
-          console.log(newReview);
-  
+          //update the product review number and rating
+          axios.put(updateProductUrl + product.productId, updateProduct)
+          .then(response => {
+            console.log("enter this product method")
+            console.log(response.data)
+          }).catch((error) => {
+            console.log(error); // handle any errors that occur during the axios call
+          });
+          //create review
           axios.post(createNewReviewUrl, newReview)
             .then(response => {
               console.log("enter")

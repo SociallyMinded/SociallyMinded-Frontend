@@ -9,6 +9,7 @@ export const createNewOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord`
 export const createNewReviewUrl = `${ABSOLUTE_PATH}/entity.review`
 export const updateOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 export const deleteOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
+export const updateProductUrl = `${ABSOLUTE_PATH}/entity.product/`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`

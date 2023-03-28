@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 import React from 'react';
+import Rating from '@mui/material/Rating';
 
 export const DataDisplay = ({data}) => {
     console.log(data)
@@ -23,8 +24,18 @@ export const DataDisplay = ({data}) => {
                         <StyledCardBody>
                             <Card.Title>{d.name}</Card.Title>
                             <Card.Title>${d.price}</Card.Title>
+                          
                         </StyledCardBody>
-                    </StyledCard>
+                        {d.numRatings != 0 && d.ratingScore != 0 && (
+                        <RatingNumber> 
+                        <Rating name="read-only" precision={0.02} value={d.ratingScore/d.numRatings} readOnly />
+                        <Score>{ (d.ratingScore/d.numRatings).toFixed(2) }</Score>
+                        </RatingNumber>
+                        ) }
+                        {d.numRatings == 0 && d.ratingScore == 0 && (
+                        <NoRating>No Rating Yet</NoRating>
+                        ) }
+                        </StyledCard>
                 </StyledLink>
                 </StyledCol>
             ))}
@@ -107,4 +118,20 @@ const StyledText = styled.p`
 
 const StyledImg = styled(Card.Img)`
   border-width:0px;
+`
+
+const NoRating = styled.p`
+    color: #777;
+    font-size:0.8em;
+    margin-top:2%;
+    text-align: center;
+`
+
+const RatingNumber = styled.div`
+    margin-top:2%;
+    text-align: center;
+    display: flex;
+`
+const Score = styled.span`
+margin-left: 5px;
 `
