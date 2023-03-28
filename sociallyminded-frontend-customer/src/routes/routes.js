@@ -6,14 +6,15 @@ export const getAllCustomersUrl = `${ABSOLUTE_PATH}/entity.customer`
 export const handleLoginViaGmail = `${ABSOLUTE_PATH}/entity.customer/loginViaGmail/`
 export const getAllProductsUrl = `${ABSOLUTE_PATH}/entity.product/`
 export const createNewOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord`
+export const createNewReviewUrl = `${ABSOLUTE_PATH}/entity.review`
 export const updateOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 export const deleteOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
+export const getProductByIdUrl = `${ABSOLUTE_PATH}/entity.product/`
 // Add customer firebase uid after the last "/" 
 export const getOrdersByCustomer = `${ABSOLUTE_PATH}/entity.orderrecord/findOrderRecordsByCustomerId/`
-
 
 export const ABSOLUTE_HOME_LINK = ABSOLUTE_FRONTEND_PATH
 export const HOME_LINK = "/"

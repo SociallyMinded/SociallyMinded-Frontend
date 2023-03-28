@@ -14,6 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from "react-router-dom";
 import ModalDialog from "react-bootstrap";
 import ModalHeader from "react-bootstrap";
 import { Toast } from "react-bootstrap";
@@ -112,7 +113,11 @@ export const ProfilePage = () => {
         prepareDataForExport,
         showDownloadData,
         showExportData,
-        handleDownloadData
+        handleDownloadData,
+
+        showReviewCompleteToast,
+        handleShowReviewCompleteToast,
+        handleCloseReviewCompleteToast
 
 
     } = useProfileHooks(user)
@@ -197,6 +202,14 @@ export const ProfilePage = () => {
                     </Toast.Header>
                     <Toast.Body>Payment is credited to {orderSelected.orderTitle}!</Toast.Body>
                 </StyledToast>
+                }
+                {showReviewCompleteToast && 
+                    <StyledToast onClose={handleCloseReviewCompleteToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Reviewed Sucess</strong>
+                        </Toast.Header>
+                        <Toast.Body>Your review is submitted!</Toast.Body>
+                    </StyledToast>
                 }
 
 
@@ -314,8 +327,9 @@ export const ProfilePage = () => {
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.PAYMENT)}>
                                             Pay for Order
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.4">
+                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}`}>
                                             Submit a Review
+                                            {/* </Link> */}
                                         </NavDropdown.Item>
                                         </NavDropdown>
                                     </Nav>
@@ -512,7 +526,7 @@ export const ProfilePage = () => {
 
                 </PaginationContainer>} 
                 <p>Number of Pages : {determineTotalNosOfPages()} </p>
-
+                
    
                 
 

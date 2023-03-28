@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from "react"
 import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
 import { deleteOrderUrl, getOrdersByCustomer, updateOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import axios from 'axios'
+import { Toast } from "react-bootstrap";
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
@@ -55,6 +56,11 @@ const useProfileHooks = (user) => {
     const showConfirmEditOrderPage = () => setShowConfirmEditOrderModal(true)
     const closeConfirmEditOrderPage = () => setShowConfirmEditOrderModal(false)
 
+    //toast after the review is completed
+    const location = useLocation();
+    const [showReviewCompleteToast, setShowReviewCompleteToast] = useState(location.search.includes('showReviewCompleteToast'));
+    const handleShowReviewCompleteToast = () => setShowReviewCompleteToast(true);
+    const handleCloseReviewCompleteToast = () => setShowReviewCompleteToast(false);
 
     const returnToPurchaseModalAfterConfirmModal = () => {
         setShowConfirmEditOrderModal(false)
@@ -456,8 +462,11 @@ const useProfileHooks = (user) => {
         prepareDataForExport,
         showDownloadData,
         showExportData,
-        handleDownloadData
+        handleDownloadData,
 
+        showReviewCompleteToast,
+        handleShowReviewCompleteToast,
+        handleCloseReviewCompleteToast
     } 
 }
 

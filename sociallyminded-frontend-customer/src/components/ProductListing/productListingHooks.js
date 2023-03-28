@@ -99,6 +99,7 @@ const useProductListingHooks = (state) => {
         setLoading(true)
         console.log(addressData.ADDRESS)
         if (user != null) {
+            console.log("user id:"+user.uid)
             const customerFirebaseUid = user.uid
             const productId = state.d.productId
             const totalPrice = Math.round(state.d.price * orderQty,2)
@@ -112,7 +113,7 @@ const useProductListingHooks = (state) => {
                     "address": addressData != null ? addressData.ADDRESS : ""
                 }
             }
-           
+           console.log(newOrder)
             await axios.post(createNewOrderUrl, newOrder)
                 .then(response => {
                     console.log(response)
