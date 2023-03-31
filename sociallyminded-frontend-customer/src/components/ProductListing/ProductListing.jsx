@@ -21,11 +21,12 @@ import { UserAuth } from "../../context/AuthContext";
 import useLoginHooks from "../Login/loginHooks";
 import Header from "../common/Header/Header";
 import LoggedInHeader from "../common/Header/LoggedInHeader";
-import { Marker } from "react-map-gl";
 import Map from 'react-map-gl';
 
-import PointMarker from "../PointMarker";
+import PointMarker from "../Map/PointMarker"
+import BaseMap from "../Map/BaseMap"
 
+import Alert from 'react-bootstrap/Alert';
 const ProductListing = () => {
     const { state } = useLocation();
     const { user } = UserAuth()
@@ -57,7 +58,6 @@ const ProductListing = () => {
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ProductListingPage>        
-
             <ProductListingImgSection>
                 <Carousel>
                     <Carousel.Item>
@@ -268,6 +268,8 @@ const ProductListingDescriptionSection = styled.div`
     flex-direction:column;
     width:50vw;
     height:50vh;
+    position:1;
+    display:absolute;
 `
 
 const ProductListingDescriptionContainer = styled.div`
@@ -290,11 +292,10 @@ const ProductListingPurchaseContainer = styled.div`
 const ProductListingToastSection = styled.div`
     position:absolute;
     z-index:1;
-    width:50%;
-    padding-left:30%;
+    width:53%;
+    padding-left:38%;
     top:17%;
 `
-
 
 const StyledToast = styled(Toast)`
     height:100%;
@@ -304,11 +305,12 @@ const StyledToast = styled(Toast)`
 
 const StyledLoginPromptToast = styled(Toast)`
     position:relative;
+    z-index:2;
     height:100%;
-    width:80%;
+    width:100%;
     margin-right:5%;
     box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
-    background-color:#EDD2D2;
+    background-color:rgba(255, 204, 204, 0.95);
 `
 
 const StyledButton = styled(Button)`

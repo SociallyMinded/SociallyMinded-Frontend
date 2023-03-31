@@ -28,7 +28,15 @@ const useProductListingHooks = (state) => {
     const [showLoginPromptToast, setShowLoginPromptToast] = useState(false);
 
 
-    const handleShowPurchaseModal = () => setShowPurchaseModal(true);
+    const handleShowPurchaseModal = () => {
+        if (user == null) {
+            setShowPurchaseModal(false)
+            setShowLoginPromptToast(true)
+        } else {
+            setShowPurchaseModal(true);
+        }
+    }
+
     const handleClosePurchaseModal = () => setShowPurchaseModal(false);
 
     const handleShowReviewsPage = () => setShowReviewsPage(true);

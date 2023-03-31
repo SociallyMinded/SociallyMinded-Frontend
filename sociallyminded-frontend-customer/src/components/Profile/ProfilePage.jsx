@@ -18,12 +18,12 @@ import { Link } from "react-router-dom";
 import ModalDialog from "react-bootstrap";
 import ModalHeader from "react-bootstrap";
 import { Toast } from "react-bootstrap";
-import { Actions } from "./profileHooks.js";
+import { Actions, ORDERSTATUS } from "./profileHooks.js";
 
 import { Pagination } from 'react-bootstrap';
 
 import { Map, Marker } from "react-map-gl";
-import PointMarker from "../PointMarker";
+import PointMarker from "../Map/PointMarker";
 import InputGroup from 'react-bootstrap/InputGroup';
 import { faHome,  faArrowDownWideShort, faArrowUpShortWide } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -117,8 +117,16 @@ export const ProfilePage = () => {
 
         showReviewCompleteToast,
         handleShowReviewCompleteToast,
-        handleCloseReviewCompleteToast
+        handleCloseReviewCompleteToast,
 
+        showUpdateErrorActionToast,
+        handleCloseUpdateErrorActionToast,
+        showCancelErrorActionToast,
+        handleCloseCancelErrorActionToast,
+        showPaymentErrorActionToast,
+        handleClosePaymentErrorActionToast,
+        showReviewErrorActionToast,
+        handleCloseReviewErrorActionToast
 
     } = useProfileHooks(user)
 
@@ -211,6 +219,54 @@ export const ProfilePage = () => {
                         <Toast.Body>Your review is submitted!</Toast.Body>
                     </StyledToast>
                 }
+                {showUpdateErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseUpdateErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only update an order if it is still in pending approval stage</Toast.Body>
+                    </StyledErrorToast>
+                }
+                {showCancelErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseCancelErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only cancel an order if it is still in pending approval stage</Toast.Body>
+                    </StyledErrorToast>
+                }
+                {showPaymentErrorActionToast &&   orderSelected.orderStatus == ORDERSTATUS.IN_DELIVERY && 
+                    <StyledErrorToast onClose={handleClosePaymentErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>
+                            You have already made the payment for this order
+                        </Toast.Body>
+                    </StyledErrorToast>
+                }
+                {showPaymentErrorActionToast &&   orderSelected.orderStatus != ORDERSTATUS.IN_DELIVERY && 
+                    <StyledErrorToast onClose={handleClosePaymentErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>
+                            You can only make a payment if the order is in awaiting payment stage (when the enterprise has accepted the order) 
+                        </Toast.Body>
+                    </StyledErrorToast>
+                }
+
+                {showReviewErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseReviewErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
+                    </StyledErrorToast>
+                }
+
+
+
 
 
        
@@ -325,10 +381,10 @@ export const ProfilePage = () => {
                                             Cancel Order
                                         </NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.PAYMENT)}>
-                                            Pay for Order
+                                            Make Payment
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}`}>
-                                            Submit a Review
+                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
+                                            Mark as Received
                                             {/* </Link> */}
                                         </NavDropdown.Item>
                                         </NavDropdown>
@@ -574,8 +630,18 @@ const StyledToast = styled(Toast)`
     position:absolute;
     z-index:1;
     width:20vw;
-    background-color:#DBE8D7;    
+    background-color: rgba(219, 242, 206, 0.97);
 `
+
+const StyledErrorToast = styled(Toast)`
+    margin-left:70%;
+    margin-top:3%;
+    position:absolute;
+    z-index:1;
+    width:20vw;
+    background-color:rgba(255, 204, 204, 0.97);
+`
+
 
 const PaginationContainer = styled(Pagination)`
     margin-top:3vh;
@@ -628,6 +694,7 @@ const StyledCSVLink = styled(CSVLink)`
 const StyledInputGroup = styled(InputGroup)`
     width:80%;
     margin-right: 2%;
+    z-index:-1;
 `
 
 const TableInputContainer = styled.div`
