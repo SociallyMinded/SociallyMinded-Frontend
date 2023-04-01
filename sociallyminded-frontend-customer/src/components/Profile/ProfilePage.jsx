@@ -254,12 +254,13 @@ export const ProfilePage = () => {
             <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
         <TableInputContainer>
             <StyledInputGroup className="mb-3">
-                <Form.Control
+                <SearchOrderInput
                     placeholder="Search Order"
                     aria-describedby="basic-addon2"
                     value = {searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                
+                    disabled={false}
+                    onChange={(e) => setSearchQuery(e.target.value) }
+                   
                 />
                
             </StyledInputGroup>
@@ -727,4 +728,7 @@ margin-bottom: 16px;
 `
 const OrderStatusLabel = styled.label`
 margin-right: 16px;
+`
+
+const SearchOrderInput = styled(Form.Control)`
 `

@@ -61,9 +61,14 @@ const useProductReviewHooks = (state) => {
         setSelectedRating(rating);
     };
 
+    const filteredRating = selectedRating
+  ? data.filter((d) => d.rating === selectedRating)
+  : data;
+
     return { 
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
-        handleShrink, isEnlarged, setIsEnlarged, rating, handleFilterButtonClick
+        handleShrink, isEnlarged, setIsEnlarged, rating, handleFilterButtonClick, selectedRating,
+        setSelectedRating, filteredRating
     } 
 }
 

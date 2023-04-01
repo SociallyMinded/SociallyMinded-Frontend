@@ -430,7 +430,7 @@ const useProfileHooks = (user) => {
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
         showPaymentOrderModal, showPaymentSuccessToast,
-        showConfirmEditModalPage,searchQuery, orderStatus,        
+        showConfirmEditModalPage, searchQuery, orderStatus,        
         showConfirmEditModalPage, 
         showUpdateErrorActionToast,
         showCancelErrorActionToast,  
@@ -442,6 +442,7 @@ const useProfileHooks = (user) => {
       //filter
 const filteredOrders = (data ?? []).filter((d) => {
     console.log("enter, data : " + data);
+    console.log("searchqury : " + searchQuery);
     if (searchQuery === '' && orderStatus === 'All') {
     return true; // show all orders
     } else if (searchQuery === '' && d.orderStatus === orderStatus) {
