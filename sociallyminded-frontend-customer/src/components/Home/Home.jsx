@@ -127,8 +127,6 @@ const Home = () => {
                             by our home grown Singaporean social enterprises. Here,
                             you can find anything ranging from clothes, to food, to 
                             clay crafts. 
-                            <br></br>
-                            <br></br>
                             Enjoy a fuss free and seamless online shopping experience 
                             while contributing towards sustainable social and environmental 
                             causes! 

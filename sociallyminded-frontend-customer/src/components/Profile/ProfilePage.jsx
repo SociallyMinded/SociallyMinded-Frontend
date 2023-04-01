@@ -186,22 +186,23 @@ export const ProfilePage = () => {
             
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
      
-                {showEditSuccessToast &&  
-                    <StyledToast onClose={handleCloseEditSuccessToast}>
-                        <Toast.Header>
-                            <strong className="me-auto">Order Updated</strong>
-                        </Toast.Header>
-                        <Toast.Body> {orderSelected.orderTitle} is updated!</Toast.Body>
-                    </StyledToast>
-                }
-                {showCancelSuccessToast &&  
-                    <StyledToast onClose={handleCloseCancelSuccessToast}>
+            {showEditSuccessToast &&  
+                <StyledToast onClose={handleCloseEditSuccessToast}>
                     <Toast.Header>
-                            <strong className="me-auto">Order Cancelled</strong>
-                        </Toast.Header>
-                        <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
-                    </StyledToast>
+                        <strong className="me-auto">Order Updated</strong>
+                    </Toast.Header>
+                    <Toast.Body> {orderSelected.orderTitle} is updated!</Toast.Body>
+                </StyledToast>
                 }
+            {showCancelSuccessToast &&  
+                <StyledToast onClose={handleCloseCancelSuccessToast}>
+                <Toast.Header>
+                        <strong className="me-auto">Order Cancelled</strong>
+                    </Toast.Header>
+                    <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
+                </StyledToast>
+                }
+
                 {showReviewCompleteToast && 
                     <StyledToast onClose={handleCloseReviewCompleteToast}>
                         <Toast.Header>
@@ -226,6 +227,7 @@ export const ProfilePage = () => {
                         <Toast.Body>You can only cancel an order if it is still in pending approval stage</Toast.Body>
                     </StyledErrorToast>
                 }
+   
 
                 {showReviewErrorActionToast &&
                     <StyledErrorToast onClose={handleCloseReviewErrorActionToast}>
@@ -235,6 +237,11 @@ export const ProfilePage = () => {
                         <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
                     </StyledErrorToast>
                 }
+
+
+
+
+
        
             <TableContainer>
 
@@ -375,7 +382,7 @@ export const ProfilePage = () => {
                             type="number"
                             placeholder={orderSelected != null && orderSelected.quantity}
                             autoFocus
-                            value={editOrderQty}
+                            value={orderSelected != null && editOrderQty}
                             onChange={(e) => handleEditOrderQty(e.target.value)}
                         />
                         </Form.Group>
@@ -385,7 +392,7 @@ export const ProfilePage = () => {
                             type="text"
                             placeholder={orderSelected != null && orderSelected.address}
                             autoFocus
-                            value={editOrderAddress}
+                            value={orderSelected != null && editOrderAddress}
                             onChange={(e) => handleEditOrderAddress(e.target.value)}
                         />
                         </Form.Group>
