@@ -22,7 +22,7 @@ export const Actions = {
 }
 
 export const ORDERSTATUS = {
-    PENDING_APPROVAL: 'Order Sent',
+    PENDING_APPROVAL: 'Pending Approval',
     IN_DELIVERY: 'In Delivery'
 }
 
@@ -101,6 +101,15 @@ const useProfileHooks = (user) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
         setEditOrderAddress(order.address)
+
+        setShowEditSuccessToast(false)
+        setShowCancelSuccessToast(false)
+        setShowReviewCompleteToast(false)
+
+        setShowUpdateErrorActionToast(false)
+        setShowCancelErrorActionToast(false)
+        setShowReviewErrorActionToast(false)
+
         if (action == Actions.UPDATE) {
             if (order.orderStatus == ORDERSTATUS.PENDING_APPROVAL) {
                 setShowEditOrderModal(true)
