@@ -18,12 +18,12 @@ import { Link } from "react-router-dom";
 import ModalDialog from "react-bootstrap";
 import ModalHeader from "react-bootstrap";
 import { Toast } from "react-bootstrap";
-import { Actions } from "./profileHooks.js";
+import { Actions, ORDERSTATUS } from "./profileHooks.js";
 
 import { Pagination } from 'react-bootstrap';
 
 import { Map, Marker } from "react-map-gl";
-import PointMarker from "../PointMarker";
+import PointMarker from "../Map/PointMarker";
 import InputGroup from 'react-bootstrap/InputGroup';
 import { faHome,  faArrowDownWideShort, faArrowUpShortWide } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -123,8 +123,16 @@ export const ProfilePage = () => {
         orderStatus,
         setOrderStatus,
         searchQuery,
-        setSearchQuery
+        setSearchQuery,
 
+        showUpdateErrorActionToast,
+        handleCloseUpdateErrorActionToast,
+        showCancelErrorActionToast,
+        handleCloseCancelErrorActionToast,
+        showPaymentErrorActionToast,
+        handleClosePaymentErrorActionToast,
+        showReviewErrorActionToast,
+        handleCloseReviewErrorActionToast
 
     } = useProfileHooks(user)
 
@@ -201,14 +209,6 @@ export const ProfilePage = () => {
                 </StyledToast>
                 }
 
-                {showPaymentSuccessToast &&  
-                <StyledToast onClose={handleClosePaymentSuccessToast}>
-                    <Toast.Header>
-                        <strong className="me-auto">Order Paid</strong>
-                    </Toast.Header>
-                    <Toast.Body>Payment is credited to {orderSelected.orderTitle}!</Toast.Body>
-                </StyledToast>
-                }
                 {showReviewCompleteToast && 
                     <StyledToast onClose={handleCloseReviewCompleteToast}>
                         <Toast.Header>
@@ -217,6 +217,35 @@ export const ProfilePage = () => {
                         <Toast.Body>Your review is submitted!</Toast.Body>
                     </StyledToast>
                 }
+                {showUpdateErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseUpdateErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only update an order if it is still in pending approval stage</Toast.Body>
+                    </StyledErrorToast>
+                }
+                {showCancelErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseCancelErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only cancel an order if it is still in pending approval stage</Toast.Body>
+                    </StyledErrorToast>
+                }
+   
+
+                {showReviewErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseReviewErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
+                    </StyledErrorToast>
+                }
+
+
+
 
 
        
@@ -308,7 +337,7 @@ export const ProfilePage = () => {
             <StyledTable hover>
                 <thead>
                     <tr>
-                    <th>#</th>
+                    <th>Order Id</th>
                     <th>
                         Order Title 
                         <StyledFontAwesomeIconSort 
@@ -372,18 +401,14 @@ export const ProfilePage = () => {
                                     <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav >
                                         <NavDropdown title="More" id="basic-nav-dropdown" class="navbar-toggler-icon">
-                                        <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2" onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
+                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
                                             Update Order
                                         </NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.CANCEL)}>
                                             Cancel Order
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.PAYMENT)}>
-                                            Pay for Order
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}`}>
-                                            Submit a Review
+                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
+                                            Mark as Received
                                             {/* </Link> */}
                                         </NavDropdown.Item>
                                         </NavDropdown>
@@ -412,7 +437,7 @@ export const ProfilePage = () => {
                             type="number"
                             placeholder={orderSelected != null && orderSelected.quantity}
                             autoFocus
-                            value={editOrderQty}
+                            value={orderSelected != null && editOrderQty}
                             onChange={(e) => handleEditOrderQty(e.target.value)}
                         />
                         </Form.Group>
@@ -422,7 +447,7 @@ export const ProfilePage = () => {
                             type="text"
                             placeholder={orderSelected != null && orderSelected.address}
                             autoFocus
-                            value={editOrderAddress}
+                            value={orderSelected != null && editOrderAddress}
                             onChange={(e) => handleEditOrderAddress(e.target.value)}
                         />
                         </Form.Group>
@@ -628,8 +653,18 @@ const StyledToast = styled(Toast)`
     position:absolute;
     z-index:1;
     width:20vw;
-    background-color:#DBE8D7;    
+    background-color: rgba(219, 242, 206, 0.97);
 `
+
+const StyledErrorToast = styled(Toast)`
+    margin-left:70%;
+    margin-top:3%;
+    position:absolute;
+    z-index:1;
+    width:20vw;
+    background-color:rgba(255, 204, 204, 0.97);
+`
+
 
 const PaginationContainer = styled(Pagination)`
     margin-top:3vh;
@@ -677,6 +712,7 @@ const StyledCSVLink = styled(CSVLink)`
 const StyledInputGroup = styled(InputGroup)`
     width:80%;
     margin-right: 2%;
+    z-index:-1;
 `
 
 const TableInputContainer = styled.div`

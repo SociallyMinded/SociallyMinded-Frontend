@@ -23,11 +23,13 @@ const HeaderLinkContainer = styled.div`
 `
 
 const HeaderSiteLinks = styled.div`
+    justify-content:end;
     display:flex;
+    flex-wrap:wrap;
     flex-direction:row;
-    margin-left:69%;
+    width:90%;
     margin-top:0.5em;
-    width:100%;
+    margin-left:30%;
 `
 const HeaderLink = styled(Link)`
     margin-right:10%;

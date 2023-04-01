@@ -15,3 +15,8 @@ export const ReviewPageTemplate = styled.div`
     margin-top: 3%;
     margin-bottom: 20vh;
 `
+
+export const LandingPageTemplate = styled.div`
+    font-family: 'Josefin Sans', sans-serif;
+    margin-top: 3%;
+`

@@ -1,11 +1,8 @@
-import { useState, useMemo, useCallback } from "react"
-import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
+import { useState } from "react"
 import { deleteOrderUrl, getOrdersByCustomer, updateOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import axios from 'axios'
-import { Toast } from "react-bootstrap";
 import { useEffect } from "react"
-import { ProductCategories } from "../../enum"
-import { useLocation } from "react-router"
+import { useLocation , useNavigate} from "react-router"
 import { 
     orderTitleComparator, 
     qtyComparator, 
@@ -18,7 +15,7 @@ import {
 export const Actions = {
     UPDATE: 'Update',
     CANCEL: 'Cancel',
-    PAYMENT: 'Payment'
+    COMPLETE_ORDER: 'Order Received'
 }
 
 export const ORDERSTATUS = {
@@ -29,6 +26,8 @@ export const ORDERSTATUS = {
 }
 
 const useProfileHooks = (user) => {
+    const navigate = useNavigate();
+
     const [data, setData] = useState(null)
     const [customer, setCustomer] = useState(null)
     const [error, setError] = useState(null)
@@ -57,6 +56,10 @@ const useProfileHooks = (user) => {
     const showConfirmEditOrderPage = () => setShowConfirmEditOrderModal(true)
     const closeConfirmEditOrderPage = () => setShowConfirmEditOrderModal(false)
 
+    const [showUpdateErrorActionToast, setShowUpdateErrorActionToast] = useState(false)
+    const handleShowUpdateErrorActionToast = () => setShowUpdateErrorActionToast(true)
+    const handleCloseUpdateErrorActionToast = () => setShowUpdateErrorActionToast(false)
+
     //toast after the review is completed
     const location = useLocation();
     const [showReviewCompleteToast, setShowReviewCompleteToast] = useState(location.search.includes('showReviewCompleteToast'));
@@ -84,17 +87,46 @@ const useProfileHooks = (user) => {
     const handleShowCancelSuccessToast = () => setShowCancelSuccessToast(true)
     const handleCloseCancelSuccessToast = () => setShowCancelSuccessToast(false)
 
+    const [showCancelErrorActionToast, setShowCancelErrorActionToast] = useState(false)
+    const handleShowCancelErrorActionToast = () => setShowCancelErrorActionToast(true)
+    const handleCloseCancelErrorActionToast = () => setShowCancelErrorActionToast(false)
+
+    const [showReviewErrorActionToast, setShowReviewErrorActionToast] = useState(false)
+    const handleShowReviewErrorActionToast = () => setShowReviewErrorActionToast(true)
+    const handleCloseReviewErrorActionToast = () => setShowReviewErrorActionToast(false)
+
 
     const handleOrderSelected = (order, action) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
         setEditOrderAddress(order.address)
+
+        setShowEditSuccessToast(false)
+        setShowCancelSuccessToast(false)
+        setShowReviewCompleteToast(false)
+
+        setShowUpdateErrorActionToast(false)
+        setShowCancelErrorActionToast(false)
+        setShowReviewErrorActionToast(false)
+
         if (action == Actions.UPDATE) {
-            setShowEditOrderModal(true)
+            if (order.orderStatus == ORDERSTATUS.PENDING_APPROVAL) {
+                setShowEditOrderModal(true)
+            } else {
+                setShowUpdateErrorActionToast(true)
+            }
         } else if (action == Actions.CANCEL) {
-            setShowCancelOrderModal(true)
-        } else if (action == Actions.PAYMENT) {
-            setShowPaymentOrderModal(true)
+            if (order.orderStatus == ORDERSTATUS.PENDING_APPROVAL) {
+                setShowCancelOrderModal(true)
+            } else {
+                setShowCancelErrorActionToast(true)
+            }
+        } else if (action == Actions.COMPLETE_ORDER) {
+            if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {
+                navigate(`/addReview?productId=${order.product.productId}`)
+            } else {
+                setShowReviewErrorActionToast(true)
+            }
         }
     }
 
@@ -214,6 +246,11 @@ const useProfileHooks = (user) => {
     const [showPaymentSuccessToast, setShowPaymentSuccessToast] = useState(false)
     const handleShowPaymentSuccessToast = () => setShowPaymentSuccessToast(true)
     const handleClosePaymentSuccessToast = () => setShowPaymentSuccessToast(false)
+
+    const [showPaymentErrorActionToast, setShowPaymentErrorActionToast] = useState(false)
+    const handleShowPaymentErrorActionToast = () => setShowPaymentErrorActionToast(true)
+    const handleClosePaymentErrorActionToast = () => setShowPaymentErrorActionToast(false)
+
 
     const makePayment = async () => {
         setLoading(true)
@@ -393,7 +430,13 @@ const useProfileHooks = (user) => {
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
         showPaymentOrderModal, showPaymentSuccessToast,
-        showConfirmEditModalPage,searchQuery, orderStatus        
+        showConfirmEditModalPage,searchQuery, orderStatus,        
+        showConfirmEditModalPage, 
+        showUpdateErrorActionToast,
+        showCancelErrorActionToast,  
+        showPaymentErrorActionToast,
+        showReviewErrorActionToast
+
     ]);
 
       //filter
@@ -488,7 +531,17 @@ const filteredOrders = (data ?? []).filter((d) => {
         orderStatus,
         setOrderStatus,
         searchQuery,
-        setSearchQuery
+        setSearchQuery,
+        
+        showUpdateErrorActionToast,
+        handleCloseUpdateErrorActionToast,
+        showCancelErrorActionToast,
+        handleCloseCancelErrorActionToast,
+        showPaymentErrorActionToast,
+        handleClosePaymentErrorActionToast,
+        showReviewErrorActionToast,
+        handleCloseReviewErrorActionToast
+
     } 
 }
 

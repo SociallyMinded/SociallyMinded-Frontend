@@ -28,7 +28,15 @@ const useProductListingHooks = (state) => {
     const [showLoginPromptToast, setShowLoginPromptToast] = useState(false);
 
 
-    const handleShowPurchaseModal = () => setShowPurchaseModal(true);
+    const handleShowPurchaseModal = () => {
+        if (user == null) {
+            setShowPurchaseModal(false)
+            setShowLoginPromptToast(true)
+        } else {
+            setShowPurchaseModal(true);
+        }
+    }
+
     const handleClosePurchaseModal = () => setShowPurchaseModal(false);
 
     const handleShowReviewsPage = () => setShowReviewsPage(true);
@@ -43,6 +51,12 @@ const useProductListingHooks = (state) => {
     
     const [orderQty, setOrderQty] = useState("");
     const handleOrderQty = (e) => setOrderQty(e.target.value);
+
+    const [creditCardNos, setCreditCardNos] = useState("");
+    const handleCreditCardNos = (e) => setCreditCardNos(e.target.value);
+
+    const [creditCardCVV, setCreditCardCVV] = useState("");
+    const handleCreditCardCVV = (e) => setCreditCardCVV(e.target.value);
 
     const [postalCode, setPostalCode] = useState("")
     const handlePostalCode = (e) => setPostalCode(e.target.value);
@@ -133,7 +147,7 @@ const useProductListingHooks = (state) => {
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        postalCode, handlePostalCode,
+        postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos,
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
