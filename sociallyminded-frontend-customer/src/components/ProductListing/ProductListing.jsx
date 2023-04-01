@@ -37,12 +37,10 @@ const ProductListing = () => {
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        postalCode, handlePostalCode,
-        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, 
-        geocodeAddress,
+        postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos,
+        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
-        addressData,
-        returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
     } = useProductListingHooks(state)
 
     console.log(addressData)
@@ -146,6 +144,28 @@ const ProductListing = () => {
                             autoFocus
                             value={orderQty}
                             onChange={handleOrderQty}
+                        />
+                        </Form.Group>
+                    </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Credit Card Nos</Form.Label>
+                        <Form.Control
+                            type="number"
+                            autoFocus
+                            value={creditCardNos}
+                            onChange={handleCreditCardNos}
+                        />
+                        </Form.Group>
+                    </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Credit Card CVV</Form.Label>
+                        <Form.Control
+                            type="number"
+                            autoFocus
+                            value={creditCardCVV}
+                            onChange={handleCreditCardCVV}
                         />
                         </Form.Group>
                     </Form>
