@@ -309,7 +309,7 @@ export const ProfilePage = () => {
             <StyledTable hover>
                 <thead>
                     <tr>
-                    <th>#</th>
+                    <th>Order Id</th>
                     <th>
                         Order Title 
                         <StyledFontAwesomeIconSort 

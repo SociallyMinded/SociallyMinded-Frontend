@@ -28,13 +28,13 @@ body {
 }
 
 #flip div div {
-  color:#e38abc;
+  color:#cc43a5;
 }
 #flip div:first-child div {
-  color:#c18ae3;
+  color:#9e43cc;
 }
 #flip div:last-child div {
-  color:#8ac2e3;
+  color:#436dcc;
 }
 
 @keyframes show {
