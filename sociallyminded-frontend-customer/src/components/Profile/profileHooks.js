@@ -1,10 +1,7 @@
-import { useState, useMemo, useCallback } from "react"
-import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
+import { useState } from "react"
 import { deleteOrderUrl, getOrdersByCustomer, updateOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import axios from 'axios'
-import { Toast } from "react-bootstrap";
 import { useEffect } from "react"
-import { ProductCategories } from "../../enum"
 import { useLocation , useNavigate} from "react-router"
 import { 
     orderTitleComparator, 
