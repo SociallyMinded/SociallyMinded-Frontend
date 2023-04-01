@@ -18,13 +18,11 @@ import {
 export const Actions = {
     UPDATE: 'Update',
     CANCEL: 'Cancel',
-    PAYMENT: 'Payment',
     COMPLETE_ORDER: 'Order Received'
 }
 
 export const ORDERSTATUS = {
-    PENDING_APPROVAL: 'Pending Approval',
-    AWAITING_PAYMENT: 'Payment Required',
+    PENDING_APPROVAL: 'Order Sent',
     IN_DELIVERY: 'In Delivery'
 }
 
@@ -114,12 +112,6 @@ const useProfileHooks = (user) => {
                 setShowCancelOrderModal(true)
             } else {
                 setShowCancelErrorActionToast(true)
-            }
-        } else if (action == Actions.PAYMENT) {
-            if (order.orderStatus == ORDERSTATUS.AWAITING_PAYMENT) {
-                setShowPaymentOrderModal(true)
-            } else {
-                setShowPaymentErrorActionToast(true)
             }
         } else if (action == Actions.COMPLETE_ORDER) {
             if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {

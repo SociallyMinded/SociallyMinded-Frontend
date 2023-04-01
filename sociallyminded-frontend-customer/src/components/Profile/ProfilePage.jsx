@@ -186,30 +186,21 @@ export const ProfilePage = () => {
             
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
      
-            {showEditSuccessToast &&  
-                <StyledToast onClose={handleCloseEditSuccessToast}>
-                    <Toast.Header>
-                        <strong className="me-auto">Order Updated</strong>
-                    </Toast.Header>
-                    <Toast.Body> {orderSelected.orderTitle} is updated!</Toast.Body>
-                </StyledToast>
+                {showEditSuccessToast &&  
+                    <StyledToast onClose={handleCloseEditSuccessToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Order Updated</strong>
+                        </Toast.Header>
+                        <Toast.Body> {orderSelected.orderTitle} is updated!</Toast.Body>
+                    </StyledToast>
                 }
-            {showCancelSuccessToast &&  
-                <StyledToast onClose={handleCloseCancelSuccessToast}>
-                <Toast.Header>
-                        <strong className="me-auto">Order Cancelled</strong>
-                    </Toast.Header>
-                    <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
-                </StyledToast>
-                }
-
-                {showPaymentSuccessToast &&  
-                <StyledToast onClose={handleClosePaymentSuccessToast}>
+                {showCancelSuccessToast &&  
+                    <StyledToast onClose={handleCloseCancelSuccessToast}>
                     <Toast.Header>
-                        <strong className="me-auto">Order Paid</strong>
-                    </Toast.Header>
-                    <Toast.Body>Payment is credited to {orderSelected.orderTitle}!</Toast.Body>
-                </StyledToast>
+                            <strong className="me-auto">Order Cancelled</strong>
+                        </Toast.Header>
+                        <Toast.Body>{orderSelected.orderTitle} is cancelled!</Toast.Body>
+                    </StyledToast>
                 }
                 {showReviewCompleteToast && 
                     <StyledToast onClose={handleCloseReviewCompleteToast}>
@@ -235,26 +226,6 @@ export const ProfilePage = () => {
                         <Toast.Body>You can only cancel an order if it is still in pending approval stage</Toast.Body>
                     </StyledErrorToast>
                 }
-                {showPaymentErrorActionToast &&   orderSelected.orderStatus == ORDERSTATUS.IN_DELIVERY && 
-                    <StyledErrorToast onClose={handleClosePaymentErrorActionToast}>
-                        <Toast.Header>
-                            <strong className="me-auto">Error</strong>
-                        </Toast.Header>
-                        <Toast.Body>
-                            You have already made the payment for this order
-                        </Toast.Body>
-                    </StyledErrorToast>
-                }
-                {showPaymentErrorActionToast &&   orderSelected.orderStatus != ORDERSTATUS.IN_DELIVERY && 
-                    <StyledErrorToast onClose={handleClosePaymentErrorActionToast}>
-                        <Toast.Header>
-                            <strong className="me-auto">Error</strong>
-                        </Toast.Header>
-                        <Toast.Body>
-                            You can only make a payment if the order is in awaiting payment stage (when the enterprise has accepted the order) 
-                        </Toast.Body>
-                    </StyledErrorToast>
-                }
 
                 {showReviewErrorActionToast &&
                     <StyledErrorToast onClose={handleCloseReviewErrorActionToast}>
@@ -264,11 +235,6 @@ export const ProfilePage = () => {
                         <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
                     </StyledErrorToast>
                 }
-
-
-
-
-
        
             <TableContainer>
 
@@ -309,7 +275,7 @@ export const ProfilePage = () => {
             <StyledTable hover>
                 <thead>
                     <tr>
-                    <th>#</th>
+                    <th>Order Id</th>
                     <th>
                         Order Title 
                         <StyledFontAwesomeIconSort 
@@ -373,15 +339,11 @@ export const ProfilePage = () => {
                                     <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav >
                                         <NavDropdown title="More" id="basic-nav-dropdown" class="navbar-toggler-icon">
-                                        <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2" onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
+                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
                                             Update Order
                                         </NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.CANCEL)}>
                                             Cancel Order
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.PAYMENT)}>
-                                            Make Payment
                                         </NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
                                             Mark as Received

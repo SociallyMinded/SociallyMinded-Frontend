@@ -251,7 +251,7 @@ const ReviewDescription = styled.div`
 
 `
 const ReviewBox = styled.div`
-background-color: #F3EEFC;
+    background-color: #F3EEFC;
     min-height: 5rem;
     border: 1px solid #AC73FF;
     margin-bottom: 1rem;
@@ -262,23 +262,23 @@ background-color: #F3EEFC;
     padding: 1.875rem;
 `
 const RatingTotal = styled.p`
-color : #AC73FF;
-font-size: 1.125rem;
+    color : #AC73FF;
+    font-size: 1.125rem;
 `
 const WrapperStar = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin:auto;
-`;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin:auto;
+`
 
 const ReviewFilter = styled.div`
-flex: 1;
+    flex: 1;
     margin-left: 0.9375rem;
 `
 const AllFilter = styled.div`
-cursor: pointer;
+    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -302,19 +302,15 @@ cursor: pointer;
 `
 
 const ReviewImageListContainer = styled.div`
-display: flex;
+    display: flex;
     width: 100%;
     flex-wrap: wrap;
 `
 const ReviewImgByUser = styled.img`
-width: 4.5rem;
+    width: 4.5rem;
     height: 4.5rem;
-    margin: 0 0.625rem 0.625rem
-rem
- 0;
- margin-right: 6px;
- cursor: zoom-in;
+    margin: 0 0.625rem 0.625rem;
+    margin-right: 6px;
+    cursor: zoom-in;
     position: relative;
 `
-
-
