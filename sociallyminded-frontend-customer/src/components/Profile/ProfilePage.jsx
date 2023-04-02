@@ -253,17 +253,19 @@ export const ProfilePage = () => {
 
             <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
         <TableInputContainer>
-            <StyledInputGroup className="mb-3">
-                <SearchOrderInput
-                    placeholder="Search Order"
+                <OrderInputGroup>
+                 <SearchOrderInput
+                    type="text"
+                    // placeholder="Search Order"
                     aria-describedby="basic-addon2"
-                    value = {searchQuery}
+                    value = {searchQuery != null && searchQuery}
                     disabled={false}
                     onChange={(e) => setSearchQuery(e.target.value) }
                    
                 />
+                </OrderInputGroup>
                
-            </StyledInputGroup>
+            {/* </StyledInputGroup> */}
             <div>
                 {showExportData && <StyledButton onClick={prepareDataForExport}>Export Data</StyledButton>}
                 {showDownloadData && <StyledButton onClick={handleDownloadData}>
@@ -716,6 +718,10 @@ const StyledInputGroup = styled(InputGroup)`
     z-index:-1;
 `
 
+const OrderInputGroup = styled(InputGroup)`
+    width:80%;
+    margin-right: 2%;
+`
 const TableInputContainer = styled.div`
     display:flex;
     flex-direction:row;
