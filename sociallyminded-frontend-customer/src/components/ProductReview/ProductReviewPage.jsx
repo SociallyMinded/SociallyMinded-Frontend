@@ -66,27 +66,10 @@ export const ProductReviewPage = () => {
                                     {rating === null ? "All" : `${rating} stars`}
                                 </AllFilter>
                                 ))}
-                            {/* <FiveStarsFilter>
-                                5 Star
-                                </FiveStarsFilter>
-                                <FourStarsFilter>
-                                    4 Star
-                                </FourStarsFilter>
-                                <ThreeStarsFilter>
-                                    3 Star
-                                </ThreeStarsFilter>
-                                <TwoStarsFilter>
-                                    2 Star
-                                </TwoStarsFilter>
-                                <OneStarsFilter>
-                                    1 Star
-                                </OneStarsFilter>
-                                <ImageFilter>
-                                    With Image
-                                </ImageFilter> */}
+                           
                         </ReviewFilter>
                     </ReviewBox>
-                {/* } */}
+               
 
                 {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
                 {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}

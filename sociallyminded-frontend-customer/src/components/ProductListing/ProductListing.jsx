@@ -40,7 +40,8 @@ const ProductListing = () => {
         postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos,
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
-        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, 
+        setLikeList, likeList, setUserDetail, userDetail, handleToggleLike
     } = useProductListingHooks(state)
 
     console.log(addressData)
@@ -120,6 +121,19 @@ const ProductListing = () => {
                         <StyledButton variant="primary" onClick={handleShowReviewsPage}>
                             <StyledLink to="/product_review" state={ state }>View All Reviews</StyledLink>
                         </StyledButton>
+                        {userDetail.likeList!=null && 
+                        <UnlikeIcon onClick={handleToggleLike}>
+                        🤍
+                      </UnlikeIcon>}
+                    {userDetail.likeList!=null && !userDetail.likeList.includes(state.d.productId) ? (
+                            <UnlikeIcon onClick={handleToggleLike}>
+                            🤍
+                          </UnlikeIcon>
+                        ) : (
+                            <LikeIcon onClick={handleToggleLike}>
+                            ❤️
+                        </LikeIcon>
+                        )}
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
 
@@ -344,6 +358,20 @@ const StyledLink = styled(Link)`
     &:hover {
         color:white;
     }
+`
+const LikeIcon = styled.div`
+position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '24px',
+    cursor: 'pointer',
+`
+const UnlikeIcon = styled.div`
+position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '24px',
+    cursor: 'pointer',
 `
 
 

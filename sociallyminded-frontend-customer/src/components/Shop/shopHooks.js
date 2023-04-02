@@ -1,16 +1,21 @@
 import { useState, useMemo } from "react"
 import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
 import { getAllProductsUrl } from "../../routes/routes"
+import { getCustomerByUid } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
+import { UserAuth } from "../../context/AuthContext";
 
 const useShopHooks = () => {
     const [data, setData] = useState(null)
     const [displayData, setDisplayData] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
-    
+    const [userDetail, setUserDetail] = useState(null)
+    const [likeList, setLikeList] = useState(null)
+    const { user } = UserAuth();
+    console.log("user : " + userDetail);
     useEffect(() => {
         axios.get(getAllProductsUrl)
         .then(response => {
@@ -25,6 +30,23 @@ const useShopHooks = () => {
         )
     }, []);
 
+    // const userDetails =  async () => {
+    // console.log("user . uid : " + user.uid);
+    //     await axios.get(getCustomerByUid + user.uid)
+    //     .then(response => {
+    //         setUserDetail(response.data)
+    //         console.log("response : " + response.data)
+    //         if(userDetail.likeList != null){
+    //             setLikeList(userDetail.likeList)
+    //         }
+    //     })
+    //     .catch ((error) => {
+    //         setError(error)
+    //     })
+    //     .finally (
+    //         setLoading(false)
+    //     )
+    // , []};
     const [craftFilterClicked, setCraftFilterClicked] = useState(true)
     const [clothingFilterClicked, setClothingFilterClicked] = useState(true)
     const [foodFilterClicked, setFoodFilterClicked] = useState(true)
@@ -123,13 +145,43 @@ const useShopHooks = () => {
 
         setDisplayData(filteredDisplayData)
     }
+   
+
+    //for Like List
+   
+
+    function handleToggleLike() {
+        // setIsLike(!isLike);
+        // const updateUser = {
+            
+        //     "category" : product.category,
+        //     "description" : product.description,
+        //     "imageLink": product.imageLink,
+        //     "name" : product.name,
+        //     "price" : product.price,
+        //     "numRatings" : Big(product.numRatings).plus(1),
+        //     "ratingScore" : Big(product.ratingScore).plus(rating),
+        //     "productId" : productId
+          
+        //     };
+
+        //   //update the product review number and rating
+        //   axios.put(updateProductUrl + product.productId, updateProduct)
+        //   .then(response => {
+        //     console.log("enter this product method")
+        //     console.log(response.data)
+        //   }).catch((error) => {
+        //     console.log(error); // handle any errors that occur during the axios call
+        //   });
+      }
 
     return { 
         searchQuery,
         data, loading,
         searchByProductName, displayData,
         searchPrompts, handleSearchQuery, showSearchPrompts, performSearch,
-        filterProductByCategory, craftFilterClicked, clothingFilterClicked, foodFilterClicked, othersFilterClicked
+        filterProductByCategory, craftFilterClicked, clothingFilterClicked, foodFilterClicked, othersFilterClicked,
+        user, userDetail, likeList
     } 
 }
 

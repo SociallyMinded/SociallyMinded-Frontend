@@ -11,11 +11,13 @@ export const updateOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 export const deleteOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 export const updateProductUrl = `${ABSOLUTE_PATH}/entity.product/`
 
+
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
 export const getProductByIdUrl = `${ABSOLUTE_PATH}/entity.product/`
 // Add customer firebase uid after the last "/" 
 export const getOrdersByCustomer = `${ABSOLUTE_PATH}/entity.orderrecord/findOrderRecordsByCustomerId/`
+export const getCustomerByUid = `${ABSOLUTE_PATH}/entity.customer/`
 
 export const ABSOLUTE_HOME_LINK = ABSOLUTE_FRONTEND_PATH
 export const HOME_LINK = "/"

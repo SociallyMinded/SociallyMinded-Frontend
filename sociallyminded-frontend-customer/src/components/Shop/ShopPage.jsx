@@ -15,7 +15,8 @@ export const ShopPage = () => {
         searchByProductName, searchPrompts, handleSearchQuery, 
         displayData, showSearchPrompts, performSearch,
         filterProductByCategory, craftFilterClicked, clothingFilterClicked, 
-        foodFilterClicked, othersFilterClicked
+        foodFilterClicked, othersFilterClicked, handleToggleLike, isLike, 
+        likeList, userDetail
     } = useShopHooks();
 
     const { user } = UserAuth()
@@ -47,7 +48,14 @@ export const ShopPage = () => {
                 />
 
                 <DataDisplay 
-                    data={{ displayData: displayData }}
+                    data={{ displayData: displayData, 
+                        handleToggleLike: handleToggleLike, 
+                        isLike: isLike, 
+                        likeList: likeList, 
+                        userDetail: userDetail
+                    }}
+                    
+
                 />
 
             </div>

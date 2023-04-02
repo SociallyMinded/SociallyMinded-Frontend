@@ -5,9 +5,16 @@ import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 import React from 'react';
 import Rating from '@mui/material/Rating';
+import { UserAuth } from "../../context/AuthContext";
+
 
 export const DataDisplay = ({data}) => {
-    console.log(data)
+    //const { user } = UserAuth();
+    console.log("data:" + data)
+    console.log("user in shop : " + data.userDetail);
+    // console.log("user in shop in the like list " + likeList)
+    // console.log("user detail : "+ userDetail);
+    
     return (
         <StyledRow lg={5} md={4}>
             {data.displayData != null && data.displayData.map((d) => (
@@ -19,8 +26,18 @@ export const DataDisplay = ({data}) => {
                     <StyledCardHeader>
                         {d.socialenterprise.enterpriseName}
                     </StyledCardHeader>
+
+                    {/* {!userDetail.likeList.includes(d.productId) ? (
+                            <UnlikeIcon onClick={handleToggleLike}>
+                            🤍
+                          </UnlikeIcon>
+                        ) : (
+                            <LikeIcon onClick={handleToggleLike}>
+                            ❤️
+                        </LikeIcon>
+                        )} */}
                         <StyledImg variant="top" src={require('./donut.png')} />
-                        
+                       
                         <StyledCardBody>
                             <Card.Title>{d.name}</Card.Title>
                             <Card.Title>${d.price}</Card.Title>
@@ -118,6 +135,7 @@ const StyledText = styled.p`
 
 const StyledImg = styled(Card.Img)`
   border-width:0px;
+  position: relative;
 `
 
 const NoRating = styled.p`
@@ -135,3 +153,19 @@ const RatingNumber = styled.div`
 const Score = styled.span`
 margin-left: 5px;
 `
+
+const LikeIcon = styled.div`
+position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '24px',
+    cursor: 'pointer',
+`
+const UnlikeIcon = styled.div`
+position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '24px',
+    cursor: 'pointer',
+`
+

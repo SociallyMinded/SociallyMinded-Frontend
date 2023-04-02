@@ -257,8 +257,10 @@ export const ProfilePage = () => {
                 <SearchOrderInput
                     placeholder="Search Order"
                     aria-describedby="basic-addon2"
-                    value = {searchQuery}
-                    disabled={false}
+                    value = {searchQuery != null && searchQuery}
+                    // disabled={false}
+                     type = "text"
+                   
                     onChange={(e) => setSearchQuery(e.target.value) }
                    
                 />
