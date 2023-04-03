@@ -22,9 +22,13 @@ export const DataDisplay = ({data}) => {
                         <StyledImg variant="top" src={require('./donut.png')} />
                         
                         <StyledCardBody>
-                            <Card.Title>{d.name}</Card.Title>
-                            <Card.Title>${d.price}</Card.Title>
-                          
+                            <CardTitleContainer>
+                                <StyledCardTitle>{d.name}</StyledCardTitle>
+                            </CardTitleContainer>
+                            <LineBreak></LineBreak>
+                            <CardTitleContainer>
+                                <StyledCardTitle>${d.price}</StyledCardTitle>
+                            </CardTitleContainer>
                         </StyledCardBody>
                         {d.numRatings != 0 && d.ratingScore != 0 && (
                         <RatingNumber> 
@@ -44,10 +48,24 @@ export const DataDisplay = ({data}) => {
     )
 }
 
+const LineBreak = styled.br`
+    margin-top:0vh;
+`
+
 const StyledCardHeader = styled(Card.Header)`
     background-color:white;
     border-width:0px;
+`
 
+const CardTitleContainer = styled.div`
+    max-width:100%;
+`
+
+const StyledCardTitle = styled(Card.Title)`
+    font-size:1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 `
 
 const StyledRow = styled(Row)`
@@ -105,9 +123,7 @@ const StyledCard = styled(Card)`
 
 const StyledCardBody = styled(Card.Body)`
     display: flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-between;
+    flex-direction: column;
 `
 
 const StyledText = styled.p`

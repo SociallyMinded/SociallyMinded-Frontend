@@ -27,6 +27,7 @@ import PointMarker from "../Map/PointMarker"
 import BaseMap from "../Map/BaseMap"
 
 import Alert from 'react-bootstrap/Alert';
+
 const ProductListing = () => {
     const { state } = useLocation();
     const { user } = UserAuth()
@@ -40,7 +41,8 @@ const ProductListing = () => {
         postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos,
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
-        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
+        addressText, handleAddressText
     } = useProductListingHooks(state)
 
     console.log(addressData)
@@ -104,7 +106,7 @@ const ProductListing = () => {
                 <ProductListingDescriptionContainer>
                     <ProductListingDescriptionTitleContainer>
                         <h1>{state.d.name} </h1>
-                        <h5><Badge bg="secondary"> {state.d.category} </Badge></h5>
+                        <h5><StyledBadge> {state.d.category} </StyledBadge></h5>
                     </ProductListingDescriptionTitleContainer>
                     <h2>Price : ${state.d.price}</h2>
                     <ProductListingDescriptionDetailContainer>
@@ -171,10 +173,20 @@ const ProductListing = () => {
                     </Form>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Address</Form.Label>
+                        <Form.Label>Unit Number</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Address / Postal Code"
+                            autoFocus
+                            value={unitNos}
+                            onChange={handleUnitNos}
+                        />
+                        </Form.Group>
+                    </Form>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Postal Code </Form.Label>
+                        <Form.Control
+                            type="text"
                             autoFocus
                             value={postalCode}
                             onChange={handlePostalCode}
@@ -220,7 +232,7 @@ const ProductListing = () => {
                     </Form>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Address : {addressData.ADDRESS}</Form.Label>
+                        <Form.Label>Address : {addressText}</Form.Label>
                         </Form.Group>
                     </Form>
                     <Form>
@@ -255,10 +267,14 @@ const ProductListing = () => {
 
 
             </ProductListingPage>
-        
         </PageTemplate>
     )
 }
+
+const StyledBadge = styled(Badge)`
+    background-color: #b3a2de!important;
+
+`
 
 const ProductListingPage = styled.div`
     display:flex;

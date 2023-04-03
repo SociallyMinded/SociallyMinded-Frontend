@@ -16,6 +16,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { useContext } from "react";
 import { LogoutToastContext } from "../../App";
 import { useLocation } from "react-router-dom";
+import Footer from "../common/Footer/Footer";
 
 import { useState } from "react";
 
@@ -127,6 +128,7 @@ const Home = () => {
                             by our home grown Singaporean social enterprises. Here,
                             you can find anything ranging from clothes, to food, to 
                             clay crafts. 
+                            <ParagraphBreak></ParagraphBreak>
                             Enjoy a fuss free and seamless online shopping experience 
                             while contributing towards sustainable social and environmental 
                             causes! 
@@ -143,15 +145,14 @@ const Home = () => {
 
             </CommentContainer>
 
-
-
-            <FooterContainer>
-                <h6>SociallyMinded 2023</h6>
-            </FooterContainer>
-
+            <Footer></Footer>
         </LandingPageTemplate>
     )
 }
+
+const ParagraphBreak = styled.br`
+    margin-top:3vh;
+`
 
 const CommentContainer = styled.div`
     display:flex;
@@ -312,9 +313,10 @@ const FooterContainer = styled.div`
     align-items: center;
     justify-content:center;
     width:100%;
-    height:8vh;
     background-color:#e1f1f2;
     margin-top:5vh;
+    height:6vh;
+    padding-top:2vh;
 
 `
 

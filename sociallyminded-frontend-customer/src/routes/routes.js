@@ -16,6 +16,7 @@ export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findR
 export const getProductByIdUrl = `${ABSOLUTE_PATH}/entity.product/`
 // Add customer firebase uid after the last "/" 
 export const getOrdersByCustomer = `${ABSOLUTE_PATH}/entity.orderrecord/findOrderRecordsByCustomerId/`
+export const getOrderByIdUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 
 export const ABSOLUTE_HOME_LINK = ABSOLUTE_FRONTEND_PATH
 export const HOME_LINK = "/"

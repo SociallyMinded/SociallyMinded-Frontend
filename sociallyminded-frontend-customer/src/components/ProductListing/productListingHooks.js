@@ -61,8 +61,14 @@ const useProductListingHooks = (state) => {
     const [postalCode, setPostalCode] = useState("")
     const handlePostalCode = (e) => setPostalCode(e.target.value);
 
+    const [unitNos, setUnitNos] = useState("")
+    const handleUnitNos = (e) => setUnitNos(e.target.value);
+
 
     const [addressData, setAddressData] = useState("")
+
+    const [addressText, setAddressText] = useState("")
+    const handleAddressText = (addressText) => setAddressText(addressText)
 
     const [confirmOrder, setConfirmOrder] = useState(false)
     const showConfirmOrderPage = (e) => setConfirmOrder(true)
@@ -95,8 +101,9 @@ const useProductListingHooks = (state) => {
         await axios.get(url)
         .then(response => {
             const addressData = response.data.results[0]
-            console.log(addressData)
+            const fullAddressText = addressData.ADDRESS.split("SINGAPORE")[0] + ` #${unitNos} SINGAPORE` + addressData.ADDRESS.split("SINGAPORE")[1]
             setAddressData(addressData)
+            setAddressText(fullAddressText)
         })
         .catch((error) => {
             console.log(error)
@@ -147,10 +154,11 @@ const useProductListingHooks = (state) => {
         data, displayData, loading, error, createNewOrder, 
         handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
         showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos,
+        postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos, unitNos, handleUnitNos,
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
-        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage
+        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
+        addressText, handleAddressText
     } 
 }
 

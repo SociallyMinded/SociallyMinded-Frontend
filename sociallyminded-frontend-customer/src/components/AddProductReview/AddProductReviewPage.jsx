@@ -21,6 +21,7 @@ import { PROFILE_PAGE_LINK } from "../../routes/routes";
 import { createNewReviewUrl } from "../../routes/routes";
 import { getProductByIdUrl } from "../../routes/routes";
 import { updateProductUrl } from "../../routes/routes";
+import { getOrderByIdUrl } from "../../routes/routes";
 //import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
 import LoggedInHeader from "../common/Header/LoggedInHeader";
 
@@ -28,6 +29,7 @@ import LoggedInHeader from "../common/Header/LoggedInHeader";
 
 export const AddProductReviewPage = (state) => {
     const [product, setProduct] = useState(null);
+    const [order, setOrder] = useState(null);
     const [rating, setRating] = React.useState(5);
     const [hover, setHover] = React.useState(-1);
     const [reviewDescription, setReviewDescription] = useState('');
@@ -44,7 +46,11 @@ export const AddProductReviewPage = (state) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const productId = searchParams.get('productId');
-
+    const orderId = searchParams.get('orderId');
+    const orderTitle = searchParams.get('orderTitle');
+    const productImageLink = searchParams.get('productImageLink');
+    const dateOfOrder = searchParams.get('dateOfOrder');
+    
     //const { state } = useLocation()
     const navigate = useNavigate();
     const { user } = UserAuth();
@@ -110,11 +116,17 @@ export const AddProductReviewPage = (state) => {
 
     
     useEffect(() => {
+      setLoading(true);
       axios.get(getProductByIdUrl + productId)
       .then(response => {
         
           setProduct(response.data)
           console.log("product : " + response.data)
+          return axios.get(getOrderByIdUrl + orderId);
+      })
+      .then(response => {
+        setOrder(response.data); // set the order state variable here
+        console.log("order : " + response.data);
       })
       .catch ((error) => {
           setError(error)
@@ -150,8 +162,7 @@ export const AddProductReviewPage = (state) => {
           "reviewImages" : imageBase64s
         }
           };
-          console.log("number rating" + Big(product.numRatings).plus(1) );
-          console.log("rating score :" + Big(product.ratingScore).plus(rating) );
+         
           const updateProduct = {
             "socialEnterpriseId" : product.socialenterprise.socialEnterpriseId,
             "product": {
@@ -252,17 +263,43 @@ export const AddProductReviewPage = (state) => {
         left: "0"
     }
     
+    const ShowProductBeingReviewed = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#e6e6fa",
+      padding: "10px"
+  }
+
+  const ProductImage = {
+    width: "100px",
+    height: "100px",
+    marginRight: "10px"
+}
+
+const ShowOrderTitle = {
+  fontSize: "20px",
+  fontWeight: "bold",
+  margin: "0"
+}
+
     return (
       <PageTemplate>
          {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
        {/* show the product that going to review*/}
-       <div>
+       <div style={ShowProductBeingReviewed}>
        {/* <img
           src={}
          alt= "pic"
                             /> */}
-        {/* <p> Product name : {product.name} </p>
-         */}
+        <img style={ProductImage} variant="top" src={require('./donut.png')} />
+        <div style={{ textAlign: 'center' }}>
+        <p style={ShowOrderTitle}> {dateOfOrder!= null && dateOfOrder.split("T")[0]} </p>
+       
+        <p style={ShowOrderTitle}>{orderTitle} </p>
+        </div>
+        {/* <p> Product name : {product.name} </p> */}
+        
        </div>
         <div>
         <form style={formStyle} onSubmit={handleSubmit}>

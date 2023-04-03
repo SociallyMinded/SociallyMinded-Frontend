@@ -414,7 +414,12 @@ export const ProfilePage = () => {
                                             Mark as Received
                                             {/* </Link> */}
                                         </NavDropdown.Item>
+                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&productImageLink=${d.product.imageLink}&dateOfOrder=${d.dateOfOrder}`}>
+                                            Submit a Review
+                                        </NavDropdown.Item>
                                         </NavDropdown>
+                                        
+                                      
                                     </Nav>
                                     </Navbar.Collapse>
                             </Container>
