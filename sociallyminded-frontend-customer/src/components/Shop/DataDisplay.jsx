@@ -19,7 +19,7 @@ export const DataDisplay = ({data}) => {
                     <StyledCardHeader>
                         {d.socialenterprise.enterpriseName}
                     </StyledCardHeader>
-                        <StyledImg variant="top" src={require('./donut.png')} />
+                        <StyledImg variant="top" src={`data:image/jpeg;base64,${d.imageLink[0]}`} />
                         
                         <StyledCardBody>
                             <CardTitleContainer>
