@@ -167,7 +167,7 @@ const ProductListing = () => {
                                 />
                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback type="invalid">
-                                    Please provide a quantity
+                                    Please provide an order quantity
                                 </Form.Control.Feedback>
                             </Form.Group>
 
@@ -313,9 +313,8 @@ const ProductListing = () => {
 
 const ModalButtonContainer = styled.div`
     width:100%;
-    margin-top:5vh;
-    margin-bottom:3vh;
-
+    margin-top:3vh;
+    margin-bottom:1vh;
 `
 
 const ModalButton = styled(Button)`

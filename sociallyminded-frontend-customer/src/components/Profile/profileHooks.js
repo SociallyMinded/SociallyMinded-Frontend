@@ -9,7 +9,8 @@ import {
     priceComparator,
     orderAddressComparator, 
     orderDateComparator,
-    orderStatusComparator 
+    orderStatusComparator, 
+    orderIdComparator
 } from "./comparator"
 
 export const Actions = {
@@ -133,17 +134,23 @@ const useProfileHooks = (user) => {
         const url = obtainGeocodeUrl(editOrderAddress)
         await axios.get(url)
         .then(response => {
-            const addressData = response.data.results[0]
-            console.log(addressData)
-            setAddressData(addressData)
+            if (editOrderQty != "") {
+                const addressData = response.data.results[0]
+                console.log(addressData)
+                setAddressData(addressData)
+
+                setShowEditOrderModal(false)
+                setShowConfirmEditOrderModal(true)
+            } else {
+                setShowConfirmEditOrderModal(false)
+            }
+          
         })
         .catch((error) => {
             console.log(error)
         })
         .finally (() => {
             setLoading(false)
-            setShowEditOrderModal(false)
-            setShowConfirmEditOrderModal(true)
         })
     }
 
@@ -151,6 +158,7 @@ const useProfileHooks = (user) => {
     const updateEditedOrder = async () => {
         setLoading(true)
         if (user != null) {
+
             const customerFirebaseUid = user.uid
             const updatedTotalPrice = editOrderQty * orderSelected.product.price
             console.log(orderSelected)
@@ -164,21 +172,27 @@ const useProfileHooks = (user) => {
                     "orderRecordId": orderSelected.orderRecordId,
                     "dateOfOrder": orderSelected.dateOfOrder,
                     "orderStatus": orderSelected.orderStatus,
-                    "address": addressData.ADDRESS
+                    "address": editOrderAddress
                 }
             }
-           
-            await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch(error => setEditOrderError(error.response.data))
-                .finally(res => {
-                    setRefreshTable(true)
 
-                    setShowConfirmEditOrderModal(false)
-                    setShowEditSuccessToast(true)
-                })
+            if (editOrderQty == "" || editOrderAddress == "") {
+                setRefreshTable(false)
+                setShowEditOrderModal(true)
+                setShowEditSuccessToast(false)
+            } else {
+                await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => setEditOrderError(error.response.data))
+                    .finally(res => {
+                        console.log(res)
+                        setRefreshTable(true)
+                        setShowEditOrderModal(false)
+                        setShowEditSuccessToast(true)  
+                    })
+            }
         } else {
             // setShowPurchaseModal(false)
             // setShowLoginPromptToast(true)
@@ -293,8 +307,6 @@ const useProfileHooks = (user) => {
             }
         }
     }
-    
-
     
     const [sortAscendingOrderTitle, setSortAscendingOrderTitle] = useState(true)
     const sortByOrderTitle = (e) => {
