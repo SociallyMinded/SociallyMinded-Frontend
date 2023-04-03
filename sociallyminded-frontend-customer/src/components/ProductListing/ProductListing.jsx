@@ -26,7 +26,8 @@ import Map from 'react-map-gl';
 import PointMarker from "../Map/PointMarker"
 import BaseMap from "../Map/BaseMap"
 
-import Alert from 'react-bootstrap/Alert';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 
 const ProductListing = () => {
     const { state } = useLocation();
@@ -42,7 +43,7 @@ const ProductListing = () => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
-        addressText, handleAddressText
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError
     } = useProductListingHooks(state)
 
     console.log(addressData)
@@ -52,7 +53,20 @@ const ProductListing = () => {
         latitude: addressData == null ? 1.3555175316779877 : addressData.LATITUDE,
         zoom: 16
       });
-    
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        event.preventDefault()
+        setValidated(true)
+    }
+
       
     return (
         <PageTemplate>
@@ -101,6 +115,14 @@ const ProductListing = () => {
                         <Toast.Body>Please log in to your account to place an order</Toast.Body>
                     </StyledLoginPromptToast>
                 }
+                {showAddressNotFoundError &&
+                      <StyledLoginPromptToast onClose={handleCloseAddressNotFoundError}>
+                      <Toast.Header>
+                          <strong className="me-auto">Notice</strong>
+                      </Toast.Header>
+                      <Toast.Body>Your provided postal code does not exist. Please check if your postal code is correct</Toast.Body>
+                  </StyledLoginPromptToast>
+                }
             </ProductListingToastSection>
 
                 <ProductListingDescriptionContainer>
@@ -125,80 +147,97 @@ const ProductListing = () => {
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
 
-                
-                
             </ProductListingDescriptionSection>
-
-      
-
-
 
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
-                    <Modal.Title>{state.d.name}</Modal.Title>
+                        <Modal.Title>{state.d.name}</Modal.Title>
                     </Modal.Header>
+                    
                     <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Qty</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={orderQty}
-                            onChange={handleOrderQty}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Credit Card Nos</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={creditCardNos}
-                            onChange={handleCreditCardNos}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Credit Card CVV</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={creditCardCVV}
-                            onChange={handleCreditCardCVV}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Unit Number</Form.Label>
-                        <Form.Control
-                            type="text"
-                            autoFocus
-                            value={unitNos}
-                            onChange={handleUnitNos}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Postal Code </Form.Label>
-                        <Form.Control
-                            type="text"
-                            autoFocus
-                            value={postalCode}
-                            onChange={handlePostalCode}
-                        />
-                        </Form.Group>
-                    </Form>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Qty</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    autoFocus
+                                    value={orderQty}
+                                    onChange={handleOrderQty}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a quantity
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Credit Card Nos</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={creditCardNos}
+                                    onChange={handleCreditCardNos}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a credit card nos
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Credit Card CVV</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    autoFocus
+                                    value={creditCardCVV}
+                                    onChange={handleCreditCardCVV}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a credit card cvv
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Unit Number</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={unitNos}
+                                    onChange={handleUnitNos}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your unit number
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Postal Code </Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={postalCode}
+                                    onChange={handlePostalCode}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your postal code
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <ModalButtonContainer>
+                                <ModalButton type="submit" variant="primary" onClick={geocodeAddress}>
+                                    Confirm Order
+                                </ModalButton>
+                            </ModalButtonContainer>
+                        </Form>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="primary" onClick={geocodeAddress}>
-                        Confirm Order
-                    </Button>
-                    </Modal.Footer>
                 </Modal> 
 
                 {addressData != null  && <Modal show={confirmOrder} onHide={closeConfirmOrderPage} centered>
@@ -237,7 +276,7 @@ const ProductListing = () => {
                     </Form>
                     <Form>
                              
-                    <Map
+                    {!showAddressNotFoundError && <Map
                         mapboxAccessToken={'pk.eyJ1Ijoib25neW9uZ2VuMjAwMCIsImEiOiJjbDZseXN2ejQwZ25pM2JxcTNwbGY2Mm01In0.6_e_3aUVc5M9RUMI9S2sfw'}
                         {...viewState}
                         onMove={evt => setViewState(evt.viewState)}
@@ -250,15 +289,16 @@ const ProductListing = () => {
                             longitude={addressData.LONGITUDE}
                             latitude={addressData.LATITUDE}
                         />
-                    </Map>
+                    </Map>}
 
                     </Form>
+
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
                         Back
                     </Button>
-                    <Button variant="primary" onClick={createNewOrder}>
+                    <Button type="submit" variant="primary" onClick={createNewOrder}>
                         Place Order
                     </Button>
                     </Modal.Footer>
@@ -271,9 +311,18 @@ const ProductListing = () => {
     )
 }
 
+const ModalButtonContainer = styled.div`
+    width:100%;
+    margin-top:5vh;
+    margin-bottom:3vh;
+
+`
+
+const ModalButton = styled(Button)`
+`
+
 const StyledBadge = styled(Badge)`
     background-color: #b3a2de!important;
-
 `
 
 const ProductListingPage = styled.div`

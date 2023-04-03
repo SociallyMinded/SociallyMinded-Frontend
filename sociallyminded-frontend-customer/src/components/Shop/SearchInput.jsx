@@ -70,5 +70,5 @@ const StyledFormControl = styled(Form.Control)`
     width:80%;
 `
 const StyledFormCheck = styled(Form.Check)`
-  padding-left:3vw;
+    padding-left:3vw;
 `

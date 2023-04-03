@@ -623,7 +623,7 @@ const StyledFontAwesomeIconSort = styled(FontAwesomeIcon)`
 
 const StyledButton = styled(Button)`
     text-decoration: none !important;
-    background-color:#0275d8!important;
+    background-color:#0D6EFD!important;
     &:hover {
         text-decoration: none !important;
         color:white;
