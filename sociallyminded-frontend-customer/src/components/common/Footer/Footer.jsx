@@ -10,8 +10,15 @@ const Footer = () => {
 }
 
 const StyledFooter = styled.div`
-    font-family: 'Josefin Sans', sans-serif;
-    padding: 1em;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content:center;
+    width:100%;
+    background-color:#d3e8e8;
+    margin-top:5vh;
+    height:6vh;
+    padding-top:2.5vh;
 `
 
 export default Footer
