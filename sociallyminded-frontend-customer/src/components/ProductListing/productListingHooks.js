@@ -29,6 +29,9 @@ const useProductListingHooks = (state) => {
 
 
     const handleShowPurchaseModal = () => {
+        setShowSuccessToast(false)
+        setShowLoginPromptToast(false)
+        setShowAddressNotFoundError(false)
         if (user == null) {
             setShowPurchaseModal(false)
             setShowLoginPromptToast(true)
@@ -74,6 +77,8 @@ const useProductListingHooks = (state) => {
     const showConfirmOrderPage = (e) => setConfirmOrder(true)
     const closeConfirmOrderPage = (e) => setConfirmOrder(false)
 
+    const [showAddressNotFoundError, setShowAddressNotFoundError] = useState(false)
+    const handleCloseAddressNotFoundError = () => setShowAddressNotFoundError(false)
 
     const returnToPurchaseModalAfterConfirmModal = () => {
         setConfirmOrder(false)
@@ -100,18 +105,31 @@ const useProductListingHooks = (state) => {
         const url = obtainGeocodeUrl(postalCode)
         await axios.get(url)
         .then(response => {
-            const addressData = response.data.results[0]
-            const fullAddressText = addressData.ADDRESS.split("SINGAPORE")[0] + ` #${unitNos} SINGAPORE` + addressData.ADDRESS.split("SINGAPORE")[1]
-            setAddressData(addressData)
-            setAddressText(fullAddressText)
+            if (orderQty !== "" && creditCardNos !== "" && creditCardCVV !== "" && unitNos !== "" && postalCode !== "") {
+                if (response.data.results.length != 0) {
+                    const addressData = response.data.results[0]
+                    const fullAddressText = addressData.ADDRESS.split("SINGAPORE")[0] + ` #${unitNos} SINGAPORE` + addressData.ADDRESS.split("SINGAPORE")[1]
+                    setAddressData(addressData)
+                    setAddressText(fullAddressText)
+                    setShowPurchaseModal(false)
+                    setConfirmOrder(true)
+                } else {
+                    setShowAddressNotFoundError(true)
+                    setShowPurchaseModal(false)
+                    setConfirmOrder(false)
+                }
+            }
+            else {
+                setConfirmOrder(false)
+            }
+            
         })
         .catch((error) => {
             console.log(error)
         })
         .finally (() => {
             setLoading(false)
-            setShowPurchaseModal(false)
-            setConfirmOrder(true)
+  
 
         })
     }
@@ -158,7 +176,7 @@ const useProductListingHooks = (state) => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
-        addressText, handleAddressText
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError
     } 
 }
 
