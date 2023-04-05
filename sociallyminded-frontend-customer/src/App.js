@@ -30,7 +30,7 @@ function App() {
               <Route path='/reset_pw' element={<ResetPassword/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/shop' element={<ShopPage/>}/>
-              <Route path='/product_listing' element={<ProductListing/>}/>
+              <Route path='/product_listing/:productId' element={<ProductListing/>}/>
               <Route path='/product_review' element={<ProductReviewPage/>}/>
               <Route path='/addReview' element={<AddProductReviewPage/>}/>
               <Route path='/profile' element={<ProfilePage/>}/>

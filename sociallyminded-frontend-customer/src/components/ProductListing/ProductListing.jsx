@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { PageTemplate } from "../common/styles";
+import { PageTemplate, ReviewPageTemplate } from "../common/styles";
 
 import Modal from 'react-bootstrap/Modal';
 import { useState } from "react";
@@ -27,7 +27,9 @@ import PointMarker from "../Map/PointMarker"
 import BaseMap from "../Map/BaseMap"
 
 import InputGroup from 'react-bootstrap/InputGroup';
-
+import { getProductsBySocialEnterprise } from "../../routes/routes";
+import { useEffect } from "react";
+import axios from "axios";
 
 const ProductListing = () => {
     const { state } = useLocation();
@@ -43,10 +45,8 @@ const ProductListing = () => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
-        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts
     } = useProductListingHooks(state)
-
-    console.log(addressData)
 
     const [viewState, setViewState] = useState({
         longitude: addressData == null ? 103.77655039734071 : addressData.LONGITUDE,
@@ -67,7 +67,16 @@ const ProductListing = () => {
         setValidated(true)
     }
 
-      
+
+    const getAllRecommendedProducts = () => {
+        const recommended = data.filter((d) => 
+            d.socialenterprise.socialEnterpriseId == state.d.socialenterprise.socialEnterpriseId &&
+            d.productId != state.d.productId
+        )
+        return recommended
+    }
+
+    
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
@@ -146,8 +155,27 @@ const ProductListing = () => {
                         </StyledButton>
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
-
             </ProductListingDescriptionSection>
+            {data != null && getAllRecommendedProducts().length > 0 &&     
+                <ProductRecommendationTitle>other products from this social enterprise</ProductRecommendationTitle>
+            }
+            <ProductRecommendationSectionContainer>
+                    <ProductRecommendationSection>
+                    {data != null && getAllRecommendedProducts().length > 0 && getAllRecommendedProducts().map((d) => (
+                        <ProductRecommendationImgContainer>
+                            <StyledProductLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
+                            <ProductRecommendationImg
+                                src={require('./donut.png')}
+                                alt="First slide"
+                            />
+                            <ProductRecommendationName>{d.name}</ProductRecommendationName>
+                            </StyledProductLink>
+                        </ProductRecommendationImgContainer>
+                    ))}
+                    </ProductRecommendationSection>
+                    
+                </ProductRecommendationSectionContainer>
+            
 
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
@@ -304,12 +332,81 @@ const ProductListing = () => {
                     </Modal.Footer>
                 </Modal> 
                 }
-
-
             </ProductListingPage>
         </PageTemplate>
     )
 }
+
+const ProductRecommendationName = styled.p`
+    width:80%;
+`
+
+const StyledProductLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+`
+const ProductRecommendationTitle = styled.h4`
+    margin-top:7vh;
+`
+
+const ProductRecommendationSectionContainer = styled.div`
+    padding-bottom:10vh;
+    overflow-x: scroll;
+    max-width:100%;
+`
+
+const ProductRecommendationSection = styled.div`
+    display:flex;
+    flex-direction:row;
+`
+
+const ProductRecommendationImgContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+`
+
+const ProductRecommendationImg = styled.img`
+    width:20vw;
+    height:30vh;
+    border-radius:10px;
+    margin-right:1vw;
+    margin-top:2vh;
+    margin-bottom:2vh;
+
+    display: block;
+    top: 0px;
+    position: relative;
+    border-radius: 4px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+
+
+    &:hover {
+        transition: all 0.2s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        border-radius:20px;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        border-radius: 32px;
+        transform: scale(2);
+        transform-origin: 50% 50%;
+        transition: transform 0.15s ease-out;
+    }
+
+    &:hover:before {
+        transform: scale(2.15);
+    }
+`
 
 const ModalButtonContainer = styled.div`
     width:100%;
