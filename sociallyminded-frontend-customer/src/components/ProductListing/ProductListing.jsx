@@ -76,6 +76,14 @@ const ProductListing = () => {
         return recommended
     }
 
+    const renderDisabledButton = () => {
+        if (orderQty == "" || creditCardNos == "" || creditCardCVV == "" || unitNos == "" || postalCode == "") {
+            return true
+        } else {
+            return false
+        }
+    }
+
     
     return (
         <PageTemplate>
@@ -195,7 +203,7 @@ const ProductListing = () => {
                                 />
                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback type="invalid">
-                                    Please provide an order quantity
+                                    Please provide your order quantity
                                 </Form.Control.Feedback>
                             </Form.Group>
 
@@ -210,7 +218,7 @@ const ProductListing = () => {
                                 />
                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback type="invalid">
-                                    Please provide a credit card nos
+                                    Please provide your credit card nos
                                 </Form.Control.Feedback>
                             </Form.Group>
                     
@@ -219,14 +227,14 @@ const ProductListing = () => {
                                 <Form.Label>Credit Card CVV</Form.Label>
                                 <Form.Control
                                     required
-                                    type="number"
+                                    type="password"
                                     autoFocus
                                     value={creditCardCVV}
                                     onChange={handleCreditCardCVV}
                                 />
                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback type="invalid">
-                                    Please provide a credit card cvv
+                                    Please provide your credit card cvv
                                 </Form.Control.Feedback>
                             </Form.Group>
                     
@@ -260,9 +268,12 @@ const ProductListing = () => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <ModalButtonContainer>
-                                <ModalButton type="submit" variant="primary" onClick={geocodeAddress}>
+                                {renderDisabledButton() == true && <ModalButton disabled type="submit" variant="primary" onClick={geocodeAddress}>
                                     Confirm Order
-                                </ModalButton>
+                                </ModalButton>}
+                                {renderDisabledButton() == false && <ModalButton type="submit" variant="primary" onClick={geocodeAddress}>
+                                    Confirm Order
+                                </ModalButton>}
                             </ModalButtonContainer>
                         </Form>
                     </Modal.Body>

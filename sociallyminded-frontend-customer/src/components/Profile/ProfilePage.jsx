@@ -194,6 +194,13 @@ export const ProfilePage = () => {
         setValidated(true)
     }
 
+    const showDisabledUpdateButton = () => {
+        if (editOrderQty == "" || editOrderAddress == "") {
+            return true
+        } else {
+            return false
+        }
+    }
 
   
     return (
@@ -406,7 +413,7 @@ export const ProfilePage = () => {
                                 />
                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback type="invalid">
-                                    Please provide an order quantity
+                                    Please provide your order quantity
                                 </Form.Control.Feedback>
                             </Form.Group>
 
@@ -430,9 +437,14 @@ export const ProfilePage = () => {
 
                             {/* Confirm Update */}
                             <ModalButtonContainer>
-                                <Button type="submit" variant="primary" onClick={updateEditedOrder}>  
+                                {showDisabledUpdateButton() == false && <Button type="submit" variant="primary" onClick={updateEditedOrder}>  
                                     Confirm Update
                                 </Button>
+                                }
+                                {showDisabledUpdateButton() == true && <Button disabled type="submit" variant="primary" onClick={updateEditedOrder}>  
+                                    Confirm Update
+                                </Button>
+                                }
                             </ModalButtonContainer>
                         </Form>
                     </Modal.Body>
@@ -519,10 +531,6 @@ export const ProfilePage = () => {
                 </PaginationContainer>} 
                 <p>Number of Pages : {determineTotalNosOfPages()} </p>
                 
-   
-                
-
-             
             </TableContainer>
         </PageTemplate>
     )
