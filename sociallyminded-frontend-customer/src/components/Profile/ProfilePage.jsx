@@ -413,10 +413,10 @@ export const ProfilePage = () => {
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
                                             Mark as Received
                                             {/* </Link> */}
+                                              <a href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&productImageLink=${d.product.imageLink[0]}&dateOfOrder=${d.dateOfOrder}`}/>
+               
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&productImageLink=${d.product.imageLink}&dateOfOrder=${d.dateOfOrder}`}>
-                                            Submit a Review
-                                        </NavDropdown.Item>
+                                      
                                         </NavDropdown>
                                         
                                       

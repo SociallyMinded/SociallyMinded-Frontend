@@ -59,8 +59,22 @@ const ProductListing = () => {
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ProductListingPage>        
             <ProductListingImgSection>
+                
                 <Carousel>
-                    <Carousel.Item>
+
+                    {state.d.imageLink != null && state.d.imageLink.map((i) => (
+                         <Carousel.Item>
+                             <ProductListingImg 
+                             src={`${i}`} 
+                             alt="image"/>
+                         </Carousel.Item>
+                        //    {d.reviewImages.map((base64, index) => (
+                        //     <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
+                        // ))}
+
+                    ))}
+
+                    {/* <Carousel.Item>
                         <ProductListingImg
                         src={require('./donut.png')}
                         alt="First slide"
@@ -77,7 +91,7 @@ const ProductListing = () => {
                         src={require('./donut.png')}
                         alt="Third slide"
                         />
-                    </Carousel.Item>
+                    </Carousel.Item> */}
                 </Carousel>
             </ProductListingImgSection>
 

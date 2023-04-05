@@ -75,6 +75,7 @@ export const AddProductReviewPage = (state) => {
       };
 
       const handleFileChange = (event) => {
+        console.log("productImake link :" +productImageLink);
         const files = event.target.files;
         let urls = [];
         let images = [];
@@ -292,7 +293,9 @@ const ShowOrderTitle = {
           src={}
          alt= "pic"
                             /> */}
-        <img style={ProductImage} variant="top" src={require('./donut.png')} />
+        {/* <img style={ProductImage} variant="top" src={`${productImageLink[0]}`} />
+        <img style={ProductImage} variant="top" src={`${productImageLink}`} /> */}
+        {/* <img style={ProductImage} variant="top" src={require('./donut.png')} /> */}
         <div style={{ textAlign: 'center' }}>
         <p style={ShowOrderTitle}> {dateOfOrder!= null && dateOfOrder.split("T")[0]} </p>
        
