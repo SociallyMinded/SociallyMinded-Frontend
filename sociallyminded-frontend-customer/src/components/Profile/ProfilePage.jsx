@@ -109,6 +109,7 @@ export const ProfilePage = () => {
         sortByOrderStatus,
         sortAscendingOrderStatus,
 
+
         dataExport,
         prepareDataForExport,
         showDownloadData,
@@ -185,6 +186,27 @@ export const ProfilePage = () => {
         setCurrentPage(numPages)
     }
 
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        event.preventDefault()
+        setValidated(true)
+    }
+
+    const showDisabledUpdateButton = () => {
+        if (editOrderQty == "" || editOrderAddress == "") {
+            return true
+        } else {
+            return false
+        }
+    }
 
   
     return (
@@ -340,7 +362,9 @@ export const ProfilePage = () => {
             <StyledTable hover>
                 <thead>
                     <tr>
-                    <th>Order Id</th>
+                    <th>
+                        Order Id
+                    </th>
                     <th>
                         Order Title 
                         <StyledFontAwesomeIconSort 
@@ -435,104 +459,59 @@ export const ProfilePage = () => {
                 
                 <Modal show={showEditOrderModal} centered>
                     <Modal.Header closeButton onClick={handleCloseEditOrderModal}>
-                    <Modal.Title>{orderSelected != null && orderSelected.orderTitle}</Modal.Title>
+                        <Modal.Title>{orderSelected != null && orderSelected.orderTitle}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Qty</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder={orderSelected != null && orderSelected.quantity}
-                            autoFocus
-                            value={orderSelected != null && editOrderQty}
-                            onChange={(e) => handleEditOrderQty(e.target.value)}
-                        />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder={orderSelected != null && orderSelected.address}
-                            autoFocus
-                            value={orderSelected != null && editOrderAddress}
-                            onChange={(e) => handleEditOrderAddress(e.target.value)}
-                        />
-                        </Form.Group>
-                    </Form>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                            {/* Edit Order Qty */}
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Qty</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    placeholder={orderSelected != null && orderSelected.quantity}
+                                    autoFocus
+                                    value={orderSelected != null && editOrderQty}
+                                    onChange={(e) => handleEditOrderQty(e.target.value)}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your order quantity
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                            {/* Edit Order Address */}
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    as="textarea"
+                                    placeholder={orderSelected != null && orderSelected.address}
+                                    autoFocus
+                                    value={orderSelected != null && editOrderAddress}
+                                    onChange={(e) => handleEditOrderAddress(e.target.value)}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your address
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                            {/* Confirm Update */}
+                            <ModalButtonContainer>
+                                {showDisabledUpdateButton() == false && <Button type="submit" variant="primary" onClick={updateEditedOrder}>  
+                                    Confirm Update
+                                </Button>
+                                }
+                                {showDisabledUpdateButton() == true && <Button disabled type="submit" variant="primary" onClick={updateEditedOrder}>  
+                                    Confirm Update
+                                </Button>
+                                }
+                            </ModalButtonContainer>
+                        </Form>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="primary" onClick={geocodeAddress}>  
-                        Confirm Update
-                    </Button>
-                    </Modal.Footer>
                 </Modal> 
-
-                {addressData != null  && <Modal show={showConfirmEditModalPage} onHide={closeConfirmEditOrderPage} centered>
-                    <Modal.Header closeButton onClick={closeConfirmEditOrderPage}>
-                    <Modal.Title>Confirm Edits : {orderSelected != null && orderSelected.orderTitle}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Qty</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={editOrderQty}
-                            disabled
-                        />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control
-                                type="number"
-                                placeholder="1"
-                                autoFocus
-                                value={orderSelected != null && (orderSelected.totalPrice/orderSelected.quantity) * editOrderQty}
-                                disabled
-                            />                    
-                        </Form.Group>
-                    </Form>
-                    <Form>
-  
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Address : {addressData.ADDRESS}</Form.Label>
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                             
-                    <Map
-                        mapboxAccessToken={'pk.eyJ1Ijoib25neW9uZ2VuMjAwMCIsImEiOiJjbDZseXN2ejQwZ25pM2JxcTNwbGY2Mm01In0.6_e_3aUVc5M9RUMI9S2sfw'}
-                        {...viewState}
-                        onMove={evt => setViewState(evt.viewState)}
-                        mapStyle="mapbox://styles/mapbox/streets-v9"
-                        style={{width:"100%", height:"40vh"}}
-                        latitude={addressData.LATITUDE}
-                        longitude={addressData.LONGITUDE}
-                    >
-                        <PointMarker
-                            longitude={addressData.LONGITUDE}
-                            latitude={addressData.LATITUDE}
-                        />
-                    </Map>
-
-                    </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
-                        Back
-                    </Button>
-                    <Button variant="primary" onClick={updateEditedOrder}>
-                        Apply Updates
-                    </Button>
-                    </Modal.Footer>
-                </Modal> 
-                }
-
-
           
                 <Modal show={showCancelOrderModal} centered>
                     <Modal.Header closeButton onClick={handleCloseCancelOrderModal}>
@@ -615,14 +594,16 @@ export const ProfilePage = () => {
                 </PaginationContainer>} 
                 <p>Number of Pages : {determineTotalNosOfPages()} </p>
                 
-   
-                
-
-             
             </TableContainer>
         </PageTemplate>
     )
 }
+
+const ModalButtonContainer = styled.div`
+    width:100%;
+    margin-top:3vh;
+    margin-bottom:1vh;
+`
 
 const StyledNavbar = styled(Navbar)`
     width:50%;
@@ -685,7 +666,7 @@ const StyledFontAwesomeIconSort = styled(FontAwesomeIcon)`
 
 const StyledButton = styled(Button)`
     text-decoration: none !important;
-    background-color:#0275d8!important;
+    background-color:#0D6EFD!important;
     &:hover {
         text-decoration: none !important;
         color:white;

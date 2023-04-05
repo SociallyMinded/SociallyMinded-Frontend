@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { PageTemplate } from "../common/styles";
+import { PageTemplate, ReviewPageTemplate } from "../common/styles";
 
 import Modal from 'react-bootstrap/Modal';
 import { useState } from "react";
@@ -26,7 +26,10 @@ import Map from 'react-map-gl';
 import PointMarker from "../Map/PointMarker"
 import BaseMap from "../Map/BaseMap"
 
-import Alert from 'react-bootstrap/Alert';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { getProductsBySocialEnterprise } from "../../routes/routes";
+import { useEffect } from "react";
+import axios from "axios";
 
 const ProductListing = () => {
     const { state } = useLocation();
@@ -42,18 +45,46 @@ const ProductListing = () => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
-        addressText, handleAddressText
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts
     } = useProductListingHooks(state)
-
-    console.log(addressData)
 
     const [viewState, setViewState] = useState({
         longitude: addressData == null ? 103.77655039734071 : addressData.LONGITUDE,
         latitude: addressData == null ? 1.3555175316779877 : addressData.LATITUDE,
         zoom: 16
       });
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        event.preventDefault()
+        setValidated(true)
+    }
+
+
+    const getAllRecommendedProducts = () => {
+        const recommended = data.filter((d) => 
+            d.socialenterprise.socialEnterpriseId == state.d.socialenterprise.socialEnterpriseId &&
+            d.productId != state.d.productId
+        )
+        return recommended
+    }
+
+    const renderDisabledButton = () => {
+        if (orderQty == "" || creditCardNos == "" || creditCardCVV == "" || unitNos == "" || postalCode == "") {
+            return true
+        } else {
+            return false
+        }
+    }
+
     
-      
     return (
         <PageTemplate>
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
@@ -115,6 +146,14 @@ const ProductListing = () => {
                         <Toast.Body>Please log in to your account to place an order</Toast.Body>
                     </StyledLoginPromptToast>
                 }
+                {showAddressNotFoundError &&
+                      <StyledLoginPromptToast onClose={handleCloseAddressNotFoundError}>
+                      <Toast.Header>
+                          <strong className="me-auto">Notice</strong>
+                      </Toast.Header>
+                      <Toast.Body>Your provided postal code does not exist. Please check if your postal code is correct</Toast.Body>
+                  </StyledLoginPromptToast>
+                }
             </ProductListingToastSection>
 
                 <ProductListingDescriptionContainer>
@@ -138,81 +177,120 @@ const ProductListing = () => {
                         </StyledButton>
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
-
-                
-                
             </ProductListingDescriptionSection>
-
-      
-
-
+            {data != null && getAllRecommendedProducts().length > 0 &&     
+                <ProductRecommendationTitle>other products from this social enterprise</ProductRecommendationTitle>
+            }
+            <ProductRecommendationSectionContainer>
+                    <ProductRecommendationSection>
+                    {data != null && getAllRecommendedProducts().length > 0 && getAllRecommendedProducts().map((d) => (
+                        <ProductRecommendationImgContainer>
+                            <StyledProductLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
+                            <ProductRecommendationImg
+                                src={require('./donut.png')}
+                                alt="First slide"
+                            />
+                            <ProductRecommendationName>{d.name}</ProductRecommendationName>
+                            </StyledProductLink>
+                        </ProductRecommendationImgContainer>
+                    ))}
+                    </ProductRecommendationSection>
+                    
+                </ProductRecommendationSectionContainer>
+            
 
                 <Modal show={showPurchaseModal} onHide={handleClosePurchaseModal} centered>
                     <Modal.Header closeButton>
-                    <Modal.Title>{state.d.name}</Modal.Title>
+                        <Modal.Title>{state.d.name}</Modal.Title>
                     </Modal.Header>
+                    
                     <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Qty</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={orderQty}
-                            onChange={handleOrderQty}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Credit Card Nos</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={creditCardNos}
-                            onChange={handleCreditCardNos}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Credit Card CVV</Form.Label>
-                        <Form.Control
-                            type="number"
-                            autoFocus
-                            value={creditCardCVV}
-                            onChange={handleCreditCardCVV}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Unit Number</Form.Label>
-                        <Form.Control
-                            type="text"
-                            autoFocus
-                            value={unitNos}
-                            onChange={handleUnitNos}
-                        />
-                        </Form.Group>
-                    </Form>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Postal Code </Form.Label>
-                        <Form.Control
-                            type="text"
-                            autoFocus
-                            value={postalCode}
-                            onChange={handlePostalCode}
-                        />
-                        </Form.Group>
-                    </Form>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Qty</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="number"
+                                    autoFocus
+                                    value={orderQty}
+                                    onChange={handleOrderQty}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your order quantity
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Credit Card Nos</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={creditCardNos}
+                                    onChange={handleCreditCardNos}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your credit card nos
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Credit Card CVV</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="password"
+                                    autoFocus
+                                    value={creditCardCVV}
+                                    onChange={handleCreditCardCVV}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your credit card cvv
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Unit Number</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={unitNos}
+                                    onChange={handleUnitNos}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your unit number
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                    
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Postal Code </Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    autoFocus
+                                    value={postalCode}
+                                    onChange={handlePostalCode}
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide your postal code
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <ModalButtonContainer>
+                                {renderDisabledButton() == true && <ModalButton disabled type="submit" variant="primary" onClick={geocodeAddress}>
+                                    Confirm Order
+                                </ModalButton>}
+                                {renderDisabledButton() == false && <ModalButton type="submit" variant="primary" onClick={geocodeAddress}>
+                                    Confirm Order
+                                </ModalButton>}
+                            </ModalButtonContainer>
+                        </Form>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="primary" onClick={geocodeAddress}>
-                        Confirm Order
-                    </Button>
-                    </Modal.Footer>
                 </Modal> 
 
                 {addressData != null  && <Modal show={confirmOrder} onHide={closeConfirmOrderPage} centered>
@@ -251,7 +329,7 @@ const ProductListing = () => {
                     </Form>
                     <Form>
                              
-                    <Map
+                    {!showAddressNotFoundError && <Map
                         mapboxAccessToken={'pk.eyJ1Ijoib25neW9uZ2VuMjAwMCIsImEiOiJjbDZseXN2ejQwZ25pM2JxcTNwbGY2Mm01In0.6_e_3aUVc5M9RUMI9S2sfw'}
                         {...viewState}
                         onMove={evt => setViewState(evt.viewState)}
@@ -264,30 +342,108 @@ const ProductListing = () => {
                             longitude={addressData.LONGITUDE}
                             latitude={addressData.LATITUDE}
                         />
-                    </Map>
+                    </Map>}
 
                     </Form>
+
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
                         Back
                     </Button>
-                    <Button variant="primary" onClick={createNewOrder}>
+                    <Button type="submit" variant="primary" onClick={createNewOrder}>
                         Place Order
                     </Button>
                     </Modal.Footer>
                 </Modal> 
                 }
-
-
             </ProductListingPage>
         </PageTemplate>
     )
 }
 
+const ProductRecommendationName = styled.p`
+    width:80%;
+`
+
+const StyledProductLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+`
+const ProductRecommendationTitle = styled.h4`
+    margin-top:7vh;
+`
+
+const ProductRecommendationSectionContainer = styled.div`
+    padding-bottom:10vh;
+    overflow-x: scroll;
+    max-width:100%;
+`
+
+const ProductRecommendationSection = styled.div`
+    display:flex;
+    flex-direction:row;
+`
+
+const ProductRecommendationImgContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+`
+
+const ProductRecommendationImg = styled.img`
+    width:20vw;
+    height:30vh;
+    border-radius:10px;
+    margin-right:1vw;
+    margin-top:2vh;
+    margin-bottom:2vh;
+
+    display: block;
+    top: 0px;
+    position: relative;
+    border-radius: 4px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+
+
+    &:hover {
+        transition: all 0.2s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        border-radius:20px;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        border-radius: 32px;
+        transform: scale(2);
+        transform-origin: 50% 50%;
+        transition: transform 0.15s ease-out;
+    }
+
+    &:hover:before {
+        transform: scale(2.15);
+    }
+`
+
+const ModalButtonContainer = styled.div`
+    width:100%;
+    margin-top:3vh;
+    margin-bottom:1vh;
+`
+
+const ModalButton = styled(Button)`
+`
+
 const StyledBadge = styled(Badge)`
     background-color: #b3a2de!important;
-
 `
 
 const ProductListingPage = styled.div`

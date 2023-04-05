@@ -150,8 +150,8 @@ const Home = () => {
     )
 }
 
-const ParagraphBreak = styled.br`
-    margin-top:3vh;
+const ParagraphBreak = styled.div`
+    height:3vh;
 `
 
 const CommentContainer = styled.div`
@@ -427,6 +427,7 @@ const HomePageLink = styled(Link)`
 
 const ProductListingDescSection = styled.div`
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     width:30vw;

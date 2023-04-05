@@ -14,7 +14,7 @@ export const DataDisplay = ({data}) => {
             {data.displayData != null && data.displayData.map((d) => (
                 <StyledCol md={3}>
                     
-                <StyledLink id="styled-card-link" to="/product_listing" state={{ d }}>
+                <StyledLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
                     
                     <StyledCard>
                     <StyledCardHeader>
@@ -27,7 +27,6 @@ export const DataDisplay = ({data}) => {
                             <CardTitleContainer>
                                 <StyledCardTitle>{d.name}</StyledCardTitle>
                             </CardTitleContainer>
-                            <LineBreak></LineBreak>
                             <CardTitleContainer>
                                 <StyledCardTitle>${d.price}</StyledCardTitle>
                             </CardTitleContainer>
