@@ -1,12 +1,13 @@
 import { useState, useMemo } from "react"
 import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
-import { getAllProductsUrl, getAllReviewsByProductIdUrl } from "../../routes/routes"
+import { getAllProductsUrl, getAllReviewsByProductIdUrl,getProductsBySocialEnterprise } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 import { useLocation } from "react-router"
 import { createNewOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import { UserAuth } from "../../context/AuthContext"
+
 
 export const ORDERSTATUS = {
     PENDING_APPROVAL: 'Pending Approval',
@@ -88,7 +89,7 @@ const useProductListingHooks = (state) => {
     const { user } = UserAuth()
 
     useEffect(() => {
-        axios.get(getAllReviewsByProductIdUrl + state.d.productId)
+        axios.get(getProductsBySocialEnterprise + state.d.socialenterprise.socialEnterpriseId)
         .then(response => {
             setData(response.data)
             setDisplayData(response.data)
@@ -100,6 +101,21 @@ const useProductListingHooks = (state) => {
             setLoading(false)
         )
     }, []);
+
+    const getOtherProducts = async () => {
+        axios.get(getProductsBySocialEnterprise + state.d.socialenterprise.socialEnterpriseId)
+        .then(response => {
+            setData(response.data)
+            setDisplayData(response.data)
+        })
+        .catch ((error) => {
+            setError(error)
+        })
+        .finally (
+            setLoading(false)
+        )
+    }
+
 
     const geocodeAddress =  async () => {
         const url = obtainGeocodeUrl(postalCode)
@@ -176,7 +192,7 @@ const useProductListingHooks = (state) => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
-        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts
     } 
 }
 
