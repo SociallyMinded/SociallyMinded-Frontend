@@ -9,12 +9,14 @@ export const createNewOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord`
 export const createNewReviewUrl = `${ABSOLUTE_PATH}/entity.review`
 export const updateOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 export const deleteOrderUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
+export const updateProductUrl = `${ABSOLUTE_PATH}/entity.product/`
 
 // Add product Id after the last "/" 
 export const getAllReviewsByProductIdUrl = `${ABSOLUTE_PATH}/entity.review/findReviewsByProductId/`
 export const getProductByIdUrl = `${ABSOLUTE_PATH}/entity.product/`
 // Add customer firebase uid after the last "/" 
 export const getOrdersByCustomer = `${ABSOLUTE_PATH}/entity.orderrecord/findOrderRecordsByCustomerId/`
+export const getOrderByIdUrl = `${ABSOLUTE_PATH}/entity.orderrecord/`
 // Add enterprise id after the last "/" 
 export const getProductsBySocialEnterprise = `${ABSOLUTE_PATH}/entity.product/findProductsByEnterpriseId/`
 

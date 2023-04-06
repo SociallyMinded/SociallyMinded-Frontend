@@ -21,7 +21,9 @@ export const Actions = {
 
 export const ORDERSTATUS = {
     PENDING_APPROVAL: 'Pending Approval',
-    IN_DELIVERY: 'In Delivery'
+    AWAITING_PAYMENT: 'Payment Required',
+    IN_DELIVERY: 'In Delivery',
+    COMPLETED: 'Completed'
 }
 
 const useProfileHooks = (user) => {
@@ -308,6 +310,8 @@ const useProfileHooks = (user) => {
         }
     }
     
+
+   
     const [sortAscendingOrderTitle, setSortAscendingOrderTitle] = useState(true)
     const sortByOrderTitle = (e) => {
         setSortAscendingOrderTitle(!sortAscendingOrderTitle)
@@ -396,18 +400,18 @@ const useProfileHooks = (user) => {
     const handleCloseExportDate = () => setShowExportData(false)
 
     const [showDownloadData, setShowDownloadData] = useState(false)
-
+    //it save according to the filtered data.
     const prepareDataForExport = () => {
         var dataPrep = []
-        if (data != null) {
-            for (let i = 0; i < data.length; i++) {
+        if (filteredOrders != null) {
+            for (let i = 0; i < filteredOrders.length; i++) {
                 const dataModel = {
-                    "orderTitle": data[i].orderTitle,
-                    "address": data[i].address,
-                    "quantity": data[i].quantity,
-                    "totalPrice": data[i].totalPrice,
-                    "dateOfOrder": data[i].dateOfOrder,
-                    "orderStatus": data[i].orderStatus
+                    "orderTitle": filteredOrders[i].orderTitle,
+                    "address": filteredOrders[i].address,
+                    "quantity": filteredOrders[i].quantity,
+                    "totalPrice": filteredOrders[i].totalPrice,
+                    "dateOfOrder": filteredOrders[i].dateOfOrder,
+                    "orderStatus": filteredOrders[i].orderStatus
                 }
                 dataPrep.push(dataModel)
             }
@@ -421,6 +425,8 @@ const useProfileHooks = (user) => {
         setShowDownloadData(false)
         setShowExportData(true)
     }
+    const [orderStatus, setOrderStatus] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         axios.get(getOrdersByCustomer + user.uid)
@@ -438,6 +444,7 @@ const useProfileHooks = (user) => {
         showEditOrderModal, showEditSuccessToast, 
         showCancelOrderModal, showCancelSuccessToast,
         showPaymentOrderModal, showPaymentSuccessToast,
+        showConfirmEditModalPage, searchQuery, orderStatus,        
         showConfirmEditModalPage, 
         showUpdateErrorActionToast,
         showCancelErrorActionToast,  
@@ -445,6 +452,20 @@ const useProfileHooks = (user) => {
         showReviewErrorActionToast
 
     ]);
+
+      //filter
+const filteredOrders = (data ?? []).filter((d) => {
+    console.log("enter, data : " + data);
+    console.log("searchqury : " + searchQuery);
+    if (searchQuery === '' && orderStatus === 'All') {
+    return true; // show all orders
+    } else if (searchQuery === '' && d.orderStatus === orderStatus) {
+    return true; // show orders with selected status
+    } else {
+       return d.orderTitle.toLowerCase().includes(searchQuery.toLowerCase()) &&
+       (orderStatus === 'All' || d.orderStatus === orderStatus);
+    }
+    });
 
     return { 
         data, setData, loading, error,
@@ -521,6 +542,12 @@ const useProfileHooks = (user) => {
         handleShowReviewCompleteToast,
         handleCloseReviewCompleteToast,
 
+        filteredOrders,
+        orderStatus,
+        setOrderStatus,
+        searchQuery,
+        setSearchQuery,
+        
         showUpdateErrorActionToast,
         handleCloseUpdateErrorActionToast,
         showCancelErrorActionToast,

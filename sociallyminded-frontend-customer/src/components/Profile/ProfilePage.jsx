@@ -120,6 +120,12 @@ export const ProfilePage = () => {
         handleShowReviewCompleteToast,
         handleCloseReviewCompleteToast,
 
+        filteredOrders,
+        orderStatus,
+        setOrderStatus,
+        searchQuery,
+        setSearchQuery,
+
         showUpdateErrorActionToast,
         handleCloseUpdateErrorActionToast,
         showCancelErrorActionToast,
@@ -269,19 +275,19 @@ export const ProfilePage = () => {
 
             <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
         <TableInputContainer>
-            <StyledInputGroup className="mb-3">
-                <Form.Control
-                    placeholder="Search Order"
+                <OrderInputGroup>
+                 <SearchOrderInput
+                    type="text"
+                    // placeholder="Search Order"
                     aria-describedby="basic-addon2"
-                
+                    value = {searchQuery != null && searchQuery}
+                    disabled={false}
+                    onChange={(e) => setSearchQuery(e.target.value) }
+                   
                 />
-                <Button variant="outline-secondary" id="button-addon2" >
-                    Filter
-                </Button>
-                <Button variant="outline-secondary" id="button-addon2" >
-                    Search
-                </Button>
-            </StyledInputGroup>
+                </OrderInputGroup>
+               
+            {/* </StyledInputGroup> */}
             <div>
                 {showExportData && <StyledButton onClick={prepareDataForExport}>Export Data</StyledButton>}
                 {showDownloadData && <StyledButton onClick={handleDownloadData}>
@@ -297,7 +303,59 @@ export const ProfilePage = () => {
 
             </div>
         </TableInputContainer>
-          
+        <FilterOrderStatusGroup>
+            <OrderStatusLabel>
+                <input
+                type="radio"
+                name="statusFilter"
+                value="All"
+                checked={orderStatus === 'All'}
+                onChange={() => setOrderStatus('All')}
+            />
+            All
+            </OrderStatusLabel>
+            
+            <OrderStatusLabel>
+            <input
+                type="radio"
+                name="statusFilter"
+                value="Pending Approval"
+                checked={orderStatus === 'Pending Approval'}
+                onChange={() => setOrderStatus('Pending Approval')}
+            />
+            Pending Approval
+            </OrderStatusLabel>
+            <OrderStatusLabel>
+            <input
+                type="radio"
+                name="statusFilter"
+                value="Payment Required"
+                checked={orderStatus === 'Payment Required'}
+                onChange={() => setOrderStatus('Payment Required')}
+            />
+            Payment Required
+            </OrderStatusLabel>
+            <OrderStatusLabel>
+            <input
+                type="radio"
+                name="statusFilter"
+                value="In Delivery"
+                checked={orderStatus === 'In Delivery'}
+                onChange={() => setOrderStatus('In Delivery')}
+            />
+            In Delivery
+            </OrderStatusLabel>
+            <OrderStatusLabel>
+            <input
+                type="radio"
+                name="statusFilter"
+                value="Completed"
+                checked={orderStatus === 'Completed'}
+                onChange={() => setOrderStatus('Completed')}
+            />
+            Completed
+            </OrderStatusLabel>
+        </FilterOrderStatusGroup>
             {data != null && data.length == 0 && <h5>You have no orders currently</h5>}
             {data != null && data.length != 0 && 
             <StyledTableContainer>
@@ -354,7 +412,7 @@ export const ProfilePage = () => {
                 </thead>             
                 
                 <tbody>
-                {data != null && data.slice((currentPage-1)*5,(((currentPage-1)*5)+5)).map((d) => (
+                {filteredOrders != null && filteredOrders.slice((currentPage-1)*5,(((currentPage-1)*5)+5)).map((d) => (
                     <tr>
                         <StyledTd>{d.orderRecordId}</StyledTd>
                         <StyledTd>{d.orderTitle}</StyledTd>
@@ -379,8 +437,13 @@ export const ProfilePage = () => {
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
                                             Mark as Received
                                             {/* </Link> */}
+                                              <a href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&productImageLink=${d.product.imageLink[0]}&dateOfOrder=${d.dateOfOrder}`}/>
+               
                                         </NavDropdown.Item>
+                                      
                                         </NavDropdown>
+                                        
+                                      
                                     </Nav>
                                     </Navbar.Collapse>
                             </Container>
@@ -557,7 +620,6 @@ const TableContainer = styled(Table)`
 const StyledTable = styled(Table)`
     padding-top:0px!important;
     width:97%;
-
 `
 
 const StyledTableContainer = styled.div`
@@ -612,14 +674,11 @@ const StyledButton = styled(Button)`
     &:after {
         text-decoration: none !important;
         color:white;
-
     }
     &:before {
         text-decoration: none !important;
         color:white;
-
     }
-
 `
 
 const StyledCSVLink = styled(CSVLink)`
@@ -632,12 +691,10 @@ const StyledCSVLink = styled(CSVLink)`
     &:after {
         text-decoration: none !important;
         color:white;
-
     }
     &:before {
         text-decoration: none !important;
         color:white;
-
     }
 `
 
@@ -647,7 +704,23 @@ const StyledInputGroup = styled(InputGroup)`
     z-index:-1;
 `
 
+const OrderInputGroup = styled(InputGroup)`
+    width:80%;
+    margin-right: 2%;
+`
 const TableInputContainer = styled.div`
     display:flex;
     flex-direction:row;
+`
+const FilterOrderStatusGroup = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-bottom: 16px;
+`
+const OrderStatusLabel = styled.label`
+margin-right: 16px;
+`
+
+const SearchOrderInput = styled(Form.Control)`
 `

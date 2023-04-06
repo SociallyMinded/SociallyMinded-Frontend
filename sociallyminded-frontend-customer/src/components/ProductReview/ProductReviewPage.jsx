@@ -23,7 +23,8 @@ export const ProductReviewPage = () => {
     
     const {         
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
-        handleShrink, isEnlarged, setIsEnlarged, rating
+        handleShrink, isEnlarged, setIsEnlarged, rating, handleFilterButtonClick, selectedRating,
+        setSelectedRating, filteredRating
     } = useProductReviewHooks(state)
 
     return (
@@ -52,10 +53,19 @@ export const ProductReviewPage = () => {
                     <Rating name="read-only" precision={0.02} value={rating} readOnly />
                     </WrapperStar>
                         {/* <TotalRating name="read-only" value={state.d.rating} precision={0.2} readOnly /> */}
-                        {/* <ReviewFilter> */}
+                        <ReviewFilter>
                             {/* <AllFilter>
                                 All
                                 </AllFilter> */}
+                                {[null, 1, 2, 3, 4, 5].map((rating) => (
+                                <AllFilter
+                                    key={rating}
+                                    onClick={() => handleFilterButtonClick(rating)}
+                                    className={selectedRating === rating ? "selected" : ""}
+                                >
+                                    {rating === null ? "All" : `${rating} stars`}
+                                </AllFilter>
+                                ))}
                             {/* <FiveStarsFilter>
                                 5 Star
                                 </FiveStarsFilter>
@@ -74,12 +84,13 @@ export const ProductReviewPage = () => {
                                 <ImageFilter>
                                     With Image
                                 </ImageFilter> */}
-                        {/* </ReviewFilter> */}
+                        </ReviewFilter>
                     </ReviewBox>
                 {/* } */}
 
                 {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
-                {data != null && data.map((d) => (
+                {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
+                {filteredRating != null && filteredRating.map((d) => (
 
 
                     <ReviewContainer>
@@ -274,8 +285,12 @@ const WrapperStar = styled.div`
 `
 
 const ReviewFilter = styled.div`
-    flex: 1;
-    margin-left: 0.9375rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 1rem;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
 `
 const AllFilter = styled.div`
     cursor: pointer;
@@ -299,6 +314,11 @@ const AllFilter = styled.div`
     border-radius: 2px;
     margin-bottom: 0.3125rem;
     margin-top: 0.3125rem;
+    &.selected {
+        border-color: #AC73FF;
+        fill: #AC73FF;
+        color: #AC73FF;
+      }
 `
 
 const ReviewImageListContainer = styled.div`

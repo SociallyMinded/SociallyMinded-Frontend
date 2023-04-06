@@ -1,4 +1,5 @@
 import React from 'react';
+import Big from 'big.js';
 import { PageTemplate, ReviewPageTemplate } from '../common/styles';
 import Header from '../common/Header/Header';
 import styled from 'styled-components';
@@ -17,14 +18,18 @@ import StarIcon from '@mui/icons-material/Star';
 import { AiFillCamera } from 'react-icons/ai';
 import { ImEnlarge2 } from 'react-icons/im';
 import { PROFILE_PAGE_LINK } from "../../routes/routes";
-import { createNewReviewUrl } from "../../routes/routes"
-import { getProductByIdUrl } from "../../routes/routes"
+import { createNewReviewUrl } from "../../routes/routes";
+import { getProductByIdUrl } from "../../routes/routes";
+import { updateProductUrl } from "../../routes/routes";
+import { getOrderByIdUrl } from "../../routes/routes";
 //import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
 import LoggedInHeader from "../common/Header/LoggedInHeader";
 
 
+
 export const AddProductReviewPage = (state) => {
     const [product, setProduct] = useState(null);
+    const [order, setOrder] = useState(null);
     const [rating, setRating] = React.useState(5);
     const [hover, setHover] = React.useState(-1);
     const [reviewDescription, setReviewDescription] = useState('');
@@ -41,7 +46,11 @@ export const AddProductReviewPage = (state) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const productId = searchParams.get('productId');
-
+    const orderId = searchParams.get('orderId');
+    const orderTitle = searchParams.get('orderTitle');
+    const productImageLink = searchParams.get('productImageLink');
+    const dateOfOrder = searchParams.get('dateOfOrder');
+    
     //const { state } = useLocation()
     const navigate = useNavigate();
     const { user } = UserAuth();
@@ -66,6 +75,7 @@ export const AddProductReviewPage = (state) => {
       };
 
       const handleFileChange = (event) => {
+        console.log("productImake link :" +productImageLink);
         const files = event.target.files;
         let urls = [];
         let images = [];
@@ -107,11 +117,17 @@ export const AddProductReviewPage = (state) => {
 
     
     useEffect(() => {
+      setLoading(true);
       axios.get(getProductByIdUrl + productId)
       .then(response => {
         
           setProduct(response.data)
-          console.log("product : "+response.data)
+          console.log("product : " + response.data)
+          return axios.get(getOrderByIdUrl + orderId);
+      })
+      .then(response => {
+        setOrder(response.data); // set the order state variable here
+        console.log("order : " + response.data);
       })
       .catch ((error) => {
           setError(error)
@@ -141,27 +157,36 @@ export const AddProductReviewPage = (state) => {
           "productId" :productId,
           "custFirebaseUid": customerFirebaseUid,
           "review": {
-          // "dateOfReview":currentDate,
           "reviewDescription" : reviewDescription,
           "rating" : rating,
           "isAnonymous" : isAnonymous,
           "reviewImages" : imageBase64s
         }
           };
+         
+          const updateProduct = {
+            "socialEnterpriseId" : product.socialenterprise.socialEnterpriseId,
+            "product": {
+            "category" : product.category,
+            "description" : product.description,
+            "imageLink": product.imageLink,
+            "name" : product.name,
+            "price" : product.price,
+            "numRatings" : Big(product.numRatings).plus(1),
+            "ratingScore" : Big(product.ratingScore).plus(rating),
+            "productId" : productId
+          }
+            };
 
-          // const newProduct = {
-          //   "productId" :productId,
-          //   "custFirebaseUid": customerFirebaseUid,
-          //   "review": {
-          //   // "dateOfReview":currentDate,
-          //   "reviewDescription" : reviewDescription,
-          //   "rating" : rating,
-          //   "isAnonymous" : isAnonymous,
-          //   "reviewImages" : imageBase64s
-          // }
-          //   };
-          console.log(newReview);
-  
+          //update the product review number and rating
+          axios.put(updateProductUrl + product.productId, updateProduct)
+          .then(response => {
+            console.log("enter this product method")
+            console.log(response.data)
+          }).catch((error) => {
+            console.log(error); // handle any errors that occur during the axios call
+          });
+          //create review
           axios.post(createNewReviewUrl, newReview)
             .then(response => {
               console.log("enter")
@@ -239,17 +264,45 @@ export const AddProductReviewPage = (state) => {
         left: "0"
     }
     
+    const ShowProductBeingReviewed = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#e6e6fa",
+      padding: "10px"
+  }
+
+  const ProductImage = {
+    width: "100px",
+    height: "100px",
+    marginRight: "10px"
+}
+
+const ShowOrderTitle = {
+  fontSize: "20px",
+  fontWeight: "bold",
+  margin: "0"
+}
+
     return (
       <PageTemplate>
          {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
        {/* show the product that going to review*/}
-       <div>
+       <div style={ShowProductBeingReviewed}>
        {/* <img
           src={}
          alt= "pic"
                             /> */}
-        {/* <p> Product name : {product.name} </p>
-         */}
+        {/* <img style={ProductImage} variant="top" src={`${productImageLink[0]}`} />
+        <img style={ProductImage} variant="top" src={`${productImageLink}`} /> */}
+        {/* <img style={ProductImage} variant="top" src={require('./donut.png')} /> */}
+        <div style={{ textAlign: 'center' }}>
+        <p style={ShowOrderTitle}> {dateOfOrder!= null && dateOfOrder.split("T")[0]} </p>
+       
+        <p style={ShowOrderTitle}>{orderTitle} </p>
+        </div>
+        {/* <p> Product name : {product.name} </p> */}
+        
        </div>
         <div>
         <form style={formStyle} onSubmit={handleSubmit}>

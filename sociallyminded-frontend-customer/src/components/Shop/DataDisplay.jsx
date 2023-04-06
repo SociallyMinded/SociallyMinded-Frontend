@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 import React from 'react';
+import { AiFillStar } from 'react-icons/ai';
+import Rating from '@mui/material/Rating';
 
 export const DataDisplay = ({data}) => {
     console.log(data)
@@ -18,8 +20,9 @@ export const DataDisplay = ({data}) => {
                     <StyledCardHeader>
                         {d.socialenterprise.enterpriseName}
                     </StyledCardHeader>
-                        <StyledImg variant="top" src={require('./donut.png')} />
-                        
+                    <ImgDiv>
+                        <StyledImg variant="top" src={`${d.imageLink[0]}`} />
+                    </ImgDiv>
                         <StyledCardBody>
                             <CardTitleContainer>
                                 <StyledCardTitle>{d.name}</StyledCardTitle>
@@ -28,7 +31,17 @@ export const DataDisplay = ({data}) => {
                                 <StyledCardTitle>${d.price}</StyledCardTitle>
                             </CardTitleContainer>
                         </StyledCardBody>
-                    </StyledCard>
+                        {d.numRatings != 0 && d.ratingScore != 0 && (
+                        <RatingNumber> 
+                      
+                        <Score>{ (d.ratingScore/d.numRatings).toFixed(2) } <span style={{ color: "#FFC107", marginBottom: "2.5px" }}><AiFillStar/></span></Score>
+
+                        </RatingNumber>
+                        ) }
+                        {d.numRatings == 0 && d.ratingScore == 0 && (
+                        <NoRating>No Rating Yet</NoRating>
+                        ) }
+                        </StyledCard>
                 </StyledLink>
                 </StyledCol>
             ))}
@@ -123,4 +136,35 @@ const StyledText = styled.p`
 
 const StyledImg = styled(Card.Img)`
   border-width:0px;
+  object-fit: cover;
+  width : 100%;
+  height: 100%;
 `
+
+const ImgDiv = styled.div`
+  width: 100%; 
+  height: 190px;
+`
+
+const NoRating = styled.p`
+    color: #777;
+    font-size:0.8em;
+    margin-top:2%;
+    text-align: center;
+`
+
+const RatingNumber = styled.div`
+    margin-top:2%;
+    text-align: center;
+    display: flex;
+   justifyContent: center;
+   margin-left: 35%;
+  font-weight: bold;
+`
+const Score = styled.span`
+display: flex;
+  align-items: center;
+  margin-left: 5px;
+
+`
+// margin-left: 5px;

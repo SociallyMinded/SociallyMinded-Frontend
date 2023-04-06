@@ -90,25 +90,18 @@ const ProductListing = () => {
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ProductListingPage>        
             <ProductListingImgSection>
+                
                 <Carousel>
-                    <Carousel.Item>
-                        <ProductListingImg
-                        src={require('./donut.png')}
-                        alt="First slide"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <ProductListingImg
-                        src={require('./donut.png')}
-                        alt="Second slide"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <ProductListingImg
-                        src={require('./donut.png')}
-                        alt="Third slide"
-                        />
-                    </Carousel.Item>
+
+                    {state.d.imageLink != null && state.d.imageLink.map((i) => (
+                         <Carousel.Item>
+                             <ProductListingImg 
+                             src={`${i}`} 
+                             alt="image"/>
+                         </Carousel.Item>
+                    ))}
+
+                  
                 </Carousel>
             </ProductListingImgSection>
 
@@ -164,16 +157,17 @@ const ProductListing = () => {
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
             </ProductListingDescriptionSection>
+           
+            <ProductRecommendationSectionContainer>
             {data != null && getAllRecommendedProducts().length > 0 &&     
                 <ProductRecommendationTitle>other products from this social enterprise</ProductRecommendationTitle>
             }
-            <ProductRecommendationSectionContainer>
                     <ProductRecommendationSection>
                     {data != null && getAllRecommendedProducts().length > 0 && getAllRecommendedProducts().map((d) => (
                         <ProductRecommendationImgContainer>
                             <StyledProductLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
                             <ProductRecommendationImg
-                                src={require('./donut.png')}
+                                src={`${d.imageLink[0]}`}
                                 alt="First slide"
                             />
                             <ProductRecommendationName>{d.name}</ProductRecommendationName>
@@ -369,6 +363,7 @@ const ProductRecommendationSectionContainer = styled.div`
     padding-bottom:10vh;
     overflow-x: scroll;
     max-width:100%;
+    margin-top:100px;
 `
 
 const ProductRecommendationSection = styled.div`
