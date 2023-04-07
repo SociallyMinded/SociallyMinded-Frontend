@@ -8,6 +8,8 @@ import React from 'react';
 import useLoginHooks from "../Login/loginHooks";
 import Header from "../common/Header/Header"; 
 import { UserAuth } from "../../context/AuthContext";
+import Spinner from 'react-bootstrap/Spinner';
+import styled from "styled-components";
 
 export const ShopPage = () => {
     const {         
@@ -46,6 +48,13 @@ export const ShopPage = () => {
                     }}
                 />
 
+                {displayData == null && 
+                    <LoadingContainer>
+                        <Spinner animation="grow" />
+                        <SpinnerText>Loading</SpinnerText>
+                    </LoadingContainer>
+                }
+                
                 <DataDisplay 
                     data={{ displayData: displayData }}
                 />
@@ -54,3 +63,16 @@ export const ShopPage = () => {
         </PageTemplate>
     )
 }
+
+const SpinnerText = styled.h5`
+    margin-left:1vw;
+    margin-top:1vh;
+`
+
+const LoadingContainer = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:50vh;
+`

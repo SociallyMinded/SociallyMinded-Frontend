@@ -13,6 +13,7 @@ import {
     orderIdComparator
 } from "./comparator"
 
+
 export const Actions = {
     UPDATE: 'Update',
     CANCEL: 'Cancel',
@@ -21,7 +22,6 @@ export const Actions = {
 
 export const ORDERSTATUS = {
     PENDING_APPROVAL: 'Pending Approval',
-    AWAITING_PAYMENT: 'Payment Required',
     IN_DELIVERY: 'In Delivery',
     COMPLETED: 'Completed'
 }
@@ -50,6 +50,10 @@ const useProfileHooks = (user) => {
     const [editOrderAddress, setEditOrderAddress] = useState("");
     const handleEditOrderAddress = (address) => setEditOrderAddress(address);
     const [editOrderAddressError, setEditOrderAddressError] = useState(null)
+
+    const [editOrderDetails, setEditOrderDetails] = useState("");
+    const handleEditOrderDetails = (details) => setEditOrderDetails(details);
+
 
     const [addressData, setAddressData] = useState("")
 
@@ -96,11 +100,11 @@ const useProfileHooks = (user) => {
     const handleShowReviewErrorActionToast = () => setShowReviewErrorActionToast(true)
     const handleCloseReviewErrorActionToast = () => setShowReviewErrorActionToast(false)
 
-
     const handleOrderSelected = (order, action) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
         setEditOrderAddress(order.address)
+        setEditOrderDetails(order.orderDetails)
 
         setShowEditSuccessToast(false)
         setShowCancelSuccessToast(false)
@@ -174,7 +178,8 @@ const useProfileHooks = (user) => {
                     "orderRecordId": orderSelected.orderRecordId,
                     "dateOfOrder": orderSelected.dateOfOrder,
                     "orderStatus": orderSelected.orderStatus,
-                    "address": editOrderAddress
+                    "address": editOrderAddress,
+                    "orderDetails": editOrderDetails
                 }
             }
 
@@ -310,89 +315,98 @@ const useProfileHooks = (user) => {
         }
     }
     
-
+    const [sortCriteria, setSortCriteria] = useState("Sort");
+    
+    const sortByOrderId = (e, sortAscending) => {
+        if (sortAscending == true) {
+            const sortedData = data.sort(orderIdComparator)
+            setData(sortedData)
+            setSortCriteria("Sort Ascending Order Id")
+        } else {
+            const sortedData = data.sort(orderIdComparator).reverse()
+            setData(sortedData)
+            setSortCriteria("Sort Descending Order Id")
+        }
+    }
    
     const [sortAscendingOrderTitle, setSortAscendingOrderTitle] = useState(true)
-    const sortByOrderTitle = (e) => {
-        setSortAscendingOrderTitle(!sortAscendingOrderTitle)
-
-        if (sortAscendingOrderTitle == true) {
+    const sortByOrderTitle = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(orderTitleComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Title")
         } else {
             const sortedData = data.sort(orderTitleComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Title")
         }
     }
 
     const [sortAscendingOrderQty, setSortAscendingOrderQty] = useState(true)
-    const sortByOrderQty = (e) => {
-        setSortAscendingOrderQty(!sortAscendingOrderQty)
-
-        if (sortAscendingOrderQty == true) {
+    const sortByOrderQty = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(qtyComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Quantity")
         } else {
             const sortedData = data.sort(qtyComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Quantity")
         }
     }
 
     const [sortAscendingOrderTotalPrice, setSortAscendingOrderTotalPrice] = useState(true)
-    const sortByOrderTotalPrice = (e) => {
-        setSortAscendingOrderTotalPrice(!sortAscendingOrderTotalPrice)
-
-        if (sortAscendingOrderTotalPrice == true) {
+    const sortByOrderTotalPrice = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(priceComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Price")
         } else {
             const sortedData = data.sort(priceComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Price")
         }
     }
 
     const [sortAscendingOrderAddress, setSortAscendingOrderAddress] = useState(true)
-    const sortByOrderAddress = (e) => {
-        setSortAscendingOrderAddress(!sortAscendingOrderAddress)
-
-        if (sortAscendingOrderAddress == true) {
+    const sortByOrderAddress = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(orderAddressComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Address")
         } else {
             const sortedData = data.sort(orderAddressComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Address")
         }
     }
 
     const [sortAscendingOrderDate, setSortAscendingOrderDate] = useState(true)
-    const sortByOrderDate = (e) => {
-        setSortAscendingOrderDate(!sortAscendingOrderDate)
-
-        if (sortAscendingOrderDate == true) {
+    const sortByOrderDate = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(orderDateComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Date")
         } else {
             const sortedData = data.sort(orderDateComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Date")
         }
     }
 
     const [sortAscendingOrderStatus, setSortAscendingOrderStatus] = useState(true)
-    const sortByOrderStatus = (e) => {
-        setSortAscendingOrderStatus(!sortAscendingOrderStatus)
-
-        if (sortAscendingOrderStatus == true) {
+    const sortByOrderStatus = (e, sortAscending) => {
+        if (sortAscending == true) {
             const sortedData = data.sort(orderStatusComparator)
             setData(sortedData)
+            setSortCriteria("Sort Ascending Order Date")
         } else {
             const sortedData = data.sort(orderStatusComparator).reverse()
             setData(sortedData)
+            setSortCriteria("Sort Descending Order Date")
         }
     }
 
- 
-
- 
 
     const [dataExport, setDataExport] = useState([])
     const [showExportData, setShowExportData] = useState(true)
@@ -453,18 +467,18 @@ const useProfileHooks = (user) => {
 
     ]);
 
-      //filter
-const filteredOrders = (data ?? []).filter((d) => {
-    console.log("enter, data : " + data);
-    console.log("searchqury : " + searchQuery);
-    if (searchQuery === '' && orderStatus === 'All') {
-    return true; // show all orders
-    } else if (searchQuery === '' && d.orderStatus === orderStatus) {
-    return true; // show orders with selected status
-    } else {
-       return d.orderTitle.toLowerCase().includes(searchQuery.toLowerCase()) &&
-       (orderStatus === 'All' || d.orderStatus === orderStatus);
-    }
+    //filter
+    const filteredOrders = (data ?? []).filter((d) => {
+        console.log("enter, data : " + data);
+        console.log("searchqury : " + searchQuery);
+        if (searchQuery === '' && orderStatus === 'All') {
+            return true; // show all orders
+        } else if (searchQuery === '' && d.orderStatus === orderStatus) {
+            return true; // show orders with selected status
+        } else {
+            return d.orderTitle.toLowerCase().includes(searchQuery.toLowerCase()) &&
+            (orderStatus === 'All' || d.orderStatus === orderStatus);
+        }
     });
 
     return { 
@@ -475,6 +489,7 @@ const filteredOrders = (data ?? []).filter((d) => {
         handleEditOrderAddress,
         orderSelected,
         geocodeAddress,
+        editOrderDetails, handleEditOrderDetails,
 
         updateEditedOrder,
         showEditOrderModal,
@@ -519,6 +534,7 @@ const filteredOrders = (data ?? []).filter((d) => {
         setShowConfirmEditOrderModal,
         returnToPurchaseModalAfterConfirmModal,
 
+        sortByOrderId,
         sortByOrderTitle,
         sortAscendingOrderTitle,
         sortByOrderAddress,
@@ -531,6 +547,8 @@ const filteredOrders = (data ?? []).filter((d) => {
         sortAscendingOrderTotalPrice,
         sortByOrderStatus,
         sortAscendingOrderStatus,
+        sortCriteria,
+        setSortCriteria,
 
         dataExport,
         prepareDataForExport,

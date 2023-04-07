@@ -28,7 +28,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { faHome,  faArrowDownWideShort, faArrowUpShortWide } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import DropdownButton from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+
 import { CSVLink, CSVDownload } from "react-csv";
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 const exportHeaders = [
     { label: "Order Title", key: "orderTitle" },
@@ -43,8 +47,6 @@ const exportHeaders = [
 export const ProfilePage = () => {
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
   
     const { user } = UserAuth()
     const { 
@@ -66,7 +68,8 @@ export const ProfilePage = () => {
         handleCloseEditSuccessToast,
         showConfirmEditModalPage,
         closeConfirmEditOrderPage,
-       
+        editOrderDetails, handleEditOrderDetails,
+
         cancelOrder,
         showCancelOrderModal,
         handleShowCancelOrderModal,
@@ -96,6 +99,7 @@ export const ProfilePage = () => {
         setShowConfirmEditOrderModal,
         returnToPurchaseModalAfterConfirmModal,
 
+        sortByOrderId,
         sortByOrderTitle,
         sortAscendingOrderTitle,
         sortByOrderAddress,
@@ -108,7 +112,8 @@ export const ProfilePage = () => {
         sortAscendingOrderTotalPrice,
         sortByOrderStatus,
         sortAscendingOrderStatus,
-
+        sortCriteria,
+        setSortCriteria,
 
         dataExport,
         prepareDataForExport,
@@ -136,6 +141,14 @@ export const ProfilePage = () => {
         handleCloseReviewErrorActionToast
 
     } = useProfileHooks(user)
+
+    const handleClose = () => {
+        setShow(false);
+        setSortCriteria("Sort")
+    }
+
+    const handleShow = () => setShow(true);
+
 
     const [page, setPage] = useState(1)
     console.log(data != null ? data : 1)
@@ -265,20 +278,14 @@ export const ProfilePage = () => {
                         <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
                     </StyledErrorToast>
                 }
-
-
-
-
-
-       
             <TableContainer>
 
             <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
-        <TableInputContainer>
+            <TableInputContainer>
                 <OrderInputGroup>
                  <SearchOrderInput
                     type="text"
-                    // placeholder="Search Order"
+                    placeholder="Search order record by order title"
                     aria-describedby="basic-addon2"
                     value = {searchQuery != null && searchQuery}
                     disabled={false}
@@ -286,6 +293,12 @@ export const ProfilePage = () => {
                    
                 />
                 </OrderInputGroup>
+            
+                <>
+                    <Button variant="primary" onClick={handleShow} className="me-2">
+                        Filter & Sort 
+                    </Button>
+                </>
                
             {/* </StyledInputGroup> */}
             <div>
@@ -303,110 +316,20 @@ export const ProfilePage = () => {
 
             </div>
         </TableInputContainer>
-        <FilterOrderStatusGroup>
-            <OrderStatusLabel>
-                <input
-                type="radio"
-                name="statusFilter"
-                value="All"
-                checked={orderStatus === 'All'}
-                onChange={() => setOrderStatus('All')}
-            />
-            All
-            </OrderStatusLabel>
-            
-            <OrderStatusLabel>
-            <input
-                type="radio"
-                name="statusFilter"
-                value="Pending Approval"
-                checked={orderStatus === 'Pending Approval'}
-                onChange={() => setOrderStatus('Pending Approval')}
-            />
-            Pending Approval
-            </OrderStatusLabel>
-            <OrderStatusLabel>
-            <input
-                type="radio"
-                name="statusFilter"
-                value="Payment Required"
-                checked={orderStatus === 'Payment Required'}
-                onChange={() => setOrderStatus('Payment Required')}
-            />
-            Payment Required
-            </OrderStatusLabel>
-            <OrderStatusLabel>
-            <input
-                type="radio"
-                name="statusFilter"
-                value="In Delivery"
-                checked={orderStatus === 'In Delivery'}
-                onChange={() => setOrderStatus('In Delivery')}
-            />
-            In Delivery
-            </OrderStatusLabel>
-            <OrderStatusLabel>
-            <input
-                type="radio"
-                name="statusFilter"
-                value="Completed"
-                checked={orderStatus === 'Completed'}
-                onChange={() => setOrderStatus('Completed')}
-            />
-            Completed
-            </OrderStatusLabel>
-        </FilterOrderStatusGroup>
+       
             {data != null && data.length == 0 && <h5>You have no orders currently</h5>}
             {data != null && data.length != 0 && 
             <StyledTableContainer>
             <StyledTable hover>
                 <thead>
                     <tr>
-                    <th>
-                        Order Id
-                    </th>
-                    <th>
-                        Order Title 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderTitle == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderTitle}
-                        />
-                    </th>
-                    <th>
-                        Qty 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderQty == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderQty}
-                        />
-                    </th>
-                    <th>
-                        Price 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderTotalPrice == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderTotalPrice}
-                        />
-                    </th>
-                    <th>
-                        Order Date 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderDate == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderDate}
-                        />
-                    </th>
-                    <th>
-                        Order Address 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderAddress == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderAddress}
-                        />
-                    </th>
-                    <th>
-                        Status 
-                        <StyledFontAwesomeIconSort 
-                            icon={sortAscendingOrderStatus == true ? faArrowDownWideShort : faArrowUpShortWide} 
-                            onClick={sortByOrderStatus}
-                        />
-                    </th>
+                    <th>Order Id</th>
+                    <th>Order Title</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Order Date</th>
+                    <th>Order Address</th>
+                    <th>Status</th>
                     <th></th>
                     </tr>  
                 </thead>             
@@ -496,6 +419,20 @@ export const ProfilePage = () => {
                                 <Form.Control.Feedback type="invalid">
                                     Please provide your address
                                 </Form.Control.Feedback>
+                            </Form.Group>
+
+                                {/* Edit Order Details */}
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                                <Form.Label>Order Details</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    as="textarea"
+                                    placeholder={orderSelected != null && orderSelected.orderDetails}
+                                    autoFocus
+                                    value={orderSelected != null && editOrderDetails}
+                                    onChange={(e) => handleEditOrderDetails(e.target.value)}
+                                />
                             </Form.Group>
 
                             {/* Confirm Update */}
@@ -595,9 +532,110 @@ export const ProfilePage = () => {
                 <p>Number of Pages : {determineTotalNosOfPages()} </p>
                 
             </TableContainer>
+            <Offcanvas show={show} onHide={handleClose} placement={"end"} name={"end"}>
+                <Offcanvas.Header closeButton>
+                    <StyledOffcanvasTitle></StyledOffcanvasTitle>
+                </Offcanvas.Header>
+                <StyledOffcanvasBody>
+                <>
+                    <StyledOffcanvasMainTitle>Filter & Sort Order Records</StyledOffcanvasMainTitle>
+                   
+                    <StyledOffcanvasTitle>Filter Order Records</StyledOffcanvasTitle>
+                    <FilterOrderStatusGroup>
+                    <OrderStatusLabel>
+                        <input
+                        type="radio"
+                        name="statusFilter"
+                        value="All"
+                        checked={orderStatus === 'All'}
+                        onChange={() => setOrderStatus('All')}
+                    />
+                    <OrderStatusText>All</OrderStatusText>
+                    </OrderStatusLabel>
+                    <OrderStatusLabel>
+                        <input
+                            type="radio"
+                            name="statusFilter"
+                            value="Pending Approval"
+                            checked={orderStatus === 'Pending Approval'}
+                            onChange={() => setOrderStatus('Pending Approval')}
+                        />
+                    <OrderStatusText>Pending Approval</OrderStatusText>
+                    </OrderStatusLabel>
+                    <OrderStatusLabel>
+                    <input
+                        type="radio"
+                        name="statusFilter"
+                        value="In Delivery"
+                        checked={orderStatus === 'In Delivery'}
+                        onChange={() => setOrderStatus('In Delivery')}
+                    />
+                    <OrderStatusText>In Delivery</OrderStatusText>
+                    </OrderStatusLabel>
+                    <OrderStatusLabel>
+                    <input
+                        type="radio"
+                        name="statusFilter"
+                        value="Completed"
+                        checked={orderStatus === 'Completed'}
+                        onChange={() => setOrderStatus('Completed')}
+                    />
+                    <OrderStatusText>Completed</OrderStatusText>
+                    </OrderStatusLabel>
+                </FilterOrderStatusGroup>
+                </>
+
+                <StyledDropdown className="d-inline mx-2">
+                        <StyledOffcanvasTitle>Sort Order Records</StyledOffcanvasTitle>
+                        <StyledDropdownToggle id="dropdown-autoclose-true">
+                            {sortCriteria}
+                        </StyledDropdownToggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={(e) => sortByOrderId(e, true)}>Sort Ascending Order Id</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderId(e, false)}>Sort Descending Order Id</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderTitle(e, true)}>Sort Ascending Order Title</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderTitle(e, false)}>Sort Descending Order Title</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderQty(e, true)}>Sort Ascending Order Quantity</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderQty(e, false)}>Sort Descending Order Quantity</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderTotalPrice(e, true)}>Sort Ascending Order Price</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderTotalPrice(e, false)}>Sort Descending Order Price</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderDate(e, true)}>Sort Ascending Order Date</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderDate(e, false)}>Sort Descending Order Date</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderAddress(e, true)}>Sort Ascending Order Address</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => sortByOrderAddress(e, false)}>Sort Descending Order Address</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </StyledDropdown>
+
+            </StyledOffcanvasBody>
+            </Offcanvas>
         </PageTemplate>
     )
 }
+
+const StyledDropdownToggle = styled(Dropdown.Toggle)`
+    margin-bottom:5vh;
+`
+
+const StyledOffcanvasBody = styled(Offcanvas.Body)`
+    padding-left:5vh;
+`
+
+const StyledOffcanvasMainTitle = styled(Offcanvas.Title)`
+    font-family: 'Josefin Sans', sans-serif;
+    margin-bottom:7vh;
+    font-size:1.5em;
+`
+
+const StyledOffcanvasTitle = styled(Offcanvas.Title)`
+    font-family: 'Josefin Sans', sans-serif;
+    margin-bottom:2vh;
+    font-size:1.1em;
+`
+
+const StyledDropdown = styled(Dropdown)`
+    font-family: 'Josefin Sans', sans-serif;
+`
 
 const ModalButtonContainer = styled.div`
     width:100%;
@@ -623,6 +661,7 @@ const StyledTable = styled(Table)`
 `
 
 const StyledTableContainer = styled.div`
+    margin-top:5vh;
 `
 
 const StyledHeader = styled.h4`
@@ -705,7 +744,7 @@ const StyledInputGroup = styled(InputGroup)`
 `
 
 const OrderInputGroup = styled(InputGroup)`
-    width:80%;
+    width:70%;
     margin-right: 2%;
 `
 const TableInputContainer = styled.div`
@@ -713,14 +752,22 @@ const TableInputContainer = styled.div`
     flex-direction:row;
 `
 const FilterOrderStatusGroup = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
-margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    margin-top:-3vh;
 `
+const OrderStatusText = styled.p`
+    margin-left:0.7vw;
+    margin-top:2.5vh;
+    font-family: 'Josefin Sans', sans-serif;
+`
+
 const OrderStatusLabel = styled.label`
-margin-right: 16px;
+    margin-right: 2vw;
+    display:flex;
+    flex-direction:row;
 `
 
 const SearchOrderInput = styled(Form.Control)`
+
 `
