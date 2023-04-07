@@ -169,10 +169,10 @@ const ProductListing = () => {
                     {data != null && getAllRecommendedProducts().length > 0 && getAllRecommendedProducts().map((d) => (
                         <ProductRecommendationImgContainer>
                             <StyledProductLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
-                            <ProductRecommendationImg
+                            {d.imageLink != null && <ProductRecommendationImg
                                 src={`${d.imageLink[0]}`}
                                 alt="First slide"
-                            />
+                            />}
                             <ProductRecommendationName>{d.name}</ProductRecommendationName>
                             </StyledProductLink>
                         </ProductRecommendationImgContainer>
