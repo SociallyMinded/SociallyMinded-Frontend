@@ -92,18 +92,21 @@ const ProductListing = () => {
             <ProductListingPage>        
             <ProductListingImgSection>
                 
-                <Carousel variant="dark">
-
-                    {state.d.imageLink != null && state.d.imageLink.map((i) => (
-                         <Carousel.Item>
-                             <ProductListingImg 
-                             src={`${i}`} 
-                             alt="image"/>
-                         </Carousel.Item>
-                    ))}
-
-                  
-                </Carousel>
+            {state.d.imageLink == null && 
+                <LoadingContainer>
+                    <Spinner animation="grow" />
+                    <SpinnerText>Loading</SpinnerText>
+                </LoadingContainer>
+            }
+            {state.d.imageLink != null && <Carousel variant="dark">
+                {state.d.imageLink != null && state.d.imageLink.map((i) => (
+                        <Carousel.Item>
+                            <ProductListingImg 
+                            src={`${i}`} 
+                            alt="image"/>
+                        </Carousel.Item>
+                ))}
+            </Carousel>}
             </ProductListingImgSection>
 
             
@@ -352,6 +355,19 @@ const ProductListing = () => {
         </PageTemplate>
     )
 }
+
+const SpinnerText = styled.h5`
+    margin-left:1vw;
+    margin-top:1vh;
+`
+
+const LoadingContainer = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:50vh;
+`
 
 const ProductRecommendationName = styled.p`
     width:80%;
