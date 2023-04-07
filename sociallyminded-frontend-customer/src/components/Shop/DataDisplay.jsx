@@ -30,8 +30,7 @@ export const DataDisplay = ({data}) => {
                             <CardTitleContainer>
                                 <StyledCardTitle>${d.price}</StyledCardTitle>
                             </CardTitleContainer>
-                        </StyledCardBody>
-                        {d.numRatings != 0 && d.ratingScore != 0 && (
+                            {d.numRatings != 0 && d.ratingScore != 0 && (
                         <RatingNumber> 
                       
                         <Score>{ (d.ratingScore/d.numRatings).toFixed(2) } <span style={{ color: "#FFC107", marginBottom: "2.5px" }}><AiFillStar/></span></Score>
@@ -41,6 +40,7 @@ export const DataDisplay = ({data}) => {
                         {d.numRatings == 0 && d.ratingScore == 0 && (
                         <NoRating>No Rating Yet</NoRating>
                         ) }
+                        </StyledCardBody>
                         </StyledCard>
                 </StyledLink>
                 </StyledCol>
@@ -150,21 +150,15 @@ const NoRating = styled.p`
     color: #777;
     font-size:0.8em;
     margin-top:2%;
-    text-align: center;
 `
 
 const RatingNumber = styled.div`
-    margin-top:2%;
     text-align: center;
     display: flex;
-   justifyContent: center;
-   margin-left: 35%;
-  font-weight: bold;
+    justifyContent: center;
+    font-weight: bold;
 `
 const Score = styled.span`
-display: flex;
-  align-items: center;
-  margin-left: 5px;
-
+    display: flex;
+    align-items: center;
 `
-// margin-left: 5px;

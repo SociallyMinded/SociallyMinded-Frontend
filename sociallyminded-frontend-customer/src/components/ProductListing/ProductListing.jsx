@@ -45,7 +45,8 @@ const ProductListing = () => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
-        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts,
+        message, handleSetMessage
     } = useProductListingHooks(state)
 
     const [viewState, setViewState] = useState({
@@ -91,18 +92,21 @@ const ProductListing = () => {
             <ProductListingPage>        
             <ProductListingImgSection>
                 
-                <Carousel>
-
-                    {state.d.imageLink != null && state.d.imageLink.map((i) => (
-                         <Carousel.Item>
-                             <ProductListingImg 
-                             src={`${i}`} 
-                             alt="image"/>
-                         </Carousel.Item>
-                    ))}
-
-                  
-                </Carousel>
+            {state.d.imageLink == null && 
+                <LoadingContainer>
+                    <Spinner animation="grow" />
+                    <SpinnerText>Loading</SpinnerText>
+                </LoadingContainer>
+            }
+            {state.d.imageLink != null && <Carousel variant="dark">
+                {state.d.imageLink != null && state.d.imageLink.map((i) => (
+                        <Carousel.Item>
+                            <ProductListingImg 
+                            src={`${i}`} 
+                            alt="image"/>
+                        </Carousel.Item>
+                ))}
+            </Carousel>}
             </ProductListingImgSection>
 
             
@@ -157,11 +161,10 @@ const ProductListing = () => {
                     </ProductListingPurchaseContainer>
                 </ProductListingDescriptionContainer>
             </ProductListingDescriptionSection>
-           
             <ProductRecommendationSectionContainer>
-            {data != null && getAllRecommendedProducts().length > 0 &&     
-                <ProductRecommendationTitle>other products from this social enterprise</ProductRecommendationTitle>
-            }
+                    {data != null && getAllRecommendedProducts().length > 0 &&     
+                        <ProductRecommendationTitle>other products from this social enterprise</ProductRecommendationTitle>
+                    }
                     <ProductRecommendationSection>
                     {data != null && getAllRecommendedProducts().length > 0 && getAllRecommendedProducts().map((d) => (
                         <ProductRecommendationImgContainer>
@@ -261,6 +264,17 @@ const ProductListing = () => {
                                     Please provide your postal code
                                 </Form.Control.Feedback>
                             </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Message to social enterprise </Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    autoFocus
+                                    value={message}
+                                    onChange={handleSetMessage}
+                                />
+                            </Form.Group>
+
                             <ModalButtonContainer>
                                 {renderDisabledButton() == true && <ModalButton disabled type="submit" variant="primary" onClick={geocodeAddress}>
                                     Confirm Order
@@ -342,6 +356,19 @@ const ProductListing = () => {
     )
 }
 
+const SpinnerText = styled.h5`
+    margin-left:1vw;
+    margin-top:1vh;
+`
+
+const LoadingContainer = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:50vh;
+`
+
 const ProductRecommendationName = styled.p`
     width:80%;
 `
@@ -356,19 +383,21 @@ const StyledProductLink = styled(Link)`
     }
 `
 const ProductRecommendationTitle = styled.h4`
-    margin-top:7vh;
 `
 
 const ProductRecommendationSectionContainer = styled.div`
     padding-bottom:10vh;
-    overflow-x: scroll;
-    max-width:100%;
-    margin-top:100px;
+    width:90vw;
+    max-width:80vw;
+    margin-top:1vh;
 `
 
 const ProductRecommendationSection = styled.div`
     display:flex;
     flex-direction:row;
+    max-width:100%;
+    margin-top:1vh;
+    overflow:scroll;
 `
 
 const ProductRecommendationImgContainer = styled.div`
@@ -441,12 +470,17 @@ const ProductListingPage = styled.div`
 const ProductListingImgSection = styled.div`
     width:25vw;
     height:50vh;
+    max-height:50vh;
+    overflow:scroll;
     margin-right:5vw;
+    display:flex;
+    border-radius:10px;
 `
 
 const ProductListingImg = styled.img`
     width:25vw;
     height:50vh;
+    max-height:50vh;
     border-radius:10px;
 `
 
@@ -454,7 +488,8 @@ const ProductListingDescriptionSection = styled.div`
     display:flex;
     flex-direction:column;
     width:50vw;
-    height:50vh;
+    max-height:100%;
+    overflow:scroll;
     position:1;
     display:absolute;
 `

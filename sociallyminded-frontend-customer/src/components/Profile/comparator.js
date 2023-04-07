@@ -1,6 +1,18 @@
 
 import React from "react";
 
+export function orderIdComparator(ord1, ord2) {
+    if (Math.floor(ord1.orderRecordId) < Math.floor(ord2.orderRecordId)) {
+        return -1;
+    }
+    else if (ord1.orderTitle > ord2.orderTitle) {
+        return 1;
+    } 
+    else {
+        return 0;
+    }
+}
+
 export function orderTitleComparator(ord1, ord2) {
     if (ord1.orderTitle < ord2.orderTitle) {
         return -1;

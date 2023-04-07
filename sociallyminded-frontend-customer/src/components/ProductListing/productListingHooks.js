@@ -41,33 +41,35 @@ const useProductListingHooks = (state) => {
         }
     }
 
-    const handleClosePurchaseModal = () => setShowPurchaseModal(false);
+    const handleClosePurchaseModal = () => setShowPurchaseModal(false)
 
-    const handleShowReviewsPage = () => setShowReviewsPage(true);
-    const handleCloseReviewsPage = () => setShowReviewsPage(false);
+    const handleShowReviewsPage = () => setShowReviewsPage(true)
+    const handleCloseReviewsPage = () => setShowReviewsPage(false)
 
-    const handleShowSuccessToast = () => setShowSuccessToast(true);
-    const handleCloseSuccessToast = () => setShowSuccessToast(false);
+    const handleShowSuccessToast = () => setShowSuccessToast(true)
+    const handleCloseSuccessToast = () => setShowSuccessToast(false)
 
-    const handleShowLoginPromptToast = () => setShowLoginPromptToast(true);
-    const handleCloseLoginPromptToast = () => setShowLoginPromptToast(false);
+    const handleShowLoginPromptToast = () => setShowLoginPromptToast(true)
+    const handleCloseLoginPromptToast = () => setShowLoginPromptToast(false)
 
     
     const [orderQty, setOrderQty] = useState("");
-    const handleOrderQty = (e) => setOrderQty(e.target.value);
+    const handleOrderQty = (e) => setOrderQty(e.target.value)
 
-    const [creditCardNos, setCreditCardNos] = useState("");
-    const handleCreditCardNos = (e) => setCreditCardNos(e.target.value);
+    const [creditCardNos, setCreditCardNos] = useState("")
+    const handleCreditCardNos = (e) => setCreditCardNos(e.target.value)
 
-    const [creditCardCVV, setCreditCardCVV] = useState("");
-    const handleCreditCardCVV = (e) => setCreditCardCVV(e.target.value);
+    const [creditCardCVV, setCreditCardCVV] = useState("")
+    const handleCreditCardCVV = (e) => setCreditCardCVV(e.target.value)
 
     const [postalCode, setPostalCode] = useState("")
-    const handlePostalCode = (e) => setPostalCode(e.target.value);
+    const handlePostalCode = (e) => setPostalCode(e.target.value)
 
     const [unitNos, setUnitNos] = useState("")
-    const handleUnitNos = (e) => setUnitNos(e.target.value);
+    const handleUnitNos = (e) => setUnitNos(e.target.value)
 
+    const [message, setMessage] = useState("")
+    const handleSetMessage = (e) => setMessage(e.target.value)
 
     const [addressData, setAddressData] = useState("")
 
@@ -165,7 +167,8 @@ const useProductListingHooks = (state) => {
                     "quantity": orderQty,
                     "totalPrice":totalPrice,
                     "orderTitle": `${state.d.name} Order`,
-                    "address": addressData != null ? addressData.ADDRESS : ""
+                    "address": addressData != null ? addressData.ADDRESS : "",
+                    "orderDetails": message
                 }
             }
            console.log(newOrder)
@@ -192,7 +195,8 @@ const useProductListingHooks = (state) => {
         showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
-        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts
+        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts,
+        message, handleSetMessage
     } 
 }
 
