@@ -21,7 +21,7 @@ export const DataDisplay = ({data}) => {
                         {d.socialenterprise.enterpriseName}
                     </StyledCardHeader>
                     <ImgDiv>
-                        <StyledImg variant="top" src={`${d.imageLink[0]}`} />
+                        {d.imageLink != null && <StyledImg variant="top" src={`${d.imageLink[0]}`} />}
                     </ImgDiv>
                         <StyledCardBody>
                             <CardTitleContainer>
