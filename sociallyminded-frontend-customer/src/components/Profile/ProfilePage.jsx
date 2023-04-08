@@ -99,22 +99,6 @@ export const ProfilePage = () => {
         setShowConfirmEditOrderModal,
         returnToPurchaseModalAfterConfirmModal,
 
-        sortByOrderId,
-        sortByOrderTitle,
-        sortAscendingOrderTitle,
-        sortByOrderAddress,
-        sortAscendingOrderAddress,
-        sortByOrderDate,
-        sortAscendingOrderDate,
-        sortByOrderQty,
-        sortAscendingOrderQty,
-        sortByOrderTotalPrice,
-        sortAscendingOrderTotalPrice,
-        sortByOrderStatus,
-        sortAscendingOrderStatus,
-        sortCriteria,
-        setSortCriteria,
-
         dataExport,
         prepareDataForExport,
         showDownloadData,
@@ -138,13 +122,19 @@ export const ProfilePage = () => {
         showPaymentErrorActionToast,
         handleClosePaymentErrorActionToast,
         showReviewErrorActionToast,
-        handleCloseReviewErrorActionToast
+        handleCloseReviewErrorActionToast,
+
+        
+        sortedDataMemo,
+        sortOrderAscending,
+        handleSortOrders,
+        sortCriteriaText
 
     } = useProfileHooks(user)
 
     const handleClose = () => {
         setShow(false);
-        setSortCriteria("Sort")
+        sortCriteriaText("Sort Ascending Order Id")
     }
 
     const handleShow = () => setShow(true);
@@ -516,7 +506,7 @@ export const ProfilePage = () => {
                     </Button> 
                     </Modal.Footer>
                 </Modal> 
-                {data != null && data.length != 0 && <PaginationContainer>
+                {sortedDataMemo != null && sortedDataMemo.length != 0 && <PaginationContainer>
                 <Pagination.First onClick={goToFirstPage}/>
 
                 {currentPage > 1 && <Pagination.Prev onClick={goToPreviousPage}/>}
@@ -585,27 +575,27 @@ export const ProfilePage = () => {
                 </FilterOrderStatusGroup>
                 </>
 
-                <StyledDropdown className="d-inline mx-2">
+                {data != null && <StyledDropdown className="d-inline mx-2">
                         <StyledOffcanvasTitle>Sort Order Records</StyledOffcanvasTitle>
                         <StyledDropdownToggle id="dropdown-autoclose-true">
-                            {sortCriteria}
+                            {sortCriteriaText}
                         </StyledDropdownToggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={(e) => sortByOrderId(e, true)}>Sort Ascending Order Id</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderId(e, false)}>Sort Descending Order Id</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderTitle(e, true)}>Sort Ascending Order Title</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderTitle(e, false)}>Sort Descending Order Title</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderQty(e, true)}>Sort Ascending Order Quantity</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderQty(e, false)}>Sort Descending Order Quantity</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderTotalPrice(e, true)}>Sort Ascending Order Price</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderTotalPrice(e, false)}>Sort Descending Order Price</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderDate(e, true)}>Sort Ascending Order Date</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderDate(e, false)}>Sort Descending Order Date</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderAddress(e, true)}>Sort Ascending Order Address</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => sortByOrderAddress(e, false)}>Sort Descending Order Address</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_ID", true)}>Sort Ascending Order Id</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_ID", false)}>Sort Descending Order Id</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_TITLE", true)}>Sort Ascending Order Title</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_TITLE", false)}>Sort Descending Order Title</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_QTY", true)}>Sort Ascending Order Quantity</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_QTY", false)}>Sort Descending Order Quantity</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_TOTAL_PRICE", true)}>Sort Ascending Order Price</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_TOTAL_PRICE", false)}>Sort Descending Order Price</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_DATE", true)}>Sort Ascending Order Date</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_DATE", false)}>Sort Descending Order Date</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_ADDRESS", true)}>Sort Ascending Order Address</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => handleSortOrders("ORDER_ADDRESS", false)}>Sort Descending Order Address</Dropdown.Item>
                         </Dropdown.Menu>
-                    </StyledDropdown>
+                    </StyledDropdown>}
 
             </StyledOffcanvasBody>
             </Offcanvas>
