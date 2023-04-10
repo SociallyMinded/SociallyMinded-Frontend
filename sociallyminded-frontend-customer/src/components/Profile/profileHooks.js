@@ -100,6 +100,11 @@ const useProfileHooks = (user) => {
     const handleShowReviewErrorActionToast = () => setShowReviewErrorActionToast(true)
     const handleCloseReviewErrorActionToast = () => setShowReviewErrorActionToast(false)
 
+
+    const [showAlreadyCompletedErrorActionToast, setShowAlreadyCompletedErrorActionToast] = useState(false)
+    const handleShowAlreadyCompletedErrorActionToast = () => setShowAlreadyCompletedErrorActionToast(true)
+    const handleCloseAlreadyCompletedErrorActionToast = () => setShowAlreadyCompletedErrorActionToast(false)
+
     const handleOrderSelected = (order, action) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
@@ -129,8 +134,10 @@ const useProfileHooks = (user) => {
         } else if (action == Actions.COMPLETE_ORDER) {
             if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {
                 setShowCompleteOrderModal(true)
-            } else {
+            } else if (order.orderStatus == ORDERSTATUS.PENDING_APPROVAL) {
                 setShowReviewErrorActionToast(true)
+            } else {
+                setShowAlreadyCompletedErrorActionToast(true)
             }
         }
     }
@@ -203,8 +210,6 @@ const useProfileHooks = (user) => {
         }
 
     }
-
-
 
     const updateOrderAsReceivedAndLeaveAReview = async () => {
         if (user != null && orderSelected != null) {
@@ -652,6 +657,8 @@ const useProfileHooks = (user) => {
         handleClosePaymentErrorActionToast,
         showReviewErrorActionToast,
         handleCloseReviewErrorActionToast,
+        showAlreadyCompletedErrorActionToast,
+        handleCloseAlreadyCompletedErrorActionToast,
 
         sortedDataMemo,
         sortOrderAscending,
