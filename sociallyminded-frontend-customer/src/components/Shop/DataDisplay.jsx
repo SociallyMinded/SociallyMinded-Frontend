@@ -30,7 +30,9 @@ export const DataDisplay = ({data}) => {
                             <CardTitleContainer>
                                 <StyledCardTitle>${d.price}</StyledCardTitle>
                             </CardTitleContainer>
-                            {d.numRatings != 0 && d.ratingScore != 0 && (
+                            
+                            {/* {d.numRatings != 0 && d.ratingScore != 0 && (
+                        
                         <RatingNumber> 
                       
                         <Score>{ (d.ratingScore/d.numRatings).toFixed(2) } <span style={{ color: "#FFC107", marginBottom: "2.5px" }}><AiFillStar/></span></Score>
@@ -39,7 +41,8 @@ export const DataDisplay = ({data}) => {
                         ) }
                         {d.numRatings == 0 && d.ratingScore == 0 && (
                         <NoRating>No Rating Yet</NoRating>
-                        ) }
+                        ) } */}
+                        
                         </StyledCardBody>
                         </StyledCard>
                 </StyledLink>

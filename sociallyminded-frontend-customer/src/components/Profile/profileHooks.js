@@ -128,7 +128,7 @@ const useProfileHooks = (user) => {
             }
         } else if (action == Actions.COMPLETE_ORDER) {
             if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {
-                navigate(`/addReview?productId=${order.product.productId}`)
+                setShowCompleteOrderModal(true)
             } else {
                 setShowReviewErrorActionToast(true)
             }
@@ -160,6 +160,85 @@ const useProfileHooks = (user) => {
         })
     }
 
+    const [showCompleteOrderModal, setShowCompleteOrderModal] = useState(false)
+    const handleShowCompleteOrderModal = () => setShowCompleteOrderModal(true)
+    const handleCloseCompleteOrderModal = () => setShowCompleteOrderModal(false)
+
+
+    const [showOrderCompleteToast, setShowOrderCompleteToast] = useState(false)
+    const handleShowOrderCompleteToast = () => setShowOrderCompleteToast(true)
+    const handleCloseOrderCompleteToast = () => setShowOrderCompleteToast(false)
+
+    const updateOrderAsReceived = async () => {
+        setShowOrderCompleteToast(false)
+        if (user != null && orderSelected != null) {
+            const newOrder = {
+                "productId" : orderSelected.product.productId,
+                "custFirebaseUid": user.uid,
+                "record": {
+                    "quantity": orderSelected.quantity,
+                    "totalPrice": orderSelected.totalPrice,
+                    "orderTitle": `${orderSelected.orderTitle}`,
+                    "orderRecordId": orderSelected.orderRecordId,
+                    "dateOfOrder": orderSelected.dateOfOrder,
+                    "orderStatus": "Order Received",
+                    "address": orderSelected.address,
+                    "orderDetails": orderSelected.orderDetails
+                }
+            }
+
+            await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
+                .then(response => {
+                    console.log(response)
+
+                })
+                .catch(error => setEditOrderError(error.response.data))
+                .finally(res => {
+                    console.log(res)
+                    setRefreshTable(true)
+                    setShowCompleteOrderModal(false)
+                    setShowOrderCompleteToast(true)
+                })
+
+        }
+
+    }
+
+
+
+    const updateOrderAsReceivedAndLeaveAReview = async () => {
+        if (user != null && orderSelected != null) {
+            const newOrder = {
+                "productId" : orderSelected.product.productId,
+                "custFirebaseUid": user.uid,
+                "record": {
+                    "quantity": orderSelected.quantity,
+                    "totalPrice": orderSelected.totalPrice,
+                    "orderTitle": `${orderSelected.orderTitle}`,
+                    "orderRecordId": orderSelected.orderRecordId,
+                    "dateOfOrder": orderSelected.dateOfOrder,
+                    "orderStatus": "Order Received",
+                    "address": orderSelected.address,
+                    "orderDetails": orderSelected.orderDetails
+                }
+            }
+
+            await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
+                .then(response => {
+                    console.log(response)
+
+                })
+                .catch(error => setEditOrderError(error.response.data))
+                .finally(res => {
+                    console.log(res)
+                    setRefreshTable(true)
+                    setShowCompleteOrderModal(false)
+                    navigate(`/addReview?productId=${orderSelected.product.productId}`)
+                })
+
+        }
+
+    }
 
     const updateEditedOrder = async () => {
         setLoading(true)
@@ -478,8 +557,8 @@ const useProfileHooks = (user) => {
         showUpdateErrorActionToast,
         showCancelErrorActionToast,  
         showPaymentErrorActionToast,
-        showReviewErrorActionToast
-
+        showReviewErrorActionToast,
+        showOrderCompleteToast
     ]);
 
     //filter
@@ -577,7 +656,17 @@ const useProfileHooks = (user) => {
         sortedDataMemo,
         sortOrderAscending,
         handleSortOrders,
-        sortCriteriaText
+        sortCriteriaText,
+
+        showCompleteOrderModal,
+        handleShowCompleteOrderModal,
+        handleCloseCompleteOrderModal,
+        updateOrderAsReceived,
+        updateOrderAsReceivedAndLeaveAReview,
+
+        showOrderCompleteToast,
+        handleShowOrderCompleteToast,
+        handleCloseOrderCompleteToast
 
     } 
 }
