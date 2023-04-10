@@ -662,7 +662,8 @@ const StyledThead = styled.thead`
 `
 const StyledTd = styled.td`
     vertical-align: middle;
-    max-width:10vw;
+    max-width:20vw;
+    text-overflow: ellipsis;
 `
 
 const StyledToast = styled(Toast)`

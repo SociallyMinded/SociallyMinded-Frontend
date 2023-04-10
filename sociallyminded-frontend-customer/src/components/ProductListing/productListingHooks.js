@@ -123,7 +123,7 @@ const useProductListingHooks = (state) => {
         const url = obtainGeocodeUrl(postalCode)
         await axios.get(url)
         .then(response => {
-            if (orderQty !== "" && creditCardNos !== "" && creditCardCVV !== "" && unitNos !== "" && postalCode !== "") {
+            if (orderQty !== "" && unitNos !== "" && postalCode !== "") {
                 if (response.data.results.length != 0) {
                     const addressData = response.data.results[0]
                     const fullAddressText = addressData.ADDRESS.split("SINGAPORE")[0] + ` #${unitNos} SINGAPORE` + addressData.ADDRESS.split("SINGAPORE")[1]
@@ -178,8 +178,8 @@ const useProductListingHooks = (state) => {
                 })
                 .catch(error => setError(error))
                 .finally(res => {
-                    setConfirmOrder(false)
-                    setShowSuccessToast(true)
+                    // setConfirmOrder(false)
+                    // setShowSuccessToast(true)
                 })
         } else {
             setShowPurchaseModal(false)
@@ -196,7 +196,9 @@ const useProductListingHooks = (state) => {
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
         addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts,
-        message, handleSetMessage
+        message, handleSetMessage,
+        setConfirmOrder,
+        setShowSuccessToast
     } 
 }
 

@@ -30,6 +30,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { getProductsBySocialEnterprise } from "../../routes/routes";
 import { useEffect } from "react";
 import axios from "axios";
+import GooglePayButton from '@google-pay/button-react';
+
 
 const ProductListing = () => {
     const { state } = useLocation();
@@ -46,7 +48,9 @@ const ProductListing = () => {
         confirmOrder, showConfirmOrderPage,
         addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage, unitNos, handleUnitNos,
         addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts,
-        message, handleSetMessage
+        message, handleSetMessage, 
+        setConfirmOrder,
+        setShowSuccessToast
     } = useProductListingHooks(state)
 
     const [viewState, setViewState] = useState({
@@ -78,7 +82,7 @@ const ProductListing = () => {
     }
 
     const renderDisabledButton = () => {
-        if (orderQty == "" || creditCardNos == "" || creditCardCVV == "" || unitNos == "" || postalCode == "") {
+        if (orderQty == "" || unitNos == "" || postalCode == "") {
             return true
         } else {
             return false
@@ -110,8 +114,7 @@ const ProductListing = () => {
             </ProductListingImgSection>
 
             
-            <ProductListingDescriptionSection>
-     
+            <ProductListingDescriptionSection> 
             <ProductListingToastSection>
                 {showSuccessToast && 
                     <StyledToast onClose={handleCloseSuccessToast}>
@@ -204,7 +207,7 @@ const ProductListing = () => {
                                 </Form.Control.Feedback>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Credit Card Nos</Form.Label>
                                 <Form.Control
                                     required
@@ -218,9 +221,9 @@ const ProductListing = () => {
                                     Please provide your credit card nos
                                 </Form.Control.Feedback>
                             </Form.Group>
-                    
+                     */}
 
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Credit Card CVV</Form.Label>
                                 <Form.Control
                                     required
@@ -233,7 +236,7 @@ const ProductListing = () => {
                                 <Form.Control.Feedback type="invalid">
                                     Please provide your credit card cvv
                                 </Form.Control.Feedback>
-                            </Form.Group>
+                            </Form.Group> */}
                     
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Unit Number</Form.Label>
@@ -342,12 +345,54 @@ const ProductListing = () => {
 
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
+
+                    <StyledBackButton variant="primary" onClick={returnToPurchaseModalAfterConfirmModal}>
                         Back
-                    </Button>
-                    <Button type="submit" variant="primary" onClick={createNewOrder}>
+                    </StyledBackButton>
+                    <GooglePayButton
+                        environment="TEST"
+                        buttonColor={"blue"}
+                        paymentRequest={{
+                            apiVersion: 2,
+                            apiVersionMinor: 0,
+                            allowedPaymentMethods: [
+                            {
+                                type: 'CARD',
+                                parameters: {
+                                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                                },
+                                tokenizationSpecification: {
+                                type: 'PAYMENT_GATEWAY',
+                                parameters: {
+                                    gateway: 'example',
+                                    gatewayMerchantId: 'exampleGatewayMerchantId',
+                                },
+                                },
+                            },
+                            ],
+                            merchantInfo: {
+                            merchantId: '12345678901234567890',
+                            merchantName: 'Demo Merchant',
+                            },
+                            transactionInfo: {
+                            totalPriceStatus: 'FINAL',
+                            totalPriceLabel: 'Total',
+                            totalPrice: '100.00',
+                            currencyCode: 'USD',
+                            countryCode: 'US',
+                            },
+                        }}
+                        onLoadPaymentData={paymentRequest => {
+                            console.log('load payment data', paymentRequest);
+                            setConfirmOrder(false)
+                            setShowSuccessToast(true)
+                        }}
+                        onClick={createNewOrder}
+                    />
+                    {/* <Button type="submit" variant="primary" onClick={createNewOrder}>
                         Place Order
-                    </Button>
+                    </Button> */}
                     </Modal.Footer>
                 </Modal> 
                 }
@@ -355,6 +400,11 @@ const ProductListing = () => {
         </PageTemplate>
     )
 }
+
+const StyledBackButton = styled(Button)`
+    margin-top:-3px;
+    margin-right:1vw;
+`
 
 const SpinnerText = styled.h5`
     margin-left:1vw;
