@@ -172,8 +172,8 @@ export const AddProductReviewPage = (state) => {
             "imageLink": product.imageLink,
             "name" : product.name,
             "price" : product.price,
-            "numRatings" : Big(product.numRatings).plus(1),
-            "ratingScore" : Big(product.ratingScore).plus(rating),
+            "numRatings" : product.numRatings == undefined ? Big(1) : Big(product.numRatings).plus(1),
+            "ratingScore" : product.ratingScore == undefined ? Big(rating)  : Big(product.ratingScore).plus(rating) ,
             "productId" : productId
           }
             };
@@ -219,7 +219,7 @@ export const AddProductReviewPage = (state) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh"
+        height: "70vh"
     }
 
     const reviewUploadImage = {
@@ -268,8 +268,8 @@ export const AddProductReviewPage = (state) => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#e6e6fa",
-      padding: "10px"
+      marginTop:"7vh",
+      marginBottom:"0vh"
   }
 
   const ProductImage = {
@@ -289,6 +289,7 @@ const ShowOrderTitle = {
          {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
        {/* show the product that going to review*/}
        <div style={ShowProductBeingReviewed}>
+        <h1>Review for product {product != null && product.name}</h1>
        {/* <img
           src={}
          alt= "pic"
@@ -297,10 +298,7 @@ const ShowOrderTitle = {
         <img style={ProductImage} variant="top" src={`${productImageLink}`} /> */}
         {/* <img style={ProductImage} variant="top" src={require('./donut.png')} /> */}
         <div style={{ textAlign: 'center' }}>
-        <p style={ShowOrderTitle}> {dateOfOrder!= null && dateOfOrder.split("T")[0]} </p>
-       
-        <p style={ShowOrderTitle}>{orderTitle} </p>
-        </div>
+               </div>
         {/* <p> Product name : {product.name} </p> */}
         
        </div>

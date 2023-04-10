@@ -128,7 +128,18 @@ export const ProfilePage = () => {
         sortedDataMemo,
         sortOrderAscending,
         handleSortOrders,
-        sortCriteriaText
+        sortCriteriaText,
+
+        showCompleteOrderModal,
+        handleShowCompleteOrderModal,
+        handleCloseCompleteOrderModal,
+        updateOrderAsReceived,
+        updateOrderAsReceivedAndLeaveAReview,
+
+
+        showOrderCompleteToast,
+        handleShowOrderCompleteToast,
+        handleCloseOrderCompleteToast
 
     } = useProfileHooks(user)
 
@@ -237,11 +248,22 @@ export const ProfilePage = () => {
                 {showReviewCompleteToast && 
                     <StyledToast onClose={handleCloseReviewCompleteToast}>
                         <Toast.Header>
-                            <strong className="me-auto">Reviewed Sucess</strong>
+                            <strong className="me-auto">Review is created</strong>
                         </Toast.Header>
-                        <Toast.Body>Your review is submitted!</Toast.Body>
+                        <Toast.Body>Your review is submitted! Thank you for shopping with SociallyMinded!</Toast.Body>
                     </StyledToast>
                 }
+
+                {showOrderCompleteToast && 
+                    <StyledToast onClose={handleCloseOrderCompleteToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Order is marked as complete</strong>
+                        </Toast.Header>
+                        <Toast.Body>Thank you for shopping with SociallyMinded!</Toast.Body>
+                    </StyledToast>
+                }
+
+
                 {showUpdateErrorActionToast &&
                     <StyledErrorToast onClose={handleCloseUpdateErrorActionToast}>
                         <Toast.Header>
@@ -506,6 +528,26 @@ export const ProfilePage = () => {
                     </Button> 
                     </Modal.Footer>
                 </Modal> 
+
+                <Modal show={showCompleteOrderModal} centered>
+                    <Modal.Header>
+                    <Modal.Title>{orderSelected != null && orderSelected.orderTitle}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                        <Form.Label>Thank you for shopping with us! We would appreciate if you could leave a review for your purchased items</Form.Label>
+                    </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={updateOrderAsReceived}>  
+                        Close
+                    </Button> 
+                    <Button variant="primary" onClick={updateOrderAsReceivedAndLeaveAReview}>  
+                        Leave a Review
+                    </Button> 
+                    </Modal.Footer>
+                </Modal> 
+
                 {sortedDataMemo != null && sortedDataMemo.length != 0 && <PaginationContainer>
                 <Pagination.First onClick={goToFirstPage}/>
 
