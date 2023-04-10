@@ -123,6 +123,8 @@ export const ProfilePage = () => {
         handleClosePaymentErrorActionToast,
         showReviewErrorActionToast,
         handleCloseReviewErrorActionToast,
+        showAlreadyCompletedErrorActionToast,
+        handleCloseAlreadyCompletedErrorActionToast,
 
         
         sortedDataMemo,
@@ -281,13 +283,22 @@ export const ProfilePage = () => {
                     </StyledErrorToast>
                 }
    
-
+        
                 {showReviewErrorActionToast &&
                     <StyledErrorToast onClose={handleCloseReviewErrorActionToast}>
                         <Toast.Header>
                             <strong className="me-auto">Error</strong>
                         </Toast.Header>
                         <Toast.Body>You can only mark an order as received after it has been sent for delivery and you have received it</Toast.Body>
+                    </StyledErrorToast>
+                }
+
+                {showAlreadyCompletedErrorActionToast &&
+                    <StyledErrorToast onClose={handleCloseAlreadyCompletedErrorActionToast}>
+                        <Toast.Header>
+                            <strong className="me-auto">Error</strong>
+                        </Toast.Header>
+                        <Toast.Body>You have already marked this order as received</Toast.Body>
                     </StyledErrorToast>
                 }
             <TableContainer>
