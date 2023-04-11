@@ -12,7 +12,7 @@ import {
     orderStatusComparator, 
     orderIdComparator
 } from "./comparator"
-
+import { useMemo } from "react"
 
 export const Actions = {
     UPDATE: 'Update',
@@ -100,6 +100,11 @@ const useProfileHooks = (user) => {
     const handleShowReviewErrorActionToast = () => setShowReviewErrorActionToast(true)
     const handleCloseReviewErrorActionToast = () => setShowReviewErrorActionToast(false)
 
+
+    const [showAlreadyCompletedErrorActionToast, setShowAlreadyCompletedErrorActionToast] = useState(false)
+    const handleShowAlreadyCompletedErrorActionToast = () => setShowAlreadyCompletedErrorActionToast(true)
+    const handleCloseAlreadyCompletedErrorActionToast = () => setShowAlreadyCompletedErrorActionToast(false)
+
     const handleOrderSelected = (order, action) => {
         setCurrentOrderSelected(order)
         setEditOrderQty(order.quantity)
@@ -128,9 +133,11 @@ const useProfileHooks = (user) => {
             }
         } else if (action == Actions.COMPLETE_ORDER) {
             if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {
-                navigate(`/addReview?productId=${order.product.productId}&orderId=${order.orderRecordId}&orderTitle=${order.orderTitle}&dateOfOrder=${order.dateOfOrder}`)
-            } else {
+                setShowCompleteOrderModal(true)
+            } else if (order.orderStatus == ORDERSTATUS.PENDING_APPROVAL) {
                 setShowReviewErrorActionToast(true)
+            } else {
+                setShowAlreadyCompletedErrorActionToast(true)
             }
         }
     }
@@ -160,6 +167,83 @@ const useProfileHooks = (user) => {
         })
     }
 
+    const [showCompleteOrderModal, setShowCompleteOrderModal] = useState(false)
+    const handleShowCompleteOrderModal = () => setShowCompleteOrderModal(true)
+    const handleCloseCompleteOrderModal = () => setShowCompleteOrderModal(false)
+
+
+    const [showOrderCompleteToast, setShowOrderCompleteToast] = useState(false)
+    const handleShowOrderCompleteToast = () => setShowOrderCompleteToast(true)
+    const handleCloseOrderCompleteToast = () => setShowOrderCompleteToast(false)
+
+    const updateOrderAsReceived = async () => {
+        setShowOrderCompleteToast(false)
+        if (user != null && orderSelected != null) {
+            const newOrder = {
+                "productId" : orderSelected.product.productId,
+                "custFirebaseUid": user.uid,
+                "record": {
+                    "quantity": orderSelected.quantity,
+                    "totalPrice": orderSelected.totalPrice,
+                    "orderTitle": `${orderSelected.orderTitle}`,
+                    "orderRecordId": orderSelected.orderRecordId,
+                    "dateOfOrder": orderSelected.dateOfOrder,
+                    "orderStatus": "Order Received",
+                    "address": orderSelected.address,
+                    "orderDetails": orderSelected.orderDetails
+                }
+            }
+
+            await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
+                .then(response => {
+                    console.log(response)
+
+                })
+                .catch(error => setEditOrderError(error.response.data))
+                .finally(res => {
+                    console.log(res)
+                    setRefreshTable(true)
+                    setShowCompleteOrderModal(false)
+                    setShowOrderCompleteToast(true)
+                })
+
+        }
+
+    }
+
+    const updateOrderAsReceivedAndLeaveAReview = async () => {
+        if (user != null && orderSelected != null) {
+            const newOrder = {
+                "productId" : orderSelected.product.productId,
+                "custFirebaseUid": user.uid,
+                "record": {
+                    "quantity": orderSelected.quantity,
+                    "totalPrice": orderSelected.totalPrice,
+                    "orderTitle": `${orderSelected.orderTitle}`,
+                    "orderRecordId": orderSelected.orderRecordId,
+                    "dateOfOrder": orderSelected.dateOfOrder,
+                    "orderStatus": "Order Received",
+                    "address": orderSelected.address,
+                    "orderDetails": orderSelected.orderDetails
+                }
+            }
+
+            await axios.put(updateOrderUrl + orderSelected.orderRecordId, newOrder)
+                .then(response => {
+                    console.log(response)
+
+                })
+                .catch(error => setEditOrderError(error.response.data))
+                .finally(res => {
+                    console.log(res)
+                    setRefreshTable(true)
+                    setShowCompleteOrderModal(false)
+                    navigate(`/addReview?productId=${order.product.productId}&orderId=${order.orderRecordId}&orderTitle=${order.orderTitle}&dateOfOrder=${order.dateOfOrder}`)
+                })
+
+        }
+
+    }
 
     const updateEditedOrder = async () => {
         setLoading(true)
@@ -315,99 +399,114 @@ const useProfileHooks = (user) => {
         }
     }
     
-    const [sortCriteria, setSortCriteria] = useState("Sort");
     
-    const sortByOrderId = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(orderIdComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Id")
-        } else {
-            const sortedData = data.sort(orderIdComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Id")
-        }
-    }
-   
-    const [sortAscendingOrderTitle, setSortAscendingOrderTitle] = useState(true)
-    const sortByOrderTitle = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(orderTitleComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Title")
-        } else {
-            const sortedData = data.sort(orderTitleComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Title")
-        }
-    }
 
-    const [sortAscendingOrderQty, setSortAscendingOrderQty] = useState(true)
-    const sortByOrderQty = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(qtyComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Quantity")
-        } else {
-            const sortedData = data.sort(qtyComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Quantity")
-        }
-    }
+    /* Sorting */ 
+    const [sortAscending, setSortAscending] = useState(true)
+    const [sortingCriteria, setSortingCriteria] = useState("ORDER_ID")
+    const [sortCriteriaText, setSortCriteriaText] = useState("Sort Ascending Order Id");
 
-    const [sortAscendingOrderTotalPrice, setSortAscendingOrderTotalPrice] = useState(true)
-    const sortByOrderTotalPrice = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(priceComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Price")
-        } else {
-            const sortedData = data.sort(priceComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Price")
-        }
-    }
+    const handleSortOrders = (sortingCriteria, sortAscending) => {
+        setSortingCriteria(sortingCriteria)
+        setSortAscending(sortAscending)
+        switch(sortingCriteria) {
+            case "ORDER_ID":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Id") : 
+                setSortCriteriaText("Sort Descending Order Id")
+                break
+                
+            case "ORDER_TITLE":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Title") : 
+                setSortCriteriaText("Sort Descending Order Title")
+                break
+                
+            case "ORDER_QTY":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Qty") : 
+                setSortCriteriaText("Sort Descending Order Qty")
+                break
 
-    const [sortAscendingOrderAddress, setSortAscendingOrderAddress] = useState(true)
-    const sortByOrderAddress = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(orderAddressComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Address")
-        } else {
-            const sortedData = data.sort(orderAddressComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Address")
+            case "ORDER_TOTAL_PRICE":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Price") : 
+                setSortCriteriaText("Sort Descending Order Price")
+                break
+
+            case "ORDER_ADDRESS":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Address") : 
+                setSortCriteriaText("Sort Descending Order Address")
+                break
+
+            case "ORDER_DATE":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Date") : 
+                setSortCriteriaText("Sort Descending Order Date")
+                break
+    
+            case "ORDER_STATUS":
+                sortAscending == true ? 
+                setSortCriteriaText("Sort Ascending Order Status") : 
+                setSortCriteriaText("Sort Descending Order Status")
+                break
+
         }
     }
 
-    const [sortAscendingOrderDate, setSortAscendingOrderDate] = useState(true)
-    const sortByOrderDate = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(orderDateComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Date")
-        } else {
-            const sortedData = data.sort(orderDateComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Date")
+    const sortOrderAscending = () => {
+        if (data != null) {
+            var sortedData;
+            switch(sortingCriteria) {
+                case "ORDER_ID":
+                    sortAscending == true ? 
+                    sortedData = data.sort(orderIdComparator) : 
+                    sortedData = data.sort(orderIdComparator).reverse()
+                    break
+    
+                case "ORDER_TITLE":
+                    sortAscending == true ? 
+                    sortedData = data.sort(orderTitleComparator) : 
+                    sortedData = data.sort(orderTitleComparator).reverse()
+                    break
+                    
+                case "ORDER_QTY":
+                    sortAscending == true ? 
+                    sortedData = data.sort(qtyComparator) : 
+                    sortedData = data.sort(qtyComparator).reverse()
+                    break
+
+                case "ORDER_TOTAL_PRICE":
+                    sortAscending == true ? 
+                    sortedData = data.sort(priceComparator) : 
+                    sortedData = data.sort(priceComparator).reverse()
+                    break
+
+                case "ORDER_ADDRESS":
+                    sortAscending == true ? 
+                    sortedData = data.sort(orderAddressComparator) : 
+                    sortedData = data.sort(orderAddressComparator).reverse()
+                    break
+
+                case "ORDER_DATE":
+                    sortAscending == true ? 
+                    sortedData = data.sort(orderDateComparator) : 
+                    sortedData = data.sort(orderDateComparator).reverse()
+                    break
+        
+                case "ORDER_STATUS":
+                    sortAscending == true ? 
+                    sortedData = data.sort(orderStatusComparator) : 
+                    sortedData = data.sort(orderStatusComparator).reverse()
+                    break
+            }
+            return sortedData
         }
     }
-
-    const [sortAscendingOrderStatus, setSortAscendingOrderStatus] = useState(true)
-    const sortByOrderStatus = (e, sortAscending) => {
-        if (sortAscending == true) {
-            const sortedData = data.sort(orderStatusComparator)
-            setData(sortedData)
-            setSortCriteria("Sort Ascending Order Date")
-        } else {
-            const sortedData = data.sort(orderStatusComparator).reverse()
-            setData(sortedData)
-            setSortCriteria("Sort Descending Order Date")
-        }
-    }
-
-
+    
+    const sortedDataMemo = useMemo(() => sortOrderAscending(), [data, sortingCriteria, sortAscending]);
+ 
     const [dataExport, setDataExport] = useState([])
     const [showExportData, setShowExportData] = useState(true)
     const handleShowExportData = () => setShowExportData(true)
@@ -463,12 +562,12 @@ const useProfileHooks = (user) => {
         showUpdateErrorActionToast,
         showCancelErrorActionToast,  
         showPaymentErrorActionToast,
-        showReviewErrorActionToast
-
+        showReviewErrorActionToast,
+        showOrderCompleteToast
     ]);
 
     //filter
-    const filteredOrders = (data ?? []).filter((d) => {
+    const filteredOrders = (sortedDataMemo ?? []).filter((d) => {
         console.log("enter, data : " + data);
         console.log("searchqury : " + searchQuery);
         if (searchQuery === '' && orderStatus === 'All') {
@@ -534,22 +633,6 @@ const useProfileHooks = (user) => {
         setShowConfirmEditOrderModal,
         returnToPurchaseModalAfterConfirmModal,
 
-        sortByOrderId,
-        sortByOrderTitle,
-        sortAscendingOrderTitle,
-        sortByOrderAddress,
-        sortAscendingOrderAddress,
-        sortByOrderDate,
-        sortAscendingOrderDate,
-        sortByOrderQty,
-        sortAscendingOrderQty,
-        sortByOrderTotalPrice,
-        sortAscendingOrderTotalPrice,
-        sortByOrderStatus,
-        sortAscendingOrderStatus,
-        sortCriteria,
-        setSortCriteria,
-
         dataExport,
         prepareDataForExport,
         showDownloadData,
@@ -573,7 +656,24 @@ const useProfileHooks = (user) => {
         showPaymentErrorActionToast,
         handleClosePaymentErrorActionToast,
         showReviewErrorActionToast,
-        handleCloseReviewErrorActionToast
+        handleCloseReviewErrorActionToast,
+        showAlreadyCompletedErrorActionToast,
+        handleCloseAlreadyCompletedErrorActionToast,
+
+        sortedDataMemo,
+        sortOrderAscending,
+        handleSortOrders,
+        sortCriteriaText,
+
+        showCompleteOrderModal,
+        handleShowCompleteOrderModal,
+        handleCloseCompleteOrderModal,
+        updateOrderAsReceived,
+        updateOrderAsReceivedAndLeaveAReview,
+
+        showOrderCompleteToast,
+        handleShowOrderCompleteToast,
+        handleCloseOrderCompleteToast
 
     } 
 }

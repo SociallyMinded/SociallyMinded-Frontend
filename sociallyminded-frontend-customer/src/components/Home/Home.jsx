@@ -20,7 +20,6 @@ import Footer from "../common/Footer/Footer";
 
 import { useState } from "react";
 
-
 const ReviewComments = [
     {
         "comment": 'SociallyMinded is a great platform! It allowed me to find out more about the different products sold by social enterprises in Singapore. I am happy knowing that my money is spent on businesses championing social good',
@@ -67,7 +66,6 @@ const Home = () => {
     return (
         <LandingPageTemplate>
             <SlantedDiv></SlantedDiv>
-
             <PageTemplate>
                 {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
                 <HomePage>
