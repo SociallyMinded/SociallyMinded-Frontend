@@ -241,7 +241,6 @@ export const AddProductReviewPage = (state) => {
         alignItems: "center",
         height: "100vh",
         marginTop:"5%"
-        
     }
 
     const reviewUploadImage = {
@@ -313,6 +312,7 @@ const ShowOrderTitle = {
        {!loading &&
        <ReviewPage>
        <div style={ShowProductBeingReviewed}>
+
         <h1>Review for product {product != null && product.name}</h1>
        {/* <img
           src={}
@@ -321,6 +321,7 @@ const ShowOrderTitle = {
         {/* <img style={ProductImage} variant="top" src={`${productImageLink[0]}`} />
         <img style={ProductImage} variant="top" src={`${productImageLink}`} /> */}
         {/* <img style={ProductImage} variant="top" src={require('./donut.png')} /> */}
+
         <div style={{ textAlign: 'center' }}>
                </div>
         {/* <p> Product name : {product.name} </p> */}
