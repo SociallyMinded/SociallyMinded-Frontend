@@ -23,7 +23,7 @@ export const Actions = {
 export const ORDERSTATUS = {
     PENDING_APPROVAL: 'Pending Approval',
     IN_DELIVERY: 'In Delivery',
-    COMPLETED: 'Completed'
+    ORDER_RECIEVED: 'Order Received'
 }
 
 const useProfileHooks = (user) => {
@@ -238,7 +238,8 @@ const useProfileHooks = (user) => {
                     console.log(res)
                     setRefreshTable(true)
                     setShowCompleteOrderModal(false)
-                    navigate(`/addReview?productId=${order.product.productId}&orderId=${order.orderRecordId}&orderTitle=${order.orderTitle}&dateOfOrder=${order.dateOfOrder}`)
+                   
+                    navigate(`/addReview?productId=${orderSelected.product.productId}&orderId=${orderSelected.orderRecordId}&orderTitle=${orderSelected.orderTitle}&dateOfOrder=${orderSelected.dateOfOrder}`)
                 })
 
         }

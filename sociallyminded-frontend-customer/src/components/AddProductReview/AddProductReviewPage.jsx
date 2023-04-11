@@ -177,19 +177,19 @@ export const AddProductReviewPage = (state) => {
             "productId" : productId
           }
             };
-          const updateOrder = {
-            "productId" :productId,
-            "custFirebaseUid": customerFirebaseUid,
-            "record": {
-            "address" : order.address,
-            "dateOfOrder" : order.dateOfOrder,
-            "orderStatus": "Completed",
-            "orderTitle" : order.orderTitle,
-            "quantity" : order.quantity,
-            "totalPrice" : order.totalPrice,
-            "orderRecordId" : orderId
-          }
-            };
+          // const updateOrder = {
+          //   "productId" :productId,
+          //   "custFirebaseUid": customerFirebaseUid,
+          //   "record": {
+          //   "address" : order.address,
+          //   "dateOfOrder" : order.dateOfOrder,
+          //   "orderStatus": "Completed",
+          //   "orderTitle" : order.orderTitle,
+          //   "quantity" : order.quantity,
+          //   "totalPrice" : order.totalPrice,
+          //   "orderRecordId" : orderId
+          // }
+          //   };
 
           //update the product review number and rating
           axios.put(updateProductUrl + product.productId, updateProduct)
@@ -200,13 +200,13 @@ export const AddProductReviewPage = (state) => {
             console.log(error); // handle any errors that occur during the axios call
           });
           //update the orderstatus
-          axios.put(updateOrderUrl + orderId, updateOrder)
-          .then(response => {
-            console.log("enter this order method")
-            console.log(response.data)
-          }).catch((error) => {
-            console.log(error); // handle any errors that occur during the axios call
-          });
+          // axios.put(updateOrderUrl + orderId, updateOrder)
+          // .then(response => {
+          //   console.log("enter this order method")
+          //   console.log(response.data)
+          // }).catch((error) => {
+          //   console.log(error); // handle any errors that occur during the axios call
+          // });
           //create review
           axios.post(createNewReviewUrl, newReview)
             .then(response => {
@@ -313,7 +313,6 @@ const ShowOrderTitle = {
        {!loading &&
        <ReviewPage>
        <div style={ShowProductBeingReviewed}>
-      
         <h1>Review for product {product != null && product.name}</h1>
        {/* <img
           src={}

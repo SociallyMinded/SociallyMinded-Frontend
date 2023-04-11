@@ -373,7 +373,7 @@ export const ProfilePage = () => {
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                     <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav >
-                                    {d.orderStatus != "Completed" &&
+                                    {d.orderStatus != "Order Received" &&
                                         <NavDropdown title="More" id="basic-nav-dropdown" class="navbar-toggler-icon">
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
                                             Update Order
@@ -623,11 +623,11 @@ export const ProfilePage = () => {
                     <input
                         type="radio"
                         name="statusFilter"
-                        value="Completed"
-                        checked={orderStatus === 'Completed'}
-                        onChange={() => setOrderStatus('Completed')}
+                        value="Order Received"
+                        checked={orderStatus === 'Order Received'}
+                        onChange={() => setOrderStatus('Order Received')}
                     />
-                    <OrderStatusText>Completed</OrderStatusText>
+                    <OrderStatusText>Order Recieved</OrderStatusText>
                     </OrderStatusLabel>
                 </FilterOrderStatusGroup>
                 </>
