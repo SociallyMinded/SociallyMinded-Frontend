@@ -128,7 +128,7 @@ const useProfileHooks = (user) => {
             }
         } else if (action == Actions.COMPLETE_ORDER) {
             if (order.orderStatus == ORDERSTATUS.IN_DELIVERY) {
-                navigate(`/addReview?productId=${order.product.productId}`)
+                navigate(`/addReview?productId=${order.product.productId}&orderId=${order.orderRecordId}&orderTitle=${order.orderTitle}&dateOfOrder=${order.dateOfOrder}`)
             } else {
                 setShowReviewErrorActionToast(true)
             }

@@ -350,6 +350,7 @@ export const ProfilePage = () => {
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                     <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav >
+                                    {d.orderStatus != "Completed" &&
                                         <NavDropdown title="More" id="basic-nav-dropdown" class="navbar-toggler-icon">
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.UPDATE)}>
                                             Update Order
@@ -357,14 +358,17 @@ export const ProfilePage = () => {
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.CANCEL)}>
                                             Cancel Order
                                         </NavDropdown.Item>
+                                       
                                         <NavDropdown.Item onClick={() => handleOrderSelected(d, Actions.COMPLETE_ORDER)}>
                                             Mark as Received
                                             {/* </Link> */}
-                                              <a href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&productImageLink=${d.product.imageLink[0]}&dateOfOrder=${d.dateOfOrder}`}/>
+                                              <a href={`/addReview?productId=${d.product.productId}&orderId=${d.orderRecordId}&orderTitle=${d.orderTitle}&dateOfOrder=${d.dateOfOrder}`}/>
                
-                                        </NavDropdown.Item>
-                                      
+                                        </NavDropdown.Item >
+                                       
+                                        
                                         </NavDropdown>
+                                         }
                                         
                                       
                                     </Nav>

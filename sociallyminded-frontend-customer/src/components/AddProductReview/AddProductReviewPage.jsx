@@ -21,9 +21,10 @@ import { PROFILE_PAGE_LINK } from "../../routes/routes";
 import { createNewReviewUrl } from "../../routes/routes";
 import { getProductByIdUrl } from "../../routes/routes";
 import { updateProductUrl } from "../../routes/routes";
-import { getOrderByIdUrl } from "../../routes/routes";
+import { getOrderByIdUrl, updateOrderUrl } from "../../routes/routes";
 //import { uploadReviewImages } from "../../routes/reviewUploadImageRoutes"
 import LoggedInHeader from "../common/Header/LoggedInHeader";
+import Spinner from 'react-bootstrap/Spinner';
 
 
 
@@ -39,7 +40,7 @@ export const AddProductReviewPage = (state) => {
     const [enlargedImg, setEnlargedImg] = useState(-1);
     const [isEnlarged, setIsEnlarged] = useState(false);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [showReviewCompleteToast, setShowReviewCompleteToast] = useState(true);
     const characterCount = reviewDescription.length;
     const maxCharacters = 999;
@@ -122,7 +123,6 @@ export const AddProductReviewPage = (state) => {
       .then(response => {
         
           setProduct(response.data)
-          console.log("product : " + response.data)
           return axios.get(getOrderByIdUrl + orderId);
       })
       .then(response => {
@@ -177,6 +177,19 @@ export const AddProductReviewPage = (state) => {
             "productId" : productId
           }
             };
+          const updateOrder = {
+            "productId" :productId,
+            "custFirebaseUid": customerFirebaseUid,
+            "record": {
+            "address" : order.address,
+            "dateOfOrder" : order.dateOfOrder,
+            "orderStatus": "Completed",
+            "orderTitle" : order.orderTitle,
+            "quantity" : order.quantity,
+            "totalPrice" : order.totalPrice,
+            "orderRecordId" : orderId
+          }
+            };
 
           //update the product review number and rating
           axios.put(updateProductUrl + product.productId, updateProduct)
@@ -186,10 +199,17 @@ export const AddProductReviewPage = (state) => {
           }).catch((error) => {
             console.log(error); // handle any errors that occur during the axios call
           });
+          //update the orderstatus
+          axios.put(updateOrderUrl + orderId, updateOrder)
+          .then(response => {
+            console.log("enter this order method")
+            console.log(response.data)
+          }).catch((error) => {
+            console.log(error); // handle any errors that occur during the axios call
+          });
           //create review
           axios.post(createNewReviewUrl, newReview)
             .then(response => {
-              console.log("enter")
               console.log(response.data)
             })
             .then((response) => {
@@ -219,7 +239,9 @@ export const AddProductReviewPage = (state) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh"
+        height: "100vh",
+        marginTop:"5%"
+        
     }
 
     const reviewUploadImage = {
@@ -288,14 +310,10 @@ const ShowOrderTitle = {
       <PageTemplate>
          {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
        {/* show the product that going to review*/}
+       {!loading &&
+       <ReviewPage>
        <div style={ShowProductBeingReviewed}>
-       {/* <img
-          src={}
-         alt= "pic"
-                            /> */}
-        {/* <img style={ProductImage} variant="top" src={`${productImageLink[0]}`} />
-        <img style={ProductImage} variant="top" src={`${productImageLink}`} /> */}
-        {/* <img style={ProductImage} variant="top" src={require('./donut.png')} /> */}
+      
         <div style={{ textAlign: 'center' }}>
         <p style={ShowOrderTitle}> {dateOfOrder!= null && dateOfOrder.split("T")[0]} </p>
        
@@ -341,7 +359,7 @@ const ShowOrderTitle = {
           value={reviewDescription} maxLength="999" />
         </label>
         <div>
-        characters: {characterCount}/{maxCharacters}
+        Character(s): {characterCount}/{maxCharacters}
       </div>
 
         {/* preview of the image*/}
@@ -395,7 +413,10 @@ const ShowOrderTitle = {
          </label>
         </>
       )}
-        <br />
+      <br/>
+      {selectedFiles.length >= 0 && (
+        <p>Image(s): {selectedFiles.length}/5</p>
+      )}
         <br />
         {/* checkbox to check if the user want to show review as anonymous */}
         <label>
@@ -411,12 +432,20 @@ const ShowOrderTitle = {
         <button class="sc-ckEbSK dVcYVY btn btn-primary" type="submit">Submit</button>
       </form> 
       </div>
+      </ReviewPage>
+       } 
+      {loading && 
+      <LoadingContainer>
+                        <Spinner animation="grow" />
+                        <SpinnerText>Loading</SpinnerText>
+                    </LoadingContainer>}
       </PageTemplate>
     );
 
 }
 
-
+const ReviewPage = styled.div`
+`
 
 const Title = styled.h1`
     position: absolute;
@@ -427,8 +456,17 @@ const Title = styled.h1`
     font-size:4.5em;
     font-weight:semi-bold;
 `
-
-
+const SpinnerText = styled.h5`
+    margin-left:1vw;
+    margin-top:1vh;
+`
+const LoadingContainer = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:50vh;
+`
 
 
 
