@@ -8,10 +8,12 @@ import SiteLogo from '../common/SiteLogo/SiteLogo';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import React from 'react';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 const Signup = () => {
 
     const {state, setState} = useSignupHooks();
+   
 
     return (
         <PageTemplate>
@@ -61,7 +63,10 @@ const Signup = () => {
                         value={state.password} 
                         onChange={setState.handlePasswordChange}
                     />
-                    <p>{state.passwordError}</p>
+
+                    <ErrorText>{state.passwordError}</ErrorText>
+                    <PasswordStrengthBar password={state.password} />
+
                 </FormInputContainer> 
                 {
                     state.email.length != 0 &&
@@ -86,6 +91,11 @@ const Signup = () => {
         </PageTemplate>
     )
 }
+
+const ErrorText = styled.p`
+    color:red;
+    font-size:0.9em;
+`
 
 const FormResultTemplate = styled.div`
     height:13vh;

@@ -240,7 +240,7 @@ export const AddProductReviewPage = (state) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "50vh",
         marginTop:"5%"
     }
 
@@ -257,7 +257,7 @@ export const AddProductReviewPage = (state) => {
     };
 
     const reviewUploadImageButton = {
-        display: "none"
+        display: "none",
     }
 
     const removeButton = {
@@ -270,7 +270,7 @@ export const AddProductReviewPage = (state) => {
         display: "inline-flex",
         cursor: "pointer",
         position: "absolute",
-        right: "0"
+        right: "0",
     }
 
     const enlargeButton = {
@@ -410,14 +410,14 @@ const ShowOrderTitle = {
       <br />
       <br />
       {selectedFiles.length < 5 && (
-        <>
+        <PhotoContainer>
          {/* upload image button */}
         <label class= "imageButton" style={reviewUploadImage} >
         <p><AiFillCamera/></p>
             <span>add photo</span>
           <input id="uploadReviewImage" style={reviewUploadImageButton} type="file" onChange={handleFileChange} /> 
          </label>
-        </>
+        </PhotoContainer>
       )}
       <br/>
       {selectedFiles.length >= 0 && (
@@ -425,14 +425,14 @@ const ShowOrderTitle = {
       )}
         <br />
         {/* checkbox to check if the user want to show review as anonymous */}
-        <label>
-        <input
-          type="checkbox"
-          checked={isAnonymous}
-          onChange={handleCheckboxChange}
-        />
-        Do not show my username in the review.
-      </label>
+        <UploadText>
+          <input
+            type="checkbox"
+            checked={isAnonymous}
+            onChange={handleCheckboxChange}
+          />
+          Do not show my username in the review.
+      </UploadText>
       <br/>
       <br/>
         <button class="sc-ckEbSK dVcYVY btn btn-primary" type="submit">Submit</button>
@@ -474,5 +474,10 @@ const LoadingContainer = styled.div`
     height:50vh;
 `
 
+const PhotoContainer = styled.div`
+  margin-top:5vh;
+`
 
-
+const UploadText = styled.p`
+  margin-bottom:3vh;
+`
