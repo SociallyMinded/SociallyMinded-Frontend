@@ -31,7 +31,7 @@ export const DataDisplay = ({data}) => {
                                 <StyledCardTitle>${d.price}</StyledCardTitle>
                             </CardTitleContainer>
                             
-                            {d.numRatings != 0 && d.ratingScore != 0 && d.ratingScore != null && d.numRatings != null && (
+                            {/* {d.numRatings != 0 && d.ratingScore != 0 && d.ratingScore != null && d.numRatings != null && (
                         
                         <RatingNumber> 
                       
@@ -41,7 +41,7 @@ export const DataDisplay = ({data}) => {
                         ) }
                         {d.numRatings == 0 && d.ratingScore == 0 && (
                         <NoRating>No Rating Yet</NoRating>
-                        ) }
+                        ) } */}
                         
                         </StyledCardBody>
                         </StyledCard>
