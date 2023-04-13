@@ -174,9 +174,10 @@ export const AddProductReviewPage = (state) => {
             "price" : product.price,
             "numRatings" : product.numRatings == undefined ? Big(1) : Big(product.numRatings).plus(1),
             "ratingScore" : product.ratingScore == undefined ? Big(rating)  : Big(product.ratingScore).plus(rating) ,
-            "productId" : productId
+            "productId" : productId,
+            "isActive": true
           }
-            };
+          };
           // const updateOrder = {
           //   "productId" :productId,
           //   "custFirebaseUid": customerFirebaseUid,
