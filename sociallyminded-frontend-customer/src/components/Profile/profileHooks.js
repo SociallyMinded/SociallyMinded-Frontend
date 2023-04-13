@@ -257,8 +257,8 @@ const useProfileHooks = (user) => {
                 "productId" : orderSelected.product.productId,
                 "custFirebaseUid": customerFirebaseUid,
                 "record": {
-                    "quantity": editOrderQty,
-                    "totalPrice": updatedTotalPrice,
+                    "quantity": orderSelected.quantity,
+                    "totalPrice": orderSelected.totalPrice,
                     "orderTitle": `${orderSelected.orderTitle}`,
                     "orderRecordId": orderSelected.orderRecordId,
                     "dateOfOrder": orderSelected.dateOfOrder,
