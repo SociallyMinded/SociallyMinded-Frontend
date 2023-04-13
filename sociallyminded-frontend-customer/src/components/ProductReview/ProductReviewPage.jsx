@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router';
 import { UserAuth } from '../../context/AuthContext';
 import LoggedInHeader from '../common/Header/LoggedInHeader';
 import Rating from '@mui/material/Rating';
+import { AiOutlineArrowUp } from 'react-icons/ai';
+// import WordCloud from 'react-wordcloud';
 
 export const ProductReviewPage = () => {
 
@@ -24,7 +26,8 @@ export const ProductReviewPage = () => {
     const {         
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
         handleShrink, isEnlarged, setIsEnlarged, rating, handleFilterButtonClick, selectedRating,
-        setSelectedRating, filteredRating
+        setSelectedRating, filteredRating, ratingCount, handleSortNewest, handleSortOldest, setSelectedSort,
+        selectedSort,handleSort, scrollToTop, visibleGoTop, setVisibleGoTop
     } = useProductReviewHooks(state)
 
     return (
@@ -40,8 +43,10 @@ export const ProductReviewPage = () => {
             <ReviewDetailsContainer>
                 <StyledLink onClick={() => navigate(-1)}>Back</StyledLink>
                 <h1>{state.d.name}</h1>
+                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
+                {data != null && data.length != 0 &&
                 <StyledReviewBody>
-                {/* {data != null && data.length == 0 &&  */}
+               
                 
                     <ReviewBox>
                         <WrapperStar>
@@ -52,43 +57,34 @@ export const ProductReviewPage = () => {
                         <br/>
                     <Rating name="read-only" precision={0.02} value={rating} readOnly />
                     </WrapperStar>
-                        {/* <TotalRating name="read-only" value={state.d.rating} precision={0.2} readOnly /> */}
+                       
                         <ReviewFilter>
-                            {/* <AllFilter>
-                                All
-                                </AllFilter> */}
+                          
                                 {[null, 1, 2, 3, 4, 5].map((rating) => (
                                 <AllFilter
                                     key={rating}
                                     onClick={() => handleFilterButtonClick(rating)}
                                     className={selectedRating === rating ? "selected" : ""}
                                 >
-                                    {rating === null ? "All" : `${rating} stars`}
+                                    {rating === null ? "All("+ratingCount[0]+")" : `${rating} stars(`+ratingCount[rating]+ `)`}
+                                   
                                 </AllFilter>
                                 ))}
-                            {/* <FiveStarsFilter>
-                                5 Star
-                                </FiveStarsFilter>
-                                <FourStarsFilter>
-                                    4 Star
-                                </FourStarsFilter>
-                                <ThreeStarsFilter>
-                                    3 Star
-                                </ThreeStarsFilter>
-                                <TwoStarsFilter>
-                                    2 Star
-                                </TwoStarsFilter>
-                                <OneStarsFilter>
-                                    1 Star
-                                </OneStarsFilter>
-                                <ImageFilter>
-                                    With Image
-                                </ImageFilter> */}
+                           
                         </ReviewFilter>
                     </ReviewBox>
                 {/* } */}
+                <SortingBox>
+                   <span style={{marginRight: "10px"}}>Sort By</span> 
+                    <Sorting  onClick={handleSortNewest}  className={selectedSort === "newest" ? "selected" : ""}>
+                        Newest
+                    </Sorting>
+                    <Sorting onClick={handleSortOldest}  className={selectedSort === "oldest" ? "selected" : ""}>
+                        Oldest
+                    </Sorting>
+                </SortingBox>
 
-                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
+              
                 {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
                 {filteredRating != null && filteredRating.map((d) => (
 
@@ -139,7 +135,15 @@ export const ProductReviewPage = () => {
                     </ReviewContainer>
 
                 ))}
+                <GoTopButton
+      className="scroll-to-top-button"
+      style={{ display: visibleGoTop ? "block" : "none" }}
+      onClick={scrollToTop}
+    >
+      <AiOutlineArrowUp/>
+    </GoTopButton>
             </StyledReviewBody>
+        }
             </ReviewDetailsContainer>  
         </ReviewPageTemplate>
     )
@@ -272,6 +276,19 @@ const ReviewBox = styled.div`
     box-sizing: border-box;
     padding: 1.875rem;
 `
+const SortingBox = styled.div`
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+`
+// min-height: 5rem;
+// margin-bottom: 1rem;
+// display: flex;
+// align-items: center;
+// box-sizing: border-box;
+// padding: 1.875rem;
 const RatingTotal = styled.p`
     color : #AC73FF;
     font-size: 1.125rem;
@@ -320,6 +337,35 @@ const AllFilter = styled.div`
         color: #AC73FF;
       }
 `
+const Sorting = styled.div`
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    height: 2rem;
+    line-height: 2rem;
+    min-width: 6.25rem;
+    text-align: center;
+    padding: 0 0.625rem;
+    color: rgba(0,0,0,.8);
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.09);
+    box-sizing: border-box;
+    display: inline-block;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    color: rgba(0,0,0,.87);
+    text-transform: capitalize;
+    border-radius: 2px;
+    margin-bottom: 0.3125rem;
+    margin-top: 0.3125rem;
+    &.selected {
+        border-color: #AC73FF;
+        fill: #AC73FF;
+        color: #AC73FF;
+      }
+`
+
 
 const ReviewImageListContainer = styled.div`
     display: flex;
@@ -333,4 +379,21 @@ const ReviewImgByUser = styled.img`
     margin-right: 6px;
     cursor: zoom-in;
     position: relative;
+`
+const GoTopButton = styled.button`
+position: fixed;
+display: flex;
+width: 50px;
+height: 50px;
+bottom: 20px;
+right: 20px;
+font-size: 25px;
+cursor: pointer;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+background-color:  #AC73FF;
+color: #fff;
+z-index: 9999;
+transition: opacity 0.2s ease-in-out;
 `
