@@ -85,12 +85,19 @@ const Signup = () => {
                     Continue with google
                 </FormButton>
                 </Form>
-                <LoginLink to={LOGIN_PAGE_LINK}>Log in</LoginLink>
+                <LinkContainer>
+                    <LoginLink to={LOGIN_PAGE_LINK}>Log in</LoginLink>
+                    <LoginLink to={"/"}>Back to Home</LoginLink>
+                </LinkContainer>
         </SignupPageTemplate>
 
         </PageTemplate>
     )
 }
+
+const LinkContainer = styled.div`
+    margin-top:3vh;
+`
 
 const ErrorText = styled.p`
     color:red;
@@ -146,7 +153,8 @@ const LogoImage = styled.img`
 `
 
 const LoginLink = styled(Link)`
-    margin-top:1.5em;
     text-decoration:none;
+    margin-right:2vw;
+    margin-left:2vw;
 `
 export default Signup;
