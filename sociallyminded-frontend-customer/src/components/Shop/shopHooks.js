@@ -14,8 +14,9 @@ const useShopHooks = () => {
     useEffect(() => {
         axios.get(getAllProductsUrl)
         .then(response => {
-            setData(response.data)
-            setDisplayData(response.data)
+            let data = response.data.filter((d) => d.isActive == true)
+            setData(data)
+            setDisplayData(data)
         })
         .catch ((error) => {
             setError(error)

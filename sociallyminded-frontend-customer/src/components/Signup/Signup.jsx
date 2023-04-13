@@ -8,10 +8,12 @@ import SiteLogo from '../common/SiteLogo/SiteLogo';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import React from 'react';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 const Signup = () => {
 
     const {state, setState} = useSignupHooks();
+   
 
     return (
         <PageTemplate>
@@ -61,7 +63,10 @@ const Signup = () => {
                         value={state.password} 
                         onChange={setState.handlePasswordChange}
                     />
-                    <p>{state.passwordError}</p>
+
+                    <ErrorText>{state.passwordError}</ErrorText>
+                    <PasswordStrengthBar password={state.password} />
+
                 </FormInputContainer> 
                 {
                     state.email.length != 0 &&
@@ -80,12 +85,24 @@ const Signup = () => {
                     Continue with google
                 </FormButton>
                 </Form>
-                <LoginLink to={LOGIN_PAGE_LINK}>Log in</LoginLink>
+                <LinkContainer>
+                    <LoginLink to={LOGIN_PAGE_LINK}>Log in</LoginLink>
+                    <LoginLink to={"/"}>Back to Home</LoginLink>
+                </LinkContainer>
         </SignupPageTemplate>
 
         </PageTemplate>
     )
 }
+
+const LinkContainer = styled.div`
+    margin-top:3vh;
+`
+
+const ErrorText = styled.p`
+    color:red;
+    font-size:0.9em;
+`
 
 const FormResultTemplate = styled.div`
     height:13vh;
@@ -136,7 +153,8 @@ const LogoImage = styled.img`
 `
 
 const LoginLink = styled(Link)`
-    margin-top:1.5em;
     text-decoration:none;
+    margin-right:2vw;
+    margin-left:2vw;
 `
 export default Signup;

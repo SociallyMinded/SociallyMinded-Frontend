@@ -30,7 +30,6 @@ const Login = () => {
                 </Alert>
             }
         </FormResultTemplate>
-         
         <h1>Log in</h1>
 
         <Form onSubmit={setState.loginToAccount}>
@@ -68,16 +67,24 @@ const Login = () => {
                 Continue with google
             </FormButton>
         </Form>
-        <SignupPageLink to={SIGNUP_PAGE_LINK}>Sign Up</SignupPageLink>
-        <HomeLink to={RESET_PASSWORD_LINK}>Reset Password</HomeLink>
+        <LinkContainer>
+            <SignupPageLink to={SIGNUP_PAGE_LINK}>Sign Up</SignupPageLink>
+            <HomeLink to={RESET_PASSWORD_LINK}>Reset Password</HomeLink>
+        </LinkContainer>
+        <HomeLinkTop to={"/"}>Back to Home</HomeLinkTop>
+
     </ResetPasswordPageTemplate>
     </PageTemplate>
     )
 }
 
+const LinkContainer = styled.div`
+    margin-top:3vh;
+    margin-bottom:2vh;
+`
 
 const FormResultTemplate = styled.div`
-    height:13vh;
+    height:10vh;
 `
 
 const ResetPasswordPageTemplate = styled.div`
@@ -98,7 +105,7 @@ const FormInputContainer = styled.div`
     flex-direction:column;
     border-radius:10px;
     border-width:0px;
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom:5%;
 `
 
@@ -115,20 +122,20 @@ const FormInput = styled.input`
     border:1px solid #c9c9c9;
 `
 
-const FormDescription = styled.p`
-    margin-top:3%;
-    margin-bottom:7%;
-`
 
 const FormButton = styled(Button)`
     margin-top:5%;    
 `
 
 const SignupPageLink = styled(Link)`
-    margin-top:1.5em;
     text-decoration:none;
+    margin-right:3vw;
 `
+const HomeLinkTop = styled(Link)`
+    text-decoration:none;
+    margin-bottom:1em;
 
+`
 const LogoImage = styled.img`
     width:1.2em;
     height:1.2em;
