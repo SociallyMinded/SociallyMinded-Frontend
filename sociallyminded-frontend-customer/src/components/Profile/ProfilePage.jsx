@@ -413,23 +413,7 @@ export const ProfilePage = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                            {/* Edit Order Qty */}
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Qty</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="number"
-                                    placeholder={orderSelected != null && orderSelected.quantity}
-                                    autoFocus
-                                    value={orderSelected != null && editOrderQty}
-                                    onChange={(e) => handleEditOrderQty(e.target.value)}
-                                />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                                <Form.Control.Feedback type="invalid">
-                                    Please provide your order quantity
-                                </Form.Control.Feedback>
-                            </Form.Group>
-
+                           
                             {/* Edit Order Address */}
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                                 <Form.Label>Address</Form.Label>
@@ -798,6 +782,7 @@ const OrderInputGroup = styled(InputGroup)`
 const TableInputContainer = styled.div`
     display:flex;
     flex-direction:row;
+    margin-bottom:3vh;
 `
 const FilterOrderStatusGroup = styled.div`
     display: flex;

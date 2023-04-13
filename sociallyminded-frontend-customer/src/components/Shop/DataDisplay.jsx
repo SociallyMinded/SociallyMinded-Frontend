@@ -101,8 +101,9 @@ const StyledCard = styled(Card)`
     border-radius: 4px;
     text-decoration: none;
     z-index: 0;
-    overflow: hidden;
     border: 1px solid #efefef;
+    height:100%;
+    overflow: scroll;
   
     &:hover {
         transition: all 0.2s ease-out;
