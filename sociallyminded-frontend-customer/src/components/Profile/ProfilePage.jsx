@@ -303,7 +303,7 @@ export const ProfilePage = () => {
                 }
             <TableContainer>
 
-            <StyledHeader>{user.displayName}'s Order Records</StyledHeader>
+            <StyledHeader>Order Records</StyledHeader>
             <TableInputContainer>
                 <OrderInputGroup>
                  <SearchOrderInput
