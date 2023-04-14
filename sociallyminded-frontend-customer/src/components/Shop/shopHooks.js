@@ -14,6 +14,7 @@ const useShopHooks = () => {
     useEffect(() => {
         axios.get(getAllProductsUrl)
         .then(response => {
+            console.log(response)
             let data = response.data.filter((d) => d.isActive == true)
             setData(data)
             setDisplayData(data)
