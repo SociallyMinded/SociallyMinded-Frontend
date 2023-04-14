@@ -1,5 +1,8 @@
 # SociallyMinded-Frontend-Customer
 
+This repository contains code for the frontend customer portal
+<img width="1251" alt="Screenshot 2023-04-14 at 3 50 50 PM" src="https://user-images.githubusercontent.com/97529863/231980073-475a544d-7924-407c-a6c5-acc4ed86fbaf.png">
+
 ## Demo Video
 [insert demo video]
 
