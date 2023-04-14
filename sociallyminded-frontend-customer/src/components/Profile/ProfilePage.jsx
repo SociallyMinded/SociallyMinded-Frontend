@@ -330,7 +330,7 @@ export const ProfilePage = () => {
                     <StyledCSVLink 
                         data={dataExport != null && dataExport} 
                         headers={exportHeaders}
-                        filename={`${user.displayName}_${new Date()}`}
+                        filename={`orders_${new Date()}`}
                         extension=".csv"
                     >                
                         Download Records
