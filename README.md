@@ -3,6 +3,14 @@
 ## Demo Video
 [insert demo video]
 
+## Installation guide
+
+1. Clone this repo
+
+2. Navigate to the root directory and run `npm i`
+
+3. After running `npm i`, run npm start 
+
 ## Frontend Tech Stack
 <img width="616" alt="Screenshot 2023-04-14 at 2 47 02 PM" src="https://user-images.githubusercontent.com/97529863/231965201-9746f258-17b1-4e63-b5fa-b8f3511dfc97.png">
 
@@ -31,6 +39,7 @@ Authentication
 - Sign up for a new account
 - Log in to account
 - Log in / sign up via an existing gmail account
+- Log out from account
 - Reset password
 
 Shops
@@ -56,5 +65,3 @@ Review
 - View reviews and ratings for all products
 - Filter reviews by number of stars given 
 - Sort reviews by date of creation 
-
-
