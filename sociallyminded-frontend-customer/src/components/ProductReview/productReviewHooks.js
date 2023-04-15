@@ -22,6 +22,7 @@ const useProductReviewHooks = (state) => {
         .then(response => {
             setData(response.data)
             setDisplayData(response.data)
+            // the user profile picture
             response.data.forEach((d) => {
                 d["avatar"] = generateRandomNum()
 
@@ -46,24 +47,27 @@ const useProductReviewHooks = (state) => {
         return RANDOM_NUM;
     }
 
-    
+    //enlarge the image
     const handleEnlarged = (img) => {
         setEnlargedImg(img);
         setIsEnlarged(true);
       };
     
+    //shrink the image
     const handleShrink = () => {
         setEnlargedImg(-1);
         setIsEnlarged(false);
     };
 
+    //filter by rating star
     const handleFilterButtonClick = (rating) => {
         setSelectedRating(rating);
     };
 
+    //show the review according to the rating star
     const filteredRating = selectedRating
-  ? data.filter((d) => d.rating === selectedRating)
-  : data;
+        ? data.filter((d) => d.rating === selectedRating)
+        : data;
 
     return { 
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,

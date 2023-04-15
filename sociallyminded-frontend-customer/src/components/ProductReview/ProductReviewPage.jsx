@@ -29,6 +29,7 @@ export const ProductReviewPage = () => {
 
     return (
         <ReviewPageTemplate>
+            {/* navigation bar, if there is no user use the navigation bar for non-user */}
             {user == null ? <Header></Header> : <LoggedInHeader></LoggedInHeader>}
             <ReviewHeaderContainer>
                 <Title>Reviews</Title>
@@ -38,26 +39,28 @@ export const ProductReviewPage = () => {
                 />
             </ReviewHeaderContainer>
             <ReviewDetailsContainer>
+                {/* back button to go to the productlisting */}
                 <StyledLink onClick={() => navigate(-1)}>Back</StyledLink>
-                <h1>{state.d.name}</h1>
-                <StyledReviewBody>
-                {/* {data != null && data.length == 0 &&  */}
                 
+                <h1>{state.d.name}</h1>
+
+                <StyledReviewBody>
                     <ReviewBox>
+                        {/* show the average rating of the product by all users */}
                         <WrapperStar>
                             <div style={{textAlign: "center"}}>
                                 
-                        <RatingTotal>{rating} out of 5</RatingTotal>
-                        </div>
-                        <br/>
-                    <Rating name="read-only" precision={0.02} value={rating} readOnly />
-                    </WrapperStar>
-                        {/* <TotalRating name="read-only" value={state.d.rating} precision={0.2} readOnly /> */}
+                                <RatingTotal>{rating} out of 5</RatingTotal>
+                            </div>
+                            <br/>
+                            <Rating name="read-only" precision={0.02} value={rating} readOnly />
+                        </WrapperStar>
+
+                       {/*  review filter according to number of stars*/}
                         <ReviewFilter>
-                            {/* <AllFilter>
-                                All
-                                </AllFilter> */}
-                                {[null, 1, 2, 3, 4, 5].map((rating) => (
+                          
+                            {/*also got show the all filter beside each filter have the number of review allocated to it*/}
+                            {[null, 1, 2, 3, 4, 5].map((rating) => (
                                 <AllFilter
                                     key={rating}
                                     onClick={() => handleFilterButtonClick(rating)}
@@ -65,85 +68,65 @@ export const ProductReviewPage = () => {
                                 >
                                     {rating === null ? "All" : `${rating} stars`}
                                 </AllFilter>
-                                ))}
-                            {/* <FiveStarsFilter>
-                                5 Star
-                                </FiveStarsFilter>
-                                <FourStarsFilter>
-                                    4 Star
-                                </FourStarsFilter>
-                                <ThreeStarsFilter>
-                                    3 Star
-                                </ThreeStarsFilter>
-                                <TwoStarsFilter>
-                                    2 Star
-                                </TwoStarsFilter>
-                                <OneStarsFilter>
-                                    1 Star
-                                </OneStarsFilter>
-                                <ImageFilter>
-                                    With Image
-                                </ImageFilter> */}
+                            ))}
+                           
                         </ReviewFilter>
                     </ReviewBox>
-                {/* } */}
+                
+                    {/* do not show any of the review details if there is no review to the product */}
+                    {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
+                    {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
+                    {filteredRating != null && filteredRating.map((d) => (
+                        <ReviewContainer>
+                            <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
+                            <ReviewDescription>
+                                {/* if isAnonymous false then  */}
+                                {d.isAnonymous == false && (
+                                    <UserName>{d.customer.username}</UserName>
+                                )}
+                                {d.isAnonymous == true && (
+                                    <UserName>Anonymous</UserName>
+                                )}
 
-                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
-                {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
-                {filteredRating != null && filteredRating.map((d) => (
-
-
-                    <ReviewContainer>
-                    <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
-                    <ReviewDescription>
-                        {d.isAnonymous == false && (
-                   
-                        <UserName>{d.customer.username}</UserName>
-                        )}
-                         {d.isAnonymous == true && (
-                   
-                            <UserName>Anonymous</UserName>
-                        )}
-
-                    <Rating name="read-only" value={d.rating} readOnly />
-                    <br/>
-                        {d.dateOfReview!= null && d.dateOfReview.split("T")[0]}
-                        
-                        <br/>
-                        {d.reviewDescription}
-                        <br/>
-                        {d.reviewImages != null &&  (
-                        <ReviewImageListContainer> 
-                            
-                            {d.reviewImages.map((base64, index) => (
-                                <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
-                            ))}
-                            {enlargedImg !== -1 && (
-                            <div onClick={handleShrink}>
+                                {/* show the star rating of that review */}
+                                <Rating name="read-only" value={d.rating} readOnly />
+                                <br/>
+                                {/* show the review date */}
+                                {d.dateOfReview!= null && d.dateOfReview.split("T")[0]}
                                 
-                            <img src={enlargedImg} key={enlargedImg} style={{ cursor: "zoom-out",maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
-                            </div>
-                            )}
-                            {isEnlarged && (
-                                <div
-                                    style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0, backgroundColor: 'rgba(172, 127, 172, 0.5)',zIndex: 99}}
-                                    onClick={handleShrink}>
-                                </div>
-                            )}
-                        </ReviewImageListContainer>
-                        )}
-        
-
-                    
-                    </ReviewDescription>
-                    </ReviewContainer>
-
-                ))}
-            </StyledReviewBody>
+                                <br/>
+                                {/* review description */}
+                                {d.reviewDescription}
+                                <br/>
+                                {/* show images */}
+                                {d.reviewImages != null &&  (
+                                    <ReviewImageListContainer> 
+                                        {/* enlarge the image */}
+                                        {d.reviewImages.map((base64, index) => (
+                                            <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
+                                        ))}
+                                        {/* delarge the image */}
+                                        {enlargedImg !== -1 && (
+                                            <div onClick={handleShrink}>
+                                                <img src={enlargedImg} key={enlargedImg} style={{ cursor: "zoom-out",maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
+                                            </div>
+                                        )}
+                                        {/* the background of the enlarge image */}
+                                        {isEnlarged && (
+                                            <div
+                                                style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0, backgroundColor: 'rgba(172, 127, 172, 0.5)',zIndex: 99}}
+                                                onClick={handleShrink}>
+                                            </div>
+                                        )}
+                                    </ReviewImageListContainer>
+                                )}
+                            </ReviewDescription>
+                        </ReviewContainer>
+                    ))}
+                </StyledReviewBody>
             </ReviewDetailsContainer>  
         </ReviewPageTemplate>
     )
-
 }
 
 const ReviewHeaderContainer = styled.div`
