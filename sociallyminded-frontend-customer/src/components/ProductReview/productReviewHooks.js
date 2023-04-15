@@ -26,7 +26,7 @@ const useProductReviewHooks = (state) => {
         3: 0,
         4: 0,
         5: 0
-      });
+    });
     const [selectedSort, setSelectedSort] = useState("newest");
    
     useEffect(() => {
@@ -34,12 +34,12 @@ const useProductReviewHooks = (state) => {
         .then(response => {
             setData(response.data.sort(reviewDateComparator).reverse())
             setDisplayData(response.data)
+            // for the user picture
             response.data.forEach((d) => {
                 d["avatar"] = generateRandomNum()
 
             })
            
-            
             const counts = {
                 0: 0,
                 1: 0,
@@ -47,16 +47,18 @@ const useProductReviewHooks = (state) => {
                 3: 0,
                 4: 0,
                 5: 0
-              };
-              //count the number of review for each rating number
-              response.data.forEach((review) => {
+            };
+            //count the number of review for each rating number
+            response.data.forEach((review) => {
                 counts[review.rating] += 1;
-              });
-              //count the total amount of review
-              const totalCount = response.data.length;
-              counts[0] = totalCount;
-              setRatingCount(counts);
+            });
+
+            //count the total amount of review
+            const totalCount = response.data.length;
+            counts[0] = totalCount;
+            setRatingCount(counts);
            
+            //count the average rating of the product by all the user
             const totalRating = response.data.reduce((sum, review) => sum + review.rating, 0);
             const averageRating = totalRating / response.data.length;
             setRating(averageRating.toFixed(2));
@@ -70,43 +72,30 @@ const useProductReviewHooks = (state) => {
         )
     }, []);
     
+    // sort the review by latest by date
     const handleSortNewest = () => {
         const sorted = data.sort(reviewDateComparator);
         setSelectedSort("newest");
         setData(sorted);
-      };
-      const handleSortOldest = () => {
+    };
+
+    // sort the review by oldest by date
+    const handleSortOldest = () => {
         const sorted = data.sort(reviewDateComparator).reverse();
         setSelectedSort("oldest");
         setData(sorted);
-      };
-      window.addEventListener("scroll", () => {
+    };
+
+    //the button for the going back to top appear at certain height
+    window.addEventListener("scroll", () => {
         setScrollPosition(window.scrollY);
         setVisibleGoTop(window.scrollY > 0);
-      });
+    });
     
-      const scrollToTop = () => {
+    // set the position of go back to top, like the height
+    const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-
-    //   const handleSort = (order) => {
-    //     const sorted = data.sort((a, b) => {
-    //       const dateA = new Date(a.dateOfReview);
-    //       const dateB = new Date(b.dateOfReview);
-    //       if (isNaN(dateA) || isNaN(dateB)) {
-    //         console.error('Invalid date string:', dateA, dateB);
-    //         return 0;
-    //       }
-    //       if (order === 'newest') {
-    //         return dateB - dateA; // Sort in descending order (newest first)
-    //       } else {
-    //         return dateA - dateB; // Sort in ascending order (oldest first)
-    //       }
-    //     });
-    //     console.log('Sorted data:', sorted);
-    //     setSelectedSort(order);
-    //     setData(sorted);
-    //   };
+    };
 
     const generateRandomNum = () => {
         const MAX_NUM = 18
@@ -115,24 +104,27 @@ const useProductReviewHooks = (state) => {
         return RANDOM_NUM;
     }
 
-    
+    // image enlarge
     const handleEnlarged = (img) => {
         setEnlargedImg(img);
         setIsEnlarged(true);
-      };
+    };
     
+    //image shrink
     const handleShrink = () => {
         setEnlargedImg(-1);
         setIsEnlarged(false);
     };
 
+    //filter
     const handleFilterButtonClick = (rating) => {
         setSelectedRating(rating);
     };
 
+    //show the data allocated to the filter
     const filteredRating = selectedRating
-  ? data.filter((d) => d.rating === selectedRating)
-  : data;
+        ? data.filter((d) => d.rating === selectedRating)
+        : data;
 
     return { 
         data, displayData, loading, error, generateRandomNum, enlargedImg, handleEnlarged,
