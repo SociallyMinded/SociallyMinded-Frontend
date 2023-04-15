@@ -12,7 +12,7 @@ import { ProfilePage } from './components/Profile/ProfilePage';
 import React from 'react';
 import { createContext } from 'react';
 import { useState } from 'react';
-import Home from "./components/Home/Home.jsx"
+import { Home } from './components/Home/Home';
 export const LogoutToastContext = createContext(-1);
 
 function App() {
