@@ -1,20 +1,19 @@
-import { useState, useMemo } from "react"
-import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
+import { useState } from "react"
 import { getAllProductsUrl } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
 import { ProductCategories } from "../../enum"
 
-const useShopHooks = () => {
+export const useShopHooks = () => {
     const [data, setData] = useState(null)
     const [displayData, setDisplayData] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
     
+    // Fetch shop products data
     useEffect(() => {
         axios.get(getAllProductsUrl)
         .then(response => {
-            console.log(response)
             let data = response.data.filter((d) => d.isActive == true)
             setData(data)
             setDisplayData(data)
@@ -126,13 +125,24 @@ const useShopHooks = () => {
         setDisplayData(filteredDisplayData)
     }
 
-    return { 
+    const state = { 
         searchQuery,
         data, loading,
-        searchByProductName, displayData,
-        searchPrompts, handleSearchQuery, showSearchPrompts, performSearch,
-        filterProductByCategory, craftFilterClicked, clothingFilterClicked, foodFilterClicked, othersFilterClicked
-    } 
-}
+        displayData, searchPrompts,
+        showSearchPrompts, 
+        craftFilterClicked,
+        clothingFilterClicked,
+        foodFilterClicked,
+        othersFilterClicked
+    }
 
-export default useShopHooks
+    const action = { 
+        searchByProductName,
+        handleSearchQuery,
+        performSearch,
+        filterProductByCategory
+    }
+
+    return { state, action }
+    
+}

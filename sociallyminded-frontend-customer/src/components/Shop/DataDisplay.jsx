@@ -4,58 +4,40 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
 import React from 'react';
-import { AiFillStar } from 'react-icons/ai';
-import Rating from '@mui/material/Rating';
 
 export const DataDisplay = ({data}) => {
-    console.log(data)
     return (
         <StyledRow lg={5} md={4}>
             {data.displayData != null && data.displayData.map((d) => (
-                <StyledCol md={3}>
-                    
-                <StyledLink id="styled-card-link" to={'/product_listing/'+ d.productId } state={{ d:d, allData: data }}>
-                    
-                    <StyledCard>
-                    <StyledCardHeader>
-                        {d.socialenterprise.enterpriseName}
-                    </StyledCardHeader>
-                    <ImgDiv>
-                        {d.imageLink != null && <StyledImg variant="top" src={`${d.imageLink[0]}`} />}
-                    </ImgDiv>
-                        <StyledCardBody>
-                            <CardTitleContainer>
-                                <StyledCardTitle>{d.name}</StyledCardTitle>
-                            </CardTitleContainer>
-                            <CardTitleContainer>
-                                <StyledCardTitle>${d.price}</StyledCardTitle>
-                            </CardTitleContainer>
-                            
-                            {/* {d.numRatings != 0 && d.ratingScore != 0 && d.ratingScore != null && d.numRatings != null && (
-                        
-                        <RatingNumber> 
-                      
-                        <Score>{ (d.ratingScore/d.numRatings).toFixed(2) } <span style={{ color: "#FFC107", marginBottom: "2.5px" }}><AiFillStar/></span></Score>
-
-                        </RatingNumber>
-                        ) }
-                        {d.numRatings == 0 && d.ratingScore == 0 && (
-                        <NoRating>No Rating Yet</NoRating>
-                        ) } */}
-                        
-                        </StyledCardBody>
+                <StyledCol md={3} key={d.productId}>
+                    <StyledLink 
+                        id="styled-card-link" 
+                        to={'/product_listing/'+ d.productId } 
+                        state={{ d:d, allData: data }}
+                    >
+                        <StyledCard>
+                            <StyledCardHeader>
+                                {d.socialenterprise.enterpriseName}
+                            </StyledCardHeader>
+                            <ImgDiv>
+                                {d.imageLink != null && <StyledImg variant="top" src={`${d.imageLink[0]}`} />}
+                            </ImgDiv>
+                            <StyledCardBody>
+                                <CardTitleContainer>
+                                    <StyledCardTitle>{d.name}</StyledCardTitle>
+                                </CardTitleContainer>
+                                <CardTitleContainer>
+                                    <StyledCardTitle>${d.price}</StyledCardTitle>
+                                </CardTitleContainer>
+                            </StyledCardBody>
                         </StyledCard>
-                </StyledLink>
+                    </StyledLink>
                 </StyledCol>
             ))}
             {data.displayData != null && data.displayData.length == 0 && <StyledText>There are no products to display</StyledText>}
         </StyledRow>
     )
 }
-
-const LineBreak = styled.br`
-    margin-top:0vh;
-`
 
 const StyledCardHeader = styled(Card.Header)`
     background-color:white;
@@ -148,21 +130,4 @@ const StyledImg = styled(Card.Img)`
 const ImgDiv = styled.div`
   width: 100%; 
   height: 190px;
-`
-
-const NoRating = styled.p`
-    color: #777;
-    font-size:0.8em;
-    margin-top:2%;
-`
-
-const RatingNumber = styled.div`
-    text-align: center;
-    display: flex;
-    justifyContent: center;
-    font-weight: bold;
-`
-const Score = styled.span`
-    display: flex;
-    align-items: center;
 `

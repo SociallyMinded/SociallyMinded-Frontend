@@ -1,25 +1,18 @@
+import React from 'react';
 import { PageTemplate } from "../common/styles";
 import LoggedInHeader from "../common/Header/LoggedInHeader"
-import useShopHooks from "./shopHooks";
+import { useShopHooks } from "./shopHooks";
 import { SearchInput } from "./SearchInput";
 import { DataDisplay } from "./DataDisplay";
 import { PromptResults } from "./PromptResults";
-import React from 'react';
-import useLoginHooks from "../Login/loginHooks";
 import Header from "../common/Header/Header"; 
 import { UserAuth } from "../../context/AuthContext";
 import Spinner from 'react-bootstrap/Spinner';
 import styled from "styled-components";
 
 export const ShopPage = () => {
-    const {         
-        searchQuery, data, loading,
-        searchByProductName, searchPrompts, handleSearchQuery, 
-        displayData, showSearchPrompts, performSearch,
-        filterProductByCategory, craftFilterClicked, clothingFilterClicked, 
-        foodFilterClicked, othersFilterClicked
-    } = useShopHooks();
-
+    
+    const { state, action } = useShopHooks();
     const { user } = UserAuth()
 
     return (
@@ -28,27 +21,26 @@ export const ShopPage = () => {
             <div>
                 <SearchInput 
                     data={{
-                        searchByProductName: searchByProductName,
-                        searchQuery: searchQuery,
-                        filterProductByCategory: filterProductByCategory,
-                        filterProductByCategory: filterProductByCategory,
-                        craftFilterClicked: craftFilterClicked,
-                        clothingFilterClicked: clothingFilterClicked,
-                        foodFilterClicked: foodFilterClicked,
-                        othersFilterClicked: othersFilterClicked,
-                        performSearch: performSearch
+                        searchQuery: state.searchQuery,
+                        foodFilterClicked: state.foodFilterClicked,
+                        othersFilterClicked: state.othersFilterClicked,
+                        craftFilterClicked: state.craftFilterClicked,
+                        clothingFilterClicked: state.clothingFilterClicked,
+                        searchByProductName: action.searchByProductName,
+                        filterProductByCategory: action.filterProductByCategory,
+                        performSearch: action.performSearch
                     }}
                 />
 
                 <PromptResults
                     data={{
-                        showSearchPrompts: showSearchPrompts,
-                        searchPrompts: searchPrompts,
-                        handleSearchQuery: handleSearchQuery
+                        searchPrompts: state.searchPrompts,
+                        showSearchPrompts: state.showSearchPrompts,
+                        handleSearchQuery: action.handleSearchQuery
                     }}
                 />
 
-                {displayData == null && 
+                {state.displayData == null && 
                     <LoadingContainer>
                         <Spinner animation="grow" />
                         <SpinnerText>Loading</SpinnerText>
@@ -56,9 +48,8 @@ export const ShopPage = () => {
                 }
                 
                 <DataDisplay 
-                    data={{ displayData: displayData }}
+                    data={{ displayData: state.displayData }}
                 />
-
             </div>
         </PageTemplate>
     )

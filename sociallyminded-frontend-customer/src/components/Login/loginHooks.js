@@ -1,12 +1,10 @@
-import React from "react";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { GoogleAuthProvider, signOut } from "firebase/auth";
 import { GENERIC_EMAIL_ERROR, USER_NOT_FOUND, WRONG_PASSWORD, GENERIC_LOGIN_ERROR } from "./loginConstants";
 import { newCustomerRecord } from "./loginConstants";
 import axios from "axios";
-import { handleLoginViaGmail, ABSOLUTE_HOME_LINK } from "../../routes/routes";
+import { handleLoginViaGmail } from "../../routes/routes";
 import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
 
 const useLoginHooks = () => {
@@ -17,8 +15,6 @@ const useLoginHooks = () => {
         signIn, signInWithGmailPopup, 
         sendPasswordResetEmailToUser
     } = UserAuth() 
-
-    console.log(user)
 
     const navigate = useNavigate()
 
@@ -102,12 +98,14 @@ const useLoginHooks = () => {
     }
 
     const signOutFromAccount = async () => {
-        try {
-            await logout()
-            setShowLogoutToast(true)
-            console.log('You are logged out')
-        } catch (err) {
-            console.log(err.message)
+        if (user != null) {
+            try {
+                await logout()
+                setShowLogoutToast(true)
+                console.log('You are logged out')
+            } catch (err) {
+                console.log(err.message)
+            }
         }
     }
 
@@ -122,7 +120,7 @@ const useLoginHooks = () => {
         userSignedIn
     }
 
-    const setState = { 
+    const action = { 
         handleEmailChange,
         handlePasswordChange, 
         handleShowErrorWarning, 
@@ -133,8 +131,7 @@ const useLoginHooks = () => {
         handleShowLogoutToast
     }
 
-    return { state, setState }
-
+    return { state, action }
 }
 
 export default useLoginHooks

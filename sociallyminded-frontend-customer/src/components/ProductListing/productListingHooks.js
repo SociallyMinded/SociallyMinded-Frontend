@@ -1,20 +1,15 @@
-import { useState, useMemo } from "react"
-import { DataCreationTemplate, DataFetchingTemplate } from "../../utils/dataFetching"
-import { getAllProductsUrl, getAllReviewsByProductIdUrl,getProductsBySocialEnterprise } from "../../routes/routes"
+import { useState } from "react"
+import { getProductsBySocialEnterprise } from "../../routes/routes"
 import axios from 'axios'
 import { useEffect } from "react"
-import { ProductCategories } from "../../enum"
-import { useLocation } from "react-router"
 import { createNewOrderUrl, obtainGeocodeUrl } from "../../routes/routes"
 import { UserAuth } from "../../context/AuthContext"
-
 
 export const ORDERSTATUS = {
     PENDING_APPROVAL: 'Pending Approval',
     AWAITING_PAYMENT: 'Payment Required',
     IN_DELIVERY: 'In Delivery'
 }
-
 
 const useProductListingHooks = (state) => {
 
@@ -79,6 +74,8 @@ const useProductListingHooks = (state) => {
     const [confirmOrder, setConfirmOrder] = useState(false)
     const showConfirmOrderPage = (e) => setConfirmOrder(true)
     const closeConfirmOrderPage = (e) => setConfirmOrder(false)
+
+    const [validated, setValidated] = useState(false);
 
     const [showAddressNotFoundError, setShowAddressNotFoundError] = useState(false)
     const handleCloseAddressNotFoundError = () => setShowAddressNotFoundError(false)
@@ -186,20 +183,86 @@ const useProductListingHooks = (state) => {
             setShowLoginPromptToast(true)
         }
     }
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        event.preventDefault()
+        setValidated(true)
+    }
+
+
+    const getAllRecommendedProducts = () => {
+        const recommended = data.filter((d) => 
+            d.socialenterprise.socialEnterpriseId == state.d.socialenterprise.socialEnterpriseId &&
+            d.productId != state.d.productId
+        )
+        return recommended
+    }
+
+    const renderDisabledButton = () => {
+        if (orderQty == "" || unitNos == "" || postalCode == "") {
+            return true
+        } else {
+            return false
+        }
+    }
     
-    return { 
-        data, displayData, loading, error, createNewOrder, 
-        handleShowPurchaseModal, handleShowReviewsPage, handleClosePurchaseModal, showPurchaseModal,
-        showSuccessToast, handleShowSuccessToast, handleCloseSuccessToast, orderQty, handleOrderQty,
-        postalCode, handlePostalCode, creditCardCVV, handleCreditCardCVV, creditCardNos, handleCreditCardNos, unitNos, handleUnitNos,
-        showLoginPromptToast, handleShowLoginPromptToast, handleCloseLoginPromptToast, geocodeAddress,
-        confirmOrder, showConfirmOrderPage,
-        addressData, returnToPurchaseModalAfterConfirmModal, closeConfirmOrderPage,
-        addressText, handleAddressText, showAddressNotFoundError, handleCloseAddressNotFoundError, getOtherProducts,
-        message, handleSetMessage,
+    const productState = { 
+        data, 
+        displayData, 
+        loading, 
+        error,
+        showPurchaseModal,
+        showSuccessToast,
+        orderQty, 
+        postalCode, 
+        creditCardCVV,
+        creditCardNos,
+        unitNos, 
+        showLoginPromptToast,
+        confirmOrder, 
+        addressData, 
+        addressText, 
+        showAddressNotFoundError, 
+        message,
+        validated
+    }
+
+    const action = { 
+        createNewOrder, 
+        handleShowPurchaseModal, 
+        handleShowReviewsPage, 
+        handleClosePurchaseModal, 
+        handleShowSuccessToast, 
+        handleCloseSuccessToast, 
+        handleOrderQty,
+        handlePostalCode,
+        handleCreditCardCVV, 
+        handleCreditCardNos, 
+        handleUnitNos,
+        handleShowLoginPromptToast, 
+        handleCloseLoginPromptToast, 
+        geocodeAddress,
+        showConfirmOrderPage, 
+        returnToPurchaseModalAfterConfirmModal, 
+        closeConfirmOrderPage,
+        handleAddressText, 
+        handleCloseAddressNotFoundError, 
+        getOtherProducts,
+        handleSetMessage, 
         setConfirmOrder,
-        setShowSuccessToast
-    } 
+        setShowSuccessToast, 
+        getAllRecommendedProducts,
+        handleSubmit, 
+        renderDisabledButton, 
+        setValidated
+    }
+    return { productState, action }
 }
 
 export default useProductListingHooks

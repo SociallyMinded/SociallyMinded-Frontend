@@ -1,10 +1,10 @@
+import React from 'react';
 import styled from 'styled-components'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { DropdownButton } from "react-bootstrap";
 import { ProductCategories, ProductCategoryLabels } from '../../enum';
-import React from 'react';
 
 const SearchInputCategory = ({data}) => {
     return (

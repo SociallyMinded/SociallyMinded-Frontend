@@ -7,7 +7,7 @@ import useLoginHooks from "../../Login/loginHooks";
 
 const LoggedInHeader = () => {
 
-    const { state, setState } = useLoginHooks()
+    const { state, action } = useLoginHooks()
     const d = { "userLoggedOut" : true}
 
     return (
@@ -16,7 +16,7 @@ const LoggedInHeader = () => {
             <HeaderSiteLinks>
                 <HeaderLink to={SHOP_LINK}>Shop</HeaderLink>
                 <HeaderLink to={PROFILE_PAGE_LINK}>Profile</HeaderLink>
-                <HeaderLink to={HOME_LINK} onClick={setState.signOutFromAccount}  state={{ d }}>Log Out</HeaderLink>
+                <HeaderLink to={HOME_LINK} onClick={action.signOutFromAccount}  state={{ d }}>Log Out</HeaderLink>
             </HeaderSiteLinks>
         </HeaderLinkContainer>
     )

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom'
-import { getAllCustomersUrl, getCustomerByFirebaseUid, handleLoginViaGmail } from "../../routes/routes";
+import { getAllCustomersUrl, handleLoginViaGmail } from "../../routes/routes";
 import { 
     PASSWORD_INSUFFICIENT_LEN_ERROR, 
     newCustomerRecord,
@@ -10,17 +10,16 @@ import {
     EMAIL_ALREADY_EXISTS
 } from "./signupConstants";
 import { LOGIN_SIGNUP_REDIRECT_LINK } from "../../routes/routes";
-import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, updateProfile } from "firebase/auth";
+
 const useSignupHooks = () => {
 
-    const { createUser, setCurrentUserDetail, signInWithGmailPopup } = UserAuth() 
+    const { createUser, signInWithGmailPopup } = UserAuth() 
     const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [firebaseUid, setFirebaseUid] = useState("")
 
     
     const [passwordError, setPasswordError] = useState("")
@@ -124,7 +123,7 @@ const useSignupHooks = () => {
         showPageLoadSpinner
     }
 
-    const setState = { 
+    const action = { 
         handleUsernameChange, 
         handleEmailChange,
         handlePasswordChange,  
@@ -133,7 +132,7 @@ const useSignupHooks = () => {
         handleShowErrorWarning
     }
 
-    return { state, setState }
+    return { state, action }
 
 }
 
