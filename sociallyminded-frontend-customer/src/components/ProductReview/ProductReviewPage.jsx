@@ -41,109 +41,129 @@ export const ProductReviewPage = () => {
                 />
             </ReviewHeaderContainer>
             <ReviewDetailsContainer>
+
+                {/* go back to the product list */}
                 <StyledLink onClick={() => navigate(-1)}>Back</StyledLink>
                 <h1>{state.d.name}</h1>
-                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
-                {data != null && data.length != 0 &&
-                <StyledReviewBody>
-               
                 
-                    <ReviewBox>
-                        <WrapperStar>
-                            <div style={{textAlign: "center"}}>
-                                
-                        <RatingTotal>{rating} out of 5</RatingTotal>
-                        </div>
-                        <br/>
-                    <Rating name="read-only" precision={0.02} value={rating} readOnly />
-                    </WrapperStar>
-                       
-                        <ReviewFilter>
-                          
-                                {[null, 1, 2, 3, 4, 5].map((rating) => (
-                                <AllFilter
-                                    key={rating}
-                                    onClick={() => handleFilterButtonClick(rating)}
-                                    className={selectedRating === rating ? "selected" : ""}
-                                >
-                                    {rating === null ? "All("+ratingCount[0]+")" : `${rating} stars(`+ratingCount[rating]+ `)`}
-                                   
-                                </AllFilter>
-                                ))}
-                           
-                        </ReviewFilter>
-                    </ReviewBox>
-                {/* } */}
-                <SortingBox>
-                   <span style={{marginRight: "10px"}}>Sort By</span> 
-                    <Sorting  onClick={handleSortNewest}  className={selectedSort === "newest" ? "selected" : ""}>
-                        Newest
-                    </Sorting>
-                    <Sorting onClick={handleSortOldest}  className={selectedSort === "oldest" ? "selected" : ""}>
-                        Oldest
-                    </Sorting>
-                </SortingBox>
+                {/* when there is no review */}
+                {data != null && data.length == 0 && <h5>There are no reviews yet</h5>}
 
-              
-                {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
-                {filteredRating != null && filteredRating.map((d) => (
-
-
-                    <ReviewContainer>
-                    <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
-                    <ReviewDescription>
-                        {d.isAnonymous == false && (
-                   
-                        <UserName>{d.customer.username}</UserName>
-                        )}
-                         {d.isAnonymous == true && (
-                   
-                            <UserName>Anonymous</UserName>
-                        )}
-
-                    <Rating name="read-only" value={d.rating} readOnly />
-                    <br/>
-                        {d.dateOfReview!= null && d.dateOfReview.split("T")[0]}
-                        
-                        <br/>
-                        {d.reviewDescription}
-                        <br/>
-                        {d.reviewImages != null &&  (
-                        <ReviewImageListContainer> 
-                            
-                            {d.reviewImages.map((base64, index) => (
-                                <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
-                            ))}
-                            {enlargedImg !== -1 && (
-                            <div onClick={handleShrink}>
-                                
-                            <img src={enlargedImg} key={enlargedImg} style={{ cursor: "zoom-out",maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
-                            </div>
-                            )}
-                            {isEnlarged && (
-                                <div
-                                    style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0, backgroundColor: 'rgba(172, 127, 172, 0.5)',zIndex: 99}}
-                                    onClick={handleShrink}>
+                {/* when there is review */}
+                {data != null && data.length != 0 &&
+                    <StyledReviewBody>
+                        <ReviewBox>
+                            <WrapperStar>
+                                <div style={{textAlign: "center"}}>
+                                    {/* show the average rating*/}
+                                    <RatingTotal>{rating} out of 5</RatingTotal>
                                 </div>
-                            )}
-                        </ReviewImageListContainer>
-                        )}
-        
+                                <br/>
+                                <Rating name="read-only" precision={0.02} value={rating} readOnly />
+                            </WrapperStar>
+                        
+                        {/* show the filter button by rating and All */}
+                            <ReviewFilter>
+                            
+                                {[null, 1, 2, 3, 4, 5].map((rating) => (
+                                    <AllFilter
+                                        key={rating}
+                                        onClick={() => handleFilterButtonClick(rating)}
+                                        className={selectedRating === rating ? "selected" : ""}
+                                    >
+                                        {/* beside each rating filter button put the number of reviews allocated to it  */}
+                                        {rating === null ? "All(" + ratingCount[0] + ")" : `${rating} stars(` + ratingCount[rating] + `)`}
+                                        
+                                    </AllFilter>
+                                ))}
+                            
+                            </ReviewFilter>
+                        </ReviewBox>
+                        
+                        {/* sorting by latest and oldest button*/}
+                        <SortingBox>
+                            <span style={{marginRight: "10px"}}>Sort By</span> 
+                            <Sorting  onClick={handleSortNewest}  className={selectedSort === "newest" ? "selected" : ""}>
+                                Newest
+                            </Sorting>
+                            <Sorting onClick={handleSortOldest}  className={selectedSort === "oldest" ? "selected" : ""}>
+                                Oldest
+                            </Sorting>
+                        </SortingBox>
 
-                    
-                    </ReviewDescription>
-                    </ReviewContainer>
+                        {/* when there is no review allocated to that rating */}
+                        {filteredRating != null && filteredRating.length == 0 && <h5>There are no reviews to this rating yet.</h5>}
+                        
+                        {/* when there is review allocated to that rating  */}
+                        {filteredRating != null && filteredRating.map((d) => (
+                            <ReviewContainer>
 
-                ))}
-                <GoTopButton
-      className="scroll-to-top-button"
-      style={{ display: visibleGoTop ? "block" : "none" }}
-      onClick={scrollToTop}
-    >
-      <AiOutlineArrowUp/>
-    </GoTopButton>
-            </StyledReviewBody>
-        }
+                                {/* show the user image */}
+                                <AvatarImg src={require(`./avatar/${d.avatar}.png`)}></AvatarImg>
+                                <ReviewDescription>
+
+                                    {/* show the user name or anonymous*/}
+                                    {d.isAnonymous == false && (
+                            
+                                        <UserName>{d.customer.username}</UserName>
+                                    )}
+                                    {d.isAnonymous == true && (
+                            
+                                        <UserName>Anonymous</UserName>
+                                    )}
+
+                                    {/* show the rating by star */}
+                                    <Rating name="read-only" value={d.rating} readOnly />
+                                    <br/>
+
+                                    {/* show date of review */}
+                                    {d.dateOfReview!= null && d.dateOfReview.split("T")[0]}
+                                    <br/>
+
+                                    {/* show the review description */}
+                                    {d.reviewDescription}
+                                    <br/>
+
+                                    {/* show the review pictures */}
+                                    {d.reviewImages != null &&  (
+                                        <ReviewImageListContainer> 
+
+                                            {/* enlarge image when click */}
+                                            {d.reviewImages.map((base64, index) => (
+                                                <ReviewImgByUser key={index} src={base64} alt={`Review Image ${index }`} onClick={() => handleEnlarged(base64)}/>
+                                            ))}
+
+                                            {/* shrink image when click again */}
+                                            {enlargedImg !== -1 && (
+                                                <div onClick={handleShrink}>
+                                                    <img src={enlargedImg} key={enlargedImg} style={{ cursor: "zoom-out",maxWidth:"100%", maxHeight:"100%", position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, margin: 'auto', zIndex: 100 }} alt="Enlarged" />
+                                                </div>
+                                            )}
+
+                                            {/* the background of the image when it is enlarge */}
+                                            {isEnlarged && (
+                                                <div
+                                                    style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0, backgroundColor: 'rgba(172, 127, 172, 0.5)',zIndex: 99}}
+                                                    onClick={handleShrink}>
+                                                </div>
+                                            )}
+                                        </ReviewImageListContainer>
+                                    )}
+                                </ReviewDescription>
+                            </ReviewContainer>
+
+                        ))}
+
+                        {/* button for go to top */}
+                        <GoTopButton
+                            className="scroll-to-top-button"
+                            style={{ display: visibleGoTop ? "block" : "none" }}
+                            onClick={scrollToTop}
+                        >
+                            <AiOutlineArrowUp/>
+                        </GoTopButton>
+                    </StyledReviewBody>
+                }
             </ReviewDetailsContainer>  
         </ReviewPageTemplate>
     )
@@ -283,12 +303,7 @@ const SortingBox = styled.div`
     align-items: center;
     margin-bottom: 1rem;
 `
-// min-height: 5rem;
-// margin-bottom: 1rem;
-// display: flex;
-// align-items: center;
-// box-sizing: border-box;
-// padding: 1.875rem;
+
 const RatingTotal = styled.p`
     color : #AC73FF;
     font-size: 1.125rem;
