@@ -3,7 +3,7 @@ import { PageTemplate, ReviewPageTemplate } from '../common/styles';
 import Header from '../common/Header/Header';
 import styled from 'styled-components';
 import useAddProductReviewHooks from './addProductReviewHooks';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { UserAuth } from '../../context/AuthContext';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
@@ -18,6 +18,8 @@ export const AddProductReviewPage = () => {
   
   const { user } = UserAuth();
 
+  const state = useLocation();
+
   const {       
     product, setProduct, order, setOrder, rating, setRating, reviewDescription, setReviewDescription,
     selectedFiles, setSelectedFiles, previewUrls, setPreviewUrls, isAnonymous, setIsAnonymous,
@@ -25,7 +27,7 @@ export const AddProductReviewPage = () => {
     showReviewCompleteToast, setShowReviewCompleteToast, characterCount, maxCharacters, location,
     searchParams, productId, orderId, orderTitle, productImageLink, dateOfOrder, ratingLabels,
     getRatingLabelText, handleReviewDescriptionChange, handleFileChange, handleRemove, handleEnlarged,
-    handleShrink, handleCheckboxChange, handleSubmit
+    handleShrink, handleCheckboxChange, handleSubmit, hover, setHover
   } = useAddProductReviewHooks(state)
 
   // css
@@ -34,7 +36,7 @@ export const AddProductReviewPage = () => {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "50vh",
+    height: "65vh",
     marginTop:"5%"
   }
 

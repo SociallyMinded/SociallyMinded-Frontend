@@ -1,7 +1,6 @@
 import React from 'react';
 import Big from 'big.js';
 import { useLocation } from 'react-router';
-import useAddProductReviewHooks from './addProductReviewHooks';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
@@ -198,7 +197,7 @@ const useAddProductReviewHooks = (state) => {
         showReviewCompleteToast, setShowReviewCompleteToast, characterCount, maxCharacters, location,
         searchParams, productId, orderId, orderTitle, productImageLink, dateOfOrder, ratingLabels,
         getRatingLabelText, handleReviewDescriptionChange, handleFileChange, handleRemove, handleEnlarged,
-        handleShrink, handleCheckboxChange, handleSubmit
+        handleShrink, handleCheckboxChange, handleSubmit, hover, setHover
     } 
 }
 
