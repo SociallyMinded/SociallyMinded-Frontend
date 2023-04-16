@@ -94,6 +94,7 @@ const ProductListing = () => {
                 />
 
                 <ModalPageTwo
+                    addressData={productState.addressData}
                     confirmOrder={productState.confirmOrder}
                     closeConfirmOrderPage={action.closeConfirmOrderPage}
                     productName={state.d.name}
